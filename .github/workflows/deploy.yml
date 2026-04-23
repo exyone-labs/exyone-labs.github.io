@@ -1,0 +1,172 @@
+name: Deploy Site
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .gitignore
+      - README.md
+      - LICENSE
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+env:
+  RUBY_VERSION: '3.4'
+  JEKYLL_ENV: production
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      build_timestamp: ${{ steps.build-info.outputs.timestamp }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Ruby with caching
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+          cache-version: 1
+
+      - name: Get build info
+        id: build-info
+        run: echo "timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+
+      - name: Build site
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: ${{ env.JEKYLL_ENV }}
+
+      - name: Test site with htmlproofer
+        run: |
+          bundle exec htmlproofer _site \
+            --disable-external \
+            --ignore-urls "/^http:\/\/127\.0\.0\.1/,/^http:\/\/0\.0\.0\.0/,/^http:\/\/localhost/"
+        continue-on-error: false
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 1
+          if-no-files-found: error
+
+  deploy-github-pages:
+    needs: build
+    if: success()
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Deployment status
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ GitHub Pages deployment successful"
+            echo "🌐 Site URL: ${{ steps.deployment.outputs.page_url }}"
+          else
+            echo "❌ GitHub Pages deployment failed"
+          fi
+
+  sync-and-deploy:
+    needs: build
+    if: success()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "ci@exyon.ee"
+
+      - name: Push to GitLab
+        id: gitlab-sync
+        run: |
+          git remote add gitlab ${{ secrets.GITLAB_REPO_URL }}
+          git push gitlab main --force
+        continue-on-error: true
+        env:
+          GITLAB_REPO_URL: ${{ secrets.GITLAB_REPO_URL }}
+
+      - name: Push to OneDev
+        id: onedev-sync
+        run: |
+          git remote add onedev ${{ secrets.ONEDEV_REPO_URL }}
+          git push onedev main --force
+        continue-on-error: true
+        env:
+          ONEDEV_REPO_URL: ${{ secrets.ONEDEV_REPO_URL }}
+
+      - name: Deploy to Codeberg Pages
+        id: codeberg-deploy
+        run: |
+          cd _site
+          echo "exyone.bluu.pl" > .domains
+          git init
+          git remote add origin ${{ secrets.CODEBERG_PAGES_REPO_URL }}
+          git checkout -b main
+          git add .
+          git commit -m "Deploy: Update site - ${{ needs.build.outputs.build_timestamp }}"
+          git push -f origin main
+        continue-on-error: true
+        env:
+          CODEBERG_PAGES_REPO_URL: ${{ secrets.CODEBERG_PAGES_REPO_URL }}
+
+      - name: Sync status report
+        if: always()
+        run: |
+          echo "## 📊 Deployment Status Report"
+          echo ""
+          echo "| Platform | Status |"
+          echo "|----------|--------|"
+          echo "| GitLab | ${{ steps.gitlab-sync.outcome == 'success' && '✅ Success' || '❌ Failed/Skipped' }} |"
+          echo "| OneDev | ${{ steps.onedev-sync.outcome == 'success' && '✅ Success' || '❌ Failed/Skipped' }} |"
+          echo "| Codeberg Pages | ${{ steps.codeberg-deploy.outcome == 'success' && '✅ Success' || '❌ Failed/Skipped' }} |"

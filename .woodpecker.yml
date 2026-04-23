@@ -1,0 +1,52 @@
+variables:
+  RUBY_VERSION: "3.4"
+  JEKYLL_ENV: production
+  BUNDLE_PATH: /bundle
+
+steps:
+  - name: restore-cache
+    image: ruby:${RUBY_VERSION}
+    commands:
+      - |
+        if [ -d "$BUNDLE_PATH" ]; then
+          echo "Cache found, restoring..."
+        else
+          echo "No cache found, will install dependencies"
+        fi
+    volumes:
+      - /bundle:${BUNDLE_PATH}
+
+  - name: install
+    image: ruby:${RUBY_VERSION}
+    commands:
+      - bundle config set --local path $BUNDLE_PATH
+      - bundle install --jobs $(nproc)
+    volumes:
+      - /bundle:${BUNDLE_PATH}
+
+  - name: build
+    image: ruby:${RUBY_VERSION}
+    commands:
+      - bundle exec jekyll build
+    volumes:
+      - /bundle:${BUNDLE_PATH}
+
+  - name: test
+    image: ruby:${RUBY_VERSION}
+    commands:
+      - bundle exec htmlproofer _site --disable-external --ignore-urls "/^http://127\\.0\\.0\\.1/,/^http://0\\.0\\.0\\.0/,/^http://localhost/"
+    volumes:
+      - /bundle:${BUNDLE_PATH}
+    when:
+      branch: ${CI_REPO_DEFAULT_BRANCH}
+
+  - name: save-cache
+    image: ruby:${RUBY_VERSION}
+    commands:
+      - echo "Cache saved to $BUNDLE_PATH"
+    volumes:
+      - /bundle:${BUNDLE_PATH}
+    when:
+      status: [success]
+
+depends_on: []

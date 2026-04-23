@@ -1,0 +1,33 @@
+image: ruby:3.4
+
+variables:
+  JEKYLL_ENV: production
+  BUNDLE_PATH: vendor/bundle
+
+cache:
+  key:
+    files:
+      - Gemfile.lock
+  paths:
+    - vendor/bundle
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+pages:
+  stage: deploy
+  before_script:
+    - bundle config set --local path $BUNDLE_PATH
+    - bundle install --jobs $(nproc)
+  script:
+    - bundle exec jekyll build
+  artifacts:
+    paths:
+      - _site
+    expire_in: 1 hour
+  publish: _site
+  environment:
+    name: pages
+    url: $CI_PAGES_URL
+  timeout: 15m
