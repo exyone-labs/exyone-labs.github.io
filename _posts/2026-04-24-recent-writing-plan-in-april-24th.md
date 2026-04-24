@@ -13,17 +13,19 @@ lang: en-zh
 
 其实我很早以前就想写一些历史方面的文章了，但一直觉得自己笔力甚微，没敢动笔。最近又想做起来，利用 AI 写作辅助，算是写出了一整个系列的文章。我让 AI 以 2023 年 7 月为时间基点，总共创作出来了 11 篇文章，主题为中国传统文学诗词的发展，整体语言风格还是偏向于文艺化的：
 
-- [先秦楚歌：汨罗江上的千古悲歌](zh/2023-07-03-chinese-pre-qin-dynasty-poets)
-- [建安风流：铜雀台下的文人悲歌](zh/2023-09-15-chinese-literati-eastern-han-dynasty)
-- [结庐南山：归去来兮的田园牧歌](zh/2023-10-14-chinese-literati-wei-and-jin-dynasty-poets)
-- [魏晋风流：乱世中的诗与远方](zh/2023-12-08-chinese-literati-the-jin-and-north-southern-dynasties)
-- [初唐四杰：青春与命运的双重变奏](zh/2024-02-01-chinese-literati-early-tang-poets)
-- [从初唐到盛唐的一位诗人：谄媚与诗才的双重困境](zh/2024-04-03-chinese-literati-wu-zhou-dynasty-poets)
-- [盛唐余晖与晚唐暮色：唐诗黄昏的最后光芒](zh/2024-05-15-chinese-literati-tang-dynasty-poets)
-- [两宋风华：词国巅峰与家国悲歌](zh/2024-06-20-chinese-literati-song-dynasty-poets)
-- [生死相许：为故国修史，遗民泪尽野史亭](zh/2025-02-14-chinese-literati-jin-dynasty-poetry)
-- [元曲风华：乱世中的市井悲欢与文人风骨](zh/2025-03-15-chinese-literati-yuan-dynasty-drama)
-- [清诗新韵：考据学兴与边塞诗的田园转向](zh/2025-04-10-chinese-literati-qing-dynasty-poetry)
+[**系列文章列表**](/posts/zh/chinese-literati-series)
+
+- [先秦楚歌：汨罗江上的千古悲歌](/posts/zh/chinese-pre-qin-dynasty-poets)
+- [建安风流：铜雀台下的文人悲歌](/posts/zh/chinese-literati-eastern-han-dynasty)
+- [结庐南山：归去来兮的田园牧歌](/posts/zh/chinese-literati-wei-and-jin-dynasty-poets)
+- [魏晋风流：乱世中的诗与远方](/posts/zh/chinese-literati-the-jin-and-north-southern-dynasties)
+- [初唐四杰：青春与命运的双重变奏](/posts/zh/chinese-literati-early-tang-poets)
+- [从初唐到盛唐的一位诗人：谄媚与诗才的双重困境](/posts/zh/chinese-literati-wu-zhou-dynasty-poets)
+- [盛唐余晖与晚唐暮色：唐诗黄昏的最后光芒](/posts/zh/chinese-literati-tang-dynasty-poets)
+- [两宋风华：词国巅峰与家国悲歌](/posts/zh/chinese-literati-song-dynasty-poets)
+- [生死相许：为故国修史，遗民泪尽野史亭](/posts/zh/chinese-literati-jin-dynasty-poetry)
+- [元曲风华：乱世中的市井悲欢与文人风骨](/posts/zh/chinese-literati-yuan-dynasty-drama)
+- [清诗新韵：考据学兴与边塞诗的田园转向](/posts/zh/chinese-literati-qing-dynasty-poetry)
 
 不过从这些文章里能看出来 AI 写作的许多问题，其中最显眼的问题就是模板化。有好几篇文章都有种重复的感觉，加上各种辞藻的堆砌，这种繁杂的感觉更强烈了。
 

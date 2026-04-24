@@ -2,6 +2,7 @@
 title: "结庐南山：归去来兮的田园牧歌"
 date: 2023-10-14
 tags: [history, literature, poetry]
+hidden: true
 categories: [Literature]
 lang: zh
 ---

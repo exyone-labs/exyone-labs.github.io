@@ -2,6 +2,7 @@
 title: "生死相许：为故国修史，遗民泪尽野史亭"
 date: 2025-02-14
 tags: [history, literature, poetry]
+hidden: true
 categories: [Literature]
 lang: zh
 ---
