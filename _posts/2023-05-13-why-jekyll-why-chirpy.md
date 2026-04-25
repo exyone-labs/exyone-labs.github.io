@@ -18,7 +18,7 @@ Here's why.
 
 I wanted a quiet corner on the internet. Not some fancy web app. Not a page that regenerates every time someone visits. Just something simple that exists as plain text files on my computer. Portable. Not tied to any specific hosting service.
 
-Jekyll does exactly that. It takes Markdown files, turns them into static HTML. No database. No backend code. Just text files and templates. I write in Markdown — clean, portable. When I'm done, Jekyll builds the whole site. I can host it anywhere: GitHub Pages, Netlify, Vercel, or even a USB drive. The site is as permanent as the words written on it.
+Jekyll does exactly that. It takes Markdown files, turns them into static HTML. No database. No backend code. Just text files and templates. I write in Markdown — clean, portable. When I'm done, Jekyll builds the whole site. I can host it anywhere: GitHub Pages, Netlify, Vercel. The site is as permanent as the words written on it.
 
 Oh, and GitHub Pages supports Jekyll natively. So I can host everything on GitHub for free, with version control built in. Every commit is a backup, every push is a deployment. As someone learning .NET, this workflow just makes sense.
 
@@ -36,25 +36,25 @@ There are practical reasons too. Chirpy is actively maintained, works well on mo
 
 ---
 
-**为什么是Jekyll？** 很简单——它符合我的需求。
+**为什么是Jekyll？** 答案很简单——它完美契合我的需求。
 
-我想要互联网上一个安静的角落。不是花哨的Web应用。不是每次有人访问就重新生成的页面。只是简单的东西，可以以纯文本形式存在于我电脑里。便携。不依赖任何特定的托管服务商。
+我需要的，不过是互联网上一方静谧的角落。不是花哨的Web应用，也不是每次访问都要重新生成的动态页面。我只想要一些简单的东西，能以纯文本的形式安栖于我的电脑里。便携，不依附于任何特定的托管服务商。
 
-Jekyll正好满足。它把Markdown文件转换成静态HTML。没有数据库，没有后端代码。只有文本文件和模板。我用Markdown写——干净、便携。写完后，Jekyll帮我构建整个站点。可以托管在任何地方：GitHub Pages、Netlify、Vercel，甚至U盘都行。站点和写下的文字一样持久。
+Jekyll恰好满足。它将Markdown文件化作静态HTML，无需数据库，亦无后端代码。唯有文本与模板相伴。我用Markdown书写——干净而便携。落笔之后，Jekyll便为我构建起整座站点。GitHub Pages、Netlify、Vercel，皆可承载。站点如笔下的文字，恒久而真实。
 
-哦，还有一点：GitHub Pages原生支持Jekyll。所以我可以把整个站点托管在GitHub上——免费，还自带版本控制。每次提交都是备份，每次推送都是部署。对一个在学.NET的人来说，这种工作方式挺自然的。
+还有一点：GitHub Pages原生支持Jekyll。于是整个站点可以栖身于GitHub——免费，且自带版本控制。每一次提交都是备份，每一次推送都是部署。对于正在学习.NET的我而言，这种工作方式再自然不过。
 
-**为什么是Chirpy？** 长得好看很重要啊。
+**为什么是Chirpy？** 外在的美，亦是灵魂的投射。
 
-我承认——我这个人挺实用的。通常更看重功能而不是外观。但个人网站不一样。那是我在互联网上的小角落。网站的样貌代表我自己。不需要花哨，但看着舒服是基本的。
+我承认，我是个实用主义者。平日里更看重功能而非外观。但个人网站不同——那是我于互联网上的小小领地，它的模样，便是我的模样。不必华丽，但求赏心悦目。
 
-确定Chirpy之前，我试过几个主题。有的太简陋，有的功能太多我用不上。Chirpy正好——干净但不空荡，功能丰富但不杂乱。
+确定Chirpy之前，我试过几个主题。有的过于简陋，有的功能繁杂得用不上。Chirpy恰到好处——干净而不空荡，丰富而不杂乱。
 
-真正让我下定决心的是排版。阅读体验明显精心打磨过。行高、边距、对比度，都调得很到位。我不自觉地就在页面上多待了一会儿，享受着留白。这让我想起第一次握着一支做工很好的钢笔的感觉——平衡、配重、恰到好处。
+真正打动我的，是排版。阅读体验显然经过精心打磨：行高、边距、对比度，无一不恰到好处。我不自觉地在页面上多停留了片刻，享受着那份留白。这让我想起第一次握住一支做工精良的钢笔——平衡、配重，一切都刚刚好。
 
-还有深色模式，直接一锤定音了。其实我不太需要这个功能，我很喜欢浅色，但是有许多朋友是需要深色模式的，所以我认为我的博客同样必须支持深色模式。
+还有深色模式，这一锤定音。其实我并不需要它，我偏爱浅色，但许多朋友需要。既然是我的博客，便也该为他们留一扇窗。
 
-当然也有实际的原因。Chirpy维护勤快，移动端适配好，SEO友好，支持标签分类——这些都是博客必备的。但这些是次要的。主要原因？感觉对了。就像找到一支合适的笔、一本合适的笔记本——看到了就知道。
+当然，也有实际的原因。Chirpy维护勤勉，移动端适配出色，SEO友好，支持标签分类——这些都是博客的基石。但它们只是次要的。主要原因？感觉对了。就像找到一支合适的笔、一本合适的笔记本——遇见的那一刻，便知道了。
 
 ---
 

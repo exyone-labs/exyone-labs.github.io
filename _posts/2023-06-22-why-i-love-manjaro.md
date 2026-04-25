@@ -6,7 +6,7 @@ tags: [linux, manjaro, operating-system]
 lang: en-zh
 ---
 
-I've always been curious about Linux. In programming circles, it's one of those topics everyone brings up sooner or later. The hype, the controversy, the almost religious devotion of its users — I wanted to see what all the fuss was about. Also, it's free. As a teenager, free has a certain appeal that needs no explanation.
+I've always been curious about Linux. In programming circles, it's one of those topics everyone brings up sooner or later. The hype, the controversy, the almost religious devotion of its users — I wanted to see what all the fuss was about.
 
 **Why Manjaro specifically?** I did my research. Ubuntu is the popular choice, but it feels somewhat dated, a relic of an earlier era. Fedora presents a more modern face, yet it has a reputation for breaking at the worst possible moments. And then there's Arch Linux — the trendy one, the one that hardcore users speak of in reverent tones. Rolling releases, cutting edge, infinitely customizable. But Arch demands a price: a steep learning curve, the infamous "do it yourself" philosophy. You build everything from the ground up. For a beginner like me, that was simply too much to ask.
 
@@ -24,21 +24,21 @@ Would I recommend Manjaro to everyone? Probably not. If you seek something that 
 
 ---
 
-我一直以来对Linux都抱有好奇心。在编程的圈子里，这是个总会被人提起的话题。那些炒作、争议、用户近乎宗教般的狂热——我想看看究竟有什么值得这么大惊小怪的。再说，它是免费的。作为一个未成年人，"免费"这个词的吸引力不言而喻。
+我对Linux，一直心存好奇。在编程的圈子里，这是个绕不开的话题——那些炒作与争议，那些近乎宗教般的狂热追随，总让我忍不住想一探究竟：究竟是什么，值得如此大惊小怪？
 
-**为什么是Manjaro？** 我做了功课。Ubuntu是热门选择，但总感觉有些过时，像是上一个时代的产物。Fedora看起来更现代，却有不稳定的骂名。至于Arch Linux——那就是焦点所在，极客们谈论它时总是满怀敬意。滚动更新、最前沿、高度定制。但Arch是有代价的：陡峭的学习曲线，那著名的"自己动手"理念。一切从零开始搭建。对于我这样的新手来说，这要求实在太高了。
+**为什么是Manjaro？** 我做过功课。Ubuntu是热门之选，却总透着一股顽固保守的气息。Fedora看起来更现代，却背负着不稳定的骂名。至于Arch Linux——那才是焦点所在，极客们谈起它时，总是满怀敬意。滚动更新、最前沿、高度定制。但Arch的代价太高了：陡峭的学习曲线，那著名的"自己动手"哲学。一切从零搭建。对我这样的新手而言，门槛实在太高。
 
-然后我发现了Manjaro。
+然后，我遇见了Manjaro。
 
-官方提供三个版本——KDE、Gnome、Xfce。任选你喜欢的桌面环境。它继承了Arch的滚动更新模式，确保你始终能用上最新的软件包。但关键区别在于：Manjaro会暂缓更新，进行额外测试，努力在"前沿"与"稳定"之间寻求平衡。对于我这种只想要一个能正常使用、不必担心随时崩溃的系统的人来说——这种做法让我感到安心。
+官方提供三个版本——KDE、Gnome、Xfce，任君选择。它继承了Arch的滚动更新模式，让你始终能用上最新的软件包。但关键的区别在于：Manjaro会暂缓更新，进行额外测试，在"前沿"与"稳定"之间寻求平衡。对于我这种只想要一个能正常运转、不必担心随时崩溃的系统的人来说——这份审慎，让我安心。
 
-然而最吸引人的，是AUR——Arch用户仓库。软件的宝库。几乎你能想到的任何东西都能在那里找到。不满意默认应用？换掉。想要某个特定的东西？很可能已经有人打包好了。
+然而最吸引人的，是AUR——Arch用户仓库。一座软件的宝库。几乎你能想到的一切，都能在那里寻得。不满意默认应用？换掉。想要某个特定的东西？多半已经有人打包好了。
 
-Manjaro还提供一些相当贴心的工具。MHWD负责硬件检测和驱动管理。Pamac是图形化的包管理器——点点鼠标就能安装，不需要输入命令。作为一个NVIDIA用户，驱动管理居然没费什么功夫。这是我在Linux上完全没有料到的。
+Manjaro还提供一些相当贴心的工具。MHWD负责硬件检测与驱动管理。Pamac是图形化的包管理器——点几下鼠标便能安装，无需敲击命令。作为NVIDIA用户，驱动管理竟没费什么周折。这是我在Linux上始料未及的。
 
-这一路顺利吗？不太顺利。学习曲线是存在的——终端命令、配置文件、一路上偶有颠簸。但或许这正是其魅力的一部分。自己动手配置的系统，用起来有一种特别的满足感。
+这一路顺利吗？并不。学习曲线确实存在——终端命令、配置文件，沿途偶有颠簸。但或许，这正是其魅力的一部分。亲手配置的系统，用起来有一种特别的满足感。
 
-我会推荐Manjaro给所有人吗？不一定。如果你追求的是开箱即用、简单省事，还是用Windows或Mac吧。但如果你好奇心旺盛、渴望学习、不介意亲自动手——不妨试试。你可能会像我一样爱上它。
+我会向所有人推荐Manjaro吗？未必。如果你追求开箱即用、省心省事，还是留在Windows或Mac的怀抱吧。但若你好奇心旺盛、渴望学习、不介意亲自动手——不妨一试。说不定，你会像我一样爱上它。
 
 ---
 

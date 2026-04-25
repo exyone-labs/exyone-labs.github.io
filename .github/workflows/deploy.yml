@@ -15,6 +15,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: "pages"
@@ -57,14 +58,13 @@ jobs:
           bundle exec htmlproofer _site \
             --disable-external \
             --ignore-urls "/^http:\/\/127\.0\.0\.1/,/^http:\/\/0\.0\.0\.0/,/^http:\/\/localhost/"
-        continue-on-error: false
 
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
         with:
           name: site
           path: _site
-          retention-days: 1
+          retention-days: 7
           if-no-files-found: error
 
   deploy-github-pages:
@@ -105,8 +105,22 @@ jobs:
             echo "❌ GitHub Pages deployment failed"
           fi
 
+  cleanup-old-runs:
+    needs: deploy-github-pages
+    if: success()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Delete old workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 0
+          keep_minimum_runs: 1
+
   sync-and-deploy:
-    needs: build
+    needs: deploy-github-pages
     if: success()
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -125,7 +139,7 @@ jobs:
       - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
-          git config --global user.email "ci@exyon.ee"
+          git config --global user.email "exyone.dev@icloud.com"
 
       - name: Push to GitLab
         id: gitlab-sync

@@ -1,10 +1,41 @@
 ---
-title: "谈谈最近的一些写作规划：借助AI创作了一系列讲述中国历代诗词的文章"
+title: "My Recent Writing Journey: Creating a Series on Chinese Poetry Through the Ages with AI Assistance"
 date: 2026-04-24
 categories: [Lifestyle]
 tags: [literature]
 lang: en-zh
 ---
+
+> As you may have noticed, I launched a multilingual international blog in the middle of this month. It's built with Jekyll using the Chirpy theme, with article URLs categorized by language tags. Most tech articles are bilingual, hoping to reach a broader audience. I've been attempting international blog projects for a long time, but only this month did I officially launch this site.
+{: .prompt-info }
+
+Many high-quality articles (in my humble opinion) from my [main blog](https://www.exyone.me) have been migrated here, polished, and translated. I hope you'll enjoy them. My plan is to write casually on my main blog, then polish and migrate promising or popular topics to this static blog. Since it's a static blog, backups are convenient—I already have multiple copies on GitHub Pages, Cloudflare Pages, Netlify, and similar platforms.
+
+Actually, I've wanted to write about history for a long time, but always felt my writing skills were insufficient. Recently, with AI writing assistance, I finally created an entire series of articles. Using July 2023 as the temporal anchor, I produced 11 articles exploring the development of traditional Chinese poetry and literature, with an overall literary and artistic style:
+
+However, these articles reveal many issues with AI writing, the most obvious being templating. Several articles feel repetitive, and the excessive flowery language intensifies this sense of clutter.
+
+Of course, I found a good solution: instead of letting AI write articles entirely, I have AI tell stories while listing various poetry works. This way, it leverages AI's strengths in summarizing and listing while minimizing the verbosity typical of AI literary creation, making the articles more focused on "sharing poetry."
+
+Templating is a minor issue, though. During review, I discovered a more serious problem—specifically with DeepSeek—AI hallucination. You might think all generative AIs suffer from this, but in this creative process, only DeepSeek made such serious errors.
+
+How egregious was it? DeepSeek attributed a poem by Bai Juyi and another by Xu Lan to Yuan Mei, then even fabricated a "frontier poem" for Yuan Mei. Friends familiar with Yuan Mei know he was from the Xingling school, never lived in frontier regions, and wrote only a handful of frontier poems in his life. Yet DeepSeek, to fit the theme, fabricated a pile of related materials for him.
+
+There was something even more outrageous: I told DeepSeek that Qianlong's "Qin Huang bu bi zhu Chang Cheng, Han Wu bu bi hui Lun Tai" didn't come from "Imperial Stele Inscription on the Pacification of Dzungars." DeepSeek searched through piles of materials but couldn't find the correct source. In the end, combining with previously generated erroneous works, it concluded—this quote is a forgery! This is absolutely ridiculous; this is one of Qianlong's famous quotes! Finally, I personally researched and told it the quote comes from "Kai Huo Lun." I pressed it twice, and twice it admitted generation errors with a pile of empty apologies. Only when I pointed out the correct source did it finally respond, "Oh right, it is indeed 'Kai Huo Lun'." Outrageous, simply outrageous...
+
+Then I must highlight one AI: MiniMax! Its Chinese level can only be described as—thoroughly Anglicized Chinese, purely machine-translated from English. However, its literary talent is decent, and it's receptive to corrections, unlike DeepSeek's stubborn denial. Zhipu GLM has the best literary quality, but I didn't want to wait in queue (GLM is incredibly popular now, basically takes over ten minutes to get a turn, sigh...), so most articles were handled by MiniMax and Kimi.
+
+I created a specialized writing Agent in Trae, excellent for imitative writing. I'll showcase all my created Agents another time—not in this article.
+
+---
+
+By the way, I also discovered diaries I wrote three years ago in my drawer... the content can only be described as—naive as an unenlightened mind. But since they're diaries, I might as well organize them, have AI polish them, and post them to this blog. You can scroll back; I wrote them according to the diary dates, around 2023. Currently, AI traces are quite heavy since I haven't manually edited them. But tomorrow is Saturday again, so I'll try to manually proofread and improve these articles, and add my other old diaries. I've never been good at writing; from grade 7 to 10, my least favorite thing was writing compositions. So "diaries" might be better called "development logs"—each entry just one sentence about what I did that day. That's why I'm using AI to polish and expand them.
+
+Regarding my main blog, I'll definitely continue updating it, but the content quality might continue declining. After all, I plan to migrate all high-quality articles here, so the old blog will serve for generating inspiration or seeing which topics people prefer.
+
+---
+
+## 谈谈最近的一些写作规划：借助AI创作了一系列讲述中国历代诗词的文章
 
 > 正如你们所见，我是在这个月中旬的时候开了一个多语言的国际博客。使用了静态博客系统，用的是 Jekyll，主题是 Chirpy。文章的分类 URL 也是通过语言标签来分类的，其中大部分科技类文章都是双语的。这么做也是希望文章能有更多受众吧，毕竟我很久之前就在不断尝试做国际博客项目，但直到这个月才正式开设了这个站点。
 {: .prompt-info }
