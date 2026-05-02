@@ -27,8 +27,8 @@ Jekyll provides a powerful hook system that allows plugins to modify content aft
 ```ruby
 # _plugins/twikoo-inject.rb
 
-Jekyll::Hooks.register :documents, :post_render do |document|
-  inject_twikoo_comment(document)
+Jekyll::Hooks.register :posts, :post_render do |post|
+  inject_twikoo_comment(post)
 end
 ```
 
@@ -38,15 +38,12 @@ The hook runs after Jekyll finishes rendering each document. It checks if the do
 
 The plugin does three things:
 
-**1. Target Only Posts**
+**1. Ensure HTML Output**
 
-Not every page needs comments. The plugin checks if the document belongs to the `posts` collection:
+The `:posts` hook already targets only posts. The additional check ensures we only process HTML output (not other formats like JSON or XML):
 
 ```ruby
-is_post = document.is_a?(Jekyll::Document) && 
-          document.collection && 
-          document.collection.label == 'posts'
-return unless is_post
+return unless post.output_ext == '.html'
 ```
 
 **2. Create a Toggle UI**
@@ -106,6 +103,7 @@ If you're interested in implementing this on your own Chirpy blog, the complete 
 |------|---------|
 | 2026-04-25 | Initial release with toggle UI, lazy loading, and CSS variable support |
 | 2026-04-25 | Changed hook from `:site, :post_render` to `:documents, :post_render` for better compatibility |
+| 2026-05-02 | Changed hook to `:posts, :post_render` for more precise targeting, matching the pattern used in `auto-permalink.rb` |
 
 ---
 
@@ -137,9 +135,9 @@ _代码段见英文版 Section 3。_
 
 插件做了三件事：
 
-**1. 只针对文章页面**
+**1. 确保为 HTML 输出**
 
-不是每个页面都需要评论。插件检查文档是否属于 `posts` 集合：
+`:posts` 钩子已经限定只处理文章。额外的检查确保我们只处理 HTML 输出（而非 JSON 或 XML 等其他格式）：
 
 _代码段见英文版 Section 4.1。_
 
@@ -181,3 +179,4 @@ _代码段见英文版 Section 4.3。_
 |------|----------|
 | 2026-04-25 | 初始版本，包含切换 UI、懒加载、CSS 变量支持 |
 | 2026-04-25 | 将钩子从 `:site, :post_render` 改为 `:documents, :post_render` 以提高兼容性 |
+| 2026-05-02 | 将钩子改为 `:posts, :post_render` 以更精确地定位文章，与 `auto-permalink.rb` 的设计模式保持一致 |

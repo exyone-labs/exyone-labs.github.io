@@ -1,18 +1,13 @@
-Jekyll::Hooks.register :documents, :post_render do |document|
-  inject_twikoo_comment(document)
+Jekyll::Hooks.register :posts, :post_render do |post|
+  inject_twikoo_comment(post)
 end
 
-def inject_twikoo_comment(document)
-  return unless document.output_ext == '.html'
+def inject_twikoo_comment(post)
+  return unless post.output_ext == '.html'
   
-  output = document.output
+  output = post.output
   return unless output && output.include?('</body>')
-  
-  is_post = document.is_a?(Jekyll::Document) && 
-            document.collection && 
-            document.collection.label == 'posts'
-  
-  return unless is_post
+  return if output.include?('id="twikoo-section"')
   
   twikoo_container = <<~HTML
     
@@ -66,5 +61,5 @@ def inject_twikoo_comment(document)
     </script>
   HTML
   
-  document.output = output.sub('</body>', "#{twikoo_container}\n</body>")
+  post.output = output.sub('</body>', "#{twikoo_container}\n</body>")
 end

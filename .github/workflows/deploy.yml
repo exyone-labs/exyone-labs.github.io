@@ -37,19 +37,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Ruby with caching
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
-          cache-version: 1
 
       - name: Get build info
         id: build-info
         run: echo "timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
 
       - name: Build site
-        run: bundle exec jekyll build
+        run: |
+          bundle install
+          bundle exec jekyll build
         env:
           JEKYLL_ENV: ${{ env.JEKYLL_ENV }}
 
