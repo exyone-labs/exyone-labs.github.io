@@ -40,7 +40,7 @@ Modern development is no longer about "opening one big IDE to handle everything.
 |--------|-----------|------------|
 | **VS Code** | Unmatched extension ecosystem, industry standard | Can get laggy with too many plugins |
 | **Neovim / Helix** | Pure terminal native, keyboard-driven, minimal resources | Steep learning curve |
-| **Zed** | Rust-written,追求极致速度和协作 | Relatively new, smaller ecosystem |
+| **Zed** | Rust-written, pursuing ultimate speed and collaboration | Relatively new, smaller ecosystem |
 | **Sublime Text** | Veteran lightweight king, loyal fanbase | Fewer modern features |
 
 Fleet's original ambition was to be "JetBrains' version of VS Code"—intelligent yet not bloated. Unfortunately, the market competition was fierce, and it ultimately failed to establish a solid foothold.
@@ -61,7 +61,7 @@ Editors handle **creation** (writing code, completion, refactoring), while termi
 
 #### **Combo A: Neovim + Modern Terminal Emulator + Multiplexer** (Geek's Choice)
 
-- **Terminal**: WezTerm (best cross-platform), Alacritty (极致轻量), Kitty
+- **Terminal**: WezTerm (best cross-platform), Alacritty (extremely lightweight), Kitty
 - **Multiplexer**: Tmux or Zellij (supports pane splitting, session persistence)
 - **Workflow tools**: `fzf` for fuzzy file search, `lazygit` for visual Git, `ripgrep` for lightning code search, `zoxide` for smart directory jumping, `starship` for prompt beautification
 - **Ideal scenario**: C#/.NET developers can use `dotnet watch` in one pane for real-time hot reload while editing Razor or .cs files in Neovim. Fully keyboard-driven, smooth experience over SSH.

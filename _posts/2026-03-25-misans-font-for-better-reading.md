@@ -40,7 +40,7 @@ My Chinese blog once bore Traditional Chinese titles for their classical gravita
 
 ## On LXGW WenKai
 
-The beloved 霞鹜文楷 occupies a curious space — more handwritten art piece than utilitarian typeface. Its warmth is undeniable, yet its calligraphic nature distracts in extended reading. For my blog's temperament, it remains a mismatch.
+The beloved LxgwWenKai occupies a curious space — more handwritten art piece than utilitarian typeface. Its warmth is undeniable, yet its calligraphic nature distracts in extended reading. For my blog's temperament, it remains a mismatch.
 
 ## Conclusion
 
