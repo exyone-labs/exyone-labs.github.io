@@ -163,7 +163,7 @@ jobs:
         id: codeberg-deploy
         run: |
           cd _site
-          echo "exyone.bluu.pl" > .domains
+          echo "exyone.cn.mt" > .domains
           git init
           git remote add origin ${{ secrets.CODEBERG_PAGES_REPO_URL }}
           git checkout -b main
