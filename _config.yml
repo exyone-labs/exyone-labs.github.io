@@ -123,7 +123,7 @@ comments:
     repo: exyone-labs/exyone-labs.github.io # <gh-username>/<repo>
     repo_id: R_kgDOSARDDA
     category: Comments
-    category_id: DIC_kwDOSARDDM4C6pqn
+    category_id: DIC_kwDOSARDDM4C6pqo
     mapping: pathname # optional, default to 'pathname'
     strict: 0 # optional, default to '0'
     input_position: top # optional, default to 'bottom'
