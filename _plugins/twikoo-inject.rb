@@ -9,6 +9,14 @@ def inject_twikoo_comment(post)
   return unless output && output.include?('</body>')
   return if output.include?('data-twikoo-injected="true"')
   
+  site = post.site
+  twikoo_config = site.config.dig('comments', 'twikoo') || {}
+  
+  env_id = twikoo_config['env_id']
+  return unless env_id
+  
+  version = twikoo_config['version'] || '1.6.44'
+  
   twikoo_container = <<~HTML
     
     <!-- Twikoo Comment System -->
@@ -25,7 +33,7 @@ def inject_twikoo_comment(post)
         <div id="tcomment"></div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/twikoo@#{version}/dist/twikoo.all.min.js"></script>
     <script>
     (function() {
       var twikooLoaded = false;
@@ -38,7 +46,7 @@ def inject_twikoo_comment(post)
           btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> 收起 Twikoo 评论';
           if (!twikooLoaded) {
             twikoo.init({
-              envId: 'https://comments.exyone.us.kg/',
+              envId: '#{env_id}',
               el: '#tcomment',
               path: location.pathname,
               lang: document.documentElement.lang || 'en'

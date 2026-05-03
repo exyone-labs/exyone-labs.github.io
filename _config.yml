@@ -128,7 +128,11 @@ comments:
     strict: 0 # optional, default to '0'
     input_position: top # optional, default to 'bottom'
     lang: # optional, default to the value of `site.lang`
-    reactions_enabled: 1 # optional, default to the value of `1`
+    reactions_enabled: 1 # optional, default to the value of '1'
+  # Twikoo options › https://twikoo.js.org/
+  twikoo:
+    env_id: https://comments.exyone.us.kg/
+    version: 1.6.44
 
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets
 assets:
