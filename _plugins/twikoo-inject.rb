@@ -7,12 +7,12 @@ def inject_twikoo_comment(post)
   
   output = post.output
   return unless output && output.include?('</body>')
-  return if output.include?('id="twikoo-section"')
+  return if output.include?('data-twikoo-injected="true"')
   
   twikoo_container = <<~HTML
     
     <!-- Twikoo Comment System -->
-    <div id="twikoo-section" style="max-width: 800px; margin: 0.5rem auto 2rem auto; padding: 0 1rem;">
+    <div id="twikoo-section" data-twikoo-injected="true" style="max-width: 800px; margin: 0.5rem auto 2rem auto; padding: 0 1rem;">
       <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
         <span style="height: 1px; flex: 1; background: var(--border-color, #e1e4e8);"></span>
         <a id="twikoo-toggle-btn" href="javascript:void(0)" style="color: var(--text-muted, #888); font-size: 0.85rem; text-decoration: none; white-space: nowrap; padding: 0.25rem 0.5rem; border-radius: 4px; transition: all 0.2s;">
