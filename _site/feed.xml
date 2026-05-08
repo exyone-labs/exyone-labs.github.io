@@ -1,0 +1,143 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://exyone.is-a.dev/</id>
+  <title>EXYONE@BLOG:~$</title>
+  <subtitle>Technical writings on .NET, front-end development, and digital craftsmanship. Happy to connect and make friends.</subtitle>
+  <updated>2026-05-08T13:35:52+08:00</updated>
+  <author>
+    <name>Exyone.dev@icloud.com</name>
+    <uri>https://exyone.is-a.dev/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="https://exyone.is-a.dev/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="https://exyone.is-a.dev/"/>
+  <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
+  <rights> © 2026 Exyone.dev@icloud.com </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>Adding Twikoo Comments to Chirpy: A Plugin Development Journey</title>
+    <link href="https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/" rel="alternate" type="text/html" title="Adding Twikoo Comments to Chirpy: A Plugin Development Journey" />
+    <published>2026-04-25T00:00:00+08:00</published>
+  
+    <updated>2026-05-03T09:36:37+08:00</updated>
+  
+    <id>https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/</id>
+    <content type="text/html" src="https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/" />
+    <author>
+      <name>Exyone.dev@icloud.com</name>
+    </author>
+
+  
+    
+    <category term="Technology" />
+    
+  
+
+  <summary>Chirpy is an excellent theme, but it doesn’t natively support Twikoo comments. I wanted to add Twikoo alongside the existing Giscus system without modifying the theme’s source code. The solution evolved through multiple iterations: I started with a Jekyll plugin, then tried footer.html template injection, and finally settled on a local-build-then-push workflow to ensure consistency across all d...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Jekyll and Chirpy: A Journey of Trial and Error</title>
+    <link href="https://exyone.is-a.dev/posts/en-zh/about-jekyll-and-chirpy/" rel="alternate" type="text/html" title="Jekyll and Chirpy: A Journey of Trial and Error" />
+    <published>2026-04-25T00:00:00+08:00</published>
+  
+    <updated>2026-04-25T00:00:00+08:00</updated>
+  
+    <id>https://exyone.is-a.dev/posts/en-zh/about-jekyll-and-chirpy/</id>
+    <content type="text/html" src="https://exyone.is-a.dev/posts/en-zh/about-jekyll-and-chirpy/" />
+    <author>
+      <name>Exyone.dev@icloud.com</name>
+    </author>
+
+  
+    
+    <category term="Technology" />
+    
+  
+
+  <summary>In Why choose Jekyll, and why choose Chirpy, I explained my reasons for choosing Jekyll and Chirpy. But truth be told, that article was written this year, not three years ago. As I mentioned in my previous post, I stumbled upon some “diaries” from three years ago in my drawer and wanted to migrate them to this blog.  Those diary entries were quite brief, though—just a sentence or two each. To a...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>My Recent Writing Journey: Creating a Series on Chinese Poetry Through the Ages with AI Assistance</title>
+    <link href="https://exyone.is-a.dev/posts/en-zh/recent-writing-plan-in-april-24th/" rel="alternate" type="text/html" title="My Recent Writing Journey: Creating a Series on Chinese Poetry Through the Ages with AI Assistance" />
+    <published>2026-04-24T00:00:00+08:00</published>
+  
+    <updated>2026-04-25T13:13:53+08:00</updated>
+  
+    <id>https://exyone.is-a.dev/posts/en-zh/recent-writing-plan-in-april-24th/</id>
+    <content type="text/html" src="https://exyone.is-a.dev/posts/en-zh/recent-writing-plan-in-april-24th/" />
+    <author>
+      <name>Exyone.dev@icloud.com</name>
+    </author>
+
+  
+    
+    <category term="Lifestyle" />
+    
+  
+
+  <summary>As you may have noticed, I launched a multilingual international blog in the middle of this month. It’s built with Jekyll using the Chirpy theme, with article URLs categorized by language tags. Most tech articles are bilingual, hoping to reach a broader audience. I’ve been attempting international blog projects for a long time, but only this month did I officially launch this site.   Many high-...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>中国文人系列：从先秦到清末的文学长河</title>
+    <link href="https://exyone.is-a.dev/posts/zh/chinese-literati-series/" rel="alternate" type="text/html" title="中国文人系列：从先秦到清末的文学长河" />
+    <published>2026-04-23T00:00:00+08:00</published>
+  
+    <updated>2026-04-25T13:24:09+08:00</updated>
+  
+    <id>https://exyone.is-a.dev/posts/zh/chinese-literati-series/</id>
+    <content type="text/html" src="https://exyone.is-a.dev/posts/zh/chinese-literati-series/" />
+    <author>
+      <name>Exyone.dev@icloud.com</name>
+    </author>
+
+  
+    
+    <category term="Literature" />
+    
+  
+
+  <summary>系列文章列表     先秦楚歌：汨罗江上的千古悲歌   建安风流：铜雀台下的文人悲歌   结庐南山：归去来兮的田园牧歌   魏晋风流：乱世中的诗与远方   初唐四杰：青春与命运的双重变奏   从初唐到盛唐的一位诗人：谄媚与诗才的双重困境   盛唐余晖与晚唐暮色：唐诗黄昏的最后光芒   两宋风华：词国巅峰与家国悲歌   生死相许：为故国修史，遗民泪尽野史亭   元曲风华：乱世中的市井悲欢与文人风骨   清诗新韵：考据学兴与边塞诗的田园转向   系列简介  中国文学源远流长，从《诗经》《楚辞》开始，经过汉赋、魏晋玄学、唐诗、宋词、元曲、明清小说等不同阶段的发展，形成了独具特色的文学传统。本系列文章以历史朝代为线索，探讨各个时期的文人命运、文学成就及其时代背景，展现中国文学的演变历程和精神内核。  从东汉末年的建安七子，到魏晋时期的竹林七贤；从初唐四杰的青春意气，到盛唐诗人的浪漫豪情；从两...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</title>
+    <link href="https://exyone.is-a.dev/posts/en/the-art-of-grift-astrbot-case-study/" rel="alternate" type="text/html" title="The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust" />
+    <published>2026-04-18T00:00:00+08:00</published>
+  
+    <updated>2026-05-02T12:28:30+08:00</updated>
+  
+    <id>https://exyone.is-a.dev/posts/en/the-art-of-grift-astrbot-case-study/</id>
+    <content type="text/html" src="https://exyone.is-a.dev/posts/en/the-art-of-grift-astrbot-case-study/" />
+    <author>
+      <name>Exyone.dev@icloud.com</name>
+    </author>
+
+  
+    
+    <category term="Technology" />
+    
+  
+
+  <summary>This article is a follow-up to my previous piece about website design’s impact on open source projects. While that article focused on first impressions and usability, this one delves deeper into the ethical and trust issues surrounding AstrBot’s brand strategy.   There is a special kind of irony in watching a project that claims to build “intelligent agents” stumble so visibly at the simple act...</summary>
+
+  </entry>
+
+</feed>
+
+

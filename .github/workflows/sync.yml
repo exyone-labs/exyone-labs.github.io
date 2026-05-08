@@ -1,0 +1,84 @@
+name: Sync Site
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .gitignore
+      - README.md
+      - LICENSE
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  actions: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  sync-platforms:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get build timestamp
+        run: echo "build_timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "exyone.dev@icloud.com"
+
+      - name: Push to GitLab
+        id: gitlab-sync
+        run: |
+          git remote add gitlab ${{ secrets.GITLAB_REPO_URL }}
+          git push gitlab main --force
+        continue-on-error: true
+        env:
+          GITLAB_REPO_URL: ${{ secrets.GITLAB_REPO_URL }}
+
+      - name: Push to OneDev
+        id: onedev-sync
+        run: |
+          git remote add onedev ${{ secrets.ONEDEV_REPO_URL }}
+          git push onedev main --force
+        continue-on-error: true
+        env:
+          ONEDEV_REPO_URL: ${{ secrets.ONEDEV_REPO_URL }}
+
+      - name: Deploy to Codeberg Pages
+        id: codeberg-deploy
+        run: |
+          git clone ${{ secrets.CODEBERG_PAGES_REPO_URL }} codeberg-deploy --depth 1
+          rm -rf codeberg-deploy/*
+          cp -r _site/* codeberg-deploy/
+          cd codeberg-deploy
+          echo "exyone.cn.mt" > .domains
+          git add .
+          git commit -m "Deploy: Update site"
+          git push -f origin main
+        continue-on-error: true
+        env:
+          CODEBERG_PAGES_REPO_URL: ${{ secrets.CODEBERG_PAGES_REPO_URL }}
+
+      - name: Sync status report
+        if: always()
+        run: |
+          echo "## 📊 Deployment Status Report"
+          echo ""
+          echo "| Platform | Status |"
+          echo "|----------|--------|"
+          echo "| GitLab | ${{ steps.gitlab-sync.outcome == 'success' && '✅ Success' || '❌ Failed/Skipped' }} |"
+          echo "| OneDev | ${{ steps.onedev-sync.outcome == 'success' && '✅ Success' || '❌ Failed/Skipped' }} |"
+          echo "| Codeberg Pages | ${{ steps.codeberg-deploy.outcome == 'success' && '✅ Success' || '❌ Failed/Skipped' }} |"

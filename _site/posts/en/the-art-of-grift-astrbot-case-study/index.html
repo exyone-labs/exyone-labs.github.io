@@ -1,0 +1,3410 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="en" >
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+  ><!-- Setup Open Graph image -->
+
+  
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="This article is a follow-up to my previous piece about website design’s impact on open source projects. While that article focused on first impressions and usability, this one delves deeper into the ethical and trust issues surrounding AstrBot’s brand strategy." />
+<meta property="og:description" content="This article is a follow-up to my previous piece about website design’s impact on open source projects. While that article focused on first impressions and usability, this one delves deeper into the ethical and trust issues surrounding AstrBot’s brand strategy." />
+<link rel="canonical" href="https://exyone.is-a.dev/posts/en/the-art-of-grift-astrbot-case-study/" />
+<meta property="og:url" content="https://exyone.is-a.dev/posts/en/the-art-of-grift-astrbot-case-study/" />
+<meta property="og:site_name" content="EXYONE@BLOG:~$" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-18T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust" />
+<meta name="twitter:site" content="@exyone_rss" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-02T12:28:30+08:00","datePublished":"2026-04-18T00:00:00+08:00","description":"This article is a follow-up to my previous piece about website design’s impact on open source projects. While that article focused on first impressions and usability, this one delves deeper into the ethical and trust issues surrounding AstrBot’s brand strategy.","headline":"The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust","mainEntityOfPage":{"@type":"WebPage","@id":"https://exyone.is-a.dev/posts/en/the-art-of-grift-astrbot-case-study/"},"url":"https://exyone.is-a.dev/posts/en/the-art-of-grift-astrbot-case-study/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <title>The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust | EXYONE@BLOG:~$</title>
+
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon-precomposed" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-title" content="EXYONE@BLOG:~$">
+<meta name="application-name" content="EXYONE@BLOG:~$">
+<meta name="theme-color" content="#ffffff">
+
+
+  <!-- Resource Hints -->
+  
+    
+      
+        <link rel="preconnect" href="https://fonts.loli.net" >
+      
+        <link rel="dns-prefetch" href="https://fonts.loli.net" >
+      
+    
+      
+        <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+      
+        <link rel="dns-prefetch" href="https://gstatic.loli.net" >
+      
+    
+      
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+      
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+      
+    
+  
+
+  <!-- Bootstrap -->
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
+
+  <!-- Web Font -->
+  <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+
+  <!-- Custom Font -->
+  <link href="https://hanzi.itedev.com/fonts/Source+Han+Sans+VF/result.css" rel="stylesheet">
+  <style>
+    .content {
+      font-family: 'Source Han Sans VF', 'Microsoft YaHei', 'PingFang SC', 'MiSans', sans-serif !important;
+    }
+  </style>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css">
+
+  <!-- 3rd-party Dependencies -->
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.css">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
+  
+
+  
+    <!-- Image Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
+  
+
+  <!-- Scripts -->
+
+  <script src="/assets/js/dist/theme.min.js"></script>
+
+  <!-- JS selector for site. -->
+
+<!-- commons -->
+
+
+
+<!-- layout specified -->
+
+
+  
+
+  
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.20/dayjs.min.js,npm/dayjs@1.11.20/locale/en.js,npm/dayjs@1.11.20/plugin/relativeTime.js,npm/dayjs@1.11.20/plugin/localizedFormat.js,npm/tocbot@4.36.4/dist/tocbot.min.js"></script>
+
+
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+<!-- Pageviews -->
+
+  
+
+  
+
+
+
+  
+
+  <!-- A placeholder to allow defining custom metadata -->
+
+</head>
+
+  <body>
+    <!-- The Side Bar -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="/" id="avatar" class="rounded-circle"><img src="/assets/img/avatar.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
+
+    <a class="site-title d-block" href="/">EXYONE@BLOG:~$</a>
+    <p class="site-subtitle fst-italic mb-0">A .NET and Front-End developer from China.</p>
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item">
+        <a href="/" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>HOME</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      
+        <li class="nav-item">
+          <a href="/categories/" class="nav-link">
+            <i class="fa-fw fas fa-stream"></i>
+            
+
+            <span>CATEGORIES</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/tags/" class="nav-link">
+            <i class="fa-fw fas fa-tags"></i>
+            
+
+            <span>TAGS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/archives/" class="nav-link">
+            <i class="fa-fw fas fa-archive"></i>
+            
+
+            <span>ARCHIVES</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/about/" class="nav-link">
+            <i class="fa-fw fas fa-info-circle"></i>
+            
+
+            <span>ABOUT</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/friends/" class="nav-link">
+            <i class="fa-fw fas fa-link"></i>
+            
+
+            <span>FRIENDS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/guestbook/" class="nav-link">
+            <i class="fa-fw fas fa-comments"></i>
+            
+
+            <span>GUESTBOOK</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+    </ul>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+    
+      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      
+        <span class="icon-border"></span>
+      
+    
+
+    
+
+      
+        <a
+          href="https://github.com/exyone-labs"
+          aria-label="github"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://codeberg.org/exyone"
+          aria-label="codeberg"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fas fa-code-branch"></i>
+        </a>
+      
+    
+
+      
+        <a
+          href="https://twitter.com/exyone_rss"
+          aria-label="twitter"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://exyone.bsky.social"
+          aria-label="bluesky"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-bluesky"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://space.bilibili.com/3706949002595300"
+          aria-label="bilibili"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-bilibili"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://www.youtube.com/@exyone-t3a"
+          aria-label="youtube"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://qm.qq.com/q/9m5B32MsaQ"
+          aria-label="qq"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-qq"></i>
+        </a>
+      
+    
+
+      
+        <a
+          href="javascript:location.href = 'mailto:' + ['exyone.dev','icloud.com'].join('@')"
+          aria-label="email"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+    
+          
+        
+
+      
+        <a
+          href="/feed.xml"
+          aria-label="rss"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-rss"></i>
+        </a>
+      
+    
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->
+
+
+    <div id="main-wrapper" class="d-flex justify-content-center">
+      <div class="container d-flex flex-column px-xxl-5">
+        <!-- The Top Bar -->
+
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
+  <div
+    id="topbar"
+    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
+  >
+    <nav id="breadcrumb" aria-label="Breadcrumb">
+      
+
+      
+        
+          
+            <span>
+              <a href="/">Home</a>
+            </span>
+
+          
+        
+          
+        
+          
+        
+          
+            
+              <span>The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</span>
+            
+
+          
+        
+      
+    </nav>
+    <!-- endof #breadcrumb -->
+
+    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    <div id="topbar-title">
+      Post
+    </div>
+
+    <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
+      <i class="fas fa-search fa-fw"></i>
+    </button>
+
+    <search id="search" class="align-items-center ms-3 ms-lg-0">
+      <i class="fas fa-search fa-fw"></i>
+      <input
+        class="form-control"
+        id="search-input"
+        type="search"
+        aria-label="search"
+        autocomplete="off"
+        placeholder="Search..."
+      >
+    </search>
+    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">Cancel</button>
+  </div>
+</header>
+
+
+        <div class="row flex-grow-1">
+          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              <!-- Refactor the HTML structure -->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- return -->
+
+
+
+
+
+
+
+
+
+
+<article class="px-1" data-toc="true">
+  <header>
+    <h1 data-toc-skip>The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</h1>
+    
+
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        Posted
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1776441600"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Apr 18, 2026
+</time>
+
+      </span>
+
+      <!-- lastmod date -->
+      
+        <span>
+          Updated
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1777696110"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  May  2, 2026
+</time>
+
+        </span>
+      
+
+      
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
+
+          By
+
+          <em>
+            
+              <a href="https://twitter.com/exyone_rss">Exyone.dev@icloud.com</a>
+            
+          </em>
+        </span>
+
+        <div>
+          <!-- pageviews -->
+          
+
+          <!-- read time -->
+          <!-- Calculate the post's reading time, and display the word count in tooltip -->
+
+
+
+<!-- words per minute -->
+
+
+
+
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="1751 words"
+>
+  <em>9 min</em> read</span>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">Contents</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  
+
+  <div class="content">
+    <blockquote class="prompt-info">
+  <p><em>This article is a follow-up to my previous piece about website design’s impact on open source projects. While that article focused on first impressions and usability, this one delves deeper into the ethical and trust issues surrounding AstrBot’s brand strategy.</em></p>
+</blockquote>
+
+<p>There is a special kind of irony in watching a project that claims to build “intelligent agents” stumble so visibly at the simple act of presenting itself. <strong>AstrBot</strong> — an open‑source AI chatbot framework — has achieved something remarkable without writing a single line of questionable code: it has turned every possible aspect of its public face into a case study in how <em>not</em> to earn trust.</p>
+
+<p>To be clear from the outset: this is not a hit piece. I am not here to attack anyone personally, nor to question the technical competence of the developers. AstrBot, in many ways, is a genuinely impressive project — its plugin architecture is elegant, its configuration system more intuitive than OpenClaw’s, and its visual design, when it works, shows a level of polish that many open‑source projects lack. The problem is not that AstrBot is bad. The problem is that its branding choices are so conspicuously questionable that they overshadow its genuine merits.</p>
+
+<p>This is not a story about bad code. It is a story about performance, calculated ambiguity, and the quiet tragedy of a project that could have been great, but chose shortcuts instead.</p>
+
+<hr />
+
+<h2 id="i-the-name-game-a-vowel-too-far"><span class="me-2">I. The Name Game: A Vowel Too Far</span><a href="#i-the-name-game-a-vowel-too-far" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Let us begin with the most obvious — and, admittedly, the most uncomfortable — aspect.</p>
+
+<p>Sony’s <strong>Astro Bot</strong> is no longer a cult hero. It is a mascot on par with Mario, Zelda, and Monster Hunter — a TGA Game of the Year winner in 2024, with global trademark registrations dating back to 2020. Its little robot face sells consoles, plush toys, and dreams. Team Asobi, the developer, has built an IP that Sony actively defends through lawsuits, domain arbitrations, and cease‑and‑desist letters.</p>
+
+<p>Enter <strong>AstrBot</strong>. Same “Bot.” Same cosmic aroma. One missing vowel.</p>
+
+<p>The project’s lead developer, a self‑described anime enthusiast and “astronomy lover,” once explained that “Astr” is merely a shorthand for <em>astronomy</em>. This is technically defensible — if you also believe that “Phoshop” is an innocent abbreviation for <em>photography software</em>. The standard, universally recognised root is <em>Astro‑</em>. Every English‑speaking child knows it. Every developer who has ever named a project knows it.</p>
+
+<p>Choosing the non‑standard, orphaned “Astr” while keeping the exact same “Bot” is not necessarily malicious. But it is, at minimum, a curious coincidence — one that becomes harder to ignore when you consider the context.</p>
+
+<p>And here is the thing: the AstrBot team is not a group of random coders who have never touched a controller. Their own GitHub avatars scream “ACG culture” — anime characters, game references, the whole visual lexicon of a dedicated gaming community. These are people who <em>know</em> who Team Asobi is. They would have seen <em>Astro Bot</em>’s 2024 TGA win. They would have watched its rise from a charming tech demo to Sony’s golden child.</p>
+
+<p>And yet, after that explosive success, the name stayed. No rename. No “AstrChat.” No acknowledgment. Just silence, and later, a linguistic defence that felt less like an explanation and more like a shrug.</p>
+
+<p>When a developer offers a “clever” etymology, they inadvertently prove they knew the standard root existed. The very act of explaining becomes the evidence of awareness.</p>
+
+<hr />
+
+<h2 id="ii-the-website-where-first-impressions-go-to-die"><span class="me-2">II. The Website: Where First Impressions Go to Die</span><a href="#ii-the-website-where-first-impressions-go-to-die" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>If the name is a slow burn, the website is an immediate puzzle.</p>
+
+<p>Visit <code class="language-plaintext highlighter-rouge">astrbot.app</code> and then <code class="language-plaintext highlighter-rouge">docs.astrbot.app</code>. You will notice something strange: they are largely the same. The homepage and the documentation homepage repeat the same “Quick Start” sections, the same deployment options, the same information. This is not redundancy; it is <strong>information architecture confusion</strong>. A project that cannot clearly separate its landing page from its documentation sends a mixed signal about how it organises its own priorities.</p>
+
+<p>And it is <em>slow</em>. Painfully slow. OpenClaw’s website, by contrast, loads with the crisp efficiency of a tool whose developers understand performance. AstrBot’s sluggishness sends an immediate, silent signal: <em>we are still figuring out the basics</em>.</p>
+
+<p>Then there is the <strong>sponsorship placement</strong>. Right on the front page, under “Quick Start,” you will find a “Deploy on RainYun” button. RainYun is a cloud provider known for aggressive advertising, high prices, and a reputation for shutting down VPNs and mail servers. Putting a paid sponsor’s one‑click deployment alongside genuine technical methods (Docker, package managers, clients) is not evil — but it is <strong>jarring</strong>. It turns a documentation site into something that feels like a hybrid of a tutorial and a billboard.</p>
+
+<p>Good documentation separates content from commerce. AstrBot’s does not, and that blurring is noticeable.</p>
+
+<hr />
+
+<h2 id="iii-visual-identity-from-anime-to-alarming"><span class="me-2">III. Visual Identity: From “Anime” to “Alarming”</span><a href="#iii-visual-identity-from-anime-to-alarming" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>We have already discussed the avatars. But let us be precise: the problem is not “anime.” The problem is <strong>tone</strong>.</p>
+
+<p>OpenClaw has contributors with anime avatars too. But those are recognisable characters — restrained, normal, the kind of image you see on a thousand developer profiles. AstrBot’s team, however, leans into <em>grotesque, exaggerated, cheap</em> visuals. The difference is not between “weeb” and “normie.” It is between <strong>professional eccentricity</strong> and <strong>performative weirdness</strong>.</p>
+
+<p>To be fair, AstrBot’s <em>actual interface design</em> — the UI of the bot itself — is quite good. Better than OpenClaw’s, in fact. The dashboard is clean, the colour scheme is coherent, and the overall aesthetic shows a level of design sophistication that many open‑source AI tools lack. If only the same care had been applied to the project’s public face.</p>
+
+<p>Why does this matter? Because <strong>first impressions dictate who gets the benefit of the doubt</strong>.</p>
+
+<p>Imagine a serious vulnerability is found in OpenClaw tomorrow. The community will likely say: “AI agents are still immature — this is a general problem, not a failure of the project.” Now imagine the same vulnerability appears in AstrBot. The reaction might be: “Well, look at their website, their naming, their avatars — does this surprise anyone?”</p>
+
+<p>This is not unfair. It is <strong>trust accounting</strong>. AstrBot has spent its reputation budget on choices that raise eyebrows. When the inevitable bug arrives, there may be less goodwill to cushion the fall.</p>
+
+<hr />
+
+<h2 id="iv-a-tale-of-two-bots-openclaw-vs-astrbot"><span class="me-2">IV. A Tale of Two Bots: OpenClaw vs. AstrBot</span><a href="#iv-a-tale-of-two-bots-openclaw-vs-astrbot" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>The contrast is almost too perfect — and, in AstrBot’s favour, somewhat unfair.</p>
+
+<p><strong>OpenClaw</strong> was originally named <em>Clawdbot</em>. Anthropic, the creator of the Claude AI model, politely asked them to change it because the pronunciation was too close. What did OpenClaw do? They renamed. Immediately. Publicly. Painfully. They turned a legal request into a lesson in professional humility. Their README is clean, structured, and clearly AI‑assisted — but with a human editor’s touch that shows care.</p>
+
+<p><strong>AstrBot</strong> received no such request, because Sony either does not know they exist or does not care. That is not a badge of honour; it is a <strong>grey‑zone survival strategy</strong>. The project floats under the radar, close enough to a famous IP to borrow its coolness, but too small to attract legal attention. It is a parasite feeding on obscurity — though, to be charitable, perhaps unintentionally.</p>
+
+<p>And here is where I must give credit where it is due: AstrBot’s <em>technical design</em> is, in many ways, superior to OpenClaw’s. Its plugin system is more modular. Its configuration is more user‑friendly. Its visual design, when applied to the actual product rather than the marketing, shows genuine talent. The README, while also AI‑generated and somewhat chaotic, reflects a project that is ambitious and genuinely trying to build something useful.</p>
+
+<p>The tragedy is that these genuine strengths are obscured by branding choices that feel, to an outside observer, deliberately provocative.</p>
+
+<hr />
+
+<h2 id="v-the-uncomfortable-question-what-does-this-do-to-the-chinese-opensource-community"><span class="me-2">V. The Uncomfortable Question: What Does This Do to the Chinese Open‑Source Community?</span><a href="#v-the-uncomfortable-question-what-does-this-do-to-the-chinese-opensource-community" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>This is the part where we must be careful — and honest.</p>
+
+<p>AstrBot is a Chinese project. Its developer is Chinese. The team is Chinese. And every time an international user encounters this kind of calculated brand ambiguity, a quiet association forms in their mind: <em>“Another Chinese project that takes shortcuts.”</em></p>
+
+<p>That is deeply unfair to the thousands of Chinese developers who produce world‑class, honest, professional open‑source work. But unfairness is the currency of stereotypes. A single visible case can poison the well for everyone else.</p>
+
+<p>This is not a critique of Chinese developers. It is a critique of a specific project that happens to be Chinese — and a plea to the wider community to judge the individual, not the nation. AstrBot’s behaviour is not representative. It is the exception. But exceptions, when loud enough, become the narrative.</p>
+
+<hr />
+
+<h2 id="vi-why-sony-wont-sue-and-why-that-doesnt-matter"><span class="me-2">VI. Why Sony Won’t Sue (And Why That Doesn’t Matter)</span><a href="#vi-why-sony-wont-sue-and-why-that-doesnt-matter" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>You might ask: if the name is so problematic, why hasn’t Sony done anything?</p>
+
+<p>The answer is simple economics. A lawsuit against a non‑commercial, small‑scale open‑source project would cost Sony between $5,000 and $15,000 in legal fees — and yield exactly $0 in damages. Sony’s lawyers are busy protecting real revenue streams. They are not scrolling GitHub looking for minor name collisions.</p>
+
+<p>But <strong>legal silence is not moral permission</strong>. The absence of a lawsuit does not make the behaviour right. It just means the project is too insignificant to bother with.</p>
+
+<p>AstrBot knows this. And that knowledge is, perhaps, what makes the behaviour so conspicuous.</p>
+
+<hr />
+
+<h2 id="vii-the-final-irony-an-intelligent-agent-that-cannot-read-the-room"><span class="me-2">VII. The Final Irony: An “Intelligent Agent” That Cannot Read the Room</span><a href="#vii-the-final-irony-an-intelligent-agent-that-cannot-read-the-room" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>AstrBot set out to build an intelligent agent. In a sense, it succeeded — just not in the way its README suggests.</p>
+
+<p>Its intelligence lies in exploiting legal blind spots. Its agency lies in choosing not to change. And its legacy, unless corrected, will be that of a project that knew exactly what it was doing, pretended otherwise, and hoped no one would notice.</p>
+
+<p>But we noticed. And now, so will everyone else.</p>
+
+<p>To the team behind AstrBot: your code may be brilliant — and in many ways, it is. Your interface design is genuinely good. Your plugin architecture is elegant. But your name — that one missing vowel — will always be a footnote in a story about the shortcut you chose over the standard you knew.</p>
+
+<p>Trust is built in drops and lost in buckets. You started with a bucket that could have been full. The holes are still there — but they are patchable.</p>
+
+<hr />
+
+<p><em>Postscript: This article is not an attack on AstrBot, nor on Chinese open‑source. It is a reflection on how branding choices can overshadow technical merit. The global community owes nothing to stereotypes — but it owes everything to honesty. Let us keep the two separate.</em></p>
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    
+      <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw me-1"></i>
+        
+          <a href="/categories/technology/">Technology</a>
+      </div>
+    
+
+    <!-- tags -->
+    
+      <div class="post-tags">
+        <i class="fa fa-tags fa-fw me-1"></i>
+        
+          <a
+            href="/tags/ai/"
+            class="post-tag no-text-decoration"
+          >ai</a>
+        
+          <a
+            href="/tags/open-source/"
+            class="post-tag no-text-decoration"
+          >open-source</a>
+        
+      </div>
+    
+
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
+      <div class="license-wrapper">
+        
+          
+
+          This post is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         by the author.
+        
+      </div>
+
+      <!-- Post sharing snippet -->
+
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">Share</span>
+  <span class="share-icons">
+    
+    
+    
+
+    
+
+      
+
+      <a href="https://twitter.com/intent/tweet?text=The%20Art%20of%20the%20Grift:%20How%20AstrBot%20Turned%20Brand%20Ambiguity%20Into%20a%20Case%20Study%20in%20Broken%20Trust%20-%20EXYONE@BLOG:~$&url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen%2Fthe-art-of-grift-astrbot-case-study%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+        <i class="fa-fw fa-brands fa-square-x-twitter"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.facebook.com/sharer/sharer.php?title=The%20Art%20of%20the%20Grift:%20How%20AstrBot%20Turned%20Brand%20Ambiguity%20Into%20a%20Case%20Study%20in%20Broken%20Trust%20-%20EXYONE@BLOG:~$&u=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen%2Fthe-art-of-grift-astrbot-case-study%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+        <i class="fa-fw fab fa-facebook-square"></i>
+      </a>
+    
+
+      
+
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen%2Fthe-art-of-grift-astrbot-case-study%2F&text=The%20Art%20of%20the%20Grift:%20How%20AstrBot%20Turned%20Brand%20Ambiguity%20Into%20a%20Case%20Study%20in%20Broken%20Trust%20-%20EXYONE@BLOG:~$" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+        <i class="fa-fw fab fa-telegram"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen%2Fthe-art-of-grift-astrbot-case-study%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin" aria-label="Linkedin">
+        <i class="fa-fw fab fa-linkedin"></i>
+      </a>
+    
+
+      
+
+      <a href="https://service.weibo.com/share/share.php?title=The%20Art%20of%20the%20Grift:%20How%20AstrBot%20Turned%20Brand%20Ambiguity%20Into%20a%20Case%20Study%20in%20Broken%20Trust%20-%20EXYONE@BLOG:~$&url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen%2Fthe-art-of-grift-astrbot-case-study%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Weibo" aria-label="Weibo">
+        <i class="fa-fw fab fa-weibo"></i>
+      </a>
+    
+        <script defer type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/share-to-mastodon/+esm"></script>
+        <button class="btn text-start" data-bs-toggle="tooltip" data-bs-placement="top" title="Mastodon" aria-label="Mastodon">
+          <share-to-mastodon
+            class="share-mastodon"
+            message="The%20Art%20of%20the%20Grift:%20How%20AstrBot%20Turned%20Brand%20Ambiguity%20Into%20a%20Case%20Study%20in%20Broken%20Trust%20-%20EXYONE@BLOG:~$"
+            url="https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen%2Fthe-art-of-grift-astrbot-case-study%2F"customInstanceList="[{&quot;label&quot;:&quot;mastodon.social&quot;,&quot;link&quot;:&quot;https://mastodon.social/&quot;},{&quot;label&quot;:&quot;mastodon.online&quot;,&quot;link&quot;:&quot;https://mastodon.online/&quot;},{&quot;label&quot;:&quot;fosstodon.org&quot;,&quot;link&quot;:&quot;https://fosstodon.org/&quot;},{&quot;label&quot;:&quot;photog.social&quot;,&quot;link&quot;:&quot;https://photog.social/&quot;}]"
+          >
+            <i class="fa-fw fa-brands fa-mastodon"></i>
+          </share-to-mastodon>
+        </button>
+
+        
+
+      
+
+      <a href="https://bsky.app/intent/compose?text=The%20Art%20of%20the%20Grift:%20How%20AstrBot%20Turned%20Brand%20Ambiguity%20Into%20a%20Case%20Study%20in%20Broken%20Trust%20-%20EXYONE@BLOG:~$%20https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen%2Fthe-art-of-grift-astrbot-case-study%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Bluesky" aria-label="Bluesky">
+        <i class="fa-fw fa-brands fa-bluesky"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen%2Fthe-art-of-grift-astrbot-case-study%2F&title=The%20Art%20of%20the%20Grift:%20How%20AstrBot%20Turned%20Brand%20Ambiguity%20Into%20a%20Case%20Study%20in%20Broken%20Trust%20-%20EXYONE@BLOG:~$" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Reddit" aria-label="Reddit">
+        <i class="fa-fw fa-brands fa-square-reddit"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.threads.net/intent/post?text=The%20Art%20of%20the%20Grift:%20How%20AstrBot%20Turned%20Brand%20Ambiguity%20Into%20a%20Case%20Study%20in%20Broken%20Trust%20-%20EXYONE@BLOG:~$%20https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen%2Fthe-art-of-grift-astrbot-case-study%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Threads" aria-label="Threads">
+        <i class="fa-fw fa-brands fa-square-threads"></i>
+      </a>
+    
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Copy link"
+      data-title-succeed="Link copied successfully!"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+  </span>
+</div>
+
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
+</article>
+
+
+            
+          </main>
+
+          <!-- panel -->
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted">
+            <div class="access">
+              <!-- Get 5 last posted/updated posts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section id="access-lastmod">
+    <h2 class="panel-heading">Recently Updated</h2>
+    <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/adding-twikoo-to-chirpy/">Adding Twikoo Comments to Chirpy: A Plugin Development Journey</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/misans-font-for-better-reading/">MiSans: A Gentler Companion for Long-form Reading</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en/the-art-of-grift-astrbot-case-study/">The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/jetbrains-fleet-stop-updates/">JetBrains Fleet in 2025: A Retired IDE for the Future</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/zh/chinese-literati-series/">中国文人系列：从先秦到清末的文学长河</a>
+        </li>
+      
+    </ul>
+  </section>
+  <!-- #access-lastmod -->
+
+
+              <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/literature/">literature</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/history/">history</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/poetry/">poetry</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/open-source/">open-source</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">tutorial</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ai/">ai</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/blog/">blog</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/chirpy/">chirpy</a>
+      
+    </div>
+  </section>
+
+
+            </div>
+
+            
+              
+              
+
+
+
+
+
+
+  <div class="toc-border-cover z-3"></div>
+  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
+
+
+            
+          </aside>
+        </div>
+
+        <div class="row">
+          <!-- tail -->
+          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  <aside id="related-posts" aria-labelledby="related-label">
+    <h3 class="mb-4" id="related-label">Further Reading</h3>
+    <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/en-zh/copilot-ai-data-policy-open-source/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1775923200"
+  data-df="ll"
+  
+>
+  Apr 12, 2026
+</time>
+
+              <h4 class="pt-0 my-2">Copilot's Data Shift: Rethinking Open Source in the AI Age</h4>
+              <div class="text-muted">
+                <p>The code we write echoes beyond our screens. Its stewardship remains our collective responsibility.   GitHub’s recent policy pivot has stirred the waters. Starting April 24, 2026, Copilot will — by...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/en-zh/jetbrains-fleet-stop-updates/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1763049600"
+  data-df="ll"
+  
+>
+  Nov 14, 2025
+</time>
+
+              <h4 class="pt-0 my-2">JetBrains Fleet in 2025: A Retired IDE for the Future</h4>
+              <div class="text-muted">
+                <p>I recently came across the official JetBrains announcement and suddenly realized that Fleet is truly “retiring.” Starting from December 22, 2025, Fleet will stop distributing new versions and updat...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/en-zh/about-open-source-licenses/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1705248000"
+  data-df="ll"
+  
+>
+  Jan 15, 2024
+</time>
+
+              <h4 class="pt-0 my-2">About Open Source Licenses: Why I Only Like BSD-2-Clause and Apache 2.0</h4>
+              <div class="text-muted">
+                <p>Why I Only Use BSD-2-Clause and Apache 2.0  Most open source projects use GPL or MIT. I don’t like either. Let me explain.  Over time, I’ve stopped following trends blindly. GPL’s “paternalistic co...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+    </nav>
+  </aside>
+  <!-- #related-posts -->
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/posts/en-zh/website-design-open-source-project/"
+      class="btn btn-outline-primary"
+      aria-label="Older"
+    >
+      <p>Why I'd Abandon an Open Source Project Over Its Website Design</p>
+    </a>
+  
+
+  
+    <a
+      href="/posts/zh/chinese-literati-series/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>中国文人系列：从先秦到清末的文学长河</p>
+    </a>
+  
+</nav>
+
+            
+
+            <!-- The Footer -->
+<footer
+  aria-label="Site Info"
+  class="d-flex flex-column justify-content-center text-muted flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3"
+>
+  <p class="mb-0 copyright">
+    © <span id="year"></span>
+    · <em class="fst-normal">Exyone.dev@icloud.com</em>
+    <i class="fas fa-heartbeat heartbeat-icon"></i>
+    34 posts · 30 tags
+  </p>
+
+  <p class="mb-0">
+    Built with <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> &amp;
+    <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> ·
+    Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a> ·
+    <a href="https://www.cloudflare.com" target="_blank" rel="noopener">Cloudflare CDN</a>
+  </p>
+</footer>
+
+<style>
+  #sidebar .site-title {
+    font-size: 1.5rem;
+  }
+
+  .heartbeat-icon {
+    color: #ff6b6b;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    display: inline-block;
+    margin: 0 0.3em;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.15); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.15); }
+    70%      { transform: scale(1); }
+  }
+
+  .heartbeat-icon:hover {
+    color: #ff4757;
+    animation: heartbeat-hover 1s ease-in-out infinite;
+    cursor: pointer;
+  }
+
+  @keyframes heartbeat-hover {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.2); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.2); }
+    70%      { transform: scale(1); }
+  }
+
+  [data-mode="dark"] .heartbeat-icon {
+    color: #ff6b6b;
+  }
+  [data-mode="dark"] .heartbeat-icon:hover {
+    color: #ff4757;
+  }
+</style>
+
+<script>
+  (function() {
+    var year = new Date().getFullYear();
+    document.getElementById('year').textContent = year;
+  })();
+</script>
+          </div>
+        </div>
+
+        <!-- The Search results -->
+
+<div id="search-result-wrapper" class="d-flex justify-content-center d-none">
+  <div class="col-11 content">
+    <div id="search-hints">
+      <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/literature/">literature</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/history/">history</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/poetry/">poetry</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/open-source/">open-source</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">tutorial</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ai/">ai</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/blog/">blog</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/chirpy/">chirpy</a>
+      
+    </div>
+  </section>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+      </div>
+
+      <aside aria-label="Scroll to Top">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+          <i class="fas fa-angle-up"></i>
+        </button>
+      </aside>
+    </div>
+
+    <div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div>
+
+    
+      <aside
+  id="notification"
+  class="toast"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  data-bs-animation="true"
+  data-bs-autohide="false"
+>
+  <div class="toast-header">
+    <button
+      type="button"
+      class="btn-close ms-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="toast-body text-center pt-0">
+    <p class="px-2 mb-3">A new version of content is available.</p>
+    <button type="button" class="btn btn-primary" aria-label="Update">
+      Update
+    </button>
+  </div>
+</aside>
+
+    
+
+    <!-- Embedded scripts -->
+
+    
+      
+      <!-- The comments switcher -->
+
+  
+  <!-- https://giscus.app/ -->
+<script>
+  (function () {
+    const themeMapper = Theme.getThemeMapper('light', 'dark_dimmed');
+    const initTheme = themeMapper[Theme.visualState];
+
+    let lang = 'en';if (lang.length > 2 && !lang.startsWith('zh')) {
+      lang = lang.slice(0, 2);
+    }
+
+    let giscusAttributes = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'exyone-labs/exyone-labs.github.io',
+      'data-repo-id': 'R_kgDOSARDDA',
+      'data-category': 'Comments',
+      'data-category-id': 'DIC_kwDOSARDDM4C6pqo',
+      'data-mapping': 'pathname',
+      'data-strict' : '0',
+      'data-reactions-enabled': '1',
+      'data-emit-metadata': '0',
+      'data-theme': initTheme,
+      'data-input-position': 'top',
+      'data-lang': lang,
+      'data-loading': 'lazy',
+      crossorigin: 'anonymous',
+      async: ''
+    };
+
+    let giscusNode = document.createElement('script');
+    Object.entries(giscusAttributes).forEach(([key, value]) =>
+      giscusNode.setAttribute(key, value)
+    );
+
+    const $footer = document.querySelector('footer');
+    $footer.insertAdjacentElement("beforebegin", giscusNode);
+
+    addEventListener('message', (event) => {
+      if (event.source === window && event.data && event.data.id === Theme.ID) {
+        const newTheme = themeMapper[Theme.visualState];
+
+        const message = {
+          setConfig: {
+            theme: newTheme
+          }
+        };
+
+        const giscus =
+          document.getElementsByClassName('giscus-frame')[0].contentWindow;
+        giscus.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+    });
+  })();
+</script>
+
+
+
+    
+
+    <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('search-results'),
+      json: '/assets/js/data/search.json',
+      searchResultTemplate: '  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">    <header>      <h2><a href="{url}">{title}</a></h2>      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">        {categories}        {tags}      </div>    </header>    <p>{content}</p>  </article>',
+      noResultsText: '<p class="mt-5">Oops! No results found.</p>',
+      templateMiddleware: function(prop, value, template) {
+        if (prop === 'categories') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+          }
+        }
+
+        if (prop === 'tags') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+          }
+        }
+      }
+    });
+  });
+</script>
+
+  
+<!-- Twikoo Comment System -->
+<div id="twikoo-section" data-twikoo-injected="true" style="max-width: 800px; margin: 0.5rem auto 2rem auto; padding: 0 1rem;">
+  <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
+    <span style="height: 1px; flex: 1; background: var(--border-color, #e1e4e8);"></span>
+    <a id="twikoo-toggle-btn" href="javascript:void(0)" style="color: var(--text-muted, #888); font-size: 0.85rem; text-decoration: none; white-space: nowrap; padding: 0.25rem 0.5rem; border-radius: 4px; transition: all 0.2s;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      展开 Twikoo 评论
+    </a>
+    <span style="height: 1px; flex: 1; background: var(--border-color, #e1e4e8);"></span>
+  </div>
+  <div id="twikoo-comment-container" style="display: none;">
+    <div id="tcomment"></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js"></script>
+<script>
+(function() {
+  var twikooLoaded = false;
+  var btn = document.getElementById('twikoo-toggle-btn');
+  var container = document.getElementById('twikoo-comment-container');
+  
+  btn.addEventListener('click', function() {
+    if (container.style.display === 'none') {
+      container.style.display = 'block';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> 收起 Twikoo 评论';
+      if (!twikooLoaded) {
+        twikoo.init({
+          envId: 'https://comments.exyone.us.kg/',
+          el: '#tcomment',
+          path: location.pathname,
+          lang: document.documentElement.lang || 'en'
+        });
+        twikooLoaded = true;
+      }
+    } else {
+      container.style.display = 'none';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> 展开 Twikoo 评论';
+    }
+  });
+  
+  btn.addEventListener('mouseenter', function() {
+    btn.style.background = 'var(--border-color, #e1e4e8)';
+  });
+  btn.addEventListener('mouseleave', function() {
+    btn.style.background = 'transparent';
+  });
+})();
+</script>
+
+</body>
+</html>
+

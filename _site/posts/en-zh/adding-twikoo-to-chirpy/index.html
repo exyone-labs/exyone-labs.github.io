@@ -1,0 +1,4377 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="en-zh" >
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+  ><!-- Setup Open Graph image -->
+
+  
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Adding Twikoo Comments to Chirpy: A Plugin Development Journey" />
+<meta property="og:locale" content="en_zh" />
+<meta name="description" content="Chirpy is an excellent theme, but it doesn’t natively support Twikoo comments. I wanted to add Twikoo alongside the existing Giscus system without modifying the theme’s source code. The solution evolved through multiple iterations: I started with a Jekyll plugin, then tried footer.html template injection, and finally settled on a local-build-then-push workflow to ensure consistency across all deployment platforms." />
+<meta property="og:description" content="Chirpy is an excellent theme, but it doesn’t natively support Twikoo comments. I wanted to add Twikoo alongside the existing Giscus system without modifying the theme’s source code. The solution evolved through multiple iterations: I started with a Jekyll plugin, then tried footer.html template injection, and finally settled on a local-build-then-push workflow to ensure consistency across all deployment platforms." />
+<link rel="canonical" href="https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/" />
+<meta property="og:url" content="https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/" />
+<meta property="og:site_name" content="EXYONE@BLOG:~$" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-25T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Adding Twikoo Comments to Chirpy: A Plugin Development Journey" />
+<meta name="twitter:site" content="@exyone_rss" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-03T09:36:37+08:00","datePublished":"2026-04-25T00:00:00+08:00","description":"Chirpy is an excellent theme, but it doesn’t natively support Twikoo comments. I wanted to add Twikoo alongside the existing Giscus system without modifying the theme’s source code. The solution evolved through multiple iterations: I started with a Jekyll plugin, then tried footer.html template injection, and finally settled on a local-build-then-push workflow to ensure consistency across all deployment platforms.","headline":"Adding Twikoo Comments to Chirpy: A Plugin Development Journey","mainEntityOfPage":{"@type":"WebPage","@id":"https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/"},"url":"https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <title>Adding Twikoo Comments to Chirpy: A Plugin Development Journey | EXYONE@BLOG:~$</title>
+
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon-precomposed" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-title" content="EXYONE@BLOG:~$">
+<meta name="application-name" content="EXYONE@BLOG:~$">
+<meta name="theme-color" content="#ffffff">
+
+
+  <!-- Resource Hints -->
+  
+    
+      
+        <link rel="preconnect" href="https://fonts.loli.net" >
+      
+        <link rel="dns-prefetch" href="https://fonts.loli.net" >
+      
+    
+      
+        <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+      
+        <link rel="dns-prefetch" href="https://gstatic.loli.net" >
+      
+    
+      
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+      
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+      
+    
+  
+
+  <!-- Bootstrap -->
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
+
+  <!-- Web Font -->
+  <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+
+  <!-- Custom Font -->
+  <link href="https://hanzi.itedev.com/fonts/Source+Han+Sans+VF/result.css" rel="stylesheet">
+  <style>
+    .content {
+      font-family: 'Source Han Sans VF', 'Microsoft YaHei', 'PingFang SC', 'MiSans', sans-serif !important;
+    }
+  </style>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css">
+
+  <!-- 3rd-party Dependencies -->
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.css">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
+  
+
+  
+    <!-- Image Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
+  
+
+  <!-- Scripts -->
+
+  <script src="/assets/js/dist/theme.min.js"></script>
+
+  <!-- JS selector for site. -->
+
+<!-- commons -->
+
+
+
+<!-- layout specified -->
+
+
+  
+
+  
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.20/dayjs.min.js,npm/dayjs@1.11.20/locale/en.js,npm/dayjs@1.11.20/plugin/relativeTime.js,npm/dayjs@1.11.20/plugin/localizedFormat.js,npm/tocbot@4.36.4/dist/tocbot.min.js"></script>
+
+
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+<!-- Pageviews -->
+
+  
+
+  
+
+
+
+  
+
+  <!-- A placeholder to allow defining custom metadata -->
+
+</head>
+
+  <body>
+    <!-- The Side Bar -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="/" id="avatar" class="rounded-circle"><img src="/assets/img/avatar.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
+
+    <a class="site-title d-block" href="/">EXYONE@BLOG:~$</a>
+    <p class="site-subtitle fst-italic mb-0">A .NET and Front-End developer from China.</p>
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item">
+        <a href="/" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>HOME</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      
+        <li class="nav-item">
+          <a href="/categories/" class="nav-link">
+            <i class="fa-fw fas fa-stream"></i>
+            
+
+            <span>CATEGORIES</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/tags/" class="nav-link">
+            <i class="fa-fw fas fa-tags"></i>
+            
+
+            <span>TAGS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/archives/" class="nav-link">
+            <i class="fa-fw fas fa-archive"></i>
+            
+
+            <span>ARCHIVES</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/about/" class="nav-link">
+            <i class="fa-fw fas fa-info-circle"></i>
+            
+
+            <span>ABOUT</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/friends/" class="nav-link">
+            <i class="fa-fw fas fa-link"></i>
+            
+
+            <span>FRIENDS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/guestbook/" class="nav-link">
+            <i class="fa-fw fas fa-comments"></i>
+            
+
+            <span>GUESTBOOK</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+    </ul>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+    
+      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      
+        <span class="icon-border"></span>
+      
+    
+
+    
+
+      
+        <a
+          href="https://github.com/exyone-labs"
+          aria-label="github"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://codeberg.org/exyone"
+          aria-label="codeberg"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fas fa-code-branch"></i>
+        </a>
+      
+    
+
+      
+        <a
+          href="https://twitter.com/exyone_rss"
+          aria-label="twitter"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://exyone.bsky.social"
+          aria-label="bluesky"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-bluesky"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://space.bilibili.com/3706949002595300"
+          aria-label="bilibili"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-bilibili"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://www.youtube.com/@exyone-t3a"
+          aria-label="youtube"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://qm.qq.com/q/9m5B32MsaQ"
+          aria-label="qq"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-qq"></i>
+        </a>
+      
+    
+
+      
+        <a
+          href="javascript:location.href = 'mailto:' + ['exyone.dev','icloud.com'].join('@')"
+          aria-label="email"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+    
+          
+        
+
+      
+        <a
+          href="/feed.xml"
+          aria-label="rss"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-rss"></i>
+        </a>
+      
+    
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->
+
+
+    <div id="main-wrapper" class="d-flex justify-content-center">
+      <div class="container d-flex flex-column px-xxl-5">
+        <!-- The Top Bar -->
+
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
+  <div
+    id="topbar"
+    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
+  >
+    <nav id="breadcrumb" aria-label="Breadcrumb">
+      
+
+      
+        
+          
+            <span>
+              <a href="/">Home</a>
+            </span>
+
+          
+        
+          
+        
+          
+        
+          
+            
+              <span>Adding Twikoo Comments to Chirpy: A Plugin Development Journey</span>
+            
+
+          
+        
+      
+    </nav>
+    <!-- endof #breadcrumb -->
+
+    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    <div id="topbar-title">
+      Post
+    </div>
+
+    <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
+      <i class="fas fa-search fa-fw"></i>
+    </button>
+
+    <search id="search" class="align-items-center ms-3 ms-lg-0">
+      <i class="fas fa-search fa-fw"></i>
+      <input
+        class="form-control"
+        id="search-input"
+        type="search"
+        aria-label="search"
+        autocomplete="off"
+        placeholder="Search..."
+      >
+    </search>
+    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">Cancel</button>
+  </div>
+</header>
+
+
+        <div class="row flex-grow-1">
+          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              <!-- Refactor the HTML structure -->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- return -->
+
+
+
+
+
+
+
+
+
+
+<article class="px-1" data-toc="true">
+  <header>
+    <h1 data-toc-skip>Adding Twikoo Comments to Chirpy: A Plugin Development Journey</h1>
+    
+
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        Posted
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1777046400"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Apr 25, 2026
+</time>
+
+      </span>
+
+      <!-- lastmod date -->
+      
+        <span>
+          Updated
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1777772197"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  May  3, 2026
+</time>
+
+        </span>
+      
+
+      
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
+
+          By
+
+          <em>
+            
+              <a href="https://twitter.com/exyone_rss">Exyone.dev@icloud.com</a>
+            
+          </em>
+        </span>
+
+        <div>
+          <!-- pageviews -->
+          
+
+          <!-- read time -->
+          <!-- Calculate the post's reading time, and display the word count in tooltip -->
+
+
+
+<!-- words per minute -->
+
+
+
+
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="5366 words"
+>
+  <em>29 min</em> read</span>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">Adding Twikoo Comments to Chirpy: A Plugin Development Journey</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">Contents</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">Adding Twikoo Comments to Chirpy: A Plugin Development Journey</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  
+
+  <div class="content">
+    <p>Chirpy is an excellent theme, but it doesn’t natively support Twikoo comments. I wanted to add Twikoo alongside the existing Giscus system without modifying the theme’s source code. The solution evolved through multiple iterations: I started with a Jekyll plugin, then tried footer.html template injection, and finally settled on a local-build-then-push workflow to ensure consistency across all deployment platforms.</p>
+
+<h2 id="why-twikoo"><span class="me-2">Why Twikoo?</span><a href="#why-twikoo" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Giscus is great—it’s free, ad-free, and stores comments in GitHub Discussions. But there’s a catch: readers need a GitHub account to comment. For some friends, especially those in regions with network restrictions or those who simply don’t have a GitHub account, this creates an unnecessary barrier. A reader from China, for instance, might have stable access to your blog but struggle to load GitHub’s authentication page. Another reader might just want to leave a quick comment without creating yet another online account.</p>
+
+<p>Twikoo offers a simpler alternative. It supports anonymous comments, requires no third-party account, and provides a lightweight commenting experience. The trade-off is that you need to host a Twikoo backend (using Tencent CloudBase, Vercel, or a self-hosted solution), but for many bloggers, this is worth the flexibility it offers readers. By offering both Giscus and Twikoo, readers can choose what works best for their situation.</p>
+
+<h2 id="the-challenge"><span class="me-2">The Challenge</span><a href="#the-challenge" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Chirpy uses Giscus as its comment system, configured through <code class="language-plaintext highlighter-rouge">_config.yml</code>. The theme’s templates are packaged inside a Ruby gem, which means they’re not directly editable in your project directory. You could fork the theme and modify it, but that creates maintenance overhead—every time the theme updates, you’d need to merge those changes into your fork.</p>
+
+<p>I wanted a solution that would survive theme updates without requiring me to maintain a separate fork. The goal was to inject Twikoo into post pages without touching the theme’s core files.</p>
+
+<h2 id="the-solution-a-journey-through-multiple-approaches"><span class="me-2">The Solution: A Journey Through Multiple Approaches</span><a href="#the-solution-a-journey-through-multiple-approaches" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>My implementation went through several iterations before finding the right approach. Each method had its own limitations that led me to the next one.</p>
+
+<h3 id="first-attempt-post-render-hook"><span class="me-2">First Attempt: Post-Render Hook</span><a href="#first-attempt-post-render-hook" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>I initially created a Jekyll plugin that uses a post-render hook to inject Twikoo’s HTML and JavaScript into every post page after the build process completes. The hook runs after Jekyll finishes rendering each document. It checks if the output is HTML, verifies the document is a post, and injects the Twikoo container before the closing <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> tag.</p>
+
+<p>This approach worked locally and on some hosting platforms, but I discovered that GitHub Actions’ build environment handles Jekyll plugins differently. The plugin simply wouldn’t execute on GitHub Pages builds, even though it worked perfectly on Cloudflare Pages and locally. After weeks of debugging—changing hook types, adding error handling, clearing caches, and trying various configurations—I realized the issue was fundamental to how GitHub Pages loads custom plugins.</p>
+
+<blockquote class="prompt-tip">
+  <p>The complete source code is available in my <a href="https://github.com/exyone-labs/exyone-labs.github.io">GitHub repository</a>. Look for <code class="language-plaintext highlighter-rouge">_plugins/twikoo-inject.rb</code>.</p>
+</blockquote>
+
+<h3 id="second-attempt-footerhtml-template"><span class="me-2">Second Attempt: footer.html Template</span><a href="#second-attempt-footerhtml-template" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>After the plugin approach failed on GitHub Pages, I tried embedding Twikoo directly into <code class="language-plaintext highlighter-rouge">_includes/footer.html</code> using Liquid templates. This approach bypasses the plugin system entirely—since footer.html is part of the site’s template files, Jekyll processes it during the normal build cycle regardless of plugin loading behavior.</p>
+
+<p>The idea was sound, but the results were inconsistent. GitHub Actions’ build environment handles template includes differently than other platforms. The footer include wasn’t being processed consistently across different deployment scenarios, which meant the comment system would appear on some builds but not others.</p>
+
+<h3 id="third-attempt-local-build-workflow"><span class="me-2">Third Attempt: Local Build Workflow</span><a href="#third-attempt-local-build-workflow" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>After two failed approaches, I realized the core problem: different build environments produce different results. Even with the same source code and the same Jekyll version, subtle differences in how platforms configure their build runners can lead to inconsistent output.</p>
+
+<p>The solution I settled on is a local-build-then-push workflow. Instead of relying on the hosting platform to build the site, I build locally first, then push the pre-generated <code class="language-plaintext highlighter-rouge">_site</code> folder to a deployment repository. This ensures identical output regardless of which platform hosts the site—since the site is pre-built, the host only needs to serve static files without running Jekyll.</p>
+
+<h2 id="implementation-details"><span class="me-2">Implementation Details</span><a href="#implementation-details" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="plugin-injection-first-attempt"><span class="me-2">Plugin Injection (First Attempt)</span><a href="#plugin-injection-first-attempt" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>The original plugin approach uses several checks to ensure reliable injection. It checks if the output is HTML, verifies the document is a post, and prevents duplicate injection by looking for existing markers.</p>
+
+<h3 id="prevent-duplicate-injection"><span class="me-2">Prevent Duplicate Injection</span><a href="#prevent-duplicate-injection" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Using a unique data attribute as the marker prevents false positives when the article itself contains code examples that mention the injection target. This is a common pitfall when writing technical documentation about your own plugins.</p>
+
+<h3 id="toggle-ui-design"><span class="me-2">Toggle UI Design</span><a href="#toggle-ui-design" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Since Giscus can’t be hidden (it’s rendered by the theme), I created a toggle button that shows/hides the Twikoo section. The design uses a horizontal rule with centered text—a pattern commonly seen in publishing to separate different sections of content.</p>
+
+<p>The toggle serves a practical purpose: it keeps the page clean for readers who don’t want to comment, while making the option available for those who do. The button text changes from “展开 Twikoo 评论” (Expand Twikoo Comments) to “收起 Twikoo 评论” (Collapse Twikoo Comments) to clearly indicate the current state.</p>
+
+<h3 id="lazy-loading"><span class="me-2">Lazy Loading</span><a href="#lazy-loading" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Twikoo only initializes when the user clicks the toggle, saving resources. Without lazy loading, every page load would fetch the Twikoo JavaScript library and initialize the comment system, even if the reader never intended to leave a comment. With lazy loading, that overhead only occurs when actually needed.</p>
+
+<h2 id="styling-considerations"><span class="me-2">Styling Considerations</span><a href="#styling-considerations" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>The implementation uses CSS variables (<code class="language-plaintext highlighter-rouge">--border-color</code>, <code class="language-plaintext highlighter-rouge">--text-muted</code>, <code class="language-plaintext highlighter-rouge">--link-color</code>) to match Chirpy’s theme. This ensures the toggle looks consistent in both light and dark modes without requiring separate styles for each mode. If Chirpy updates its color scheme in the future, the Twikoo UI will automatically adapt.</p>
+
+<p>Width is constrained to <code class="language-plaintext highlighter-rouge">max-width: 800px</code>, matching the content area. This alignment keeps the comment section visually connected to the article above it. Margins are set to <code class="language-plaintext highlighter-rouge">0.5rem auto 2rem auto</code>, providing breathing room at the top and more substantial separation at the bottom, where the footer begins.</p>
+
+<h2 id="configuration"><span class="me-2">Configuration</span><a href="#configuration" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Add Twikoo configuration to your <code class="language-plaintext highlighter-rouge">_config.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="code-header">
+        <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="na">comments</span><span class="pi">:</span>
+  <span class="na">provider</span><span class="pi">:</span> <span class="s">twikoo</span> <span class="c1"># or giscus if you want both</span>
+  <span class="na">twikoo</span><span class="pi">:</span>
+    <span class="na">env_id</span><span class="pi">:</span> <span class="s">https://your-twikoo-env.com</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s">1.6.44</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">provider</code> field tells Chirpy which comment system to use for its built-in templates. Setting it to <code class="language-plaintext highlighter-rouge">twikoo</code> makes the theme render Twikoo instead of Giscus. However, since we’re injecting Twikoo through footer.html, you can actually leave this as <code class="language-plaintext highlighter-rouge">giscus</code> if you want both systems available.</p>
+
+<p>Make sure to add <code class="language-plaintext highlighter-rouge">plugins_dir</code> to your <code class="language-plaintext highlighter-rouge">_config.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="code-header">
+        <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="na">plugins_dir</span><span class="pi">:</span> <span class="s">_plugins</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>This ensures Jekyll loads the plugin from the <code class="language-plaintext highlighter-rouge">_plugins</code> directory. Without this line, Jekyll might not find your custom plugins, depending on how it’s invoked.</p>
+
+<h2 id="setting-up-the-local-build-workflow"><span class="me-2">Setting Up the Local Build Workflow</span><a href="#setting-up-the-local-build-workflow" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>The local-build-then-push workflow requires two repositories: one for your source code and one for the deployed site.</p>
+
+<h3 id="step-1-create-a-deployment-repository"><span class="me-2">Step 1: Create a Deployment Repository</span><a href="#step-1-create-a-deployment-repository" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Create a new repository on GitHub to hold your built site. This repository will contain only the contents of the <code class="language-plaintext highlighter-rouge">_site</code> folder after building. Name it something like <code class="language-plaintext highlighter-rouge">yourusername/yourusername.github.io</code> if you plan to use GitHub Pages, or simply <code class="language-plaintext highlighter-rouge">deploy</code> if you’re using another host.</p>
+
+<h3 id="step-2-configure-the-source-repository"><span class="me-2">Step 2: Configure the Source Repository</span><a href="#step-2-configure-the-source-repository" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>In your source repository (where you write posts), add the deployment repository as a remote:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git remote add deploy git@github.com:yourusername/deploy.git
+</pre></td></tr></tbody></table></code></div></div>
+
+<h3 id="step-3-build-and-push"><span class="me-2">Step 3: Build and Push</span><a href="#step-3-build-and-push" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>When you want to deploy, run these commands locally:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="c"># Build the site</span>
+bundle <span class="nb">exec </span>jekyll build
+
+<span class="c"># Switch to the deploy repository's folder</span>
+<span class="nb">cd </span>_site
+
+<span class="c"># Initialize git if needed, then commit and push</span>
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Deploy site"</span>
+git push deploy main
+</pre></td></tr></tbody></table></code></div></div>
+
+<h3 id="step-4-automate-with-a-script"><span class="me-2">Step 4: Automate with a Script</span><a href="#step-4-automate-with-a-script" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>To make this workflow more convenient, create a deploy script:</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="c">#!/bin/bash</span>
+<span class="nb">set</span> <span class="nt">-e</span>
+
+<span class="nb">echo</span> <span class="s2">"Building Jekyll site..."</span>
+bundle <span class="nb">exec </span>jekyll build
+
+<span class="nb">cd </span>_site
+
+<span class="nb">echo</span> <span class="s2">"Committing to deploy repository..."</span>
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Deploy </span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span>
+
+<span class="nb">echo</span> <span class="s2">"Pushing to deploy repository..."</span>
+git push deploy main
+
+<span class="nb">echo</span> <span class="s2">"Done!"</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Make it executable with <code class="language-plaintext highlighter-rouge">chmod +x deploy.sh</code>, then run <code class="language-plaintext highlighter-rouge">./deploy.sh</code> whenever you want to deploy.</p>
+
+<h2 id="platform-compatibility"><span class="me-2">Platform Compatibility</span><a href="#platform-compatibility" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>With the local build workflow, platform compatibility is no longer a concern. Since you’re building locally and only pushing the output, the hosting platform simply serves static files. This works with any platform that can serve HTML files:</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>Hosting Platform</th>
+      <th>Works with Local Build?</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GitHub Pages</td>
+      <td>Yes</td>
+      <td>Push to yourusername.github.io</td>
+    </tr>
+    <tr>
+      <td>Cloudflare Pages</td>
+      <td>Yes</td>
+      <td>Connect the deploy repository</td>
+    </tr>
+    <tr>
+      <td>Netlify</td>
+      <td>Yes</td>
+      <td>Connect the deploy repository</td>
+    </tr>
+    <tr>
+      <td>Vercel</td>
+      <td>Yes</td>
+      <td>Connect the deploy repository</td>
+    </tr>
+    <tr>
+      <td>Any static host</td>
+      <td>Yes</td>
+      <td>Upload the _site contents</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<p>The key advantage is that you don’t need to configure build commands or Ruby versions on your hosting platform. You’re not asking the platform to build anything—you’re giving it ready-to-serve files.</p>
+
+<h2 id="why-this-approach-works-better"><span class="me-2">Why This Approach Works Better</span><a href="#why-this-approach-works-better" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Building locally and pushing the output solves several problems that plague platform-based builds.</p>
+
+<p>First, consistency is guaranteed. When you build locally, you use the same Ruby version, the same Jekyll version, and the same gem versions every time. The output is deterministic. The files pushed to your deploy repository are exactly what you saw when you ran <code class="language-plaintext highlighter-rouge">jekyll build</code> locally.</p>
+
+<p>Second, debugging becomes easier. If something looks wrong in production, you can compare the local build output with what’s deployed. Since both come from the same build process, any differences must be due to the hosting platform’s configuration, not the build itself.</p>
+
+<p>Third, deployment is faster. Platform-based builds can take several minutes, especially if Jekyll needs to rebuild the entire site. With local building, you already have the output ready. Pushing to a git repository takes seconds, and most hosting platforms detect the new commit within seconds or minutes.</p>
+
+<p>Fourth, you gain full control over the build environment. Platform build environments can change without notice—a platform might upgrade Ruby or Jekyll, or change how it configures the build runner. When you build locally, you decide when to upgrade, and you can test thoroughly before deploying.</p>
+
+<h2 id="the-result"><span class="me-2">The Result</span><a href="#the-result" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Now each post has two comment options, and they work identically regardless of where you host the site. Giscus appears by default, integrated into the theme’s design. Twikoo is hidden by default, accessible through a toggle button at the bottom of each post. Readers can choose whichever system they prefer, or ignore both if they’re just browsing.</p>
+
+<p>The implementation is clean and non-invasive. It doesn’t require forking the theme, doesn’t complicate the deployment process, and respects Chirpy’s design language. When the theme updates, the Twikoo integration continues to work without requiring any changes.</p>
+
+<p>The local build workflow adds one extra step to deployment—you build locally instead of letting the platform build for you—but the trade-off is worth it. You get consistent results, faster deployments, and complete control over the build process.</p>
+
+<h2 id="get-the-source-code"><span class="me-2">Get the Source Code</span><a href="#get-the-source-code" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>If you’re interested in implementing this on your own Chirpy blog, the complete source code is available in my <a href="https://github.com/exyone-labs/exyone-labs.github.io">GitHub repository</a>. You’ll need:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">_includes/footer.html</code> - Twikoo integration via template</li>
+  <li><code class="language-plaintext highlighter-rouge">_plugins/twikoo-inject.rb</code> - Plugin injection (works on compatible platforms)</li>
+  <li><code class="language-plaintext highlighter-rouge">_config.yml</code> - Twikoo configuration</li>
+</ol>
+
+<h2 id="changelog"><span class="me-2">Changelog</span><a href="#changelog" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Changes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2026-04-25</td>
+      <td>Initial release with toggle UI, lazy loading, and CSS variable support</td>
+    </tr>
+    <tr>
+      <td>2026-04-25</td>
+      <td>Changed hook from <code class="language-plaintext highlighter-rouge">:site, :post_render</code> to <code class="language-plaintext highlighter-rouge">:documents, :post_render</code> for better compatibility</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>Added explicit post collection check for reliable targeting</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>Added <code class="language-plaintext highlighter-rouge">plugins_dir</code> configuration requirement</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>Added build environment comparison and Cloudflare Pages recommendation</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>Updated GitHub Actions workflow with verbose build output for debugging</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>Fixed self-exclusion bug by using unique data attribute as marker</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>Removed redundant code examples to prevent self-exclusion</td>
+    </tr>
+    <tr>
+      <td>2026-05-07</td>
+      <td>Tried footer.html template injection as alternative to plugin</td>
+    </tr>
+    <tr>
+      <td>2026-05-07</td>
+      <td>Found footer.html also inconsistent on GitHub Actions</td>
+    </tr>
+    <tr>
+      <td>2026-05-08</td>
+      <td>Implemented local-build-then-push workflow for consistency</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<hr />
+
+<h2 id="为-chirpy-添加-twikoo-评论一次插件开发记录"><span class="me-2">为 Chirpy 添加 Twikoo 评论：一次插件开发记录</span><a href="#为-chirpy-添加-twikoo-评论一次插件开发记录" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Chirpy 是个出色的主题，但它原生不支持 Twikoo 评论。我想在现有的 Giscus 系统旁添加 Twikoo，又不想修改主题源码。解决方案经过多次迭代：一开始使用 Jekyll 插件，后来尝试 footer.html 模板注入，最终采用本地构建后推送的工作流程，以确保所有部署平台的行为完全一致。</p>
+
+<h2 id="为什么选择-twikoo"><span class="me-2">为什么选择 Twikoo？</span><a href="#为什么选择-twikoo" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Giscus 很好——免费、无广告、评论存储在 GitHub Discussions 中。但有个问题：读者需要 GitHub 账号才能评论。对于一些朋友，尤其是网络受限地区的用户，或者单纯没有 GitHub 账号的人，这造成了不必要的障碍。比如一位来自中国的读者，可能能稳定访问你的博客，却难以加载 GitHub 的认证页面。另一位读者可能只是想留个言，不想为此再注册一个在线账号。</p>
+
+<p>Twikoo 提供了更简单的替代方案。它支持匿名评论，无需第三方账号，提供轻量级的评论体验。代价是你需要自己托管一个 Twikoo 后端（可以使用腾讯云 CloudBase、Vercel 或自建方案），但对于很多博主来说，为了给读者提供灵活性，这个代价是值得的。通过同时提供 Giscus 和 Twikoo，读者可以根据自己的情况选择最合适的方式。</p>
+
+<h2 id="问题所在"><span class="me-2">问题所在</span><a href="#问题所在" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Chirpy 使用 Giscus 作为评论系统，通过 <code class="language-plaintext highlighter-rouge">_config.yml</code> 配置。主题的模板被打包在 Ruby gem 里，这意味着你不能直接在项目目录中编辑它们。你可以 fork 主题然后修改，但这会带来维护负担——每次主题更新，你都需要把更新合并到你的 fork 中。</p>
+
+<p>我想要一个能在主题更新后继续工作的方案，不需要维护单独的 fork。目标是在不触碰主题核心文件的情况下，将 Twikoo 注入到文章页面中。</p>
+
+<h2 id="解决方案多次迭代的历程"><span class="me-2">解决方案：多次迭代的历程</span><a href="#解决方案多次迭代的历程" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>我的实现经过几个阶段的迭代才找到正确的方法。每种方法都有其局限性，促使我转向下一个方法。</p>
+
+<h3 id="第一次尝试后渲染钩子"><span class="me-2">第一次尝试：后渲染钩子</span><a href="#第一次尝试后渲染钩子" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>我最初创建了一个 Jekyll 插件，使用后渲染钩子在构建完成后将 Twikoo 的 HTML 和 JavaScript 注入到每篇文章页面中。这个钩子在 Jekyll 完成每个文档渲染后运行。它检查输出是否为 HTML，验证文档是否为文章，然后将 Twikoo 容器注入到 <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> 标签之前。</p>
+
+<p>这种方法在本地和某些托管平台上有效，但我发现 GitHub Actions 的构建环境处理 Jekyll 插件的方式不同。插件在 GitHub Pages 构建上根本不会执行，尽管它在 Cloudflare Pages 和本地运行良好。经过数周的调试——更改钩子类型、添加错误处理、清理缓存、尝试各种配置——我意识到问题根本在于 GitHub Pages 加载自定义插件的方式。</p>
+
+<blockquote class="prompt-tip">
+  <p>完整源码可在我的 <a href="https://github.com/exyone-labs/exyone-labs.github.io">GitHub 仓库</a>中找到，文件位置是 <code class="language-plaintext highlighter-rouge">_plugins/twikoo-inject.rb</code>。</p>
+</blockquote>
+
+<h3 id="第二次尝试footerhtml-模板"><span class="me-2">第二次尝试：footer.html 模板</span><a href="#第二次尝试footerhtml-模板" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>插件方法在 GitHub Pages 上失败后，我尝试使用 Liquid 模板将 Twikoo 直接嵌入到 <code class="language-plaintext highlighter-rouge">_includes/footer.html</code> 中。这种方法完全绕过了插件系统——由于 footer.html 是站点模板文件的一部分，Jekyll 在正常构建周期中会处理它，无论插件加载行为如何。</p>
+
+<p>这个想法是合理的，但结果不一致。GitHub Actions 的构建环境处理模板 includes 的方式与其他平台不同。footer include 在不同部署场景中没有一致地处理，这意味着评论系统在一些构建上会出现，但在另一些上不会。</p>
+
+<h3 id="第三次尝试本地构建工作流程"><span class="me-2">第三次尝试：本地构建工作流程</span><a href="#第三次尝试本地构建工作流程" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>经过两次失败的尝试，我意识到核心问题：不同的构建环境会产生不同的结果。即使使用相同的源代码和相同的 Jekyll 版本，平台配置其构建运行器的细微差异也可能导致输出不一致。</p>
+
+<p>我最终采用的解决方案是本地构建后推送工作流程。不再依赖托管平台构建站点，而是先在本地构建，然后将预生成的 <code class="language-plaintext highlighter-rouge">_site</code> 文件夹推送到部署仓库。这确保了无论在哪个平台托管，输出都完全一致——由于站点是预构建的，主机只需要提供静态文件，而不需要运行 Jekyll。</p>
+
+<h2 id="实现细节"><span class="me-2">实现细节</span><a href="#实现细节" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="插件注入第一次尝试"><span class="me-2">插件注入（第一次尝试）</span><a href="#插件注入第一次尝试" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>最初的插件方法使用多个检查来确保可靠的注入。它检查输出是否为 HTML，验证文档是否为文章，并通过查找现有标记来防止重复注入。</p>
+
+<h3 id="防止重复注入"><span class="me-2">防止重复注入</span><a href="#防止重复注入" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>使用独特的数据属性作为标记，可以避免文章本身包含提及注入目标的代码示例时出现误判。这是撰写关于自己插件的技术文档时常见的陷阱。</p>
+
+<h3 id="切换-ui-设计"><span class="me-2">切换 UI 设计</span><a href="#切换-ui-设计" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>由于 Giscus 无法隐藏（由主题渲染），我创建了一个切换按钮来显示/隐藏 Twikoo 区域。设计采用了水平分隔线配居中文字的方式——这是出版中常见的模式，用于分隔内容的不同部分。</p>
+
+<p>切换按钮有实际用途：它为不想评论的读者保持页面整洁，同时为想评论的读者提供选项。按钮文字从”展开 Twikoo 评论”变为”收起 Twikoo 评论”，清楚地指示当前状态。</p>
+
+<h3 id="懒加载"><span class="me-2">懒加载</span><a href="#懒加载" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Twikoo 只在用户点击切换按钮时才初始化，节省资源。没有懒加载的话，每次页面加载都会获取 Twikoo JavaScript 库并初始化评论系统，即使读者从未打算留言。有了懒加载，这个开销只在实际需要时才会发生。</p>
+
+<h2 id="样式考量"><span class="me-2">样式考量</span><a href="#样式考量" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>实现使用 CSS 变量（<code class="language-plaintext highlighter-rouge">--border-color</code>、<code class="language-plaintext highlighter-rouge">--text-muted</code>、<code class="language-plaintext highlighter-rouge">--link-color</code>）来匹配 Chirpy 的主题。这确保切换按钮在浅色和深色模式下都保持一致的外观，不需要为每种模式编写单独的样式。如果 Chirpy 在未来更新其配色方案，Twikoo UI 会自动适应。</p>
+
+<p>宽度限制为 <code class="language-plaintext highlighter-rouge">max-width: 800px</code>，与内容区域对齐。这种对齐让评论部分在视觉上与上方的文章相连。边距设置为 <code class="language-plaintext highlighter-rouge">0.5rem auto 2rem auto</code>，顶部留出呼吸空间，底部提供更充分的分隔，因为那里是 footer 的开始位置。</p>
+
+<h2 id="配置"><span class="me-2">配置</span><a href="#配置" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>在 <code class="language-plaintext highlighter-rouge">_config.yml</code> 中添加 Twikoo 配置：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="code-header">
+        <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="na">comments</span><span class="pi">:</span>
+  <span class="na">provider</span><span class="pi">:</span> <span class="s">twikoo</span> <span class="c1"># 如果你想同时使用两者，也可以用 giscus</span>
+  <span class="na">twikoo</span><span class="pi">:</span>
+    <span class="na">env_id</span><span class="pi">:</span> <span class="s">https://your-twikoo-env.com</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s">1.6.44</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">provider</code> 字段告诉 Chirpy 在其内置模板中使用哪个评论系统。将其设置为 <code class="language-plaintext highlighter-rouge">twikoo</code> 会让主题渲染 Twikoo 而不是 Giscus。不过，由于我们通过 footer.html 注入 Twikoo，你实际上可以将其保留为 <code class="language-plaintext highlighter-rouge">giscus</code>，这样两个系统都可用。</p>
+
+<p>确保在 <code class="language-plaintext highlighter-rouge">_config.yml</code> 中添加 <code class="language-plaintext highlighter-rouge">plugins_dir</code>：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="code-header">
+        <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="na">plugins_dir</span><span class="pi">:</span> <span class="s">_plugins</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>这确保 Jekyll 从 <code class="language-plaintext highlighter-rouge">_plugins</code> 目录加载插件。没有这一行，Jekyll 可能找不到你的自定义插件，具体取决于它的调用方式。</p>
+
+<h2 id="设置本地构建工作流程"><span class="me-2">设置本地构建工作流程</span><a href="#设置本地构建工作流程" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>本地构建后推送的工作流程需要两个仓库：一个用于源代码，一个用于已部署的站点。</p>
+
+<h3 id="步骤-1创建部署仓库"><span class="me-2">步骤 1：创建部署仓库</span><a href="#步骤-1创建部署仓库" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>在 GitHub 上创建一个新仓库来存放你构建好的站点。这个仓库在构建后只包含 <code class="language-plaintext highlighter-rouge">_site</code> 文件夹的内容。如果你计划使用 GitHub Pages，可以将其命名为 <code class="language-plaintext highlighter-rouge">yourusername/yourusername.github.io</code>，或者如果使用其他主机，简单命名为 <code class="language-plaintext highlighter-rouge">deploy</code>。</p>
+
+<h3 id="步骤-2配置源代码仓库"><span class="me-2">步骤 2：配置源代码仓库</span><a href="#步骤-2配置源代码仓库" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>在你的源代码仓库（你写文章的地方），将部署仓库添加为远程：</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git remote add deploy git@github.com:yourusername/deploy.git
+</pre></td></tr></tbody></table></code></div></div>
+
+<h3 id="步骤-3构建和推送"><span class="me-2">步骤 3：构建和推送</span><a href="#步骤-3构建和推送" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>当你想部署时，在本地运行以下命令：</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="c"># 构建站点</span>
+bundle <span class="nb">exec </span>jekyll build
+
+<span class="c"># 切换到 deploy 仓库的文件夹</span>
+<span class="nb">cd </span>_site
+
+<span class="c"># 如果需要则初始化 git，然后提交和推送</span>
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Deploy site"</span>
+git push deploy main
+</pre></td></tr></tbody></table></code></div></div>
+
+<h3 id="步骤-4用脚本自动化"><span class="me-2">步骤 4：用脚本自动化</span><a href="#步骤-4用脚本自动化" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>为了使部署更方便，创建一个部署脚本：</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="c">#!/bin/bash</span>
+<span class="nb">set</span> <span class="nt">-e</span>
+
+<span class="nb">echo</span> <span class="s2">"Building Jekyll site..."</span>
+bundle <span class="nb">exec </span>jekyll build
+
+<span class="nb">cd </span>_site
+
+<span class="nb">echo</span> <span class="s2">"Committing to deploy repository..."</span>
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Deploy </span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span>
+
+<span class="nb">echo</span> <span class="s2">"Pushing to deploy repository..."</span>
+git push deploy main
+
+<span class="nb">echo</span> <span class="s2">"Done!"</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>用 <code class="language-plaintext highlighter-rouge">chmod +x deploy.sh</code> 使其可执行，然后每当你想部署时运行 <code class="language-plaintext highlighter-rouge">./deploy.sh</code>。</p>
+
+<h2 id="平台兼容性"><span class="me-2">平台兼容性</span><a href="#平台兼容性" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>使用本地构建工作流程，平台兼容性不再是问题。由于你在本地构建并只推送输出，托管平台只需提供静态文件。这适用于任何可以提供 HTML 文件的平台：</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>托管平台</th>
+      <th>本地构建可用？</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GitHub Pages</td>
+      <td>是</td>
+      <td>推送到 yourusername.github.io</td>
+    </tr>
+    <tr>
+      <td>Cloudflare Pages</td>
+      <td>是</td>
+      <td>连接部署仓库</td>
+    </tr>
+    <tr>
+      <td>Netlify</td>
+      <td>是</td>
+      <td>连接部署仓库</td>
+    </tr>
+    <tr>
+      <td>Vercel</td>
+      <td>是</td>
+      <td>连接部署仓库</td>
+    </tr>
+    <tr>
+      <td>任何静态主机</td>
+      <td>是</td>
+      <td>上传 _site 内容</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<p>关键优势是你不需要在托管平台上配置构建命令或 Ruby 版本。你不是在要求平台构建任何东西——你给它的是准备好的文件。</p>
+
+<h2 id="为什么这种方法更好"><span class="me-2">为什么这种方法更好</span><a href="#为什么这种方法更好" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>在本地构建然后推送输出解决了困扰基于平台的构建的几个问题。</p>
+
+<p>首先，一致性得到保证。当你在本地构建时，每次都使用相同的 Ruby 版本、相同的 Jekyll 版本和相同的 gem 版本。输出是确定性的。你推送到部署仓库的文件正是你在本地运行 <code class="language-plaintext highlighter-rouge">jekyll build</code> 时看到的文件。</p>
+
+<p>其次，调试变得更容易。如果生产环境中出现问题，你可以将本地构建输出与已部署的内容进行比较。由于两者来自相同的构建过程，任何差异必定是由于托管平台的配置，而不是构建本身。</p>
+
+<p>第三，部署速度更快。基于平台的构建可能需要几分钟，特别是如果 Jekyll 需要重建整个站点时。有了本地构建，你已经准备好了输出。推送到 git 仓库只需几秒钟，大多数托管平台在几秒或几分钟内检测到新提交。</p>
+
+<p>第四，你获得了对构建环境的完全控制。平台的构建环境可能会在未经通知的情况下发生变化——平台可能会升级 Ruby 或 Jekyll，或更改其配置构建运行器的方式。当你在本地构建时，你决定何时升级，并且可以在部署前进行充分测试。</p>
+
+<h2 id="最终效果"><span class="me-2">最终效果</span><a href="#最终效果" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>现在每篇文章都有两个评论选项，而且无论你托管在哪里，它们的工作方式都完全一致。Giscus 默认显示，集成在主题的设计中。Twikoo 默认隐藏，通过每篇文章底部的切换按钮访问。读者可以选择自己偏好的评论系统，或者如果只是浏览的话，忽略两者。</p>
+
+<p>实现干净且非侵入式。它不需要 fork 主题，不会使部署过程复杂化，尊重 Chirpy 的设计语言。当主题更新时，Twikoo 集成继续工作，不需要任何更改。</p>
+
+<p>本地构建工作流程为部署增加了一个额外的步骤——你在本地构建而不是让平台为你构建——但这个权衡是值得的。你获得了一致的结果、更快的部署，以及对构建过程的完全控制。</p>
+
+<h2 id="获取源代码"><span class="me-2">获取源代码</span><a href="#获取源代码" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>如果你有兴趣在自己的 Chirpy 博客上实现这个功能，完整的源代码可以在我的 <a href="https://github.com/exyone-labs/exyone-labs.github.io">GitHub 仓库</a>中找到。你需要：</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">_includes/footer.html</code> - 通过模板的 Twikoo 集成</li>
+  <li><code class="language-plaintext highlighter-rouge">_plugins/twikoo-inject.rb</code> - 插件注入（在兼容的平台上工作）</li>
+  <li><code class="language-plaintext highlighter-rouge">_config.yml</code> - Twikoo 配置</li>
+</ol>
+
+<h2 id="更新日志"><span class="me-2">更新日志</span><a href="#更新日志" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>日期</th>
+      <th>更新内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2026-04-25</td>
+      <td>初始版本，包含切换 UI、懒加载、CSS 变量支持</td>
+    </tr>
+    <tr>
+      <td>2026-04-25</td>
+      <td>将钩子从 <code class="language-plaintext highlighter-rouge">:site, :post_render</code> 改为 <code class="language-plaintext highlighter-rouge">:documents, :post_render</code> 以提高兼容性</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>添加显式文章集合检查，确保可靠定位</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>添加 <code class="language-plaintext highlighter-rouge">plugins_dir</code> 配置要求</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>添加构建环境对比及 Cloudflare Pages 推荐说明</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>更新 GitHub Actions 工作流，添加详细构建输出用于调试</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>修复自我排除 Bug，使用独特的 data 属性作为标记</td>
+    </tr>
+    <tr>
+      <td>2026-05-02</td>
+      <td>删除冗余代码示例以防止自我排除</td>
+    </tr>
+    <tr>
+      <td>2026-05-07</td>
+      <td>尝试使用 footer.html 模板注入作为插件的替代方案</td>
+    </tr>
+    <tr>
+      <td>2026-05-07</td>
+      <td>发现 footer.html 在 GitHub Actions 上也不一致</td>
+    </tr>
+    <tr>
+      <td>2026-05-08</td>
+      <td>实现本地构建后推送工作流程以确保一致性</td>
+    </tr>
+  </tbody>
+</table></div>
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    
+      <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw me-1"></i>
+        
+          <a href="/categories/technology/">Technology</a>
+      </div>
+    
+
+    <!-- tags -->
+    
+      <div class="post-tags">
+        <i class="fa fa-tags fa-fw me-1"></i>
+        
+          <a
+            href="/tags/jekyll/"
+            class="post-tag no-text-decoration"
+          >jekyll</a>
+        
+          <a
+            href="/tags/twikoo/"
+            class="post-tag no-text-decoration"
+          >twikoo</a>
+        
+          <a
+            href="/tags/plugin/"
+            class="post-tag no-text-decoration"
+          >plugin</a>
+        
+      </div>
+    
+
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
+      <div class="license-wrapper">
+        
+          
+
+          This post is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         by the author.
+        
+      </div>
+
+      <!-- Post sharing snippet -->
+
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">Share</span>
+  <span class="share-icons">
+    
+    
+    
+
+    
+
+      
+
+      <a href="https://twitter.com/intent/tweet?text=Adding%20Twikoo%20Comments%20to%20Chirpy:%20A%20Plugin%20Development%20Journey%20-%20EXYONE@BLOG:~$&url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fadding-twikoo-to-chirpy%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+        <i class="fa-fw fa-brands fa-square-x-twitter"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.facebook.com/sharer/sharer.php?title=Adding%20Twikoo%20Comments%20to%20Chirpy:%20A%20Plugin%20Development%20Journey%20-%20EXYONE@BLOG:~$&u=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fadding-twikoo-to-chirpy%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+        <i class="fa-fw fab fa-facebook-square"></i>
+      </a>
+    
+
+      
+
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fadding-twikoo-to-chirpy%2F&text=Adding%20Twikoo%20Comments%20to%20Chirpy:%20A%20Plugin%20Development%20Journey%20-%20EXYONE@BLOG:~$" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+        <i class="fa-fw fab fa-telegram"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fadding-twikoo-to-chirpy%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin" aria-label="Linkedin">
+        <i class="fa-fw fab fa-linkedin"></i>
+      </a>
+    
+
+      
+
+      <a href="https://service.weibo.com/share/share.php?title=Adding%20Twikoo%20Comments%20to%20Chirpy:%20A%20Plugin%20Development%20Journey%20-%20EXYONE@BLOG:~$&url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fadding-twikoo-to-chirpy%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Weibo" aria-label="Weibo">
+        <i class="fa-fw fab fa-weibo"></i>
+      </a>
+    
+        <script defer type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/share-to-mastodon/+esm"></script>
+        <button class="btn text-start" data-bs-toggle="tooltip" data-bs-placement="top" title="Mastodon" aria-label="Mastodon">
+          <share-to-mastodon
+            class="share-mastodon"
+            message="Adding%20Twikoo%20Comments%20to%20Chirpy:%20A%20Plugin%20Development%20Journey%20-%20EXYONE@BLOG:~$"
+            url="https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fadding-twikoo-to-chirpy%2F"customInstanceList="[{&quot;label&quot;:&quot;mastodon.social&quot;,&quot;link&quot;:&quot;https://mastodon.social/&quot;},{&quot;label&quot;:&quot;mastodon.online&quot;,&quot;link&quot;:&quot;https://mastodon.online/&quot;},{&quot;label&quot;:&quot;fosstodon.org&quot;,&quot;link&quot;:&quot;https://fosstodon.org/&quot;},{&quot;label&quot;:&quot;photog.social&quot;,&quot;link&quot;:&quot;https://photog.social/&quot;}]"
+          >
+            <i class="fa-fw fa-brands fa-mastodon"></i>
+          </share-to-mastodon>
+        </button>
+
+        
+
+      
+
+      <a href="https://bsky.app/intent/compose?text=Adding%20Twikoo%20Comments%20to%20Chirpy:%20A%20Plugin%20Development%20Journey%20-%20EXYONE@BLOG:~$%20https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fadding-twikoo-to-chirpy%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Bluesky" aria-label="Bluesky">
+        <i class="fa-fw fa-brands fa-bluesky"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fadding-twikoo-to-chirpy%2F&title=Adding%20Twikoo%20Comments%20to%20Chirpy:%20A%20Plugin%20Development%20Journey%20-%20EXYONE@BLOG:~$" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Reddit" aria-label="Reddit">
+        <i class="fa-fw fa-brands fa-square-reddit"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.threads.net/intent/post?text=Adding%20Twikoo%20Comments%20to%20Chirpy:%20A%20Plugin%20Development%20Journey%20-%20EXYONE@BLOG:~$%20https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fadding-twikoo-to-chirpy%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Threads" aria-label="Threads">
+        <i class="fa-fw fa-brands fa-square-threads"></i>
+      </a>
+    
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Copy link"
+      data-title-succeed="Link copied successfully!"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+  </span>
+</div>
+
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
+</article>
+
+
+            
+          </main>
+
+          <!-- panel -->
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted">
+            <div class="access">
+              <!-- Get 5 last posted/updated posts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section id="access-lastmod">
+    <h2 class="panel-heading">Recently Updated</h2>
+    <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/adding-twikoo-to-chirpy/">Adding Twikoo Comments to Chirpy: A Plugin Development Journey</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/misans-font-for-better-reading/">MiSans: A Gentler Companion for Long-form Reading</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en/the-art-of-grift-astrbot-case-study/">The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/jetbrains-fleet-stop-updates/">JetBrains Fleet in 2025: A Retired IDE for the Future</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/zh/chinese-literati-series/">中国文人系列：从先秦到清末的文学长河</a>
+        </li>
+      
+    </ul>
+  </section>
+  <!-- #access-lastmod -->
+
+
+              <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/literature/">literature</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/history/">history</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/poetry/">poetry</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/open-source/">open-source</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">tutorial</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ai/">ai</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/blog/">blog</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/chirpy/">chirpy</a>
+      
+    </div>
+  </section>
+
+
+            </div>
+
+            
+              
+              
+
+
+
+
+
+
+  <div class="toc-border-cover z-3"></div>
+  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
+
+
+            
+          </aside>
+        </div>
+
+        <div class="row">
+          <!-- tail -->
+          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+
+
+
+
+
+
+
+
+
+
+  <aside id="related-posts" aria-labelledby="related-label">
+    <h3 class="mb-4" id="related-label">Further Reading</h3>
+    <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/en-zh/about-jekyll-and-chirpy/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1777046400"
+  data-df="ll"
+  
+>
+  Apr 25, 2026
+</time>
+
+              <h4 class="pt-0 my-2">Jekyll and Chirpy: A Journey of Trial and Error</h4>
+              <div class="text-muted">
+                <p>In Why choose Jekyll, and why choose Chirpy, I explained my reasons for choosing Jekyll and Chirpy. But truth be told, that article was written this year, not three years ago. As I mentioned in my ...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/en-zh/why-jekyll-why-chirpy/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1683907200"
+  data-df="ll"
+  
+>
+  May 13, 2023
+</time>
+
+              <h4 class="pt-0 my-2">Why choose Jekyll, and why choose Chirpy</h4>
+              <div class="text-muted">
+                <p>The day after I decided to build this site, a practical question came up: what tools should I use?  I’m not a web developer, but I know there are a lot of choices. WordPress is popular — powerful, ...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/en-zh/self-hosted-home-server-setup/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1767283200"
+  data-df="ll"
+  
+>
+  Jan  2, 2026
+</time>
+
+              <h4 class="pt-0 my-2">Migrating from Cloud Server to Home Server, Configuring Intranet Penetration to Map Site to Public Network</h4>
+              <div class="text-muted">
+                <p>Modified using Grok AI. Content accuracy and device compatibility are not guaranteed. Please verify and adjust according to your actual situation.   Hi everyone, I’m back! As the title says, I’ve f...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+    </nav>
+  </aside>
+  <!-- #related-posts -->
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/posts/en-zh/about-jekyll-and-chirpy/"
+      class="btn btn-outline-primary"
+      aria-label="Older"
+    >
+      <p>Jekyll and Chirpy: A Journey of Trial and Error</p>
+    </a>
+  
+
+  
+    <div class="btn btn-outline-primary disabled" aria-label="Newer">
+      <p>-</p>
+    </div>
+  
+</nav>
+
+            
+
+            <!-- The Footer -->
+<footer
+  aria-label="Site Info"
+  class="d-flex flex-column justify-content-center text-muted flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3"
+>
+  <p class="mb-0 copyright">
+    © <span id="year"></span>
+    · <em class="fst-normal">Exyone.dev@icloud.com</em>
+    <i class="fas fa-heartbeat heartbeat-icon"></i>
+    34 posts · 30 tags
+  </p>
+
+  <p class="mb-0">
+    Built with <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> &amp;
+    <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> ·
+    Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a> ·
+    <a href="https://www.cloudflare.com" target="_blank" rel="noopener">Cloudflare CDN</a>
+  </p>
+</footer>
+
+<style>
+  #sidebar .site-title {
+    font-size: 1.5rem;
+  }
+
+  .heartbeat-icon {
+    color: #ff6b6b;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    display: inline-block;
+    margin: 0 0.3em;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.15); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.15); }
+    70%      { transform: scale(1); }
+  }
+
+  .heartbeat-icon:hover {
+    color: #ff4757;
+    animation: heartbeat-hover 1s ease-in-out infinite;
+    cursor: pointer;
+  }
+
+  @keyframes heartbeat-hover {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.2); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.2); }
+    70%      { transform: scale(1); }
+  }
+
+  [data-mode="dark"] .heartbeat-icon {
+    color: #ff6b6b;
+  }
+  [data-mode="dark"] .heartbeat-icon:hover {
+    color: #ff4757;
+  }
+</style>
+
+<script>
+  (function() {
+    var year = new Date().getFullYear();
+    document.getElementById('year').textContent = year;
+  })();
+</script>
+          </div>
+        </div>
+
+        <!-- The Search results -->
+
+<div id="search-result-wrapper" class="d-flex justify-content-center d-none">
+  <div class="col-11 content">
+    <div id="search-hints">
+      <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/literature/">literature</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/history/">history</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/poetry/">poetry</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/open-source/">open-source</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">tutorial</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ai/">ai</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/blog/">blog</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/chirpy/">chirpy</a>
+      
+    </div>
+  </section>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+      </div>
+
+      <aside aria-label="Scroll to Top">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+          <i class="fas fa-angle-up"></i>
+        </button>
+      </aside>
+    </div>
+
+    <div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div>
+
+    
+      <aside
+  id="notification"
+  class="toast"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  data-bs-animation="true"
+  data-bs-autohide="false"
+>
+  <div class="toast-header">
+    <button
+      type="button"
+      class="btn-close ms-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="toast-body text-center pt-0">
+    <p class="px-2 mb-3">A new version of content is available.</p>
+    <button type="button" class="btn btn-primary" aria-label="Update">
+      Update
+    </button>
+  </div>
+</aside>
+
+    
+
+    <!-- Embedded scripts -->
+
+    
+      
+      <!-- The comments switcher -->
+
+  
+  <!-- https://giscus.app/ -->
+<script>
+  (function () {
+    const themeMapper = Theme.getThemeMapper('light', 'dark_dimmed');
+    const initTheme = themeMapper[Theme.visualState];
+
+    let lang = 'en';if (lang.length > 2 && !lang.startsWith('zh')) {
+      lang = lang.slice(0, 2);
+    }
+
+    let giscusAttributes = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'exyone-labs/exyone-labs.github.io',
+      'data-repo-id': 'R_kgDOSARDDA',
+      'data-category': 'Comments',
+      'data-category-id': 'DIC_kwDOSARDDM4C6pqo',
+      'data-mapping': 'pathname',
+      'data-strict' : '0',
+      'data-reactions-enabled': '1',
+      'data-emit-metadata': '0',
+      'data-theme': initTheme,
+      'data-input-position': 'top',
+      'data-lang': lang,
+      'data-loading': 'lazy',
+      crossorigin: 'anonymous',
+      async: ''
+    };
+
+    let giscusNode = document.createElement('script');
+    Object.entries(giscusAttributes).forEach(([key, value]) =>
+      giscusNode.setAttribute(key, value)
+    );
+
+    const $footer = document.querySelector('footer');
+    $footer.insertAdjacentElement("beforebegin", giscusNode);
+
+    addEventListener('message', (event) => {
+      if (event.source === window && event.data && event.data.id === Theme.ID) {
+        const newTheme = themeMapper[Theme.visualState];
+
+        const message = {
+          setConfig: {
+            theme: newTheme
+          }
+        };
+
+        const giscus =
+          document.getElementsByClassName('giscus-frame')[0].contentWindow;
+        giscus.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+    });
+  })();
+</script>
+
+
+
+    
+
+    <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('search-results'),
+      json: '/assets/js/data/search.json',
+      searchResultTemplate: '  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">    <header>      <h2><a href="{url}">{title}</a></h2>      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">        {categories}        {tags}      </div>    </header>    <p>{content}</p>  </article>',
+      noResultsText: '<p class="mt-5">Oops! No results found.</p>',
+      templateMiddleware: function(prop, value, template) {
+        if (prop === 'categories') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+          }
+        }
+
+        if (prop === 'tags') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+          }
+        }
+      }
+    });
+  });
+</script>
+
+  
+<!-- Twikoo Comment System -->
+<div id="twikoo-section" data-twikoo-injected="true" style="max-width: 800px; margin: 0.5rem auto 2rem auto; padding: 0 1rem;">
+  <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
+    <span style="height: 1px; flex: 1; background: var(--border-color, #e1e4e8);"></span>
+    <a id="twikoo-toggle-btn" href="javascript:void(0)" style="color: var(--text-muted, #888); font-size: 0.85rem; text-decoration: none; white-space: nowrap; padding: 0.25rem 0.5rem; border-radius: 4px; transition: all 0.2s;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      展开 Twikoo 评论
+    </a>
+    <span style="height: 1px; flex: 1; background: var(--border-color, #e1e4e8);"></span>
+  </div>
+  <div id="twikoo-comment-container" style="display: none;">
+    <div id="tcomment"></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js"></script>
+<script>
+(function() {
+  var twikooLoaded = false;
+  var btn = document.getElementById('twikoo-toggle-btn');
+  var container = document.getElementById('twikoo-comment-container');
+  
+  btn.addEventListener('click', function() {
+    if (container.style.display === 'none') {
+      container.style.display = 'block';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> 收起 Twikoo 评论';
+      if (!twikooLoaded) {
+        twikoo.init({
+          envId: 'https://comments.exyone.us.kg/',
+          el: '#tcomment',
+          path: location.pathname,
+          lang: document.documentElement.lang || 'en'
+        });
+        twikooLoaded = true;
+      }
+    } else {
+      container.style.display = 'none';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> 展开 Twikoo 评论';
+    }
+  });
+  
+  btn.addEventListener('mouseenter', function() {
+    btn.style.background = 'var(--border-color, #e1e4e8)';
+  });
+  btn.addEventListener('mouseleave', function() {
+    btn.style.background = 'transparent';
+  });
+})();
+</script>
+
+</body>
+</html>
+

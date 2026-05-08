@@ -1,0 +1,4412 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="en-zh" >
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+  ><!-- Setup Open Graph image -->
+
+  
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="JetBrains Fleet in 2025: A Retired IDE for the Future" />
+<meta property="og:locale" content="en_zh" />
+<meta name="description" content="I recently came across the official JetBrains announcement and suddenly realized that Fleet is truly “retiring.” Starting from December 22, 2025, Fleet will stop distributing new versions and updates. While existing users can continue using the downloaded version, server-dependent features (like AI Assistant) may gradually become unavailable." />
+<meta property="og:description" content="I recently came across the official JetBrains announcement and suddenly realized that Fleet is truly “retiring.” Starting from December 22, 2025, Fleet will stop distributing new versions and updates. While existing users can continue using the downloaded version, server-dependent features (like AI Assistant) may gradually become unavailable." />
+<link rel="canonical" href="https://exyone.is-a.dev/posts/en-zh/jetbrains-fleet-stop-updates/" />
+<meta property="og:url" content="https://exyone.is-a.dev/posts/en-zh/jetbrains-fleet-stop-updates/" />
+<meta property="og:site_name" content="EXYONE@BLOG:~$" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-14T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="JetBrains Fleet in 2025: A Retired IDE for the Future" />
+<meta name="twitter:site" content="@exyone_rss" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-02T12:28:30+08:00","datePublished":"2025-11-14T00:00:00+08:00","description":"I recently came across the official JetBrains announcement and suddenly realized that Fleet is truly “retiring.” Starting from December 22, 2025, Fleet will stop distributing new versions and updates. While existing users can continue using the downloaded version, server-dependent features (like AI Assistant) may gradually become unavailable.","headline":"JetBrains Fleet in 2025: A Retired IDE for the Future","mainEntityOfPage":{"@type":"WebPage","@id":"https://exyone.is-a.dev/posts/en-zh/jetbrains-fleet-stop-updates/"},"url":"https://exyone.is-a.dev/posts/en-zh/jetbrains-fleet-stop-updates/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <title>JetBrains Fleet in 2025: A Retired IDE for the Future | EXYONE@BLOG:~$</title>
+
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon-precomposed" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-title" content="EXYONE@BLOG:~$">
+<meta name="application-name" content="EXYONE@BLOG:~$">
+<meta name="theme-color" content="#ffffff">
+
+
+  <!-- Resource Hints -->
+  
+    
+      
+        <link rel="preconnect" href="https://fonts.loli.net" >
+      
+        <link rel="dns-prefetch" href="https://fonts.loli.net" >
+      
+    
+      
+        <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+      
+        <link rel="dns-prefetch" href="https://gstatic.loli.net" >
+      
+    
+      
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+      
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+      
+    
+  
+
+  <!-- Bootstrap -->
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
+
+  <!-- Web Font -->
+  <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+
+  <!-- Custom Font -->
+  <link href="https://hanzi.itedev.com/fonts/Source+Han+Sans+VF/result.css" rel="stylesheet">
+  <style>
+    .content {
+      font-family: 'Source Han Sans VF', 'Microsoft YaHei', 'PingFang SC', 'MiSans', sans-serif !important;
+    }
+  </style>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css">
+
+  <!-- 3rd-party Dependencies -->
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.css">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
+  
+
+  
+    <!-- Image Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
+  
+
+  <!-- Scripts -->
+
+  <script src="/assets/js/dist/theme.min.js"></script>
+
+  <!-- JS selector for site. -->
+
+<!-- commons -->
+
+
+
+<!-- layout specified -->
+
+
+  
+
+  
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.20/dayjs.min.js,npm/dayjs@1.11.20/locale/en.js,npm/dayjs@1.11.20/plugin/relativeTime.js,npm/dayjs@1.11.20/plugin/localizedFormat.js,npm/tocbot@4.36.4/dist/tocbot.min.js"></script>
+
+
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+<!-- Pageviews -->
+
+  
+
+  
+
+
+
+  
+
+  <!-- A placeholder to allow defining custom metadata -->
+
+</head>
+
+  <body>
+    <!-- The Side Bar -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="/" id="avatar" class="rounded-circle"><img src="/assets/img/avatar.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
+
+    <a class="site-title d-block" href="/">EXYONE@BLOG:~$</a>
+    <p class="site-subtitle fst-italic mb-0">A .NET and Front-End developer from China.</p>
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item">
+        <a href="/" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>HOME</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      
+        <li class="nav-item">
+          <a href="/categories/" class="nav-link">
+            <i class="fa-fw fas fa-stream"></i>
+            
+
+            <span>CATEGORIES</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/tags/" class="nav-link">
+            <i class="fa-fw fas fa-tags"></i>
+            
+
+            <span>TAGS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/archives/" class="nav-link">
+            <i class="fa-fw fas fa-archive"></i>
+            
+
+            <span>ARCHIVES</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/about/" class="nav-link">
+            <i class="fa-fw fas fa-info-circle"></i>
+            
+
+            <span>ABOUT</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/friends/" class="nav-link">
+            <i class="fa-fw fas fa-link"></i>
+            
+
+            <span>FRIENDS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/guestbook/" class="nav-link">
+            <i class="fa-fw fas fa-comments"></i>
+            
+
+            <span>GUESTBOOK</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+    </ul>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+    
+      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      
+        <span class="icon-border"></span>
+      
+    
+
+    
+
+      
+        <a
+          href="https://github.com/exyone-labs"
+          aria-label="github"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://codeberg.org/exyone"
+          aria-label="codeberg"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fas fa-code-branch"></i>
+        </a>
+      
+    
+
+      
+        <a
+          href="https://twitter.com/exyone_rss"
+          aria-label="twitter"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://exyone.bsky.social"
+          aria-label="bluesky"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-bluesky"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://space.bilibili.com/3706949002595300"
+          aria-label="bilibili"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-bilibili"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://www.youtube.com/@exyone-t3a"
+          aria-label="youtube"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://qm.qq.com/q/9m5B32MsaQ"
+          aria-label="qq"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-qq"></i>
+        </a>
+      
+    
+
+      
+        <a
+          href="javascript:location.href = 'mailto:' + ['exyone.dev','icloud.com'].join('@')"
+          aria-label="email"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+    
+          
+        
+
+      
+        <a
+          href="/feed.xml"
+          aria-label="rss"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-rss"></i>
+        </a>
+      
+    
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->
+
+
+    <div id="main-wrapper" class="d-flex justify-content-center">
+      <div class="container d-flex flex-column px-xxl-5">
+        <!-- The Top Bar -->
+
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
+  <div
+    id="topbar"
+    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
+  >
+    <nav id="breadcrumb" aria-label="Breadcrumb">
+      
+
+      
+        
+          
+            <span>
+              <a href="/">Home</a>
+            </span>
+
+          
+        
+          
+        
+          
+        
+          
+            
+              <span>JetBrains Fleet in 2025: A Retired IDE for the Future</span>
+            
+
+          
+        
+      
+    </nav>
+    <!-- endof #breadcrumb -->
+
+    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    <div id="topbar-title">
+      Post
+    </div>
+
+    <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
+      <i class="fas fa-search fa-fw"></i>
+    </button>
+
+    <search id="search" class="align-items-center ms-3 ms-lg-0">
+      <i class="fas fa-search fa-fw"></i>
+      <input
+        class="form-control"
+        id="search-input"
+        type="search"
+        aria-label="search"
+        autocomplete="off"
+        placeholder="Search..."
+      >
+    </search>
+    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">Cancel</button>
+  </div>
+</header>
+
+
+        <div class="row flex-grow-1">
+          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              <!-- Refactor the HTML structure -->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+  
+  
+
+  
+    
+      
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+
+  
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- return -->
+
+
+
+
+
+
+
+
+
+
+<article class="px-1" data-toc="true">
+  <header>
+    <h1 data-toc-skip>JetBrains Fleet in 2025: A Retired IDE for the Future</h1>
+    
+
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        Posted
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1763049600"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Nov 14, 2025
+</time>
+
+      </span>
+
+      <!-- lastmod date -->
+      
+        <span>
+          Updated
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1777696110"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  May  2, 2026
+</time>
+
+        </span>
+      
+
+      
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
+
+          By
+
+          <em>
+            
+              <a href="https://twitter.com/exyone_rss">Exyone.dev@icloud.com</a>
+            
+          </em>
+        </span>
+
+        <div>
+          <!-- pageviews -->
+          
+
+          <!-- read time -->
+          <!-- Calculate the post's reading time, and display the word count in tooltip -->
+
+
+
+<!-- words per minute -->
+
+
+
+
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="3071 words"
+>
+  <em>17 min</em> read</span>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">JetBrains Fleet in 2025: A Retired IDE for the Future</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">Contents</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">JetBrains Fleet in 2025: A Retired IDE for the Future</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  
+
+  <div class="content">
+    <blockquote class="prompt-tip">
+  <p>I recently came across the official JetBrains announcement and suddenly realized that Fleet is truly “retiring.” Starting from December 22, 2025, Fleet will stop distributing new versions and updates. While existing users can continue using the downloaded version, server-dependent features (like AI Assistant) may gradually become unavailable.</p>
+</blockquote>
+
+<p>Honestly, this news came as a bit of a surprise. Four years ago, when Fleet burst onto the scene as a “next-generation lightweight IDE,” I downloaded it with a curious, try-something-new mindset. Little did I expect that I’d end up using it for four whole years. Whether it was writing scripts, tweaking configurations, or building quick prototypes—Fleet’s clean interface, lightning-fast startup, and silky-smooth responsiveness made me never want to switch back to heavyweight IDEs again. And now, four years later, VS Code remains essentially unchanged, but Fleet is quietly stepping off the stage.</p>
+
+<h2 id="what-exactly-is-fleet-the-lightweight-faction-of-the-editor-world"><span class="me-2">What Exactly is Fleet? The “Lightweight Faction” of the Editor World</span><a href="#what-exactly-is-fleet-the-lightweight-faction-of-the-editor-world" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Let me first give you a quick recap: When JetBrains launched Fleet, their goal was to create a <strong>lightweight, multi-language, intelligent-assisted</strong> code editor. Fleet adopted a distributed architecture, discarding the heavy historical baggage of the traditional IntelliJ platform in favor of modern UI and extreme performance. Initially positioned as a “lightweight IDE,” it later shifted to “editor with intelligent coding assistance,” and even attempted an AI-first approach.</p>
+
+<p>Compared to traditional <strong>IDEs</strong> (like IntelliJ IDEA or Visual Studio), <strong>editors</strong> focus more on the essence of “writing code”: syntax highlighting, intelligent completion, and quick navigation, without necessarily requiring built-in build tools, debuggers, or database utilities. Fleet’s advantages include:</p>
+
+<ul>
+  <li><strong>Minimalist and beautiful interface</strong> — no extra panels cluttering your view</li>
+  <li><strong>Lightning-fast startup and low memory footprint</strong> — far below heavyweight IDEs</li>
+  <li><strong>Excellent cross-platform consistency</strong> — works seamlessly across Mac/Windows/Linux</li>
+  <li><strong>Particularly friendly for lightweight tasks</strong> like scripts, config files, and Markdown</li>
+</ul>
+
+<p>Unfortunately, JetBrains eventually realized that maintaining two overlapping product lines—IntelliJ family and Fleet—was confusing users and dividing their R&amp;D efforts. They decided to redirect Fleet’s technical expertise toward new “agentic development” products, marking the end of Fleet’s mission as a general-purpose editor.</p>
+
+<blockquote class="prompt-info">
+  <p><strong>Editor’s Note</strong>: The image below shows Fleet’s typical interface—file tree on the left, code area on the right, clean and crisp.</p>
+</blockquote>
+
+<div align="center">
+  <a href="https://resources.jetbrains.com/storage/products/blog/wp-content/uploads/Fleet-SmartMode.gif" class="popup img-link shimmer"><img src="https://resources.jetbrains.com/storage/products/blog/wp-content/uploads/Fleet-SmartMode.gif" alt="Fleet Interface" width="80%" loading="lazy"></a>
+  <p><em>Fleet's classic interface layout</em></p>
+</div>
+
+<h2 id="why-editors-matter-the-developers-second-brain"><span class="me-2">Why Editors Matter: The Developer’s “Second Brain”</span><a href="#why-editors-matter-the-developers-second-brain" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Modern development is no longer about “opening one big IDE to handle everything.” We face multi-language, multi-environment, distributed projects. <strong>Lightweight editors</strong> excel precisely because of their “focus,” outmaneuvering many heavyweight tools in terms of efficiency and comfort.</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>Editor</th>
+      <th>Strengths</th>
+      <th>Weaknesses</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>VS Code</strong></td>
+      <td>Unmatched extension ecosystem, industry standard</td>
+      <td>Can get laggy with too many plugins</td>
+    </tr>
+    <tr>
+      <td><strong>Neovim / Helix</strong></td>
+      <td>Pure terminal native, keyboard-driven, minimal resources</td>
+      <td>Steep learning curve</td>
+    </tr>
+    <tr>
+      <td><strong>Zed</strong></td>
+      <td>Rust-written, pursuing ultimate speed and collaboration</td>
+      <td>Relatively new, smaller ecosystem</td>
+    </tr>
+    <tr>
+      <td><strong>Sublime Text</strong></td>
+      <td>Veteran lightweight king, loyal fanbase</td>
+      <td>Fewer modern features</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<p>Fleet’s original ambition was to be “JetBrains’ version of VS Code”—intelligent yet not bloated. Unfortunately, the market competition was fierce, and it ultimately failed to establish a solid foothold.</p>
+
+<h2 id="terminal--editor-the-true-productivity-ceiling"><span class="me-2">Terminal + Editor: The True Productivity Ceiling</span><a href="#terminal--editor-the-true-productivity-ceiling" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Many developers only focus on the editor itself, overlooking that <strong>the terminal</strong> is actually the other half of the workflow. An excellent combination allows seamless switching between “writing code” and “executing commands,” dramatically boosting efficiency.</p>
+
+<h3 id="why-pairing-with-a-terminal-is-essential"><span class="me-2">Why Pairing with a Terminal is Essential</span><a href="#why-pairing-with-a-terminal-is-essential" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Editors handle <strong>creation</strong> (writing code, completion, refactoring), while terminals handle <strong>execution</strong> (git push, dotnet build, docker compose up, ssh remote deployment). Separating them leads to frequent window switching, copy-pasting, and context loss. A good setup enables:</p>
+
+<ul>
+  <li>Split-screen real-time log and code viewing</li>
+  <li>Full keyboard-driven operations—no mouse needed</li>
+  <li>Low resource usage, suitable for self-hosted servers or low-end devices</li>
+</ul>
+
+<h3 id="classic-combinations-my-personal-favorites"><span class="me-2">Classic Combinations (My Personal Favorites)</span><a href="#classic-combinations-my-personal-favorites" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<h4 id="combo-a-neovim--modern-terminal-emulator--multiplexer-geeks-choice"><span class="me-2"><strong>Combo A: Neovim + Modern Terminal Emulator + Multiplexer</strong> (Geek’s Choice)</span><a href="#combo-a-neovim--modern-terminal-emulator--multiplexer-geeks-choice" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<ul>
+  <li><strong>Terminal</strong>: WezTerm (best cross-platform), Alacritty (extremely lightweight), Kitty</li>
+  <li><strong>Multiplexer</strong>: Tmux or Zellij (supports pane splitting, session persistence)</li>
+  <li><strong>Workflow tools</strong>: <code class="language-plaintext highlighter-rouge">fzf</code> for fuzzy file search, <code class="language-plaintext highlighter-rouge">lazygit</code> for visual Git, <code class="language-plaintext highlighter-rouge">ripgrep</code> for lightning code search, <code class="language-plaintext highlighter-rouge">zoxide</code> for smart directory jumping, <code class="language-plaintext highlighter-rouge">starship</code> for prompt beautification</li>
+  <li><strong>Ideal scenario</strong>: C#/.NET developers can use <code class="language-plaintext highlighter-rouge">dotnet watch</code> in one pane for real-time hot reload while editing Razor or .cs files in Neovim. Fully keyboard-driven, smooth experience over SSH.</li>
+</ul>
+
+<div align="center">
+  <a href="https://stfn-pl-blog-assets.b-cdn.net/92/nvim.png" class="popup img-link shimmer"><img src="https://stfn-pl-blog-assets.b-cdn.net/92/nvim.png" alt="Neovim + Tmux" width="80%" loading="lazy"></a>
+  <p><em>Neovim running in Tmux—config scripts on the left, code on the right, multi-pane collaboration</em></p>
+</div>
+
+<h4 id="combo-b-vs-code--integratedexternal-terminal-most-peoples-daily-driver"><span class="me-2"><strong>Combo B: VS Code + Integrated/External Terminal</strong> (Most People’s Daily Driver)</span><a href="#combo-b-vs-code--integratedexternal-terminal-most-peoples-daily-driver" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>VS Code’s built-in terminal supports PowerShell, WSL, Docker containers—direct split-screen. For advanced users: disable the built-in terminal and pair with Windows Terminal, iTerm2, or WezTerm as the external default. The benefit? More terminal customization while keeping the editor lightweight.</p>
+
+<ul>
+  <li><strong>Shortcut keys</strong>: <kbd>Ctrl</kbd>+<kbd>`</kbd> to quickly summon terminal, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>5</kbd> to split terminal window</li>
+</ul>
+
+<div align="center">
+  <a href="https://code.visualstudio.com/assets/docs/terminal/basics/terminal-editor-grid.png" class="popup img-link shimmer"><img src="https://code.visualstudio.com/assets/docs/terminal/basics/terminal-editor-grid.png" alt="VS Code Terminal" width="80%" loading="lazy"></a>
+  <p><em>VS Code's classic layout—editor on the left, terminal on the right, perfect fusion</em></p>
+</div>
+
+<h4 id="combo-c-fleets-original-approach"><span class="me-2"><strong>Combo C: Fleet’s Original Approach</strong></span><a href="#combo-c-fleets-original-approach" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>Fleet also supports integrated terminals—though not as feature-rich as VS Code’s ecosystem, its unified UI and faster responsiveness are notable. I often paired it with an external terminal to run .NET CLI; it was especially comfortable for writing config scripts. Now that it’s discontinued, this combo can only be “archived.”</p>
+
+<h3 id="practical-tips-net--self-hosted-developers-must-read"><span class="me-2">Practical Tips (.NET / Self-Hosted Developers Must-Read)</span><a href="#practical-tips-net--self-hosted-developers-must-read" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">dotnet</code> CLI in the terminal for migrations, testing, and publishing—let the editor focus on code</li>
+  <li>When managing self-hosted servers, use terminal SSH to manage Docker/Halo/Gitea, edit YAML directly in the editor</li>
+  <li><strong>Advanced toolchain</strong>: <code class="language-plaintext highlighter-rouge">atuin</code> for command history, <code class="language-plaintext highlighter-rouge">delta</code> for beautiful git diffs, <code class="language-plaintext highlighter-rouge">bat</code> as a better <code class="language-plaintext highlighter-rouge">cat</code></li>
+  <li><strong>Resource monitoring</strong>: Use <code class="language-plaintext highlighter-rouge">btop</code> or <code class="language-plaintext highlighter-rouge">htop</code> in the terminal to monitor server load in real-time while tweaking configs in the editor—closed-loop efficiency at its best</li>
+</ul>
+
+<div align="center">
+  <a href="https://www.glukhov.org/developer-tools/terminals-shell/terminal-emulators-for-linux-comparison/alacritty-terminal-emulator.png" class="popup img-link shimmer"><img src="https://www.glukhov.org/developer-tools/terminals-shell/terminal-emulators-for-linux-comparison/alacritty-terminal-emulator.png" alt="Alacritty" width="80%" loading="lazy"></a>
+  <p><em>Modern terminals like Alacritty—minimalist and efficient for code editing</em></p>
+</div>
+
+<h2 id="what-should-we-do-after-fleet-stops-updating"><span class="me-2">What Should We Do After Fleet Stops Updating?</span><a href="#what-should-we-do-after-fleet-stops-updating" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Existing users shouldn’t panic—installed versions will still work. But for the long term, here’s what’s recommended:</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>Recommendation</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>First Choice</strong></td>
+      <td>VS Code + JetBrains Keymap extension, preserving similar keyboard shortcuts</td>
+    </tr>
+    <tr>
+      <td><strong>For Geeks</strong></td>
+      <td>Go directly to Neovim—steep learning curve but massive rewards</td>
+    </tr>
+    <tr>
+      <td><strong>JetBrains Fans</strong></td>
+      <td>Return to IntelliJ/Rider family—more mature AI features</td>
+    </tr>
+    <tr>
+      <td><strong>New Attempts</strong></td>
+      <td>Zed, Cursor (AI-enhanced VS Code), or Helix</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<p>Technology iteration works this way—Fleet pushed the “lightweight intelligence” concept to the market and left its excellent components for other JetBrains products. Its departure isn’t a failure; it’s yielding the stage to a more focused new direction: “agentic development.”</p>
+
+<h2 id="final-thoughts"><span class="me-2">Final Thoughts</span><a href="#final-thoughts" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Tools, after all, are just tools. When they become comfortable to use, they become part of our daily routine. Fleet’s four years of company reduced a lot of friction when I wrote code, and made me understand more deeply: <strong>The best editor isn’t the one with the most features—it’s the one that makes you “forget it exists.”</strong> The perfect terminal + editor combination takes this “forgetting” to an extreme.</p>
+
+<p>I’ll most likely continue using the VS Code + terminal combination in the future, but Fleet’s clean and crisp memory will forever remain in my development resume.</p>
+
+<p><em>Feel free to share your editor + terminal setup in the comments! Neovim diehard, or VS Code faction? Or do you have your own Fleet stories to tell?</em></p>
+
+<hr />
+
+<blockquote class="prompt-tip">
+  <p>我最近刷到 JetBrains 官方公告，才意识到 Fleet 真的要”退役”了。从 2025 年 12 月 22 日起，Fleet 将停止新版本下载和更新，已下载的用户虽然还能继续使用，但依赖服务器的功能（如 AI Assistant）可能会逐步失效。</p>
+</blockquote>
+
+<p>说实话，这消息来得有点突然。四年前，Fleet 作为”下一代轻量 IDE”横空出世时，我也是抱着尝鲜的心态下载了它。没想到一用就是四年。写脚本、调配置、快速原型，Fleet 的界面干净、启动飞快、响应丝滑，让我再也不想切回重型 IDE。结果四年过去，VS Code 还是那个 VS Code，Fleet 却要默默谢幕了。</p>
+
+<h2 id="fleet-到底是什么编辑器世界的轻量派"><span class="me-2">Fleet 到底是什么？编辑器世界的”轻量派”</span><a href="#fleet-到底是什么编辑器世界的轻量派" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>先简单回顾一下：JetBrains 推出 Fleet 时，目标是打造一款<strong>轻量级、多语言、智能辅助</strong>的代码编辑器。它采用分布式架构，抛弃了传统 IntelliJ 平台的沉重历史包袱，追求现代 UI 和极致性能。初期定位是”轻量化 IDE”，后来调整为”带智能编码辅助的编辑器”，甚至尝试过 AI-first 路线。</p>
+
+<p>和传统<strong>IDE</strong>（如 IntelliJ IDEA、Visual Studio）相比，<strong>编辑器</strong>更专注”写代码”本身：语法高亮、智能补全、快速导航，而不强求内置构建、调试、数据库工具。Fleet 的优势在于：</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>界面极简</td>
+      <td>没有多余面板干扰视线</td>
+    </tr>
+    <tr>
+      <td>启动快速</td>
+      <td>内存占用远低于重型 IDE</td>
+    </tr>
+    <tr>
+      <td>跨平台一致</td>
+      <td>Mac/Windows/Linux 随意切换</td>
+    </tr>
+    <tr>
+      <td>轻量友好</td>
+      <td>对脚本、配置文件、Markdown 特别适合</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<p>可惜的是，JetBrains 最终发现，同时维护 IntelliJ 家族和 Fleet 两条重叠的产品线，容易让用户困惑，也分散了研发精力。于是他们决定把 Fleet 的技术积累转向”智能体化开发”（agentic development）新产品，Fleet 作为通用编辑器的使命就此结束。</p>
+
+<blockquote class="prompt-info">
+  <p><strong>编辑说明</strong>：下图是 Fleet 典型界面，左侧文件树、右侧代码区，干净利落。</p>
+</blockquote>
+
+<div align="center">
+  <a href="https://resources.jetbrains.com/storage/products/blog/wp-content/uploads/Fleet-SmartMode.gif" class="popup img-link shimmer"><img src="https://resources.jetbrains.com/storage/products/blog/wp-content/uploads/Fleet-SmartMode.gif" alt="Fleet 界面" width="80%" loading="lazy"></a>
+  <p><em>Fleet 经典界面布局</em></p>
+</div>
+
+<h2 id="为什么编辑器这么重要开发者日常的第二大脑"><span class="me-2">为什么编辑器这么重要？开发者日常的”第二大脑”</span><a href="#为什么编辑器这么重要开发者日常的第二大脑" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>现代开发早已不是”打开一个大 IDE 就能搞定一切”。我们面对的是多语言、多环境、分布式项目。<strong>轻量编辑器</strong>正因为”专注”，才在效率和舒适度上碾压很多重型工具。</p>
+
+<p>主流轻量编辑器各有特色：</p>
+
+<ul>
+  <li><strong>VS Code</strong>：扩展生态无敌，几乎成了行业标配，但有时插件太多反而卡顿</li>
+  <li><strong>Neovim / Helix</strong>：纯终端原生，键盘党最爱，资源占用极低</li>
+  <li><strong>Zed</strong>：新兴 Rust 编写编辑器，追求极致速度和协作</li>
+  <li><strong>Sublime Text</strong>：老牌轻量王者，依然有人死忠</li>
+</ul>
+
+<p>Fleet 当初就是想做”JetBrains 版的 VS Code”——既有智能，又不臃肿。可惜市场竞争太激烈，最终没能站稳脚跟。</p>
+
+<h2 id="终端--编辑器真正的生产力天花板"><span class="me-2">终端 + 编辑器：真正的生产力天花板</span><a href="#终端--编辑器真正的生产力天花板" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>很多开发者只关注编辑器本身，却忽略了<strong>终端</strong>才是工作流的另一半。优秀的组合能让你在”写代码”和”执行命令”之间无缝切换，极大提升效率。</p>
+
+<h3 id="为什么一定要搭配终端"><span class="me-2">为什么一定要搭配终端？</span><a href="#为什么一定要搭配终端" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>编辑器负责<strong>创作</strong>（写代码、补全、重构），终端负责<strong>执行</strong>（git push、dotnet build、docker compose up、ssh 远程部署）。把两者割裂，会导致频繁切换窗口、复制粘贴、上下文丢失。好的搭配能实现：</p>
+
+<ul>
+  <li>分屏实时查看日志和代码</li>
+  <li>键盘全程操作，无需鼠标</li>
+  <li>资源占用低，适合自托管服务器或低配设备</li>
+</ul>
+
+<h3 id="经典组合推荐我个人最爱的几种"><span class="me-2">经典组合推荐（我个人最爱的几种）</span><a href="#经典组合推荐我个人最爱的几种" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<h4 id="组合-aneovim--现代终端模拟器--多路复用器极客首选"><span class="me-2"><strong>组合 A：Neovim + 现代终端模拟器 + 多路复用器</strong>（极客首选）</span><a href="#组合-aneovim--现代终端模拟器--多路复用器极客首选" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<ul>
+  <li><strong>终端</strong>：WezTerm（跨平台最强）、Alacritty（极致轻量）、Kitty</li>
+  <li><strong>多路复用</strong>：Tmux 或 Zellij（支持 pane 分割、session 持久化）</li>
+  <li><strong>工作流工具</strong>：<code class="language-plaintext highlighter-rouge">fzf</code> 模糊搜索文件、<code class="language-plaintext highlighter-rouge">lazygit</code> 可视化 Git、<code class="language-plaintext highlighter-rouge">ripgrep</code> 闪电搜索代码、<code class="language-plaintext highlighter-rouge">zoxide</code> 智能跳转目录、<code class="language-plaintext highlighter-rouge">starship</code> 美化提示符</li>
+  <li><strong>适合场景</strong>：C#/.NET 开发者可以用 <code class="language-plaintext highlighter-rouge">dotnet watch</code> 在一个 pane 实时热重载，Neovim 里编辑 Razor 或 .cs 文件。完全键盘驱动，远程 SSH 时体验丝滑。</li>
+</ul>
+
+<div align="center">
+  <a href="https://stfn-pl-blog-assets.b-cdn.net/92/nvim.png" class="popup img-link shimmer"><img src="https://stfn-pl-blog-assets.b-cdn.net/92/nvim.png" alt="Neovim + Tmux" width="80%" loading="lazy"></a>
+  <p><em>Neovim 在 Tmux 中的典型配置：左侧配置脚本，右侧代码区，多 pane 协作</em></p>
+</div>
+
+<h4 id="组合-bvs-code--集成外部终端大多数人的日常"><span class="me-2"><strong>组合 B：VS Code + 集成/外部终端</strong>（大多数人的日常）</span><a href="#组合-bvs-code--集成外部终端大多数人的日常" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>VS Code 内置终端支持 PowerShell、WSL、Docker 容器，直接分屏。进阶玩法：关闭内置终端，搭配 Windows Terminal / iTerm2 / WezTerm 作为外部默认终端。好处是终端自定义更强，编辑器保持轻量。</p>
+
+<ul>
+  <li><strong>快捷键</strong>：<code class="language-plaintext highlighter-rouge">Ctrl+</code><code class="language-plaintext highlighter-rouge"> 快速呼出终端，</code>Ctrl+Shift+5` 拆分终端窗口</li>
+</ul>
+
+<div align="center">
+  <a href="https://code.visualstudio.com/assets/docs/terminal/basics/terminal-editor-grid.png" class="popup img-link shimmer"><img src="https://code.visualstudio.com/assets/docs/terminal/basics/terminal-editor-grid.png" alt="VS Code 终端" width="80%" loading="lazy"></a>
+  <p><em>VS Code 经典布局：左侧编辑区，右侧终端，完美融合</em></p>
+</div>
+
+<h4 id="组合-cfleet-当年的玩法"><span class="me-2"><strong>组合 C：Fleet 当年的玩法</strong></span><a href="#组合-cfleet-当年的玩法" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>Fleet 也支持集成终端，虽然不如 VS Code 生态丰富，但 UI 统一、响应更快。我常用它搭配外部终端运行 .NET CLI，写配置脚本时特别舒服。现在停更后，这个组合只能”封存”了。</p>
+
+<h3 id="实用小贴士net--自托管开发者必看"><span class="me-2">实用小贴士（.NET / 自托管开发者必看）</span><a href="#实用小贴士net--自托管开发者必看" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li>用 <code class="language-plaintext highlighter-rouge">dotnet</code> CLI 在终端跑迁移、测试、发布，而编辑器专注代码</li>
+  <li>自托管服务器时，终端 SSH 管理 Docker / Halo / Gitea，编辑器直接改 YAML</li>
+  <li><strong>进阶工具链</strong>：<code class="language-plaintext highlighter-rouge">atuin</code> 记录历史命令、<code class="language-plaintext highlighter-rouge">delta</code> 美化 git diff、<code class="language-plaintext highlighter-rouge">bat</code> 替代 cat</li>
+  <li><strong>资源监控</strong>：用 <code class="language-plaintext highlighter-rouge">btop</code> 或 <code class="language-plaintext highlighter-rouge">htop</code> 在终端里实时看服务器负载，编辑器里调配置，闭环超高效</li>
+</ul>
+
+<div align="center">
+  <a href="https://www.glukhov.org/developer-tools/terminals-shell/terminal-emulators-for-linux-comparison/alacritty-terminal-emulator.png" class="popup img-link shimmer"><img src="https://www.glukhov.org/developer-tools/terminals-shell/terminal-emulators-for-linux-comparison/alacritty-terminal-emulator.png" alt="Alacritty" width="80%" loading="lazy"></a>
+  <p><em>Alacritty 这类现代终端的代码编辑场景，极简高效</em></p>
+</div>
+
+<h2 id="fleet-停更后我们该怎么办"><span class="me-2">Fleet 停更后，我们该怎么办？</span><a href="#fleet-停更后我们该怎么办" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>现有用户不用慌，已安装版本还能跑。但长远看，推荐：</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>推荐方案</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>首选</strong></td>
+      <td>VS Code + JetBrains Keymap 扩展，保留类似快捷键</td>
+    </tr>
+    <tr>
+      <td><strong>极客</strong></td>
+      <td>直接上 Neovim，学习曲线陡峭但回报巨大</td>
+    </tr>
+    <tr>
+      <td><strong>JetBrains 忠粉</strong></td>
+      <td>回归 IntelliJ / Rider 全家桶，AI 功能更成熟</td>
+    </tr>
+    <tr>
+      <td><strong>新尝试</strong></td>
+      <td>Zed、Cursor（AI 增强版 VS Code）或 Helix</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<p>技术迭代就是这样——Fleet 把”轻量智能”这个理念推向市场，也把自己的优秀组件留给了 JetBrains 其他产品。它的离开不是失败，而是把舞台让给了更专注的”智能体开发”新方向。</p>
+
+<h2 id="最后一点感慨"><span class="me-2">最后一点感慨</span><a href="#最后一点感慨" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>工具终究是工具，用得顺手了，它就成了日常的一部分。Fleet 四年陪伴，让我写代码时少了很多摩擦，也让我更深刻理解：<strong>最好的编辑器不是功能最多的，而是让你”忘了它存在”的那个</strong>。终端 + 编辑器的完美搭配，更是把这种”忘了存在”推向极致。</p>
+
+<p>以后我大概率会继续用 VS Code + 终端组合，但 Fleet 那份干净利落的记忆，会一直留在我的开发履历里。</p>
+
+<p><em>欢迎大家在评论区分享你的编辑器 + 终端搭配心得！是 Neovim 死忠，还是 VS Code 党？或者你也有 Fleet 的使用故事？</em></p>
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    
+      <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw me-1"></i>
+        
+          <a href="/categories/technology/">Technology</a>
+      </div>
+    
+
+    <!-- tags -->
+    
+      <div class="post-tags">
+        <i class="fa fa-tags fa-fw me-1"></i>
+        
+          <a
+            href="/tags/coding/"
+            class="post-tag no-text-decoration"
+          >coding</a>
+        
+          <a
+            href="/tags/open-source/"
+            class="post-tag no-text-decoration"
+          >open-source</a>
+        
+      </div>
+    
+
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
+      <div class="license-wrapper">
+        
+          
+
+          This post is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         by the author.
+        
+      </div>
+
+      <!-- Post sharing snippet -->
+
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">Share</span>
+  <span class="share-icons">
+    
+    
+    
+
+    
+
+      
+
+      <a href="https://twitter.com/intent/tweet?text=JetBrains%20Fleet%20in%202025:%20A%20Retired%20IDE%20for%20the%20Future%20-%20EXYONE@BLOG:~$&url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fjetbrains-fleet-stop-updates%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+        <i class="fa-fw fa-brands fa-square-x-twitter"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.facebook.com/sharer/sharer.php?title=JetBrains%20Fleet%20in%202025:%20A%20Retired%20IDE%20for%20the%20Future%20-%20EXYONE@BLOG:~$&u=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fjetbrains-fleet-stop-updates%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+        <i class="fa-fw fab fa-facebook-square"></i>
+      </a>
+    
+
+      
+
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fjetbrains-fleet-stop-updates%2F&text=JetBrains%20Fleet%20in%202025:%20A%20Retired%20IDE%20for%20the%20Future%20-%20EXYONE@BLOG:~$" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+        <i class="fa-fw fab fa-telegram"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fjetbrains-fleet-stop-updates%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin" aria-label="Linkedin">
+        <i class="fa-fw fab fa-linkedin"></i>
+      </a>
+    
+
+      
+
+      <a href="https://service.weibo.com/share/share.php?title=JetBrains%20Fleet%20in%202025:%20A%20Retired%20IDE%20for%20the%20Future%20-%20EXYONE@BLOG:~$&url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fjetbrains-fleet-stop-updates%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Weibo" aria-label="Weibo">
+        <i class="fa-fw fab fa-weibo"></i>
+      </a>
+    
+        <script defer type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/share-to-mastodon/+esm"></script>
+        <button class="btn text-start" data-bs-toggle="tooltip" data-bs-placement="top" title="Mastodon" aria-label="Mastodon">
+          <share-to-mastodon
+            class="share-mastodon"
+            message="JetBrains%20Fleet%20in%202025:%20A%20Retired%20IDE%20for%20the%20Future%20-%20EXYONE@BLOG:~$"
+            url="https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fjetbrains-fleet-stop-updates%2F"customInstanceList="[{&quot;label&quot;:&quot;mastodon.social&quot;,&quot;link&quot;:&quot;https://mastodon.social/&quot;},{&quot;label&quot;:&quot;mastodon.online&quot;,&quot;link&quot;:&quot;https://mastodon.online/&quot;},{&quot;label&quot;:&quot;fosstodon.org&quot;,&quot;link&quot;:&quot;https://fosstodon.org/&quot;},{&quot;label&quot;:&quot;photog.social&quot;,&quot;link&quot;:&quot;https://photog.social/&quot;}]"
+          >
+            <i class="fa-fw fa-brands fa-mastodon"></i>
+          </share-to-mastodon>
+        </button>
+
+        
+
+      
+
+      <a href="https://bsky.app/intent/compose?text=JetBrains%20Fleet%20in%202025:%20A%20Retired%20IDE%20for%20the%20Future%20-%20EXYONE@BLOG:~$%20https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fjetbrains-fleet-stop-updates%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Bluesky" aria-label="Bluesky">
+        <i class="fa-fw fa-brands fa-bluesky"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fjetbrains-fleet-stop-updates%2F&title=JetBrains%20Fleet%20in%202025:%20A%20Retired%20IDE%20for%20the%20Future%20-%20EXYONE@BLOG:~$" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Reddit" aria-label="Reddit">
+        <i class="fa-fw fa-brands fa-square-reddit"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.threads.net/intent/post?text=JetBrains%20Fleet%20in%202025:%20A%20Retired%20IDE%20for%20the%20Future%20-%20EXYONE@BLOG:~$%20https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fjetbrains-fleet-stop-updates%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Threads" aria-label="Threads">
+        <i class="fa-fw fa-brands fa-square-threads"></i>
+      </a>
+    
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Copy link"
+      data-title-succeed="Link copied successfully!"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+  </span>
+</div>
+
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
+</article>
+
+
+            
+          </main>
+
+          <!-- panel -->
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted">
+            <div class="access">
+              <!-- Get 5 last posted/updated posts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section id="access-lastmod">
+    <h2 class="panel-heading">Recently Updated</h2>
+    <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/adding-twikoo-to-chirpy/">Adding Twikoo Comments to Chirpy: A Plugin Development Journey</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/misans-font-for-better-reading/">MiSans: A Gentler Companion for Long-form Reading</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en/the-art-of-grift-astrbot-case-study/">The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/jetbrains-fleet-stop-updates/">JetBrains Fleet in 2025: A Retired IDE for the Future</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/zh/chinese-literati-series/">中国文人系列：从先秦到清末的文学长河</a>
+        </li>
+      
+    </ul>
+  </section>
+  <!-- #access-lastmod -->
+
+
+              <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/literature/">literature</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/history/">history</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/poetry/">poetry</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/open-source/">open-source</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">tutorial</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ai/">ai</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/blog/">blog</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/chirpy/">chirpy</a>
+      
+    </div>
+  </section>
+
+
+            </div>
+
+            
+              
+              
+
+
+
+
+
+
+  <div class="toc-border-cover z-3"></div>
+  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
+
+
+            
+          </aside>
+        </div>
+
+        <div class="row">
+          <!-- tail -->
+          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  <aside id="related-posts" aria-labelledby="related-label">
+    <h3 class="mb-4" id="related-label">Further Reading</h3>
+    <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/en-zh/about-open-source-licenses/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1705248000"
+  data-df="ll"
+  
+>
+  Jan 15, 2024
+</time>
+
+              <h4 class="pt-0 my-2">About Open Source Licenses: Why I Only Like BSD-2-Clause and Apache 2.0</h4>
+              <div class="text-muted">
+                <p>Why I Only Use BSD-2-Clause and Apache 2.0  Most open source projects use GPL or MIT. I don’t like either. Let me explain.  Over time, I’ve stopped following trends blindly. GPL’s “paternalistic co...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/en/the-art-of-grift-astrbot-case-study/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1776441600"
+  data-df="ll"
+  
+>
+  Apr 18, 2026
+</time>
+
+              <h4 class="pt-0 my-2">The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</h4>
+              <div class="text-muted">
+                <p>This article is a follow-up to my previous piece about website design’s impact on open source projects. While that article focused on first impressions and usability, this one delves deeper into th...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/en-zh/website-design-open-source-project/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1776355200"
+  data-df="ll"
+  
+>
+  Apr 17, 2026
+</time>
+
+              <h4 class="pt-0 my-2">Why I'd Abandon an Open Source Project Over Its Website Design</h4>
+              <div class="text-muted">
+                <p>This article reflects my perspective on how website design influences my decision to explore open source projects. The examples are based on my recent experiences with AI Agent tools and server man...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+    </nav>
+  </aside>
+  <!-- #related-posts -->
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/posts/zh/chinese-literati-qing-dynasty-poetry/"
+      class="btn btn-outline-primary"
+      aria-label="Older"
+    >
+      <p>清诗新韵：考据学兴与边塞诗的田园转向</p>
+    </a>
+  
+
+  
+    <a
+      href="/posts/en-zh/self-hosted-home-server-setup/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>Migrating from Cloud Server to Home Server, Configuring Intranet Penetration to Map Site to Public Network</p>
+    </a>
+  
+</nav>
+
+            
+
+            <!-- The Footer -->
+<footer
+  aria-label="Site Info"
+  class="d-flex flex-column justify-content-center text-muted flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3"
+>
+  <p class="mb-0 copyright">
+    © <span id="year"></span>
+    · <em class="fst-normal">Exyone.dev@icloud.com</em>
+    <i class="fas fa-heartbeat heartbeat-icon"></i>
+    34 posts · 30 tags
+  </p>
+
+  <p class="mb-0">
+    Built with <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> &amp;
+    <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> ·
+    Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a> ·
+    <a href="https://www.cloudflare.com" target="_blank" rel="noopener">Cloudflare CDN</a>
+  </p>
+</footer>
+
+<style>
+  #sidebar .site-title {
+    font-size: 1.5rem;
+  }
+
+  .heartbeat-icon {
+    color: #ff6b6b;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    display: inline-block;
+    margin: 0 0.3em;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.15); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.15); }
+    70%      { transform: scale(1); }
+  }
+
+  .heartbeat-icon:hover {
+    color: #ff4757;
+    animation: heartbeat-hover 1s ease-in-out infinite;
+    cursor: pointer;
+  }
+
+  @keyframes heartbeat-hover {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.2); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.2); }
+    70%      { transform: scale(1); }
+  }
+
+  [data-mode="dark"] .heartbeat-icon {
+    color: #ff6b6b;
+  }
+  [data-mode="dark"] .heartbeat-icon:hover {
+    color: #ff4757;
+  }
+</style>
+
+<script>
+  (function() {
+    var year = new Date().getFullYear();
+    document.getElementById('year').textContent = year;
+  })();
+</script>
+          </div>
+        </div>
+
+        <!-- The Search results -->
+
+<div id="search-result-wrapper" class="d-flex justify-content-center d-none">
+  <div class="col-11 content">
+    <div id="search-hints">
+      <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/literature/">literature</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/history/">history</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/poetry/">poetry</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/open-source/">open-source</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">tutorial</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ai/">ai</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/blog/">blog</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/chirpy/">chirpy</a>
+      
+    </div>
+  </section>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+      </div>
+
+      <aside aria-label="Scroll to Top">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+          <i class="fas fa-angle-up"></i>
+        </button>
+      </aside>
+    </div>
+
+    <div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div>
+
+    
+      <aside
+  id="notification"
+  class="toast"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  data-bs-animation="true"
+  data-bs-autohide="false"
+>
+  <div class="toast-header">
+    <button
+      type="button"
+      class="btn-close ms-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="toast-body text-center pt-0">
+    <p class="px-2 mb-3">A new version of content is available.</p>
+    <button type="button" class="btn btn-primary" aria-label="Update">
+      Update
+    </button>
+  </div>
+</aside>
+
+    
+
+    <!-- Embedded scripts -->
+
+    
+      
+      <!-- The comments switcher -->
+
+  
+  <!-- https://giscus.app/ -->
+<script>
+  (function () {
+    const themeMapper = Theme.getThemeMapper('light', 'dark_dimmed');
+    const initTheme = themeMapper[Theme.visualState];
+
+    let lang = 'en';if (lang.length > 2 && !lang.startsWith('zh')) {
+      lang = lang.slice(0, 2);
+    }
+
+    let giscusAttributes = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'exyone-labs/exyone-labs.github.io',
+      'data-repo-id': 'R_kgDOSARDDA',
+      'data-category': 'Comments',
+      'data-category-id': 'DIC_kwDOSARDDM4C6pqo',
+      'data-mapping': 'pathname',
+      'data-strict' : '0',
+      'data-reactions-enabled': '1',
+      'data-emit-metadata': '0',
+      'data-theme': initTheme,
+      'data-input-position': 'top',
+      'data-lang': lang,
+      'data-loading': 'lazy',
+      crossorigin: 'anonymous',
+      async: ''
+    };
+
+    let giscusNode = document.createElement('script');
+    Object.entries(giscusAttributes).forEach(([key, value]) =>
+      giscusNode.setAttribute(key, value)
+    );
+
+    const $footer = document.querySelector('footer');
+    $footer.insertAdjacentElement("beforebegin", giscusNode);
+
+    addEventListener('message', (event) => {
+      if (event.source === window && event.data && event.data.id === Theme.ID) {
+        const newTheme = themeMapper[Theme.visualState];
+
+        const message = {
+          setConfig: {
+            theme: newTheme
+          }
+        };
+
+        const giscus =
+          document.getElementsByClassName('giscus-frame')[0].contentWindow;
+        giscus.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+    });
+  })();
+</script>
+
+
+
+    
+
+    <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('search-results'),
+      json: '/assets/js/data/search.json',
+      searchResultTemplate: '  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">    <header>      <h2><a href="{url}">{title}</a></h2>      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">        {categories}        {tags}      </div>    </header>    <p>{content}</p>  </article>',
+      noResultsText: '<p class="mt-5">Oops! No results found.</p>',
+      templateMiddleware: function(prop, value, template) {
+        if (prop === 'categories') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+          }
+        }
+
+        if (prop === 'tags') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+          }
+        }
+      }
+    });
+  });
+</script>
+
+  
+<!-- Twikoo Comment System -->
+<div id="twikoo-section" data-twikoo-injected="true" style="max-width: 800px; margin: 0.5rem auto 2rem auto; padding: 0 1rem;">
+  <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
+    <span style="height: 1px; flex: 1; background: var(--border-color, #e1e4e8);"></span>
+    <a id="twikoo-toggle-btn" href="javascript:void(0)" style="color: var(--text-muted, #888); font-size: 0.85rem; text-decoration: none; white-space: nowrap; padding: 0.25rem 0.5rem; border-radius: 4px; transition: all 0.2s;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      展开 Twikoo 评论
+    </a>
+    <span style="height: 1px; flex: 1; background: var(--border-color, #e1e4e8);"></span>
+  </div>
+  <div id="twikoo-comment-container" style="display: none;">
+    <div id="tcomment"></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js"></script>
+<script>
+(function() {
+  var twikooLoaded = false;
+  var btn = document.getElementById('twikoo-toggle-btn');
+  var container = document.getElementById('twikoo-comment-container');
+  
+  btn.addEventListener('click', function() {
+    if (container.style.display === 'none') {
+      container.style.display = 'block';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> 收起 Twikoo 评论';
+      if (!twikooLoaded) {
+        twikoo.init({
+          envId: 'https://comments.exyone.us.kg/',
+          el: '#tcomment',
+          path: location.pathname,
+          lang: document.documentElement.lang || 'en'
+        });
+        twikooLoaded = true;
+      }
+    } else {
+      container.style.display = 'none';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> 展开 Twikoo 评论';
+    }
+  });
+  
+  btn.addEventListener('mouseenter', function() {
+    btn.style.background = 'var(--border-color, #e1e4e8)';
+  });
+  btn.addEventListener('mouseleave', function() {
+    btn.style.background = 'transparent';
+  });
+})();
+</script>
+
+</body>
+</html>
+
