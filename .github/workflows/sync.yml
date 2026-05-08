@@ -39,6 +39,19 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "exyone.dev@icloud.com"
 
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: github-deploy
+        uses: actions/deploy-pages@v4
+
       - name: Push to GitLab
         id: gitlab-sync
         run: |
@@ -79,6 +92,7 @@ jobs:
           echo ""
           echo "| Platform | Status |"
           echo "|----------|--------|"
+          echo "| GitHub Pages | ${{ steps.github-deploy.outcome == 'success' && '✅ Success' || '❌ Failed/Skipped' }} |"
           echo "| GitLab | ${{ steps.gitlab-sync.outcome == 'success' && '✅ Success' || '❌ Failed/Skipped' }} |"
           echo "| OneDev | ${{ steps.onedev-sync.outcome == 'success' && '✅ Success' || '❌ Failed/Skipped' }} |"
           echo "| Codeberg Pages | ${{ steps.codeberg-deploy.outcome == 'success' && '✅ Success' || '❌ Failed/Skipped' }} |"
