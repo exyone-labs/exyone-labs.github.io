@@ -1,0 +1,4838 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="en-zh" >
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+  ><!-- Setup Open Graph image -->
+
+  
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="AI Programming Advanced Guide for Non-Programmers: The Ultimate Tool Combo" />
+<meta property="og:locale" content="en_zh" />
+<meta name="description" content="In the previous article, we discussed how to open the command line, how to use configuration files to manage variable parameters, and how to use version control to protect your code. Those were foundational concepts aimed at getting you running and avoiding pitfalls." />
+<meta property="og:description" content="In the previous article, we discussed how to open the command line, how to use configuration files to manage variable parameters, and how to use version control to protect your code. Those were foundational concepts aimed at getting you running and avoiding pitfalls." />
+<link rel="canonical" href="https://exyone.is-a.dev/posts/en-zh/ai-programming-advanced-dotnet-toml-git/" />
+<meta property="og:url" content="https://exyone.is-a.dev/posts/en-zh/ai-programming-advanced-dotnet-toml-git/" />
+<meta property="og:site_name" content="EXYONE@BLOG:~$" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-05-05T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="AI Programming Advanced Guide for Non-Programmers: The Ultimate Tool Combo" />
+<meta name="twitter:site" content="@exyone_frosty" />
+<meta name="google-site-verification" content="kBZNtZYwiUvmQLdeBYw3KVii7WNN8MEFG3yZlizKv08" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-05T00:00:00+08:00","datePublished":"2026-05-05T00:00:00+08:00","description":"In the previous article, we discussed how to open the command line, how to use configuration files to manage variable parameters, and how to use version control to protect your code. Those were foundational concepts aimed at getting you running and avoiding pitfalls.","headline":"AI Programming Advanced Guide for Non-Programmers: The Ultimate Tool Combo","mainEntityOfPage":{"@type":"WebPage","@id":"https://exyone.is-a.dev/posts/en-zh/ai-programming-advanced-dotnet-toml-git/"},"url":"https://exyone.is-a.dev/posts/en-zh/ai-programming-advanced-dotnet-toml-git/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <title>AI Programming Advanced Guide for Non-Programmers: The Ultimate Tool Combo | EXYONE@BLOG:~$</title>
+
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon-precomposed" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-title" content="EXYONE@BLOG:~$">
+<meta name="application-name" content="EXYONE@BLOG:~$">
+<meta name="theme-color" content="#ffffff">
+
+
+  <!-- Resource Hints -->
+  
+    
+      
+        <link rel="preconnect" href="https://fonts.loli.net" >
+      
+        <link rel="dns-prefetch" href="https://fonts.loli.net" >
+      
+    
+      
+        <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+      
+        <link rel="dns-prefetch" href="https://gstatic.loli.net" >
+      
+    
+      
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+      
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+      
+    
+  
+
+  <!-- Bootstrap -->
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
+
+  <!-- Web Font -->
+  <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+
+  <!-- Custom Font -->
+  <link href="https://hanzi.itedev.com/fonts/Source+Han+Sans+VF/result.css" rel="stylesheet">
+  <style>
+    .content {
+      font-family: 'Source Han Sans VF', 'Microsoft YaHei', 'PingFang SC', 'MiSans', sans-serif !important;
+    }
+  </style>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css">
+
+  <!-- 3rd-party Dependencies -->
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.css">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
+  
+
+  
+    <!-- Image Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
+  
+
+  <!-- Scripts -->
+
+  <script src="/assets/js/dist/theme.min.js"></script>
+
+  <!-- JS selector for site. -->
+
+<!-- commons -->
+
+
+
+<!-- layout specified -->
+
+
+  
+
+  
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.20/dayjs.min.js,npm/dayjs@1.11.20/locale/en.js,npm/dayjs@1.11.20/plugin/relativeTime.js,npm/dayjs@1.11.20/plugin/localizedFormat.js,npm/tocbot@4.36.4/dist/tocbot.min.js"></script>
+
+
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+<!-- Pageviews -->
+
+  
+
+  
+
+
+
+  
+
+  <!-- A placeholder to allow defining custom metadata -->
+
+</head>
+
+  <body>
+    <!-- The Side Bar -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="/" id="avatar" class="rounded-circle"><img src="/assets/img/avatar.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
+
+    <a class="site-title d-block" href="/">EXYONE@BLOG:~$</a>
+    <p class="site-subtitle fst-italic mb-0">Building software with C# and JS. Based in China.</p>
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item">
+        <a href="/" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>HOME</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      
+        <li class="nav-item">
+          <a href="/categories/" class="nav-link">
+            <i class="fa-fw fas fa-stream"></i>
+            
+
+            <span>CATEGORIES</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/tags/" class="nav-link">
+            <i class="fa-fw fas fa-tags"></i>
+            
+
+            <span>TAGS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/archives/" class="nav-link">
+            <i class="fa-fw fas fa-archive"></i>
+            
+
+            <span>ARCHIVES</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/about/" class="nav-link">
+            <i class="fa-fw fas fa-info-circle"></i>
+            
+
+            <span>ABOUT</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/friends/" class="nav-link">
+            <i class="fa-fw fas fa-link"></i>
+            
+
+            <span>FRIENDS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/guestbook/" class="nav-link">
+            <i class="fa-fw fas fa-comments"></i>
+            
+
+            <span>GUESTBOOK</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+    </ul>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+    
+      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      
+        <span class="icon-border"></span>
+      
+    
+
+    
+
+      
+        <a
+          href="https://github.com/exyone-labs"
+          aria-label="github"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://codeberg.org/exyone"
+          aria-label="codeberg"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fas fa-code-branch"></i>
+        </a>
+      
+    
+
+      
+        <a
+          href="https://twitter.com/exyone_frosty"
+          aria-label="twitter"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://exyone.bsky.social"
+          aria-label="bluesky"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-bluesky"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://space.bilibili.com/3706949002595300"
+          aria-label="bilibili"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-bilibili"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://www.youtube.com/@exyone-t3a"
+          aria-label="youtube"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      
+    
+          
+      
+
+      
+        <a
+          href="https://qm.qq.com/q/9m5B32MsaQ"
+          aria-label="qq"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-qq"></i>
+        </a>
+      
+    
+
+      
+        <a
+          href="javascript:location.href = 'mailto:' + ['exyone.dev','icloud.com'].join('@')"
+          aria-label="email"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+    
+          
+        
+
+      
+        <a
+          href="/feed.xml"
+          aria-label="rss"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-rss"></i>
+        </a>
+      
+    
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->
+
+
+    <div id="main-wrapper" class="d-flex justify-content-center">
+      <div class="container d-flex flex-column px-xxl-5">
+        <!-- The Top Bar -->
+
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
+  <div
+    id="topbar"
+    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
+  >
+    <nav id="breadcrumb" aria-label="Breadcrumb">
+      
+
+      
+        
+          
+            <span>
+              <a href="/">Home</a>
+            </span>
+
+          
+        
+          
+        
+          
+        
+          
+            
+              <span>AI Programming Advanced Guide for Non-Programmers: The Ultimate Tool Combo</span>
+            
+
+          
+        
+      
+    </nav>
+    <!-- endof #breadcrumb -->
+
+    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    <div id="topbar-title">
+      Post
+    </div>
+
+    <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
+      <i class="fas fa-search fa-fw"></i>
+    </button>
+
+    <search id="search" class="align-items-center ms-3 ms-lg-0">
+      <i class="fas fa-search fa-fw"></i>
+      <input
+        class="form-control"
+        id="search-input"
+        type="search"
+        aria-label="search"
+        autocomplete="off"
+        placeholder="Search..."
+      >
+    </search>
+    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">Cancel</button>
+  </div>
+</header>
+
+
+        <div class="row flex-grow-1">
+          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              <!-- Refactor the HTML structure -->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- return -->
+
+
+
+
+
+
+
+
+
+
+<article class="px-1" data-toc="true">
+  <header>
+    <h1 data-toc-skip>AI Programming Advanced Guide for Non-Programmers: The Ultimate Tool Combo</h1>
+    
+
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        Posted
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1777910400"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  May  5, 2026
+</time>
+
+      </span>
+
+      <!-- lastmod date -->
+      
+
+      
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
+
+          By
+
+          <em>
+            
+              <a href="https://twitter.com/exyone_rss">Exyone.dev@icloud.com</a>
+            
+          </em>
+        </span>
+
+        <div>
+          <!-- pageviews -->
+          
+
+          <!-- read time -->
+          <!-- Calculate the post's reading time, and display the word count in tooltip -->
+
+
+
+<!-- words per minute -->
+
+
+
+
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="8117 words"
+>
+  <em>45 min</em> read</span>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">AI Programming Advanced Guide for Non-Programmers: The Ultimate Tool Combo</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">Contents</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">AI Programming Advanced Guide for Non-Programmers: The Ultimate Tool Combo</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  
+
+  <div class="content">
+    <p>In the previous article, we discussed how to open the command line, how to use configuration files to manage variable parameters, and how to use version control to protect your code. Those were foundational concepts aimed at getting you running and avoiding pitfalls.</p>
+
+<p>This article is an advanced “cookbook.” We won’t talk about broad choices—we’ll give you a hard-core combo that can take you through small-to-medium projects and desktop development. This combination is by no means a random decision—it’s experience I’ve accumulated over years of trying, not necessarily perfect for everyone, but probably the optimal solution to help you launch your first software.</p>
+
+<p>Today’s recommended four items are: <strong>.NET + TOML + Git</strong>, plus a real weapon hidden at the end of the article—<strong>Lua</strong>.</p>
+
+<p>Below we’ll break down each one, explaining why they’re chosen and how you can use this tool combo to build a runnable small software skeleton within half an hour.</p>
+
+<h2 id="1-net-a-fully-equipped-professional-factory"><span class="me-2">1. .NET: A Fully Equipped “Professional Factory”</span><a href="#1-net-a-fully-equipped-professional-factory" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>If we compare the programming ecosystem to a production workshop, Python is a universal toolkit—it can do anything and is quick to get started; Node.js is a super block market with too many parts to see clearly. But .NET is a fully equipped, precisely running professional factory.</p>
+
+<h3 id="first-clarify-a-concept-what-are-dependencies"><span class="me-2">First, Clarify a Concept: What Are “Dependencies”?</span><a href="#first-clarify-a-concept-what-are-dependencies" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>You can’t write programs doing everything from scratch. For example, if you want your program to connect to a database, there’s no need to write your own database communication protocol—just use code someone else has already written and tested. This act of “borrowing others’ ready-made code” is called “dependency” in programming. The code package you borrow is your “dependency.”</p>
+
+<h3 id="whats-nodejss-dependency-hell"><span class="me-2">What’s Node.js’s “Dependency Hell”</span><a href="#whats-nodejss-dependency-hell" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>In the Node.js ecosystem, dependency relationships can nest very deeply. When you install a small tool, it might automatically pull down hundreds or thousands of other packages, all piled into a directory called <code class="language-plaintext highlighter-rouge">node_modules</code> in your project folder. Over time, this folder can swell to hundreds of MB or even GB.</p>
+
+<p>This brings three more fatal problems beyond just taking up disk space:</p>
+
+<ol>
+  <li>
+    <p><strong>“Works on My Machine” Curse</strong>: Your program runs fine on your computer, but when you send it to a friend or deploy to a server, it suddenly crashes. The reason is often that some deep dependency version is inconsistent between your two machines. This uncertainty is the number one killer of beginner confidence.</p>
+  </li>
+  <li>
+    <p><strong>“Phantom Dependencies”</strong>: Your code might secretly use a package you didn’t directly declare—it’s pulled in by another package. One day if this small package is removed or updated, your entire project mysteriously collapses, and you have no idea what happened.</p>
+  </li>
+  <li>
+    <p><strong>Hard to Debug</strong>: Facing a hundreds of MB dependency directory, when something goes wrong, you have no idea where to even start investigating.</p>
+  </li>
+</ol>
+
+<h3 id="how-net-solves-this-problem"><span class="me-2">How .NET Solves This Problem</span><a href="#how-net-solves-this-problem" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>.NET uses a completely different dependency management approach: <strong>centralized, project-level references</strong>.</p>
+
+<p>Your project has a file called <code class="language-plaintext highlighter-rouge">.csproj</code>, which is essentially a clearly organized list, explicitly stating which packages you need and their versions. These packages are all downloaded to a centralized system location rather than piled in your project folder to expand.</p>
+
+<p>It’s like renovating a house. Node.js’s approach is piling building materials in every room, messy; .NET’s approach gives you a warehouse list, materials stored in an external warehouse, the house stays clean, only the list remains.</p>
+
+<p>Even more reassuring: the entire .NET ecosystem’s core libraries are maintained and guaranteed by Microsoft officially. Quality, security, and compatibility are all backed by the official team. For beginners programming with AI, this means AI-generated code has a higher probability of running—because its runtime environment is deterministic and predictable.</p>
+
+<h3 id="type-safety-making-ai-write-code-more-reliably"><span class="me-2">Type Safety: Making AI Write Code More Reliably</span><a href="#type-safety-making-ai-write-code-more-reliably" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>C# is the programming language used by .NET. It has a feature called “static typing”—here’s what that means and why it matters to you.</p>
+
+<p>In programming, data comes in different types: numbers are one type, text is another, and Boolean values (yes/no) are another. You can’t add the text “hello” to a number—it doesn’t make logical sense.</p>
+
+<p>Some languages (like JavaScript, Python) don’t check this kind of “putting a round peg in a square hole” error before running the code—programs only crash after execution. But C#’s static typing means it catches these issues before they happen. If you accidentally write text where a number is needed, the editor immediately marks it red, rather than crashing after you click the run button.</p>
+
+<p>When AI generates code for you, this feature becomes a huge advantage: type mismatch errors are intercepted in advance, and AI’s success rate visibly improves.</p>
+
+<h3 id="native-advantage-for-desktop-development"><span class="me-2">Native Advantage for Desktop Development</span><a href="#native-advantage-for-desktop-development" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>If your ultimate goal is a desktop application that runs with a double-click and has a proper window, .NET is one of the best choices—especially on Windows.</p>
+
+<p>.NET provides two most mature desktop frameworks: <strong>WinForms</strong> lets you build interfaces by drag-and-drop like building blocks, while <strong>WPF</strong> can create more modern, cooler visual effects. These are Microsoft’s official offerings, with complete documentation, and AI has been trained on massive related code, performing extremely stably in this area. If you need cross-platform, <strong>Avalonia UI</strong> is an excellent choice—a community-driven cross-platform desktop application framework.</p>
+
+<h2 id="2-toml-the-most-beginner-friendly-configuration-file-format"><span class="me-2">2. TOML: The Most Beginner-Friendly Configuration File Format</span><a href="#2-toml-the-most-beginner-friendly-configuration-file-format" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>In the previous article, we discussed why use configuration files—extracting volatile values from code. But what format you use for the configuration file itself directly determines your maintenance experience going forward.</p>
+
+<p>My recommendation is <strong>TOML</strong>. You may not have heard this name, but you just need to understand why it’s better than those big-name formats.</p>
+
+<h3 id="first-why-other-formats-are-headaches"><span class="me-2">First, Why Other Formats Are Headaches</span><a href="#first-why-other-formats-are-headaches" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>The configuration file AI most often outputs is <strong>JSON</strong>. It looks like this:</p>
+
+<div class="language-json highlighter-rouge"><div class="code-header">
+        <span data-label-text="JSON"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My App"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#3498db"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></div></div>
+
+<p>JSON has a fatal flaw: <strong>no comments allowed</strong>. You can’t write “this is the theme color, change to #ff0000 to make it red” as a note. Two months later when you open it yourself, facing a bunch of bare data, you might completely forget what each value means.</p>
+
+<p>Then there’s <strong>YAML</strong>, which looks cleaner than JSON, but its syntax <strong>entirely depends on space indentation to determine hierarchy</strong>. One extra space or one less space, and the program fails to parse. This “invisible error” is extremely unfriendly for beginners—you might stare at the file for a long time but can’t see where the problem is.</p>
+
+<p>And <strong>XML</strong>, its syntax is too verbose, full of angle brackets, poor readability, legacy from the previous generation—can skip directly.</p>
+
+<h3 id="where-toml-excels"><span class="me-2">Where TOML Excels</span><a href="#where-toml-excels" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>TOML is specifically designed for the “configuration file” scenario,恰好 addressing all the weaknesses of the formats above:</p>
+
+<ol>
+  <li>
+    <p><strong>Native comment support</strong>: You can use <code class="language-plaintext highlighter-rouge">#</code> to write explanations for each config item. This feature’s value in actual work cannot be overstated.</p>
+  </li>
+  <li>
+    <p><strong>Intuitive syntax, like an upgraded INI</strong>: If you’ve seen simple <code class="language-plaintext highlighter-rouge">.ini</code> files in Windows software (<code class="language-plaintext highlighter-rouge">key=value</code>), TOML is like its modern, standardized upgrade. No space sensitivity issues, no complex nesting rules—glance and you can start using.</p>
+  </li>
+  <li>
+    <p><strong>Safer than YAML</strong>: YAML has a famous pitfall—”implicit type conversion.” It might misunderstand what you wrote. For example, if you write <code class="language-plaintext highlighter-rouge">country: NO</code> (NO is Norway’s country code), YAML might interpret it as Boolean <code class="language-plaintext highlighter-rouge">false</code> because “NO” means “no” in English. TOML doesn’t play this concept replacement—what you write is what you get.</p>
+  </li>
+</ol>
+
+<p>Here’s a simple TOML config example. Without any programming background, you can understand it, even directly make changes:</p>
+
+<div class="language-toml highlighter-rouge"><div class="code-header">
+        <span data-label-text="TOML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="c"># Basic information about the software</span>
+<span class="k">[</span><span class="n">app</span><span class="k">]</span>
+<span class="n">name</span> <span class="o">=</span><span class="w"> </span><span class="s">"My First AI Software"</span>
+<span class="n">version</span> <span class="o">=</span><span class="w"> </span><span class="s">"1.0.0"</span>
+
+<span class="c"># Color settings for the interface theme</span>
+<span class="k">[</span><span class="n">theme</span><span class="k">]</span>
+<span class="n">color</span> <span class="o">=</span><span class="w"> </span><span class="s">"#3498db"</span> <span class="c"># A nice blue color</span>
+<span class="n">font_size</span> <span class="o">=</span><span class="w"> </span><span class="mi">14</span> <span class="c"># Font size</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>If you can use Notepad to edit TXT files, you can use TOML. Its clarity and restraint are its core advantages.</p>
+
+<h2 id="3-git-install-a-time-machine-for-your-project"><span class="me-2">3. Git: Install a “Time Machine” for Your Project</span><a href="#3-git-install-a-time-machine-for-your-project" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>After discussing config file formats, we need to talk about a tool crucial for your entire programming career: <strong>Git</strong>.</p>
+
+<p>You might think: “I’m writing code alone for now, no collaborators—do I really need to learn this?”</p>
+
+<p><strong>The answer: Must learn, and learn now. This has nothing to do with whether you have collaborators.</strong></p>
+
+<h3 id="what-exactly-is-git"><span class="me-2">What Exactly Is Git</span><a href="#what-exactly-is-git" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>If you imagine your project folder as a novel being written, Git is this novel’s “time machine.” Every time you complete a chapter or make an important change, you can use Git to take a “snapshot.” No matter how badly you mess up later chapters, you can instantly restore to the state of any snapshot—as if nothing happened.</p>
+
+<p>This “snapshot” in Git is called a <strong>commit</strong>. You can think of it as a save point.</p>
+
+<h3 id="for-you-git-solves-three-concrete-problems"><span class="me-2">For You, Git Solves Three Concrete Problems</span><a href="#for-you-git-solves-three-concrete-problems" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>First, it lets you experiment boldly.</strong> When collaborating with AI, it sometimes breaks your code. Without Git, you can only manually remember what you originally wrote, or simply start over. With Git, mess something up? One-click rollback to the previous save point, three seconds back to a clean state. This “always having a safety net” feeling is the soil of creativity.</p>
+
+<p><strong>Second, it lets you see what AI changed.</strong> AI might make dozens of changes in one file—comparing manually is extremely inefficient. Git has a command called <code class="language-plaintext highlighter-rouge">git diff</code> that highlights every change between you and AI—additions in green, deletions in red. You can review these changes line by line, deciding to accept or rollback. At this point, you’re no longer just a user passively accepting AI’s output—you’re truly “pair programming” with AI.</p>
+
+<p><strong>Third, it makes asking others for help easier.</strong> When a program has a bug, if you send the entire zip file to a friend, they have no idea what you changed. But if you send the Git commit history, they can see at a glance what modifications you made at each step—the efficiency difference in locating problems is worlds apart.</p>
+
+<h3 id="beginners-only-need-to-learn-three-commands-done-in-five-minutes"><span class="me-2">Beginners Only Need to Learn Three Commands, Done in Five Minutes</span><a href="#beginners-only-need-to-learn-three-commands-done-in-five-minutes" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Open the command line, enter your project folder, and run these three commands in order:</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git init</code> — “Start using Git to manage this folder.” This command only needs to run once when starting a new project.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git add .</code> — “Prepare to take a snapshot, include all current file changes in this photo.”</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git commit -m "Describe what you did"</code> — “Click, take a snapshot with an explanatory note.”</p>
+  </li>
+</ol>
+
+<p>For example, after having AI make a button and testing it with no issues, you can run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>git add .
+git commit -m "Implemented blue theme button"
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Later if you change something else and the program suddenly crashes, wanting to return to this save point, just run <code class="language-plaintext highlighter-rouge">git checkout .</code>, and everything restores to when the button was just finished.</p>
+
+<p>Just these three commands—you don’t need to learn advanced tricks like branching, merging, or remote repositories. Mastering “snapshot” and “rollback” solves 90% of your unexpected situations.</p>
+
+<h2 id="4-how-to-quickly-develop-a-small-software-using-this-tool-combo"><span class="me-2">4. How to Quickly Develop a Small Software Using This Tool Combo</span><a href="#4-how-to-quickly-develop-a-small-software-using-this-tool-combo" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Above we discussed what .NET, TOML, and Git each are. Next I’ll string them together to show you an actually actionable process. Let’s say you now want to make the simplest Windows desktop tool—like a “drinking water reminder” that can set reminder times.</p>
+
+<h3 id="step-1-create-project-skeleton-5-minutes"><span class="me-2">Step 1: Create Project Skeleton (5 Minutes)</span><a href="#step-1-create-project-skeleton-5-minutes" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Open the command line and first have AI generate initial code for a .NET desktop project. You can say:</p>
+
+<p>“Help me create a .NET WinForms desktop program, window title is ‘Drinking Reminder’, width 400 pixels, height 300 pixels. Put a label on the window with text ‘Time until next drink:’, then a textbox to input minutes, and finally a start button.”</p>
+
+<p>AI will give you a complete set of code. Save the code to your project folder, run <code class="language-plaintext highlighter-rouge">dotnet run</code> in the command line, and a window will pop up.</p>
+
+<h3 id="step-2-extract-adjustable-parameters-to-toml-config-3-minutes"><span class="me-2">Step 2: Extract Adjustable Parameters to TOML Config (3 Minutes)</span><a href="#step-2-extract-adjustable-parameters-to-toml-config-3-minutes" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Now your code might have some hardcoded values—window title, default reminder interval, font size of prompt text. You can tell AI:</p>
+
+<p>“Help me extract parameters like window title, default minutes, and font size into a TOML config file, the program reads this config when starting.”</p>
+
+<p>AI will generate a <code class="language-plaintext highlighter-rouge">config.toml</code> file, something like:</p>
+
+<div class="language-toml highlighter-rouge"><div class="code-header">
+        <span data-label-text="TOML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="c"># Config file for drinking reminder tool</span>
+<span class="k">[</span><span class="n">window</span><span class="k">]</span>
+<span class="n">title</span> <span class="o">=</span><span class="w"> </span><span class="s">"Drinking Reminder"</span>
+<span class="n">width</span> <span class="o">=</span><span class="w"> </span><span class="mi">400</span>
+<span class="n">height</span> <span class="o">=</span><span class="w"> </span><span class="mi">300</span>
+
+<span class="k">[</span><span class="n">reminder</span><span class="k">]</span>
+<span class="n">default_minutes</span> <span class="o">=</span><span class="w"> </span><span class="mi">30</span> <span class="c"># Default reminder interval in minutes</span>
+<span class="n">font_size</span> <span class="o">=</span><span class="w"> </span><span class="mi">14</span> <span class="c"># Font size of prompt text</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>At the same time, AI will rewrite your original code, replacing those hardcoded values with logic that reads from the config file. Later if you want to change the default minutes, just open <code class="language-plaintext highlighter-rouge">config.toml</code>, change one number, save, and rerun the program—it takes effect without touching a line of code.</p>
+
+<h3 id="step-3-use-git-to-save-2-minutes"><span class="me-2">Step 3: Use Git to Save (2 Minutes)</span><a href="#step-3-use-git-to-save-2-minutes" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Once the program runs, immediately protect your work:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>git init
+git add .
+git commit -m "Drinking reminder tool v1: pop-up window, reads TOML config"
+</pre></td></tr></tbody></table></code></div></div>
+
+<h3 id="step-4-iterate-and-modify-use-git-to-rollback-anytime"><span class="me-2">Step 4: Iterate and Modify, Use Git to Rollback Anytime</span><a href="#step-4-iterate-and-modify-use-git-to-rollback-anytime" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Next have AI add new features, like a “pause reminder” toggle. After AI makes changes, don’t rush to save—first run <code class="language-plaintext highlighter-rouge">git diff</code> to see exactly which files AI changed and what each line added or deleted. Once confirmed okay, then run <code class="language-plaintext highlighter-rouge">git add .</code> and <code class="language-plaintext highlighter-rouge">git commit -m "Added pause reminder toggle"</code>.</p>
+
+<p>If AI makes a mess of things, just run <code class="language-plaintext highlighter-rouge">git checkout .</code> to return to the clean state of the previous step and restate your requirements.</p>
+
+<p>Walk through these four steps, and you’ve established a controlled development loop: <strong>write code → get it running → Git save → keep modifying → if error, rollback</strong>. This loop is the core of professional programmers’ daily work.</p>
+
+<h2 id="5-bonus-the-logic-engine-hidden-in-configlua"><span class="me-2">5. Bonus: The “Logic Engine” Hidden in Config—Lua</span><a href="#5-bonus-the-logic-engine-hidden-in-configlua" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Finished with the main gear, let’s talk about something you might not have heard of but will love once you use: <strong>Lua</strong>.</p>
+
+<h3 id="what-is-lua-and-how-is-it-different-from-toml"><span class="me-2">What Is Lua, and How Is It Different from TOML</span><a href="#what-is-lua-and-how-is-it-different-from-toml" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>TOML’s position is “pure config file”—it’s good at expressing “what it is”—database address is 192.168.1.1, max connections is 100, theme color is blue. These are all static descriptions.</p>
+
+<p>But sometimes your needs aren’t that simple. For example, you want to write logic: “If user level is greater than 3, show advanced interface, otherwise show normal interface.” This isn’t a simple “value”—it’s a rule that needs judgment and calculation.</p>
+
+<p>TOML can’t do this, because config files shouldn’t contain logic—that would blur boundaries and be unsafe.</p>
+
+<p><strong>Lua</strong> is born for scenarios like this. It’s an extremely compact programming language—a complete interpreter is only about 200KB, designed to be embedded in other programs to give the host program flexible extensibility.</p>
+
+<p>Think of it this way:</p>
+
+<ul>
+  <li>
+    <p><strong>TOML is responsible for “what it is”</strong>: write unchanging values as config, clear and safe.</p>
+  </li>
+  <li>
+    <p><strong>Lua is responsible for “what to do”</strong>: write dynamic rules that need judgment and calculation as scripts, flexible and programmable.</p>
+  </li>
+</ul>
+
+<h3 id="luas-power-in-actual-projects"><span class="me-2">Lua’s Power in Actual Projects</span><a href="#luas-power-in-actual-projects" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>To give you a sense of Lua’s power, here’s a real example.</p>
+
+<p><strong>The entire interface of World of Warcraft and hundreds of player-made plugins are all driven by Lua.</strong> Blizzard embedded the Lua interpreter into the game client, allowing players to write their own interfaces, make automation prompts, and modify ability monitoring. This gave World of Warcraft unlimited customization space, making its plugin ecosystem flourish for twenty years.</p>
+
+<p>In your own small projects, Lua can bring qualitative change. Suppose your drinking reminder tool is running online, and you suddenly want to change a rule: normally remind every 30 minutes, but don’t remind during lunch break (12:00-13:30), and after 14:00 double the reminders. If the rules are written in C# code, you need to modify code, close program, recompile, restart. But if the rules are written in a Lua script file, you just change that <code class="language-plaintext highlighter-rouge">.lua</code> file and let the main program read it again—no downtime at all.</p>
+
+<h3 id="lua-lets-you-think-one-step-further"><span class="me-2">Lua Lets You Think One Step Further</span><a href="#lua-lets-you-think-one-step-further" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Lua is a “bonus” here—I’m not requiring you to learn it at the starting stage. But I want you to know there’s an advanced path from “config file” to “programmable config” in the programming world. You don’t need to walk it now, but knowing it exists means you have a more complete map in mind.</p>
+
+<p>After your .NET + TOML + Git basic flow becomes familiar, spend a day or two learning how to embed Lua in C# programs—you’ll find your project jumps from “can run” to “can flexibly adjust anytime”—that feeling is when programming truly becomes fascinating.</p>
+
+<h2 id="summary"><span class="me-2">Summary</span><a href="#summary" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>This article didn’t give you a long list of dazzling options, but carefully selected a group of the strongest combo for you:</p>
+
+<ul>
+  <li>
+    <p><strong>.NET</strong> is your core factory—stable, rigorous, not fussy, the first choice for desktop development.</p>
+  </li>
+  <li>
+    <p><strong>TOML</strong> is your config language—clear, commentable, no pitfalls, lets you bid farewell to config file pain.</p>
+  </li>
+  <li>
+    <p><strong>Git</strong> is your time machine—save, rollback, review AI changes—can’t live without it even programming alone.</p>
+  </li>
+  <li>
+    <p><strong>Lua</strong> is your bonus weapon—after settling the first three, it gives your project hot-update and unlimited customization possibilities.</p>
+  </li>
+</ul>
+
+<p>What you now have is a clearly structured, mutually supportive tool chain: .NET writes main logic, TOML manages constant parameters, Git manages version safety, Lua as a future expansion engine. This tool chain might not be the trendiest, but it’s stable enough to let you confidently write maintainable projects for the long term.</p>
+
+<hr />
+
+<h2 id="给非程序员的-ai-编程进阶教程一套最适合新手的万能工具箱"><span class="me-2">给非程序员的 AI 编程进阶教程：一套最适合新手的”万能工具箱”</span><a href="#给非程序员的-ai-编程进阶教程一套最适合新手的万能工具箱" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>在上一篇里，我们聊了怎么打开命令行、怎么用配置文件来管理可变参数、怎么用版本控制来保护自己的代码。那些是入门基础概念，目标是让你跑起来、不踩坑。</p>
+
+<p>而这一篇是进阶的”菜谱”。我们不谈宽泛的选择，只给你一套足够硬核、能伴你走遍中小项目和桌面开发的组合拳套装。这套搭配绝非胡乱搭配的决定，而是我自己尝试多年后沉淀下来的经验，未必人人适用，但可能是帮你落地第一款软件的最优解。</p>
+
+<p>今天要推荐的四样东西是：<strong>.NET + TOML + Git</strong>，外加一个藏在文章末尾的真正利器——<strong>Lua</strong>。</p>
+
+<p>下面我们逐个拆解，说清楚为什么是它们，以及你怎么用这套工具在半小时内搭出一个能跑的小型软件骨架。</p>
+
+<h2 id="一net一座设备齐全的专业工厂"><span class="me-2">一、.NET：一座设备齐全的”专业工厂”</span><a href="#一net一座设备齐全的专业工厂" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>如果把编程生态比作生产车间，Python 是一个万能工具箱，什么都能干、上手也快；Node.js 是一个超级积木市场，零件多到眼花缭乱。而 .NET，是一座设备齐全、运转精准的专业工厂。</p>
+
+<h3 id="先搞清楚一个概念什么是依赖"><span class="me-2">先搞清楚一个概念：什么是”依赖”？</span><a href="#先搞清楚一个概念什么是依赖" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>写程序不可能所有事情都从零开始。比如你想让程序连接数据库，没必要自己写一套数据库通信协议——直接用别人写好的、经过检验的代码包就行。这种”借用别人现成代码”的行为，在编程里就叫”依赖”。被你借用的那个代码包，就是你的一个”依赖项”。</p>
+
+<h3 id="nodejs-的依赖地狱是怎么回事"><span class="me-2">Node.js 的”依赖地狱”是怎么回事</span><a href="#nodejs-的依赖地狱是怎么回事" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>在 Node.js 生态里，依赖关系可以嵌套得非常深。你安装一个小工具，它可能自动拉下来几百上千个其他包，全部堆在项目文件夹里一个叫 <code class="language-plaintext highlighter-rouge">node_modules</code> 的目录中。时间长了，这个文件夹能膨胀到几百 MB 甚至上 GB。</p>
+
+<p>这带来的问题不光是占硬盘空间，还有三个更致命的麻烦：</p>
+
+<ol>
+  <li>
+    <p><strong>“在我电脑上能跑”魔咒</strong>：你的电脑上跑得好好的程序，发给朋友或者部署到服务器上，突然就崩溃了。原因往往是某个深层依赖的版本在你俩的机器上不一致。这种不确定性是新手信心的头号杀手。</p>
+  </li>
+  <li>
+    <p><strong>“幽灵依赖”</strong>：你的代码可能偷偷用了一个你没有直接声明安装的包——它是被某个其他包顺带拉进来的。某天这个小包被移除或更新了，你整个项目就神秘地瘫痪了，而你完全不知道发生了什么。</p>
+  </li>
+  <li>
+    <p><strong>排查困难</strong>：面对一个几百 MB 的依赖目录，当程序出错时，你根本不知道从哪查起。</p>
+  </li>
+</ol>
+
+<h3 id="net-怎么解决这个问题"><span class="me-2">.NET 怎么解决这个问题</span><a href="#net-怎么解决这个问题" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>.NET 采用了一种完全不同的依赖管理思路：<strong>集中式、项目级引用</strong>。</p>
+
+<p>你的项目里有一个叫 <code class="language-plaintext highlighter-rouge">.csproj</code> 的文件，它本质上是一张条理清晰的清单，白纸黑字写着你需要哪些包、各自是什么版本。这些包会被统一下载到一个系统的集中位置，而不是堆在你的项目文件夹里膨胀。</p>
+
+<p>这就像你装修房子。Node.js 的做法是每个房间都堆满建材，乱成一团；.NET 的做法是给你一个仓库清单，建材统一存放在外面的仓库里，屋子里干干净净，只留清单。</p>
+
+<p>更让你安心的是，整个 .NET 生态的核心库都由微软官方维护和保障，质量、安全性和兼容性全都由官方兜底。这对借助 AI 来编程的新手来说，意味着 AI 生成的代码能跑起来的概率更高——因为它的运行环境是确定的、可预测的。</p>
+
+<h3 id="类型安全让-ai-帮你写代码时更靠谱"><span class="me-2">类型安全：让 AI 帮你写代码时更靠谱</span><a href="#类型安全让-ai-帮你写代码时更靠谱" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>C# 是 .NET 使用的编程语言。它有一个特性叫”静态类型”，我用人话解释一下这是什么，以及它为什么对你很重要。</p>
+
+<p>在编程里，数据有不同类型：数字是一种类型，文字是另一种类型，表示”是或否”的布尔值又是另一种。你不能把文字”你好”和一个数字相加——这在逻辑上说不通。</p>
+
+<p>有些语言（如 JavaScript、Python）不会在代码运行前检查这种”张冠李戴”的错误，程序跑起来之后才会崩溃。而 C# 的静态类型意味着，它会在这类错误发生之前就把问题揪出来。如果你不小心把文字写进了需要数字的地方，编辑器会立刻给你标红，而不是等你点了运行按钮之后再崩溃。</p>
+
+<p>当 AI 为你生成代码时，这个特性就变成了一个巨大的优势：类型不匹配的错误会被提前拦截，AI 生成的成功率肉眼可见地提升。</p>
+
+<h3 id="桌面开发的原生优势"><span class="me-2">桌面开发的原生优势</span><a href="#桌面开发的原生优势" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>如果你最终目标是做一个双击就能运行、有正经窗口的桌面应用，.NET 是目前最好的选择之一——尤其在 Windows 上。</p>
+
+<p>.NET 提供了两套最成熟的桌面框架：<strong>WinForms</strong> 让你像搭积木一样拖拽出界面，<strong>WPF</strong> 则能做出更现代、更炫酷的视觉效果。这些都是微软官方的亲儿子，文档齐全，AI 也经过海量相关代码的训练，在这个领域表现极其稳定。如果你需要跨平台，<strong>Avalonia UI</strong> 是绝佳选择，这是一个由社区驱动开发的跨平台桌面应用框架。</p>
+
+<h2 id="二toml对新手最友好的配置文件格式"><span class="me-2">二、TOML：对新手最友好的配置文件格式</span><a href="#二toml对新手最友好的配置文件格式" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>上一篇我们讲了为什么要用配置文件——把容易变的东西从代码里抽出来。但配置文件本身用什么格式来写，直接决定了你日后的维护体验。</p>
+
+<p>我的推荐是 <strong>TOML</strong>。你不一定听过这个名字，但你只要明白它比那些大牌格式强在哪就行。</p>
+
+<h3 id="先说说其他格式为什么让人头疼"><span class="me-2">先说说其他格式为什么让人头疼</span><a href="#先说说其他格式为什么让人头疼" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>AI 最常给你输出的配置文件是 <strong>JSON</strong>。它长这样：</p>
+
+<div class="language-json highlighter-rouge"><div class="code-header">
+        <span data-label-text="JSON"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"我的应用"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#3498db"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></div></div>
+
+<p>JSON 有一个致命缺陷：<strong>不支持注释</strong>。你不能在旁边写上”这是主题色，改成 #ff0000 就变红”这样的提示。两个月后你自己打开看，面对一堆裸数据，可能完全想不起来每个值的意思。</p>
+
+<p>然后是 <strong>YAML</strong>，它看起来比 JSON 清爽一些，但它的语法<strong>完全靠空格缩进来决定层级关系</strong>。多一个空格或少一个空格，程序就会解析失败。这种”看不见的错误”对新手极其不友好——你盯着文件看了半天，可能根本看不出哪里有问题。</p>
+
+<p>还有 <strong>XML</strong>，语法太啰嗦，满眼尖括号，可读性差，是上一代的遗产，可以直接跳过。</p>
+
+<h3 id="toml-好在哪里"><span class="me-2">TOML 好在哪里</span><a href="#toml-好在哪里" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>TOML 是专门为”配置文件”这个场景设计的，恰好补上了上面所有格式的短板：</p>
+
+<ol>
+  <li>
+    <p><strong>天生支持注释</strong>：你可以用 <code class="language-plaintext highlighter-rouge">#</code> 给每项配置写上说明。这个功能放在实际工作中，价值怎么强调都不过分。</p>
+  </li>
+  <li>
+    <p><strong>语法直观，像升级版的 INI</strong>：如果你见过 Windows 软件里那种简单的 <code class="language-plaintext highlighter-rouge">.ini</code> 文件（<code class="language-plaintext highlighter-rouge">key=value</code>），TOML 就像是它的现代化、标准化升级。没有空格敏感问题，没有复杂的嵌套规则，看一眼就能上手。</p>
+  </li>
+  <li>
+    <p><strong>比 YAML 更安全</strong>：YAML 有一个出了名的坑——”隐式类型转换”。它会自作主张把你写的含义理解错。比如你写 <code class="language-plaintext highlighter-rouge">country: NO</code>（NO 是挪威的国家代码），YAML 可能把它理解成布尔值 <code class="language-plaintext highlighter-rouge">false</code>，因为”NO”在英语里就是”否”的意思。TOML 不会玩这种概念替换，你写的是什么就是什么。</p>
+  </li>
+</ol>
+
+<p>下面是一个简单的 TOML 配置示例。不需要任何编程基础，你就能看懂，甚至直接上手改：</p>
+
+<div class="language-toml highlighter-rouge"><div class="code-header">
+        <span data-label-text="TOML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="c"># 软件的基础信息</span>
+<span class="k">[</span><span class="n">app</span><span class="k">]</span>
+<span class="n">name</span> <span class="o">=</span><span class="w"> </span><span class="s">"我的第一个AI软件"</span>
+<span class="n">version</span> <span class="o">=</span><span class="w"> </span><span class="s">"1.0.0"</span>
+
+<span class="c"># 界面主题的颜色设置</span>
+<span class="k">[</span><span class="n">theme</span><span class="k">]</span>
+<span class="n">color</span> <span class="o">=</span><span class="w"> </span><span class="s">"#3498db"</span> <span class="c"># 一种好看的蓝色</span>
+<span class="n">font_size</span> <span class="o">=</span><span class="w"> </span><span class="mi">14</span> <span class="c"># 字号</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>你会用记事本改 TXT 文件，就会用 TOML。它的清晰与克制，就是它最核心的优势。</p>
+
+<h2 id="三git给你的项目装上时光机"><span class="me-2">三、Git：给你的项目装上”时光机”</span><a href="#三git给你的项目装上时光机" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>讲完配置文件的格式，接着要讲一个对你整个编程生涯都至关重要的工具：<strong>Git</strong>。</p>
+
+<p>你可能会想：”我暂时一个人写代码，也没有合作者，真有必要学这个吗？”</p>
+
+<p><strong>答案是：必须学，而且现在就学。这和你有没有合作者无关。</strong></p>
+
+<h3 id="git-到底是什么"><span class="me-2">Git 到底是什么</span><a href="#git-到底是什么" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>如果把你的项目文件夹想象成一本正在写的小说，Git 就是这本书的”时光机”。你每完成一个章节、每做一次重要修改，都可以用 Git 拍一张”快照”。将来无论你把后面的章节改得多烂，都能一键回到某一张快照的状态，就像什么都没发生过一样。</p>
+
+<p>这张”快照”，在 Git 里叫一次 <strong>commit（提交）</strong>。你可以把它理解成一个存档点。</p>
+
+<h3 id="对你来说git-能解决三个具体问题"><span class="me-2">对你来说，Git 能解决三个具体问题</span><a href="#对你来说git-能解决三个具体问题" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>第一，让你敢大胆实验。</strong>和 AI 协作时，它有时会改坏你的代码。如果没有 Git，你只能手动回忆原来写了什么，或者干脆从头再来。有了 Git，改坏了？一键回退到上一个存档点，三秒钟回到干净状态。这种”随时可以后悔”的底气，是创造力的土壤。</p>
+
+<p><strong>第二，让你看得懂 AI 改了什么。</strong>AI 可能在一个文件里改了十几处，你肉眼去对比非常低效。 Git 有一个命令叫 <code class="language-plaintext highlighter-rouge">git diff</code>，它能把你和 AI 之间的每一处改动都高亮显示出来——增加的用绿色标出，删除的用红色标出。你可以逐行审查这些变化，决定是接受还是回退。到这一步，你就不再是单方面接受 AI 输出的使用者，而是和 AI 真正”结对编程”的合作者。</p>
+
+<p><strong>第三，方便你请教别人。</strong>当程序出 bug 时，你把整个压缩包发给朋友，对方根本不知道你改了什么。但如果你把 Git 的提交记录发过去，对方看一眼就知道你每一步做了什么修改，定位问题的效率天差地别。</p>
+
+<h3 id="新手只需要学会三个命令五分钟搞定"><span class="me-2">新手只需要学会三个命令，五分钟搞定</span><a href="#新手只需要学会三个命令五分钟搞定" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>打开命令行，进入你的项目文件夹，按顺序敲下面三个命令：</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git init</code> —— “开始使用 Git 管理这个文件夹”。这个命令只需要在新项目开始时执行一次。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git add .</code> —— “准备拍快照，把当前所有文件的改动都纳入这次拍照范围”。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git commit -m "描述你这次做了什么"</code> —— “咔嚓，拍下一张快照，并附上说明文字”。</p>
+  </li>
+</ol>
+
+<p>比如你让 AI 做了一个按钮，测试完发现没问题，就可以执行：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>git add .
+git commit -m "实现了蓝色主题按钮"
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>将来你改了别的东西，程序突然崩溃了，想回到这个存档点，只需要执行 <code class="language-plaintext highlighter-rouge">git checkout .</code>，一切就恢复到这个按钮刚做完时的样子。</p>
+
+<p>就这三个命令，你不需要学分支、合并、远程仓库这些高阶玩法。掌握”拍快照”和”回退”两招，已经能解决你 90% 的意外状况。</p>
+
+<h2 id="四如何用这套工具快速开发一个小型软件"><span class="me-2">四、如何用这套工具快速开发一个小型软件</span><a href="#四如何用这套工具快速开发一个小型软件" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>上面我们讲了 .NET、TOML 和 Git 各自是什么。接下来我把它们串在一起，给你展示一套实际可操作的流程。假设你现在就想做一个最简单的 Windows 桌面工具——比如一个能够设置提醒时间的”喝水提醒”小程序。</p>
+
+<h3 id="第一步创建项目骨架5-分钟"><span class="me-2">第一步：创建项目骨架（5 分钟）</span><a href="#第一步创建项目骨架5-分钟" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>打开命令行，先让 AI 帮你生成一个 .NET 桌面项目的初始代码。你可以这样说：</p>
+
+<p>“帮我用 .NET WinForms 创建一个桌面程序，窗口标题叫’喝水提醒’，宽度 400 像素、高度 300 像素。窗口上放一个标签文字’距离下次喝水还有’，再放一个文本框可以输入分钟数，最后放一个开始按钮。”</p>
+
+<p>AI 会给你一套完整的代码。你把代码保存到项目文件夹里，在命令行运行 <code class="language-plaintext highlighter-rouge">dotnet run</code>，一个窗口就会弹出来。</p>
+
+<h3 id="第二步把可调参数抽到-toml-配置里3-分钟"><span class="me-2">第二步：把可调参数抽到 TOML 配置里（3 分钟）</span><a href="#第二步把可调参数抽到-toml-配置里3-分钟" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>现在你的代码里可能有一些写死的值，比如窗口标题、默认提醒间隔、提示文字的字体大小。你可以对 AI 说：</p>
+
+<p>“帮我把窗口标题、默认分钟数、字体大小这些参数抽到一个 TOML 配置文件里，程序启动时读取这个配置。”</p>
+
+<p>AI 会给你生成一个 <code class="language-plaintext highlighter-rouge">config.toml</code> 文件，大概长这样：</p>
+
+<div class="language-toml highlighter-rouge"><div class="code-header">
+        <span data-label-text="TOML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="c"># 喝水提醒工具的配置文件</span>
+<span class="k">[</span><span class="n">window</span><span class="k">]</span>
+<span class="n">title</span> <span class="o">=</span><span class="w"> </span><span class="s">"喝水提醒"</span>
+<span class="n">width</span> <span class="o">=</span><span class="w"> </span><span class="mi">400</span>
+<span class="n">height</span> <span class="o">=</span><span class="w"> </span><span class="mi">300</span>
+
+<span class="k">[</span><span class="n">reminder</span><span class="k">]</span>
+<span class="n">default_minutes</span> <span class="o">=</span><span class="w"> </span><span class="mi">30</span> <span class="c"># 默认提醒间隔，单位分钟</span>
+<span class="n">font_size</span> <span class="o">=</span><span class="w"> </span><span class="mi">14</span> <span class="c"># 提示文字的字号</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>与此同时，AI 会把你原来的代码重写一遍，把那些写死的值替换成从配置文件读取的逻辑。以后你想改默认分钟数，只需要打开 <code class="language-plaintext highlighter-rouge">config.toml</code> 改一个数字，保存，重新运行程序就生效——一行代码都不用碰。</p>
+
+<h3 id="第三步用-git-存档2-分钟"><span class="me-2">第三步：用 Git 存档（2 分钟）</span><a href="#第三步用-git-存档2-分钟" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>程序跑通了，立刻保护劳动成果：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>git init
+git add .
+git commit -m "喝水提醒工具第一版：弹出窗口，读取TOML配置"
+</pre></td></tr></tbody></table></code></div></div>
+
+<h3 id="第四步迭代修改利用-git-随时回退"><span class="me-2">第四步：迭代修改，利用 Git 随时回退</span><a href="#第四步迭代修改利用-git-随时回退" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>接下来你让 AI 帮你加新功能，比如加一个”暂停提醒”的开关。AI 改完之后，你先别急着存档，先运行 <code class="language-plaintext highlighter-rouge">git diff</code> 看看 AI 到底改了哪些文件、每一行增加了什么删除了什么。确认没问题了，再执行 <code class="language-plaintext highlighter-rouge">git add .</code> 和 <code class="language-plaintext highlighter-rouge">git commit -m "增加了暂停提醒开关"</code>。</p>
+
+<p>万一 AI 改出了一堆乱七八糟的东西，直接 <code class="language-plaintext highlighter-rouge">git checkout .</code> 回到上一步的干净状态，重新提需求。</p>
+
+<p>这四步走下来，你就已经建立起了一个受控的开发循环：<strong>写代码 → 跑通 → Git存档 → 继续改 → 出错就回退</strong>。这个循环，就是专业程序员每天工作的核心。</p>
+
+<h2 id="五彩蛋隐藏在配置里的逻辑引擎lua"><span class="me-2">五、彩蛋：隐藏在配置里的”逻辑引擎”——Lua</span><a href="#五彩蛋隐藏在配置里的逻辑引擎lua" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>讲完了主装备，最后我们来聊一个你可能没听过、但一用就会爱上的真正利器：<strong>Lua</strong>。</p>
+
+<h3 id="lua-是什么和-toml-有什么不同"><span class="me-2">Lua 是什么，和 TOML 有什么不同</span><a href="#lua-是什么和-toml-有什么不同" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>TOML 的定位是”纯配置文件”，它擅长表达”是什么”——数据库地址是 192.168.1.1、最大连接数是 100、主题色是蓝色。这些都是静态的描述。</p>
+
+<p>但有时候，你的需求没那么简单。比如你想写这样的逻辑：”如果用户等级大于 3，就显示高级版界面，否则显示普通版界面。”这不是一个简单的”值”，而是一段需要判断、需要运算的规则。</p>
+
+<p>TOML 做不了这个，因为配置文件本身不应该包含逻辑——那会让边界模糊、不安全。</p>
+
+<p>而 <strong>Lua</strong> 就是为这类场景而生的。它是一门极其小巧的编程语言，一个完整的解释器只有 200KB 左右，设计初衷就是嵌入到其他程序里，让主程序获得灵活的可扩展性。</p>
+
+<p>你可以这样理解：</p>
+
+<ul>
+  <li>
+    <p><strong>TOML 负责”是什么”</strong>：把那些不变量写成配置，清晰、安全。</p>
+  </li>
+  <li>
+    <p><strong>Lua 负责”怎么办”</strong>：把那些需要判断、计算的动态规则写成脚本，灵活、可编程。</p>
+  </li>
+</ul>
+
+<h3 id="lua-在实际项目中的威力"><span class="me-2">Lua 在实际项目中的威力</span><a href="#lua-在实际项目中的威力" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>为了让你对 Lua 的威力有个概念，我举一个真实的例子。</p>
+
+<p><strong>《魔兽世界》的整个界面和几百个玩家自制插件，全部都是用 Lua 驱动的。</strong> 暴雪把 Lua 解释器嵌进了游戏客户端，让玩家可以自己写界面、做自动化提示、改技能监控。这给了《魔兽世界》无限的定制空间，也让它的插件生态繁荣了二十年。</p>
+
+<p>放到你自己的小项目里，Lua 同样能带来质变。假设你的喝水提醒工具已经上线运行了，你突然想改一个规则：平时每 30 分钟提醒一次，但午休时段（12:00-13:30）不提醒，下午 14:00 之后加倍提醒。如果规则写在 C# 代码里，你需要改代码、关程序、重新编译、重新启动。但如果规则写在一个 Lua 脚本文件里，你只需要改那个 <code class="language-plaintext highlighter-rouge">.lua</code> 文件，让主程序重新读一下，全程不停机。</p>
+
+<h3 id="lua-能让你思考更进一步"><span class="me-2">Lua 能让你思考更进一步</span><a href="#lua-能让你思考更进一步" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Lua 在这里是”彩蛋”，我不要求你在起步阶段就学它。但我想让你知道，编程世界里有一条从”配置文件”到”可编程配置”的进阶道路。你不需要现在就走上去，但知道它的存在，意味着你心里有了一张更完整的地图。</p>
+
+<p>等你的 .NET + TOML + Git 这套基本流程跑熟之后，花一两天了解一下 Lua 怎么嵌入 C# 程序，你会发现自己的项目从”能跑”跃迁到”能随时灵活调整”——那种感觉，就是编程真正迷人的时刻之一。</p>
+
+<h2 id="总结"><span class="me-2">总结</span><a href="#总结" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>这一篇没有给你一长串眼花缭乱的选项，而是为你精心挑选了一组最能打的组合：</p>
+
+<ul>
+  <li>
+    <p><strong>.NET</strong> 是你的核心工厂，稳定、严谨、不折腾，桌面开发的首选。</p>
+  </li>
+  <li>
+    <p><strong>TOML</strong> 是你的配置语言，清晰、可注释、没陷阱，让你告别配置文件的痛苦。</p>
+  </li>
+  <li>
+    <p><strong>Git</strong> 是你的时光机，存档、回退、审查 AI 改动，一个人编程也离不开它。</p>
+  </li>
+  <li>
+    <p><strong>Lua</strong> 是你的彩蛋武器，等你安顿好前三样之后，它会让你的项目获得热更新和无限定制的可能。</p>
+  </li>
+</ul>
+
+<p>你现在拥有的是一个结构清晰、互相配合的工具链：.NET 写主体逻辑，TOML 管不变参数，Git 管版本安全，Lua 作为未来的扩展引擎。这套工具链也许不是最时髦的，但它足够稳定、足以让你安心地写出能长期维护的项目。</p>
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    
+      <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw me-1"></i>
+        
+          <a href="/categories/technology/">Technology</a>
+      </div>
+    
+
+    <!-- tags -->
+    
+      <div class="post-tags">
+        <i class="fa fa-tags fa-fw me-1"></i>
+        
+          <a
+            href="/tags/ai/"
+            class="post-tag no-text-decoration"
+          >ai</a>
+        
+          <a
+            href="/tags/programming/"
+            class="post-tag no-text-decoration"
+          >programming</a>
+        
+          <a
+            href="/tags/dotnet/"
+            class="post-tag no-text-decoration"
+          >dotnet</a>
+        
+          <a
+            href="/tags/toml/"
+            class="post-tag no-text-decoration"
+          >toml</a>
+        
+          <a
+            href="/tags/git/"
+            class="post-tag no-text-decoration"
+          >git</a>
+        
+          <a
+            href="/tags/tutorial/"
+            class="post-tag no-text-decoration"
+          >tutorial</a>
+        
+      </div>
+    
+
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
+      <div class="license-wrapper">
+        
+          
+
+          This post is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         by the author.
+        
+      </div>
+
+      <!-- Post sharing snippet -->
+
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">Share</span>
+  <span class="share-icons">
+    
+    
+    
+
+    
+
+      
+
+      <a href="https://twitter.com/intent/tweet?text=AI%20Programming%20Advanced%20Guide%20for%20Non-Programmers:%20The%20Ultimate%20Tool%20Combo%20-%20EXYONE@BLOG:~$&url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fai-programming-advanced-dotnet-toml-git%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+        <i class="fa-fw fa-brands fa-square-x-twitter"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.facebook.com/sharer/sharer.php?title=AI%20Programming%20Advanced%20Guide%20for%20Non-Programmers:%20The%20Ultimate%20Tool%20Combo%20-%20EXYONE@BLOG:~$&u=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fai-programming-advanced-dotnet-toml-git%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+        <i class="fa-fw fab fa-facebook-square"></i>
+      </a>
+    
+
+      
+
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fai-programming-advanced-dotnet-toml-git%2F&text=AI%20Programming%20Advanced%20Guide%20for%20Non-Programmers:%20The%20Ultimate%20Tool%20Combo%20-%20EXYONE@BLOG:~$" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+        <i class="fa-fw fab fa-telegram"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fai-programming-advanced-dotnet-toml-git%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin" aria-label="Linkedin">
+        <i class="fa-fw fab fa-linkedin"></i>
+      </a>
+    
+
+      
+
+      <a href="https://service.weibo.com/share/share.php?title=AI%20Programming%20Advanced%20Guide%20for%20Non-Programmers:%20The%20Ultimate%20Tool%20Combo%20-%20EXYONE@BLOG:~$&url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fai-programming-advanced-dotnet-toml-git%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Weibo" aria-label="Weibo">
+        <i class="fa-fw fab fa-weibo"></i>
+      </a>
+    
+        <script defer type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/share-to-mastodon/+esm"></script>
+        <button class="btn text-start" data-bs-toggle="tooltip" data-bs-placement="top" title="Mastodon" aria-label="Mastodon">
+          <share-to-mastodon
+            class="share-mastodon"
+            message="AI%20Programming%20Advanced%20Guide%20for%20Non-Programmers:%20The%20Ultimate%20Tool%20Combo%20-%20EXYONE@BLOG:~$"
+            url="https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fai-programming-advanced-dotnet-toml-git%2F"customInstanceList="[{&quot;label&quot;:&quot;mastodon.social&quot;,&quot;link&quot;:&quot;https://mastodon.social/&quot;},{&quot;label&quot;:&quot;mastodon.online&quot;,&quot;link&quot;:&quot;https://mastodon.online/&quot;},{&quot;label&quot;:&quot;fosstodon.org&quot;,&quot;link&quot;:&quot;https://fosstodon.org/&quot;},{&quot;label&quot;:&quot;photog.social&quot;,&quot;link&quot;:&quot;https://photog.social/&quot;}]"
+          >
+            <i class="fa-fw fa-brands fa-mastodon"></i>
+          </share-to-mastodon>
+        </button>
+
+        
+
+      
+
+      <a href="https://bsky.app/intent/compose?text=AI%20Programming%20Advanced%20Guide%20for%20Non-Programmers:%20The%20Ultimate%20Tool%20Combo%20-%20EXYONE@BLOG:~$%20https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fai-programming-advanced-dotnet-toml-git%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Bluesky" aria-label="Bluesky">
+        <i class="fa-fw fa-brands fa-bluesky"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fai-programming-advanced-dotnet-toml-git%2F&title=AI%20Programming%20Advanced%20Guide%20for%20Non-Programmers:%20The%20Ultimate%20Tool%20Combo%20-%20EXYONE@BLOG:~$" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Reddit" aria-label="Reddit">
+        <i class="fa-fw fa-brands fa-square-reddit"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.threads.net/intent/post?text=AI%20Programming%20Advanced%20Guide%20for%20Non-Programmers:%20The%20Ultimate%20Tool%20Combo%20-%20EXYONE@BLOG:~$%20https%3A%2F%2Fexyone.is-a.dev%2Fposts%2Fen-zh%2Fai-programming-advanced-dotnet-toml-git%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Threads" aria-label="Threads">
+        <i class="fa-fw fa-brands fa-square-threads"></i>
+      </a>
+    
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Copy link"
+      data-title-succeed="Link copied successfully!"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+  </span>
+</div>
+
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
+</article>
+
+
+            
+          </main>
+
+          <!-- panel -->
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted">
+            <div class="access">
+              <!-- Get 5 last posted/updated posts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section id="access-lastmod">
+    <h2 class="panel-heading">Recently Updated</h2>
+    <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/pl-zh/a-view-of-poland-from-a-chinese-perspective/">A View of Poland from a Chinese Perspective</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/adding-twikoo-to-chirpy/">Adding Twikoo Comments to Chirpy: A Plugin Development Journey</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/ai-programming-advanced-dotnet-toml-git/">AI Programming Advanced Guide for Non-Programmers: The Ultimate Tool Combo</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/ai-programming-for-non-programmers/">AI Programming for Non-Programmers: From Command Line to Natural Language Development</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en/the-art-of-grift-astrbot-case-study/">The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</a>
+        </li>
+      
+    </ul>
+  </section>
+  <!-- #access-lastmod -->
+
+
+              <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/literature/">literature</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/history/">history</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/poetry/">poetry</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/open-source/">open-source</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">tutorial</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ai/">ai</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/blog/">blog</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/chirpy/">chirpy</a>
+      
+    </div>
+  </section>
+
+
+            </div>
+
+            
+              
+              
+
+
+
+
+
+
+  <div class="toc-border-cover z-3"></div>
+  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
+
+
+            
+          </aside>
+        </div>
+
+        <div class="row">
+          <!-- tail -->
+          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+
+
+
+
+
+
+
+
+
+
+  <aside id="related-posts" aria-labelledby="related-label">
+    <h3 class="mb-4" id="related-label">Further Reading</h3>
+    <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/en-zh/ai-programming-for-non-programmers/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1777824000"
+  data-df="ll"
+  
+>
+  May  4, 2026
+</time>
+
+              <h4 class="pt-0 my-2">AI Programming for Non-Programmers: From Command Line to Natural Language Development</h4>
+              <div class="text-muted">
+                <p>The spark for this article came from a conversation with a friend who has zero coding experience. They asked me: “AI is so advanced now, I want to use it to develop software.” I looked around at tu...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/en-zh/self-hosted-home-server-setup/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1767283200"
+  data-df="ll"
+  
+>
+  Jan  2, 2026
+</time>
+
+              <h4 class="pt-0 my-2">Migrating from Cloud Server to Home Server, Configuring Intranet Penetration to Map Site to Public Network</h4>
+              <div class="text-muted">
+                <p>Modified using Grok AI. Content accuracy and device compatibility are not guaranteed. Please verify and adjust according to your actual situation.   Hi everyone, I’m back! As the title says, I’ve f...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/en-zh/zfile-openlist-mount-ctyun/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1737129600"
+  data-df="ll"
+  
+>
+  Jan 18, 2025
+</time>
+
+              <h4 class="pt-0 my-2">Practical Methods for Mounting China Telecom Cloud Drive on Zfile / OpenList</h4>
+              <div class="text-muted">
+                <p>This article does not guarantee timeliness. Please verify the effectiveness of the methods yourself.   With cloud storage aggregators like OpenList or Zfile, Lanzou Cloud basically just requires en...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+    </nav>
+  </aside>
+  <!-- #related-posts -->
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/posts/en-zh/ai-programming-for-non-programmers/"
+      class="btn btn-outline-primary"
+      aria-label="Older"
+    >
+      <p>AI Programming for Non-Programmers: From Command Line to Natural Language Development</p>
+    </a>
+  
+
+  
+    <a
+      href="/posts/pl-zh/a-view-of-poland-from-a-chinese-perspective/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>A View of Poland from a Chinese Perspective</p>
+    </a>
+  
+</nav>
+
+            
+
+            <!-- The Footer -->
+<footer
+  aria-label="Site Info"
+  class="d-flex flex-column justify-content-center text-muted flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3"
+>
+  <p class="mb-0 copyright">
+    © <span id="year"></span>
+    · <em class="fst-normal">Exyone.dev@icloud.com</em>
+    <i class="fas fa-heartbeat heartbeat-icon"></i>
+    37 posts · 39 tags
+  </p>
+
+  <p class="mb-0">
+    Built with <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> &amp;
+    <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> ·
+    Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a> ·
+    <a href="https://www.cloudflare.com" target="_blank" rel="noopener">Cloudflare CDN</a>
+  </p>
+</footer>
+
+<style>
+  #sidebar .site-title {
+    font-size: 1.5rem;
+  }
+
+  .heartbeat-icon {
+    color: #ff6b6b;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    display: inline-block;
+    margin: 0 0.3em;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.15); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.15); }
+    70%      { transform: scale(1); }
+  }
+
+  .heartbeat-icon:hover {
+    color: #ff4757;
+    animation: heartbeat-hover 1s ease-in-out infinite;
+    cursor: pointer;
+  }
+
+  @keyframes heartbeat-hover {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.2); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.2); }
+    70%      { transform: scale(1); }
+  }
+
+  [data-mode="dark"] .heartbeat-icon {
+    color: #ff6b6b;
+  }
+  [data-mode="dark"] .heartbeat-icon:hover {
+    color: #ff4757;
+  }
+</style>
+
+<script>
+  (function() {
+    var year = new Date().getFullYear();
+    document.getElementById('year').textContent = year;
+  })();
+</script>
+          </div>
+        </div>
+
+        <!-- The Search results -->
+
+<div id="search-result-wrapper" class="d-flex justify-content-center d-none">
+  <div class="col-11 content">
+    <div id="search-hints">
+      <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/literature/">literature</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/history/">history</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/poetry/">poetry</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/open-source/">open-source</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">tutorial</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ai/">ai</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/blog/">blog</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/chirpy/">chirpy</a>
+      
+    </div>
+  </section>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+      </div>
+
+      <aside aria-label="Scroll to Top">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+          <i class="fas fa-angle-up"></i>
+        </button>
+      </aside>
+    </div>
+
+    <div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div>
+
+    
+      <aside
+  id="notification"
+  class="toast"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  data-bs-animation="true"
+  data-bs-autohide="false"
+>
+  <div class="toast-header">
+    <button
+      type="button"
+      class="btn-close ms-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="toast-body text-center pt-0">
+    <p class="px-2 mb-3">A new version of content is available.</p>
+    <button type="button" class="btn btn-primary" aria-label="Update">
+      Update
+    </button>
+  </div>
+</aside>
+
+    
+
+    <!-- Embedded scripts -->
+
+    
+      
+      <!-- The comments switcher -->
+
+  
+  <!-- https://giscus.app/ -->
+<script>
+  (function () {
+    const themeMapper = Theme.getThemeMapper('light', 'dark_dimmed');
+    const initTheme = themeMapper[Theme.visualState];
+
+    let lang = 'en';if (lang.length > 2 && !lang.startsWith('zh')) {
+      lang = lang.slice(0, 2);
+    }
+
+    let giscusAttributes = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'exyone-labs/exyone-labs.github.io',
+      'data-repo-id': 'R_kgDOSARDDA',
+      'data-category': 'Comments',
+      'data-category-id': 'DIC_kwDOSARDDM4C6pqo',
+      'data-mapping': 'pathname',
+      'data-strict' : '0',
+      'data-reactions-enabled': '1',
+      'data-emit-metadata': '0',
+      'data-theme': initTheme,
+      'data-input-position': 'top',
+      'data-lang': lang,
+      'data-loading': 'lazy',
+      crossorigin: 'anonymous',
+      async: ''
+    };
+
+    let giscusNode = document.createElement('script');
+    Object.entries(giscusAttributes).forEach(([key, value]) =>
+      giscusNode.setAttribute(key, value)
+    );
+
+    const $footer = document.querySelector('footer');
+    $footer.insertAdjacentElement("beforebegin", giscusNode);
+
+    addEventListener('message', (event) => {
+      if (event.source === window && event.data && event.data.id === Theme.ID) {
+        const newTheme = themeMapper[Theme.visualState];
+
+        const message = {
+          setConfig: {
+            theme: newTheme
+          }
+        };
+
+        const giscus =
+          document.getElementsByClassName('giscus-frame')[0].contentWindow;
+        giscus.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+    });
+  })();
+</script>
+
+
+
+    
+
+    <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('search-results'),
+      json: '/assets/js/data/search.json',
+      searchResultTemplate: '  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">    <header>      <h2><a href="{url}">{title}</a></h2>      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">        {categories}        {tags}      </div>    </header>    <p>{content}</p>  </article>',
+      noResultsText: '<p class="mt-5">Oops! No results found.</p>',
+      templateMiddleware: function(prop, value, template) {
+        if (prop === 'categories') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+          }
+        }
+
+        if (prop === 'tags') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+          }
+        }
+      }
+    });
+  });
+</script>
+
+  
+<!-- Twikoo Comment System -->
+<div id="twikoo-section" data-twikoo-injected="true" style="max-width: 800px; margin: 0.5rem auto 2rem auto; padding: 0 1rem;">
+  <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
+    <span style="height: 1px; flex: 1; background: var(--border-color, #e1e4e8);"></span>
+    <a id="twikoo-toggle-btn" href="javascript:void(0)" style="color: var(--text-muted, #888); font-size: 0.85rem; text-decoration: none; white-space: nowrap; padding: 0.25rem 0.5rem; border-radius: 4px; transition: all 0.2s;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      展开 Twikoo 评论
+    </a>
+    <span style="height: 1px; flex: 1; background: var(--border-color, #e1e4e8);"></span>
+  </div>
+  <div id="twikoo-comment-container" style="display: none;">
+    <div id="tcomment"></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js"></script>
+<script>
+(function() {
+  var twikooLoaded = false;
+  var btn = document.getElementById('twikoo-toggle-btn');
+  var container = document.getElementById('twikoo-comment-container');
+  
+  btn.addEventListener('click', function() {
+    if (container.style.display === 'none') {
+      container.style.display = 'block';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> 收起 Twikoo 评论';
+      if (!twikooLoaded) {
+        twikoo.init({
+          envId: 'https://comments.exyone.us.kg/',
+          el: '#tcomment',
+          path: location.pathname,
+          lang: document.documentElement.lang || 'en'
+        });
+        twikooLoaded = true;
+      }
+    } else {
+      container.style.display = 'none';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> 展开 Twikoo 评论';
+    }
+  });
+  
+  btn.addEventListener('mouseenter', function() {
+    btn.style.background = 'var(--border-color, #e1e4e8)';
+  });
+  btn.addEventListener('mouseleave', function() {
+    btn.style.background = 'transparent';
+  });
+})();
+</script>
+
+</body>
+</html>
+

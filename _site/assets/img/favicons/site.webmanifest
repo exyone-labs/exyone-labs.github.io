@@ -3,7 +3,7 @@
 {
   "name": "EXYONE@BLOG:~$",
   "short_name": "EXYONE@BLOG:~$",
-  "description": "Technical writings on .NET, front-end development, and digital craftsmanship. Happy to connect and make friends.",
+  "description": "Technical blog about .NET, front-end development, and web technologies. Sharing coding tutorials, software architecture insights, and development best practices.",
   "icons": [
     {
       "src": "/assets/img/favicons/web-app-manifest-192x192.png",

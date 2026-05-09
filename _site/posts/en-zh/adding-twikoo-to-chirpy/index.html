@@ -41,7 +41,7 @@
 <meta property="article:published_time" content="2026-04-25T00:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Adding Twikoo Comments to Chirpy: A Plugin Development Journey" />
-<meta name="twitter:site" content="@exyone_rss" />
+<meta name="twitter:site" content="@exyone_frosty" />
 <meta name="google-site-verification" content="kBZNtZYwiUvmQLdeBYw3KVii7WNN8MEFG3yZlizKv08" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-08T13:36:11+08:00","datePublished":"2026-04-25T00:00:00+08:00","description":"Chirpy is an excellent theme, but it doesn’t natively support Twikoo comments. I wanted to add Twikoo alongside the existing Giscus system without modifying the theme’s source code. The solution evolved through multiple iterations: I started with a Jekyll plugin, then tried footer.html template injection, and finally settled on a local-build-then-push workflow to ensure consistency across all deployment platforms.","headline":"Adding Twikoo Comments to Chirpy: A Plugin Development Journey","mainEntityOfPage":{"@type":"WebPage","@id":"https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/"},"url":"https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/"}</script>
@@ -252,7 +252,7 @@
     <a href="/" id="avatar" class="rounded-circle"><img src="/assets/img/avatar.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
 
     <a class="site-title d-block" href="/">EXYONE@BLOG:~$</a>
-    <p class="site-subtitle fst-italic mb-0">A .NET and Front-End developer from China.</p>
+    <p class="site-subtitle fst-italic mb-0">Building software with C# and JS. Based in China.</p>
   </header>
   <!-- .profile-wrapper -->
 
@@ -391,7 +391,7 @@
 
       
         <a
-          href="https://twitter.com/exyone_rss"
+          href="https://twitter.com/exyone_frosty"
           aria-label="twitter"
           
 
@@ -1197,6 +1197,28 @@
 
       
     
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
 
     
   
@@ -1322,9 +1344,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="5366 words"
+  title="5809 words"
 >
-  <em>29 min</em> read</span>
+  <em>32 min</em> read</span>
 
         </div>
       </div>
@@ -1424,25 +1446,9 @@
 
 <h2 id="configuration"><span class="me-2">Configuration</span><a href="#configuration" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>Add Twikoo configuration to your <code class="language-plaintext highlighter-rouge">_config.yml</code>:</p>
+<p>Since Chirpy doesn’t natively support Twikoo—it only officially supports Giscus, Disqus, and Utterances—you should NOT fill in the <code class="language-plaintext highlighter-rouge">provider</code> field if you only want to use Twikoo. Doing so would cause the theme to attempt rendering an unsupported comment system and result in errors. The Twikoo injection works through footer.html and the plugin, so it doesn’t rely on Chirpy’s built-in comment configuration.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="code-header">
-        <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre><span class="na">comments</span><span class="pi">:</span>
-  <span class="na">provider</span><span class="pi">:</span> <span class="s">twikoo</span> <span class="c1"># or giscus if you want both</span>
-  <span class="na">twikoo</span><span class="pi">:</span>
-    <span class="na">env_id</span><span class="pi">:</span> <span class="s">https://your-twikoo-env.com</span>
-    <span class="na">version</span><span class="pi">:</span> <span class="s">1.6.44</span>
-</pre></td></tr></tbody></table></code></div></div>
-
-<p>The <code class="language-plaintext highlighter-rouge">provider</code> field tells Chirpy which comment system to use for its built-in templates. Setting it to <code class="language-plaintext highlighter-rouge">twikoo</code> makes the theme render Twikoo instead of Giscus. However, since we’re injecting Twikoo through footer.html, you can actually leave this as <code class="language-plaintext highlighter-rouge">giscus</code> if you want both systems available.</p>
-
-<p>Make sure to add <code class="language-plaintext highlighter-rouge">plugins_dir</code> to your <code class="language-plaintext highlighter-rouge">_config.yml</code>:</p>
+<p>The only requirement is to add <code class="language-plaintext highlighter-rouge">plugins_dir</code> to your <code class="language-plaintext highlighter-rouge">_config.yml</code>:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="code-header">
         <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
@@ -1452,25 +1458,25 @@
 
 <p>This ensures Jekyll loads the plugin from the <code class="language-plaintext highlighter-rouge">_plugins</code> directory. Without this line, Jekyll might not find your custom plugins, depending on how it’s invoked.</p>
 
+<p>If you want to use both Giscus and Twikoo (like my blog does), you can keep <code class="language-plaintext highlighter-rouge">provider</code> set to <code class="language-plaintext highlighter-rouge">giscus</code>. This way the theme renders Giscus while Twikoo appears through our custom injection.</p>
+
 <h2 id="setting-up-the-local-build-workflow"><span class="me-2">Setting Up the Local Build Workflow</span><a href="#setting-up-the-local-build-workflow" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>The local-build-then-push workflow requires two repositories: one for your source code and one for the deployed site.</p>
+<p>My approach is as follows: the source code repository and <code class="language-plaintext highlighter-rouge">_site</code> directory exist in the same repository—the source repository contains the complete blog source code as well as the built <code class="language-plaintext highlighter-rouge">_site</code> folder. After building locally, I use GitHub Actions to push the <code class="language-plaintext highlighter-rouge">_site</code> directory to GitHub Pages for hosting. For Cloudflare Pages and Netlify, I push the built files to their Pages repositories and configure them to skip building, serving only the static files we provide.</p>
 
-<h3 id="step-1-create-a-deployment-repository"><span class="me-2">Step 1: Create a Deployment Repository</span><a href="#step-1-create-a-deployment-repository" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<h3 id="step-1-enable-github-pages"><span class="me-2">Step 1: Enable GitHub Pages</span><a href="#step-1-enable-github-pages" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<p>Create a new repository on GitHub to hold your built site. This repository will contain only the contents of the <code class="language-plaintext highlighter-rouge">_site</code> folder after building. Name it something like <code class="language-plaintext highlighter-rouge">yourusername/yourusername.github.io</code> if you plan to use GitHub Pages, or simply <code class="language-plaintext highlighter-rouge">deploy</code> if you’re using another host.</p>
+<p>In your GitHub repository settings, enable GitHub Pages and select “GitHub Actions” as the build source. This allows GitHub to automatically run the Actions workflow we’ve configured.</p>
 
-<h3 id="step-2-configure-the-source-repository"><span class="me-2">Step 2: Configure the Source Repository</span><a href="#step-2-configure-the-source-repository" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<h3 id="step-2-configure-cloudflare-pages"><span class="me-2">Step 2: Configure Cloudflare Pages</span><a href="#step-2-configure-cloudflare-pages" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<p>In your source repository (where you write posts), add the deployment repository as a remote:</p>
+<p>Create a Pages project in the Cloudflare console, connecting it to your GitHub repository. Then in the settings, do two things: first, disable the “Build” option and keep only “Deploy”; second, set the deployment directory to <code class="language-plaintext highlighter-rouge">_site</code>. This way, Cloudflare will only read static files from the <code class="language-plaintext highlighter-rouge">_site</code> directory we push, not the entire repository.</p>
 
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>git remote add deploy git@github.com:yourusername/deploy.git
-</pre></td></tr></tbody></table></code></div></div>
+<h3 id="step-3-configure-netlify"><span class="me-2">Step 3: Configure Netlify</span><a href="#step-3-configure-netlify" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<h3 id="step-3-build-and-push"><span class="me-2">Step 3: Build and Push</span><a href="#step-3-build-and-push" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>Similarly, create a site in Netlify and connect it to your GitHub repository. In the site settings, do two things: first, disable the “Build” command so no build scripts run; second, set the publish directory to <code class="language-plaintext highlighter-rouge">_site</code>. This way, Netlify will only serve static files from <code class="language-plaintext highlighter-rouge">_site</code>. There’s also an additional benefit: Netlify’s free plan includes 300 minutes of build time per month. Skipping the build step saves these minutes for other projects.</p>
+
+<h3 id="step-4-build-and-push-locally"><span class="me-2">Step 4: Build and Push Locally</span><a href="#step-4-build-and-push-locally" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
 <p>When you want to deploy, run these commands locally:</p>
 
@@ -1498,7 +1504,7 @@ git commit <span class="nt">-m</span> <span class="s2">"Deploy site"</span>
 git push deploy main
 </pre></td></tr></tbody></table></code></div></div>
 
-<h3 id="step-4-automate-with-a-script"><span class="me-2">Step 4: Automate with a Script</span><a href="#step-4-automate-with-a-script" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<h3 id="step-5-automate-with-a-script"><span class="me-2">Step 5: Automate with a Script</span><a href="#step-5-automate-with-a-script" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
 <p>To make this workflow more convenient, create a deploy script:</p>
 
@@ -1742,25 +1748,9 @@ git push deploy main
 
 <h2 id="配置"><span class="me-2">配置</span><a href="#配置" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>在 <code class="language-plaintext highlighter-rouge">_config.yml</code> 中添加 Twikoo 配置：</p>
+<p>由于 Chirpy 主题原生不支持 Twikoo，官方只支持 Giscus、Disqus 和 Utterances。因此，如果你只想使用 Twikoo，不要填写 <code class="language-plaintext highlighter-rouge">provider</code> 字段，否则主题会尝试渲染不支持的评论系统导致报错。Twikoo 的注入是通过 footer.html 和插件完成的，不需要依赖 Chirpy 的评论配置。</p>
 
-<div class="language-yaml highlighter-rouge"><div class="code-header">
-        <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre><span class="na">comments</span><span class="pi">:</span>
-  <span class="na">provider</span><span class="pi">:</span> <span class="s">twikoo</span> <span class="c1"># 如果你想同时使用两者，也可以用 giscus</span>
-  <span class="na">twikoo</span><span class="pi">:</span>
-    <span class="na">env_id</span><span class="pi">:</span> <span class="s">https://your-twikoo-env.com</span>
-    <span class="na">version</span><span class="pi">:</span> <span class="s">1.6.44</span>
-</pre></td></tr></tbody></table></code></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">provider</code> 字段告诉 Chirpy 在其内置模板中使用哪个评论系统。将其设置为 <code class="language-plaintext highlighter-rouge">twikoo</code> 会让主题渲染 Twikoo 而不是 Giscus。不过，由于我们通过 footer.html 注入 Twikoo，你实际上可以将其保留为 <code class="language-plaintext highlighter-rouge">giscus</code>，这样两个系统都可用。</p>
-
-<p>确保在 <code class="language-plaintext highlighter-rouge">_config.yml</code> 中添加 <code class="language-plaintext highlighter-rouge">plugins_dir</code>：</p>
+<p>只需要确保在 <code class="language-plaintext highlighter-rouge">_config.yml</code> 中添加 <code class="language-plaintext highlighter-rouge">plugins_dir</code>：</p>
 
 <div class="language-yaml highlighter-rouge"><div class="code-header">
         <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
@@ -1770,25 +1760,25 @@ git push deploy main
 
 <p>这确保 Jekyll 从 <code class="language-plaintext highlighter-rouge">_plugins</code> 目录加载插件。没有这一行，Jekyll 可能找不到你的自定义插件，具体取决于它的调用方式。</p>
 
+<p>如果你想同时使用 Giscus 和 Twikoo（像我的博客这样），可以将 <code class="language-plaintext highlighter-rouge">provider</code> 保留为 <code class="language-plaintext highlighter-rouge">giscus</code>，这样主题会渲染 Giscus，而 Twikoo 通过我们的自定义注入显示。</p>
+
 <h2 id="设置本地构建工作流程"><span class="me-2">设置本地构建工作流程</span><a href="#设置本地构建工作流程" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>本地构建后推送的工作流程需要两个仓库：一个用于源代码，一个用于已部署的站点。</p>
+<p>我的做法是这样的：源代码仓库和 <code class="language-plaintext highlighter-rouge">_site</code> 目录在同一个仓库中，源码仓库包含完整的博客源码和构建后的 <code class="language-plaintext highlighter-rouge">_site</code> 文件夹。本地构建完成后，通过 GitHub Actions 将 <code class="language-plaintext highlighter-rouge">_site</code> 目录推送到 GitHub Pages 进行托管。对于 Cloudflare Pages 和 Netlify，则将构建产物推送到它们的 Pages 仓库，并设置它们不进行构建，只负责托管静态文件。</p>
 
-<h3 id="步骤-1创建部署仓库"><span class="me-2">步骤 1：创建部署仓库</span><a href="#步骤-1创建部署仓库" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<h3 id="步骤-1启用-github-pages"><span class="me-2">步骤 1：启用 GitHub Pages</span><a href="#步骤-1启用-github-pages" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<p>在 GitHub 上创建一个新仓库来存放你构建好的站点。这个仓库在构建后只包含 <code class="language-plaintext highlighter-rouge">_site</code> 文件夹的内容。如果你计划使用 GitHub Pages，可以将其命名为 <code class="language-plaintext highlighter-rouge">yourusername/yourusername.github.io</code>，或者如果使用其他主机，简单命名为 <code class="language-plaintext highlighter-rouge">deploy</code>。</p>
+<p>在 GitHub 仓库设置中启用 GitHub Pages，选择 “GitHub Actions” 作为构建源。这样 GitHub 会自动运行我们配置的 Actions 工作流。</p>
 
-<h3 id="步骤-2配置源代码仓库"><span class="me-2">步骤 2：配置源代码仓库</span><a href="#步骤-2配置源代码仓库" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<h3 id="步骤-2配置-cloudflare-pages"><span class="me-2">步骤 2：配置 Cloudflare Pages</span><a href="#步骤-2配置-cloudflare-pages" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<p>在你的源代码仓库（你写文章的地方），将部署仓库添加为远程：</p>
+<p>在 Cloudflare 控制台中创建 Pages 项目，连接到你的 GitHub 仓库。然后在设置中做两件事：第一，关闭”构建”选项，只保留”部署”功能；第二，将部署目录设置为 <code class="language-plaintext highlighter-rouge">_site</code>。这样 Cloudflare 只会读取我们推送的 <code class="language-plaintext highlighter-rouge">_site</code> 目录中的静态文件，而不会推送整个仓库。</p>
 
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>git remote add deploy git@github.com:yourusername/deploy.git
-</pre></td></tr></tbody></table></code></div></div>
+<h3 id="步骤-3配置-netlify"><span class="me-2">步骤 3：配置 Netlify</span><a href="#步骤-3配置-netlify" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<h3 id="步骤-3构建和推送"><span class="me-2">步骤 3：构建和推送</span><a href="#步骤-3构建和推送" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>同样在 Netlify 中创建站点，连接到 GitHub 仓库。在站点设置中做两件事：第一，关闭”构建”命令，不执行任何构建脚本；第二，将发布目录设置为 <code class="language-plaintext highlighter-rouge">_site</code>。这样 Netlify 只会托管 <code class="language-plaintext highlighter-rouge">_site</code> 中的静态文件。同时还有个额外好处：Netlify 免费版每月有 300 分钟的构建时间限制，跳过构建步骤可以节省这些额度，留给其他项目使用。</p>
+
+<h3 id="步骤-4本地构建和推送"><span class="me-2">步骤 4：本地构建和推送</span><a href="#步骤-4本地构建和推送" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
 <p>当你想部署时，在本地运行以下命令：</p>
 
@@ -1816,7 +1806,7 @@ git commit <span class="nt">-m</span> <span class="s2">"Deploy site"</span>
 git push deploy main
 </pre></td></tr></tbody></table></code></div></div>
 
-<h3 id="步骤-4用脚本自动化"><span class="me-2">步骤 4：用脚本自动化</span><a href="#步骤-4用脚本自动化" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<h3 id="步骤-5用脚本自动化"><span class="me-2">步骤 5：用脚本自动化</span><a href="#步骤-5用脚本自动化" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
 <p>为了使部署更方便，创建一个部署脚本：</p>
 
@@ -2170,6 +2160,13 @@ git push deploy main
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/pl-zh/a-view-of-poland-from-a-chinese-perspective/">A View of Poland from a Chinese Perspective</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/en-zh/adding-twikoo-to-chirpy/">Adding Twikoo Comments to Chirpy: A Plugin Development Journey</a>
         </li>
       
@@ -2177,7 +2174,14 @@ git push deploy main
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/en-zh/misans-font-for-better-reading/">MiSans: A Gentler Companion for Long-form Reading</a>
+          <a href="/posts/en-zh/ai-programming-advanced-dotnet-toml-git/">AI Programming Advanced Guide for Non-Programmers: The Ultimate Tool Combo</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/en-zh/ai-programming-for-non-programmers/">AI Programming for Non-Programmers: From Command Line to Natural Language Development</a>
         </li>
       
         
@@ -2185,20 +2189,6 @@ git push deploy main
         
         <li class="text-truncate lh-lg">
           <a href="/posts/en/the-art-of-grift-astrbot-case-study/">The Art of the Grift: How AstrBot Turned Brand Ambiguity Into a Case Study in Broken Trust</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/en-zh/jetbrains-fleet-stop-updates/">JetBrains Fleet in 2025: A Retired IDE for the Future</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/zh/chinese-literati-series/">中国文人系列：从先秦到清末的文学长河</a>
         </li>
       
     </ul>
@@ -2302,164 +2292,6 @@ git push deploy main
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2628,10 +2460,6 @@ git push deploy main
     
     
     
-      
-        
-        
-
   
     
     
@@ -2667,120 +2495,10 @@ git push deploy main
     
     
     
-      
-    
   
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2866,6 +2584,312 @@ git push deploy main
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -2881,6 +2905,53 @@ git push deploy main
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2901,7 +2972,150 @@ git push deploy main
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2943,16 +3157,16 @@ git push deploy main
         <a class="post-tag btn btn-outline-primary" href="/tags/open-source/">open-source</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
-      
-        
         <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">tutorial</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/ai/">ai</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/blog/">blog</a>
@@ -3211,6 +3425,30 @@ git push deploy main
 
   
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -3333,9 +3571,13 @@ git push deploy main
   
 
   
-    <div class="btn btn-outline-primary disabled" aria-label="Newer">
-      <p>-</p>
-    </div>
+    <a
+      href="/posts/en-zh/ai-programming-for-non-programmers/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>AI Programming for Non-Programmers: From Command Line to Natural Language Development</p>
+    </a>
   
 </nav>
 
@@ -3350,7 +3592,7 @@ git push deploy main
     © <span id="year"></span>
     · <em class="fst-normal">Exyone.dev@icloud.com</em>
     <i class="fas fa-heartbeat heartbeat-icon"></i>
-    34 posts · 30 tags
+    37 posts · 39 tags
   </p>
 
   <p class="mb-0">
@@ -3513,164 +3755,6 @@ git push deploy main
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -3839,10 +3923,6 @@ git push deploy main
     
     
     
-      
-        
-        
-
   
     
     
@@ -3878,120 +3958,10 @@ git push deploy main
     
     
     
-      
-    
   
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4077,6 +4047,312 @@ git push deploy main
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -4092,6 +4368,53 @@ git push deploy main
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4112,7 +4435,150 @@ git push deploy main
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4154,16 +4620,16 @@ git push deploy main
         <a class="post-tag btn btn-outline-primary" href="/tags/open-source/">open-source</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
-      
-        
         <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">tutorial</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/ai/">ai</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/design/">design</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/jekyll/">jekyll</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/blog/">blog</a>
