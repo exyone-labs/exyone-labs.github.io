@@ -2,11 +2,12 @@
 title: "A View of Poland from a Chinese Perspective"
 date: 2026-05-09
 categories: [Lifestyle]
-tags: [poland, culture, bilibili, esperanto]
-lang: pl-zh
+tags: [culture, esperanto]
+lang: pl
 ---
 
-**Oświadczenie: Polska część tego artykułu została wygenerowana przez tłumaczenie AI. Autor nie mówi po polsku. Polska część może zawierać wyrażenia, które nie są w pełni naturalne, i proszę polskich czytelników o wyrozumiałość.**
+> *Polska część tego artykułu została wygenerowana przez tłumaczenie AI. Autor nie mówi po polsku. Polska część może zawierać wyrażenia, które nie są w pełni naturalne, i proszę polskich czytelników o wyrozumiałość.*
+{: .prompt-warning }
 
 ## Początek: Polski przyjaciel na Bilibili
 
@@ -58,7 +59,8 @@ W dziedzinie pieczywa polska kultura chleba jest również bardzo rozwinięta. O
 
 ## 从一位波兰博主说起：我眼中的波兰
 
-**声明：本文波兰语部分由AI翻译生成，作者本人不会波兰语。波兰语部分可能存在表达不够地道之处，敬请波兰语读者谅解。**
+> *本文波兰语部分由AI翻译生成，作者本人不会波兰语。波兰语部分可能存在表达不够准确之处，敬请波兰语读者谅解。*
+{: .prompt-warning }
 
 ## 缘起：B站上的一位波兰朋友
 

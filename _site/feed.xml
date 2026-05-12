@@ -4,7 +4,7 @@
   <id>https://exyone.is-a.dev/</id>
   <title>EXYONE@BLOG:~$</title>
   <subtitle>Technical blog about .NET, front-end development, and web technologies. Sharing coding tutorials, software architecture insights, and development best practices.</subtitle>
-  <updated>2026-05-12T12:53:47+08:00</updated>
+  <updated>2026-05-12T13:30:06+08:00</updated>
   <author>
     <name>YelvFishball_17</name>
     <uri>https://exyone.is-a.dev/</uri>
@@ -20,14 +20,38 @@
 
   
   <entry>
+    <title>Hermes Agent: The Gold Standard for Code Quality and Token Efficiency in AI Agent Frameworks</title>
+    <link href="https://exyone.is-a.dev/posts/en-zh/hermes-agent-code-quality-token-efficiency/" rel="alternate" type="text/html" title="Hermes Agent: The Gold Standard for Code Quality and Token Efficiency in AI Agent Frameworks" />
+    <published>2026-05-12T00:00:00+08:00</published>
+  
+    <updated>2026-05-12T00:00:00+08:00</updated>
+  
+    <id>https://exyone.is-a.dev/posts/en-zh/hermes-agent-code-quality-token-efficiency/</id>
+    <content type="text/html" src="https://exyone.is-a.dev/posts/en-zh/hermes-agent-code-quality-token-efficiency/" />
+    <author>
+      <name>YelvFishball_17</name>
+    </author>
+
+  
+    
+    <category term="Technology" />
+    
+  
+
+  <summary>In the crowded landscape of AI agent frameworks, Hermes Agent stands out not for marketing hype, but for something far more fundamental: exceptional code quality and remarkable token efficiency.   The open-source AI agent ecosystem has witnessed explosive growth in 2026. Among dozens of competing frameworks, three have captured the majority of developer attention: Hermes Agent, OpenClaw, and As...</summary>
+
+  </entry>
+
+  
+  <entry>
     <title>A View of Poland from a Chinese Perspective</title>
-    <link href="https://exyone.is-a.dev/posts/pl-zh/a-view-of-poland-from-a-chinese-perspective/" rel="alternate" type="text/html" title="A View of Poland from a Chinese Perspective" />
+    <link href="https://exyone.is-a.dev/posts/pl/a-view-of-poland-from-a-chinese-perspective/" rel="alternate" type="text/html" title="A View of Poland from a Chinese Perspective" />
     <published>2026-05-09T00:00:00+08:00</published>
   
     <updated>2026-05-09T00:00:00+08:00</updated>
   
-    <id>https://exyone.is-a.dev/posts/pl-zh/a-view-of-poland-from-a-chinese-perspective/</id>
-    <content type="text/html" src="https://exyone.is-a.dev/posts/pl-zh/a-view-of-poland-from-a-chinese-perspective/" />
+    <id>https://exyone.is-a.dev/posts/pl/a-view-of-poland-from-a-chinese-perspective/</id>
+    <content type="text/html" src="https://exyone.is-a.dev/posts/pl/a-view-of-poland-from-a-chinese-perspective/" />
     <author>
       <name>YelvFishball_17</name>
     </author>
@@ -38,7 +62,7 @@
     
   
 
-  <summary>Oświadczenie: Polska część tego artykułu została wygenerowana przez tłumaczenie AI. Autor nie mówi po polsku. Polska część może zawierać wyrażenia, które nie są w pełni naturalne, i proszę polskich czytelników o wyrozumiałość.  Początek: Polski przyjaciel na Bilibili  Kilka tygodni temu trafiłem na Bilibili (druga co do wielkości platforma wideo w Chinach) na vlogera z Polski – Tatarskiego (jeg...</summary>
+  <summary>Polska część tego artykułu została wygenerowana przez tłumaczenie AI. Autor nie mówi po polsku. Polska część może zawierać wyrażenia, które nie są w pełni naturalne, i proszę polskich czytelników o wyrozumiałość.   Początek: Polski przyjaciel na Bilibili  Kilka tygodni temu trafiłem na Bilibili (druga co do wielkości platforma wideo w Chinach) na vlogera z Polski – Tatarskiego (jego strona). W ...</summary>
 
   </entry>
 
@@ -72,7 +96,7 @@
     <link href="https://exyone.is-a.dev/posts/en-zh/ai-programming-for-non-programmers/" rel="alternate" type="text/html" title="AI Programming for Non-Programmers: From Command Line to Natural Language Development" />
     <published>2026-05-04T00:00:00+08:00</published>
   
-    <updated>2026-05-04T00:00:00+08:00</updated>
+    <updated>2026-05-12T12:54:10+08:00</updated>
   
     <id>https://exyone.is-a.dev/posts/en-zh/ai-programming-for-non-programmers/</id>
     <content type="text/html" src="https://exyone.is-a.dev/posts/en-zh/ai-programming-for-non-programmers/" />
@@ -111,30 +135,6 @@
   
 
   <summary>Chirpy is an excellent theme, but it doesn’t natively support Twikoo comments. I wanted to add Twikoo alongside the existing Giscus system without modifying the theme’s source code. The solution evolved through multiple iterations: I started with a Jekyll plugin, then tried footer.html template injection, and finally settled on a local-build-then-push workflow to ensure consistency across all d...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Jekyll and Chirpy: A Journey of Trial and Error</title>
-    <link href="https://exyone.is-a.dev/posts/en-zh/about-jekyll-and-chirpy/" rel="alternate" type="text/html" title="Jekyll and Chirpy: A Journey of Trial and Error" />
-    <published>2026-04-25T00:00:00+08:00</published>
-  
-    <updated>2026-04-25T00:00:00+08:00</updated>
-  
-    <id>https://exyone.is-a.dev/posts/en-zh/about-jekyll-and-chirpy/</id>
-    <content type="text/html" src="https://exyone.is-a.dev/posts/en-zh/about-jekyll-and-chirpy/" />
-    <author>
-      <name>YelvFishball_17</name>
-    </author>
-
-  
-    
-    <category term="Technology" />
-    
-  
-
-  <summary>In Why choose Jekyll, and why choose Chirpy, I explained my reasons for choosing Jekyll and Chirpy. But truth be told, that article was written this year, not three years ago. As I mentioned in my previous post, I stumbled upon some “diaries” from three years ago in my drawer and wanted to migrate them to this blog.  Those diary entries were quite brief, though—just a sentence or two each. To a...</summary>
 
   </entry>
 
