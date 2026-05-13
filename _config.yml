@@ -60,6 +60,7 @@ webmaster_verifications:
 # Include files in build
 include:
   - .domains
+  - tools
 
 # Web Analytics Settings
 analytics:

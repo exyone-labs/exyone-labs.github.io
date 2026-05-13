@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Formatter - Tools</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+</head>
+<body>
+  <div class="container">
+    <a href="{{ '/' | relative_url }}" class="back-link">← Back to Home</a>
+    
+    <div class="header">
+      <h1>JSON Formatter</h1>
+      <p>Format, validate, and beautify your JSON data</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Input JSON</div>
+      <textarea id="input" placeholder="Paste your JSON here..."></textarea>
+      
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="formatJSON()">Format</button>
+        <button class="btn btn-secondary" onclick="minifyJSON()">Minify</button>
+        <button class="btn btn-secondary" onclick="validateJSON()">Validate</button>
+        <button class="btn btn-secondary" onclick="copyOutput()">Copy Output</button>
+        <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Output</div>
+      <div id="output" class="output"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied to clipboard!</div>
+
+  <script>
+    function formatJSON() {
+      const input = document.getElementById('input').value.trim();
+      const output = document.getElementById('output');
+      
+      if (!input) {
+        output.className = 'output error';
+        output.textContent = 'Please enter JSON data';
+        return;
+      }
+      
+      try {
+        const parsed = JSON.parse(input);
+        const formatted = JSON.stringify(parsed, null, 2);
+        output.className = 'output success';
+        output.textContent = formatted;
+      } catch (e) {
+        output.className = 'output error';
+        output.textContent = 'Invalid JSON: ' + e.message;
+      }
+    }
+
+    function minifyJSON() {
+      const input = document.getElementById('input').value.trim();
+      const output = document.getElementById('output');
+      
+      if (!input) {
+        output.className = 'output error';
+        output.textContent = 'Please enter JSON data';
+        return;
+      }
+      
+      try {
+        const parsed = JSON.parse(input);
+        const minified = JSON.stringify(parsed);
+        output.className = 'output success';
+        output.textContent = minified;
+      } catch (e) {
+        output.className = 'output error';
+        output.textContent = 'Invalid JSON: ' + e.message;
+      }
+    }
+
+    function validateJSON() {
+      const input = document.getElementById('input').value.trim();
+      const output = document.getElementById('output');
+      
+      if (!input) {
+        output.className = 'output error';
+        output.textContent = 'Please enter JSON data';
+        return;
+      }
+      
+      try {
+        JSON.parse(input);
+        output.className = 'output success';
+        output.textContent = '✓ Valid JSON';
+      } catch (e) {
+        output.className = 'output error';
+        output.textContent = '✗ Invalid JSON: ' + e.message;
+      }
+    }
+
+    function copyOutput() {
+      const output = document.getElementById('output').textContent;
+      if (!output) return;
+      
+      navigator.clipboard.writeText(output).then(() => {
+        showToast('Copied to clipboard!');
+      });
+    }
+
+    function clearAll() {
+      document.getElementById('input').value = '';
+      document.getElementById('output').textContent = '';
+      document.getElementById('output').className = 'output';
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    document.getElementById('input').addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+        this.value = this.value.substring(0, start) + '  ' + this.value.substring(end);
+        this.selectionStart = this.selectionEnd = start + 2;
+      }
+    });
+  </script>
+</body>
+</html>

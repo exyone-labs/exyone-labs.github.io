@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Converter - Tools</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+</head>
+<body>
+  <div class="container">
+    <a href="{{ '/' | relative_url }}" class="back-link">← Back to Home</a>
+    
+    <div class="header">
+      <h1>Color Converter</h1>
+      <p>Convert colors between HEX, RGB, HSL formats</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Color Picker</div>
+      <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+        <input type="color" id="colorPicker" value="#e94560" style="width: 80px; height: 50px; border: none; cursor: pointer; border-radius: 8px;">
+        <input type="text" id="hexInput" placeholder="#e94560" value="#e94560" style="flex: 1;">
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="convertFromHex()">Convert</button>
+        <button class="btn btn-secondary" onclick="copyAllValues()">Copy All</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Preview</div>
+      <div class="color-preview" id="colorPreview" style="background-color: #e94560;"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Color Values</div>
+      <div class="color-values">
+        <div class="color-value-item">
+          <label>HEX</label>
+          <input type="text" id="hexValue" readonly>
+          <button onclick="copyValue('hexValue')">Copy</button>
+        </div>
+        <div class="color-value-item">
+          <label>RGB</label>
+          <input type="text" id="rgbValue" readonly>
+          <button onclick="copyValue('rgbValue')">Copy</button>
+        </div>
+        <div class="color-value-item">
+          <label>HSL</label>
+          <input type="text" id="hslValue" readonly>
+          <button onclick="copyValue('hslValue')">Copy</button>
+        </div>
+        <div class="color-value-item">
+          <label>RGBA</label>
+          <input type="text" id="rgbaValue" readonly>
+          <button onclick="copyValue('rgbaValue')">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Manual Input</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;">
+        <div>
+          <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">R (0-255)</label>
+          <input type="number" id="rInput" min="0" max="255" value="233">
+        </div>
+        <div>
+          <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">G (0-255)</label>
+          <input type="number" id="gInput" min="0" max="255" value="69">
+        </div>
+        <div>
+          <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">B (0-255)</label>
+          <input type="number" id="bInput" min="0" max="255" value="96">
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="convertFromRGB()">Convert from RGB</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied to clipboard!</div>
+
+  <script>
+    function hexToRgb(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+
+      if (max === min) {
+        h = s = 0;
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+          case g: h = ((b - r) / d + 2) / 6; break;
+          case b: h = ((r - g) / d + 4) / 6; break;
+        }
+      }
+
+      return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        l: Math.round(l * 100)
+      };
+    }
+
+    function rgbToHex(r, g, b) {
+      return '#' + [r, g, b].map(x => {
+        const hex = x.toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+      }).join('');
+    }
+
+    function updateColorValues(hex) {
+      const rgb = hexToRgb(hex);
+      if (!rgb) return;
+
+      const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+
+      document.getElementById('hexValue').value = hex.toUpperCase();
+      document.getElementById('rgbValue').value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+      document.getElementById('hslValue').value = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+      document.getElementById('rgbaValue').value = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1)`;
+      
+      document.getElementById('colorPreview').style.backgroundColor = hex;
+      document.getElementById('colorPicker').value = hex;
+      document.getElementById('hexInput').value = hex.toUpperCase();
+      
+      document.getElementById('rInput').value = rgb.r;
+      document.getElementById('gInput').value = rgb.g;
+      document.getElementById('bInput').value = rgb.b;
+    }
+
+    function convertFromHex() {
+      let hex = document.getElementById('hexInput').value.trim();
+      if (!hex.startsWith('#')) hex = '#' + hex;
+      
+      if (!/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+        showToast('Invalid HEX color');
+        return;
+      }
+      
+      updateColorValues(hex);
+    }
+
+    function convertFromRGB() {
+      const r = parseInt(document.getElementById('rInput').value) || 0;
+      const g = parseInt(document.getElementById('gInput').value) || 0;
+      const b = parseInt(document.getElementById('bInput').value) || 0;
+      
+      const hex = rgbToHex(
+        Math.min(255, Math.max(0, r)),
+        Math.min(255, Math.max(0, g)),
+        Math.min(255, Math.max(0, b))
+      );
+      
+      updateColorValues(hex);
+    }
+
+    function copyValue(id) {
+      const value = document.getElementById(id).value;
+      navigator.clipboard.writeText(value).then(() => {
+        showToast('Copied to clipboard!');
+      });
+    }
+
+    function copyAllValues() {
+      const values = [
+        `HEX: ${document.getElementById('hexValue').value}`,
+        `RGB: ${document.getElementById('rgbValue').value}`,
+        `HSL: ${document.getElementById('hslValue').value}`,
+        `RGBA: ${document.getElementById('rgbaValue').value}`
+      ].join('\n');
+      
+      navigator.clipboard.writeText(values).then(() => {
+        showToast('All values copied!');
+      });
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    document.getElementById('colorPicker').addEventListener('input', function(e) {
+      updateColorValues(e.target.value);
+    });
+
+    document.getElementById('hexInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        convertFromHex();
+      }
+    });
+
+    updateColorValues('#e94560');
+  </script>
+</body>
+</html>

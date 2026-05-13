@@ -4,7 +4,7 @@
   <id>https://exyone.is-a.dev/</id>
   <title>EXYONE@BLOG:~$</title>
   <subtitle>Technical blog about .NET, front-end development, and web technologies. Sharing coding tutorials, software architecture insights, and development best practices.</subtitle>
-  <updated>2026-05-12T13:30:06+08:00</updated>
+  <updated>2026-05-13T22:13:50+08:00</updated>
   <author>
     <name>YelvFishball_17</name>
     <uri>https://exyone.is-a.dev/</uri>
@@ -21,13 +21,13 @@
   
   <entry>
     <title>Hermes Agent: The Gold Standard for Code Quality and Token Efficiency in AI Agent Frameworks</title>
-    <link href="https://exyone.is-a.dev/posts/en-zh/hermes-agent-code-quality-token-efficiency/" rel="alternate" type="text/html" title="Hermes Agent: The Gold Standard for Code Quality and Token Efficiency in AI Agent Frameworks" />
+    <link href="https://exyone.is-a.dev/posts/en/hermes-agent-code-quality-token-efficiency/" rel="alternate" type="text/html" title="Hermes Agent: The Gold Standard for Code Quality and Token Efficiency in AI Agent Frameworks" />
     <published>2026-05-12T00:00:00+08:00</published>
   
     <updated>2026-05-12T00:00:00+08:00</updated>
   
-    <id>https://exyone.is-a.dev/posts/en-zh/hermes-agent-code-quality-token-efficiency/</id>
-    <content type="text/html" src="https://exyone.is-a.dev/posts/en-zh/hermes-agent-code-quality-token-efficiency/" />
+    <id>https://exyone.is-a.dev/posts/en/hermes-agent-code-quality-token-efficiency/</id>
+    <content type="text/html" src="https://exyone.is-a.dev/posts/en/hermes-agent-code-quality-token-efficiency/" />
     <author>
       <name>YelvFishball_17</name>
     </author>
@@ -48,7 +48,7 @@
     <link href="https://exyone.is-a.dev/posts/pl/a-view-of-poland-from-a-chinese-perspective/" rel="alternate" type="text/html" title="A View of Poland from a Chinese Perspective" />
     <published>2026-05-09T00:00:00+08:00</published>
   
-    <updated>2026-05-09T00:00:00+08:00</updated>
+    <updated>2026-05-12T13:30:22+08:00</updated>
   
     <id>https://exyone.is-a.dev/posts/pl/a-view-of-poland-from-a-chinese-perspective/</id>
     <content type="text/html" src="https://exyone.is-a.dev/posts/pl/a-view-of-poland-from-a-chinese-perspective/" />
