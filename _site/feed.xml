@@ -4,16 +4,16 @@
   <id>https://exyone.is-a.dev/</id>
   <title>EXYONE@BLOG:~$</title>
   <subtitle>Technical blog about .NET, front-end development, and web technologies. Sharing coding tutorials, software architecture insights, and development best practices.</subtitle>
-  <updated>2026-05-13T22:13:50+08:00</updated>
+  <updated>2026-05-14T13:34:28+08:00</updated>
   <author>
-    <name>YelvFishball_17</name>
+    <name>Exyone.dev</name>
     <uri>https://exyone.is-a.dev/</uri>
   </author>
   <link rel="self" type="application/atom+xml" href="https://exyone.is-a.dev/feed.xml"/>
   <link rel="alternate" type="text/html" hreflang="en"
     href="https://exyone.is-a.dev/"/>
   <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
-  <rights> © 2026 YelvFishball_17 </rights>
+  <rights> © 2026 Exyone.dev </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
@@ -24,12 +24,12 @@
     <link href="https://exyone.is-a.dev/posts/en/hermes-agent-code-quality-token-efficiency/" rel="alternate" type="text/html" title="Hermes Agent: The Gold Standard for Code Quality and Token Efficiency in AI Agent Frameworks" />
     <published>2026-05-12T00:00:00+08:00</published>
   
-    <updated>2026-05-12T00:00:00+08:00</updated>
+    <updated>2026-05-13T22:14:16+08:00</updated>
   
     <id>https://exyone.is-a.dev/posts/en/hermes-agent-code-quality-token-efficiency/</id>
     <content type="text/html" src="https://exyone.is-a.dev/posts/en/hermes-agent-code-quality-token-efficiency/" />
     <author>
-      <name>YelvFishball_17</name>
+      <name>Exyone.dev</name>
     </author>
 
   
@@ -38,7 +38,7 @@
     
   
 
-  <summary>In the crowded landscape of AI agent frameworks, Hermes Agent stands out not for marketing hype, but for something far more fundamental: exceptional code quality and remarkable token efficiency.   The open-source AI agent ecosystem has witnessed explosive growth in 2026. Among dozens of competing frameworks, three have captured the majority of developer attention: Hermes Agent, OpenClaw, and As...</summary>
+  <summary>In the crowded landscape of AI agent frameworks, Hermes Agent stands out not for marketing hype, but for something far more fundamental: exceptional code quality and remarkable token efficiency.   This expanded analysis draws from extensive research across GitHub repositories, community discussions, benchmarks, official documentation, and real-user comparisons as of mid-2026. We will delve deep...</summary>
 
   </entry>
 
@@ -53,7 +53,7 @@
     <id>https://exyone.is-a.dev/posts/pl/a-view-of-poland-from-a-chinese-perspective/</id>
     <content type="text/html" src="https://exyone.is-a.dev/posts/pl/a-view-of-poland-from-a-chinese-perspective/" />
     <author>
-      <name>YelvFishball_17</name>
+      <name>Exyone.dev</name>
     </author>
 
   
@@ -77,7 +77,7 @@
     <id>https://exyone.is-a.dev/posts/en-zh/ai-programming-advanced-dotnet-toml-git/</id>
     <content type="text/html" src="https://exyone.is-a.dev/posts/en-zh/ai-programming-advanced-dotnet-toml-git/" />
     <author>
-      <name>YelvFishball_17</name>
+      <name>Exyone.dev</name>
     </author>
 
   
@@ -101,7 +101,7 @@
     <id>https://exyone.is-a.dev/posts/en-zh/ai-programming-for-non-programmers/</id>
     <content type="text/html" src="https://exyone.is-a.dev/posts/en-zh/ai-programming-for-non-programmers/" />
     <author>
-      <name>YelvFishball_17</name>
+      <name>Exyone.dev</name>
     </author>
 
   
@@ -125,7 +125,7 @@
     <id>https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/</id>
     <content type="text/html" src="https://exyone.is-a.dev/posts/en-zh/adding-twikoo-to-chirpy/" />
     <author>
-      <name>YelvFishball_17</name>
+      <name>Exyone.dev</name>
     </author>
 
   

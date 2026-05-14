@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unicode 转换 - Developer Tools</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+</head>
+<body>
+  <div class="container">
+    <a href="../" class="back-link">← 返回工具箱</a>
+    
+    <div class="header">
+      <h1>Unicode 转换</h1>
+      <p>文本与 Unicode 编码互相转换</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">输入文本</div>
+      <textarea id="input" placeholder="输入文本或 Unicode 编码..."></textarea>
+      
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="textToUnicode()">文本 → Unicode</button>
+        <button class="btn btn-primary" onclick="unicodeToText()">Unicode → 文本</button>
+        <button class="btn btn-secondary" onclick="textToCodePoints()">显示码点</button>
+        <button class="btn btn-secondary" onclick="copyOutput()">复制结果</button>
+        <button class="btn btn-secondary" onclick="clearAll()">清空</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">输出</div>
+      <div id="output" class="output" style="font-family: monospace; white-space: pre-wrap; word-break: break-all;"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">格式说明</div>
+      <div style="color: var(--text-secondary); line-height: 1.8; font-size: 0.9rem;">
+        <p><strong>\uXXXX</strong> - JavaScript 风格 Unicode 转义</p>
+        <p><strong>&amp;#XXXX;</strong> - HTML 实体编码</p>
+        <p><strong>U+XXXX</strong> - Unicode 码点表示</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">字符信息</div>
+      <div id="charInfo" style="font-family: monospace;"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">已复制到剪贴板！</div>
+
+  <script>
+    function textToUnicode() {
+      const input = document.getElementById('input').value;
+      const output = document.getElementById('output');
+      
+      if (!input) {
+        output.className = 'output error';
+        output.textContent = '请输入文本';
+        return;
+      }
+      
+      const unicode = input.split('').map(char => {
+        const code = char.codePointAt(0);
+        if (code > 0xFFFF) {
+          return '\\u' + ((code >> 10) + 0xD7C0).toString(16).padStart(4, '0') + 
+                 '\\u' + ((code & 0x3FF) + 0xDC00).toString(16).padStart(4, '0');
+        }
+        return '\\u' + code.toString(16).padStart(4, '0');
+      }).join('');
+      
+      output.className = 'output success';
+      output.textContent = unicode;
+      updateCharInfo(input);
+    }
+
+    function unicodeToText() {
+      const input = document.getElementById('input').value.trim();
+      const output = document.getElementById('output');
+      
+      if (!input) {
+        output.className = 'output error';
+        output.textContent = '请输入 Unicode 编码';
+        return;
+      }
+      
+      try {
+        let text = input;
+        
+        text = text.replace(/\\u([0-9a-fA-F]{4})/g, (match, hex) => {
+          return String.fromCharCode(parseInt(hex, 16));
+        });
+        
+        text = text.replace(/&#([0-9]+);/g, (match, dec) => {
+          return String.fromCodePoint(parseInt(dec, 10));
+        });
+        
+        text = text.replace(/&#x([0-9a-fA-F]+);/g, (match, hex) => {
+          return String.fromCodePoint(parseInt(hex, 16));
+        });
+        
+        text = text.replace(/U\+([0-9a-fA-F]+)/g, (match, hex) => {
+          return String.fromCodePoint(parseInt(hex, 16));
+        });
+        
+        output.className = 'output success';
+        output.textContent = text;
+        updateCharInfo(text);
+      } catch (e) {
+        output.className = 'output error';
+        output.textContent = '转换错误: ' + e.message;
+      }
+    }
+
+    function textToCodePoints() {
+      const input = document.getElementById('input').value;
+      const output = document.getElementById('output');
+      
+      if (!input) {
+        output.className = 'output error';
+        output.textContent = '请输入文本';
+        return;
+      }
+      
+      const codePoints = [...input].map(char => {
+        const code = char.codePointAt(0);
+        return `U+${code.toString(16).toUpperCase().padStart(4, '0')} (${char})`;
+      });
+      
+      output.className = 'output success';
+      output.textContent = codePoints.join('\n');
+      updateCharInfo(input);
+    }
+
+    function updateCharInfo(text) {
+      const info = document.getElementById('charInfo');
+      if (!text) {
+        info.innerHTML = '';
+        return;
+      }
+      
+      const chars = [...text];
+      let html = '<table style="width: 100%; border-collapse: collapse;">';
+      html += '<tr><th style="text-align: left; padding: 0.5rem;">字符</th><th style="text-align: left; padding: 0.5rem;">码点</th><th style="text-align: left; padding: 0.5rem;">名称</th></tr>';
+      
+      chars.slice(0, 20).forEach(char => {
+        const code = char.codePointAt(0);
+        html += `<tr>
+          <td style="padding: 0.5rem; border-top: 1px solid var(--border-color);">${char}</td>
+          <td style="padding: 0.5rem; border-top: 1px solid var(--border-color);">U+${code.toString(16).toUpperCase().padStart(4, '0')}</td>
+          <td style="padding: 0.5rem; border-top: 1px solid var(--border-color); color: var(--text-secondary);">码点: ${code}</td>
+        </tr>`;
+      });
+      
+      if (chars.length > 20) {
+        html += `<tr><td colspan="3" style="padding: 0.5rem; color: var(--text-secondary);">... 还有 ${chars.length - 20} 个字符</td></tr>`;
+      }
+      
+      html += '</table>';
+      info.innerHTML = html;
+    }
+
+    function copyOutput() {
+      const output = document.getElementById('output').textContent;
+      if (!output || output.startsWith('请')) return;
+      
+      navigator.clipboard.writeText(output).then(() => {
+        showToast('已复制到剪贴板！');
+      });
+    }
+
+    function clearAll() {
+      document.getElementById('input').value = '';
+      document.getElementById('output').textContent = '';
+      document.getElementById('output').className = 'output';
+      document.getElementById('charInfo').innerHTML = '';
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

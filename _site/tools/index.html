@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Tools - 开发者工具箱</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+  <style>
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .tool-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+      border-color: var(--accent-color);
+    }
+    
+    .tool-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent-color), #ff6b6b);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .tool-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .tool-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    
+    .category-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-color);
+    }
+    
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="{{ '/' | relative_url }}" class="back-link">← 返回主页</a>
+    
+    <div class="header">
+      <h1>🛠️ Developer Tools</h1>
+      <p>纯前端开发者工具箱 - 无需后端，数据安全，离线可用</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number" id="toolCount">14</div>
+        <div class="stat-label">工具数量</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">纯前端</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0</div>
+        <div class="stat-label">数据上传</div>
+      </div>
+    </div>
+
+    <div class="category-title">📝 编码转换</div>
+    <div class="tools-grid">
+      <a href="base64/" class="tool-card">
+        <div class="tool-icon">🔐</div>
+        <div class="tool-name">Base64 编解码</div>
+        <div class="tool-desc">文本与 Base64 格式互相转换</div>
+      </a>
+      
+      <a href="url-encode/" class="tool-card">
+        <div class="tool-icon">🔗</div>
+        <div class="tool-name">URL 编解码</div>
+        <div class="tool-desc">URL 编码与解码转换工具</div>
+      </a>
+      
+      <a href="unicode/" class="tool-card">
+        <div class="tool-icon">🌏</div>
+        <div class="tool-name">Unicode 转换</div>
+        <div class="tool-desc">文本与 Unicode 编码互转</div>
+      </a>
+    </div>
+
+    <div class="category-title">🎨 格式化工具</div>
+    <div class="tools-grid">
+      <a href="json-formatter/" class="tool-card">
+        <div class="tool-icon">📋</div>
+        <div class="tool-name">JSON 格式化</div>
+        <div class="tool-desc">JSON 格式化、压缩、验证</div>
+      </a>
+      
+      <a href="markdown/" class="tool-card">
+        <div class="tool-icon">📖</div>
+        <div class="tool-name">Markdown 预览</div>
+        <div class="tool-desc">实时 Markdown 编辑与预览</div>
+      </a>
+    </div>
+
+    <div class="category-title">🔐 加密哈希</div>
+    <div class="tools-grid">
+      <a href="md5/" class="tool-card">
+        <div class="tool-icon">🔑</div>
+        <div class="tool-name">MD5 哈希</div>
+        <div class="tool-desc">生成文本的 MD5 哈希值</div>
+      </a>
+      
+      <a href="hash/" class="tool-card">
+        <div class="tool-icon">🔒</div>
+        <div class="tool-name">多算法哈希</div>
+        <div class="tool-desc">SHA-1/SHA-256/SHA-512 哈希</div>
+      </a>
+      
+      <a href="password/" class="tool-card">
+        <div class="tool-icon">🎲</div>
+        <div class="tool-name">密码生成器</div>
+        <div class="tool-desc">生成安全的随机密码</div>
+      </a>
+    </div>
+
+    <div class="category-title">⏰ 时间日期</div>
+    <div class="tools-grid">
+      <a href="timestamp/" class="tool-card">
+        <div class="tool-icon">⏱️</div>
+        <div class="tool-name">时间戳转换</div>
+        <div class="tool-desc">时间戳与日期格式互转</div>
+      </a>
+    </div>
+
+    <div class="category-title">🔍 文本处理</div>
+    <div class="tools-grid">
+      <a href="regex/" class="tool-card">
+        <div class="tool-icon">🔎</div>
+        <div class="tool-name">正则测试</div>
+        <div class="tool-desc">在线正则表达式测试工具</div>
+      </a>
+      
+      <a href="diff/" class="tool-card">
+        <div class="tool-icon">📄</div>
+        <div class="tool-name">文本对比</div>
+        <div class="tool-desc">两段文本差异对比</div>
+      </a>
+      
+      <a href="counter/" class="tool-card">
+        <div class="tool-icon">📊</div>
+        <div class="tool-name">字数统计</div>
+        <div class="tool-desc">统计字符、单词、行数</div>
+      </a>
+    </div>
+
+    <div class="category-title">🎨 图像颜色</div>
+    <div class="tools-grid">
+      <a href="color-converter/" class="tool-card">
+        <div class="tool-icon">🎨</div>
+        <div class="tool-name">颜色转换</div>
+        <div class="tool-desc">HEX/RGB/HSL 颜色转换</div>
+      </a>
+      
+      <a href="image-base64/" class="tool-card">
+        <div class="tool-icon">🖼️</div>
+        <div class="tool-name">图片 Base64</div>
+        <div class="tool-desc">图片与 Base64 互转</div>
+      </a>
+      
+      <a href="qrcode/" class="tool-card">
+        <div class="tool-icon">📱</div>
+        <div class="tool-name">二维码生成</div>
+        <div class="tool-desc">生成自定义二维码</div>
+      </a>
+    </div>
+
+    <div class="category-title">🆔 生成器</div>
+    <div class="tools-grid">
+      <a href="uuid/" class="tool-card">
+        <div class="tool-icon">🆔</div>
+        <div class="tool-name">UUID 生成器</div>
+        <div class="tool-desc">生成 UUID/GUID</div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.tool-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-4px)';
+      });
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+  </script>
+</body>
+</html>

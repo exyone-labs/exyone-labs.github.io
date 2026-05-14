@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文本对比 - Developer Tools</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+  <style>
+    .diff-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 768px) {
+      .diff-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    .diff-panel {
+      display: flex;
+      flex-direction: column;
+    }
+    .diff-panel label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+    .diff-panel textarea {
+      flex: 1;
+      min-height: 200px;
+    }
+    .diff-result {
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-break: break-all;
+      line-height: 1.6;
+    }
+    .diff-add {
+      background: rgba(76, 175, 80, 0.2);
+      color: #4caf50;
+    }
+    .diff-remove {
+      background: rgba(244, 67, 54, 0.2);
+      color: #f44336;
+      text-decoration: line-through;
+    }
+    .diff-line {
+      padding: 2px 4px;
+      margin: 1px 0;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../" class="back-link">← 返回工具箱</a>
+    
+    <div class="header">
+      <h1>文本对比</h1>
+      <p>比较两段文本的差异</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">输入文本</div>
+      <div class="diff-container">
+        <div class="diff-panel">
+          <label>原始文本</label>
+          <textarea id="text1" placeholder="输入原始文本..."></textarea>
+        </div>
+        <div class="diff-panel">
+          <label>修改后文本</label>
+          <textarea id="text2" placeholder="输入修改后文本..."></textarea>
+        </div>
+      </div>
+      
+      <div class="btn-group" style="margin-top: 1rem;">
+        <button class="btn btn-primary" onclick="compareText()">对比</button>
+        <button class="btn btn-secondary" onclick="swapText()">交换文本</button>
+        <button class="btn btn-secondary" onclick="clearAll()">清空</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">对比结果</div>
+      <div id="stats" style="margin-bottom: 1rem; display: none;">
+        <span style="margin-right: 1rem;">新增: <strong id="addCount" style="color: #4caf50;">0</strong></span>
+        <span style="margin-right: 1rem;">删除: <strong id="removeCount" style="color: #f44336;">0</strong></span>
+        <span>相同: <strong id="sameCount">0</strong></span>
+      </div>
+      <div id="result" class="output diff-result" style="min-height: 100px;"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">已复制到剪贴板！</div>
+
+  <script>
+    function diff(oldText, newText) {
+      const oldLines = oldText.split('\n');
+      const newLines = newText.split('\n');
+      const result = [];
+      
+      const lcs = longestCommonSubsequence(oldLines, newLines);
+      
+      let oldIdx = 0, newIdx = 0, lcsIdx = 0;
+      
+      while (oldIdx < oldLines.length || newIdx < newLines.length) {
+        if (lcsIdx < lcs.length && oldIdx < oldLines.length && oldLines[oldIdx] === lcs[lcsIdx] && newIdx < newLines.length && newLines[newIdx] === lcs[lcsIdx]) {
+          result.push({ type: 'same', text: oldLines[oldIdx] });
+          oldIdx++;
+          newIdx++;
+          lcsIdx++;
+        } else if (oldIdx < oldLines.length && (lcsIdx >= lcs.length || oldLines[oldIdx] !== lcs[lcsIdx])) {
+          result.push({ type: 'remove', text: oldLines[oldIdx] });
+          oldIdx++;
+        } else if (newIdx < newLines.length) {
+          result.push({ type: 'add', text: newLines[newIdx] });
+          newIdx++;
+        }
+      }
+      
+      return result;
+    }
+
+    function longestCommonSubsequence(arr1, arr2) {
+      const m = arr1.length, n = arr2.length;
+      const dp = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+      
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          if (arr1[i - 1] === arr2[j - 1]) {
+            dp[i][j] = dp[i - 1][j - 1] + 1;
+          } else {
+            dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+          }
+        }
+      }
+      
+      const lcs = [];
+      let i = m, j = n;
+      while (i > 0 && j > 0) {
+        if (arr1[i - 1] === arr2[j - 1]) {
+          lcs.unshift(arr1[i - 1]);
+          i--;
+          j--;
+        } else if (dp[i - 1][j] > dp[i][j - 1]) {
+          i--;
+        } else {
+          j--;
+        }
+      }
+      
+      return lcs;
+    }
+
+    function compareText() {
+      const text1 = document.getElementById('text1').value;
+      const text2 = document.getElementById('text2').value;
+      const result = document.getElementById('result');
+      const stats = document.getElementById('stats');
+      
+      if (!text1 && !text2) {
+        result.className = 'output error';
+        result.textContent = '请输入要对比的文本';
+        stats.style.display = 'none';
+        return;
+      }
+      
+      const diffResult = diff(text1, text2);
+      
+      let addCount = 0, removeCount = 0, sameCount = 0;
+      let html = '';
+      
+      diffResult.forEach(item => {
+        const escapedText = escapeHtml(item.text || '(空行)');
+        if (item.type === 'add') {
+          html += `<div class="diff-line diff-add">+ ${escapedText}</div>`;
+          addCount++;
+        } else if (item.type === 'remove') {
+          html += `<div class="diff-line diff-remove">- ${escapedText}</div>`;
+          removeCount++;
+        } else {
+          html += `<div class="diff-line">  ${escapedText}</div>`;
+          sameCount++;
+        }
+      });
+      
+      result.className = 'output success';
+      result.innerHTML = html || '两段文本完全相同';
+      
+      document.getElementById('addCount').textContent = addCount;
+      document.getElementById('removeCount').textContent = removeCount;
+      document.getElementById('sameCount').textContent = sameCount;
+      stats.style.display = 'block';
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function swapText() {
+      const text1 = document.getElementById('text1');
+      const text2 = document.getElementById('text2');
+      const temp = text1.value;
+      text1.value = text2.value;
+      text2.value = temp;
+    }
+
+    function clearAll() {
+      document.getElementById('text1').value = '';
+      document.getElementById('text2').value = '';
+      document.getElementById('result').textContent = '';
+      document.getElementById('result').className = 'output';
+      document.getElementById('stats').style.display = 'none';
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

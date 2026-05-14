@@ -34,7 +34,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: YelvFishball_17
+  name: Exyone.dev
   email: exyone.dev@icloud.com # change to your email address
   fediverse_handle: # fill in your fediverse handle. E.g. "@username@domain.com"
   links:
@@ -61,6 +61,7 @@ webmaster_verifications:
 include:
   - .domains
   - tools
+  - fiction
 
 # Web Analytics Settings
 analytics:

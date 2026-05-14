@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>正则表达式测试 - Developer Tools</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+  <style>
+    .regex-match {
+      background: linear-gradient(135deg, #ffeb3b33, #ff980033);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+    .match-info {
+      background: var(--bg-secondary);
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .match-groups {
+      margin-top: 0.5rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--accent-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../" class="back-link">← 返回工具箱</a>
+    
+    <div class="header">
+      <h1>正则表达式测试</h1>
+      <p>在线测试和调试正则表达式</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">正则表达式</div>
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+        <span style="padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px;">/</span>
+        <input type="text" id="pattern" placeholder="输入正则表达式" style="flex: 1; min-width: 200px; font-family: monospace;">
+        <span style="padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px;">/</span>
+        <input type="text" id="flags" placeholder="标志" value="g" style="width: 80px; font-family: monospace;">
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <label style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer;">
+          <input type="checkbox" id="flagG" checked onchange="updateFlags()"> g (全局)
+        </label>
+        <label style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer;">
+          <input type="checkbox" id="flagI" onchange="updateFlags()"> i (忽略大小写)
+        </label>
+        <label style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer;">
+          <input type="checkbox" id="flagM" onchange="updateFlags()"> m (多行)
+        </label>
+        <label style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer;">
+          <input type="checkbox" id="flagS" onchange="updateFlags()"> s (点匹配换行)
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">测试文本</div>
+      <textarea id="testText" placeholder="输入要测试的文本..." style="min-height: 150px;"></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-title">匹配结果</div>
+      <div id="result" class="output" style="min-height: 100px;"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">常用正则</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <button class="btn btn-secondary" onclick="usePreset('email')">邮箱</button>
+        <button class="btn btn-secondary" onclick="usePreset('phone')">手机号</button>
+        <button class="btn btn-secondary" onclick="usePreset('url')">URL</button>
+        <button class="btn btn-secondary" onclick="usePreset('ip')">IP地址</button>
+        <button class="btn btn-secondary" onclick="usePreset('date')">日期</button>
+        <button class="btn btn-secondary" onclick="usePreset('number')">数字</button>
+        <button class="btn btn-secondary" onclick="usePreset('chinese')">中文</button>
+        <button class="btn btn-secondary" onclick="usePreset('idcard')">身份证</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">已复制到剪贴板！</div>
+
+  <script>
+    const presets = {
+      email: { pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}', flags: 'gi' },
+      phone: { pattern: '1[3-9]\\d{9}', flags: 'g' },
+      url: { pattern: 'https?:\\/\\/[\\w\\-]+(\\.[\\w\\-]+)+[\\/\\?#]?.*', flags: 'gi' },
+      ip: { pattern: '\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b', flags: 'g' },
+      date: { pattern: '\\d{4}[-/]\\d{1,2}[-/]\\d{1,2}', flags: 'g' },
+      number: { pattern: '-?\\d+(\\.\\d+)?', flags: 'g' },
+      chinese: { pattern: '[\\u4e00-\\u9fa5]+', flags: 'g' },
+      idcard: { pattern: '\\d{17}[\\dXx]', flags: 'g' }
+    };
+
+    function updateFlags() {
+      let flags = '';
+      if (document.getElementById('flagG').checked) flags += 'g';
+      if (document.getElementById('flagI').checked) flags += 'i';
+      if (document.getElementById('flagM').checked) flags += 'm';
+      if (document.getElementById('flagS').checked) flags += 's';
+      document.getElementById('flags').value = flags;
+      testRegex();
+    }
+
+    function usePreset(name) {
+      const preset = presets[name];
+      if (preset) {
+        document.getElementById('pattern').value = preset.pattern;
+        document.getElementById('flags').value = preset.flags;
+        document.getElementById('flagG').checked = preset.flags.includes('g');
+        document.getElementById('flagI').checked = preset.flags.includes('i');
+        document.getElementById('flagM').checked = preset.flags.includes('m');
+        document.getElementById('flagS').checked = preset.flags.includes('s');
+        testRegex();
+      }
+    }
+
+    function testRegex() {
+      const pattern = document.getElementById('pattern').value;
+      const flags = document.getElementById('flags').value;
+      const text = document.getElementById('testText').value;
+      const result = document.getElementById('result');
+      
+      if (!pattern) {
+        result.className = 'output error';
+        result.textContent = '请输入正则表达式';
+        return;
+      }
+      
+      if (!text) {
+        result.className = 'output';
+        result.textContent = '请输入测试文本';
+        return;
+      }
+      
+      try {
+        const regex = new RegExp(pattern, flags);
+        const matches = [];
+        let match;
+        
+        if (flags.includes('g')) {
+          while ((match = regex.exec(text)) !== null) {
+            matches.push({
+              value: match[0],
+              index: match.index,
+              groups: match.slice(1)
+            });
+          }
+        } else {
+          match = regex.exec(text);
+          if (match) {
+            matches.push({
+              value: match[0],
+              index: match.index,
+              groups: match.slice(1)
+            });
+          }
+        }
+        
+        if (matches.length === 0) {
+          result.className = 'output';
+          result.textContent = '未找到匹配项';
+          return;
+        }
+        
+        let html = `<div style="margin-bottom: 1rem;">找到 ${matches.length} 个匹配项：</div>`;
+        
+        matches.forEach((m, i) => {
+          html += `<div class="match-info">`;
+          html += `<div><strong>匹配 ${i + 1}:</strong> "${escapeHtml(m.value)}" (位置: ${m.index})</div>`;
+          if (m.groups && m.groups.length > 0 && m.groups.some(g => g !== undefined)) {
+            html += `<div class="match-groups">`;
+            m.groups.forEach((g, gi) => {
+              if (g !== undefined) {
+                html += `<div>组 ${gi + 1}: "${escapeHtml(g)}"</div>`;
+              }
+            });
+            html += `</div>`;
+          }
+          html += `</div>`;
+        });
+        
+        result.className = 'output success';
+        result.innerHTML = html;
+      } catch (e) {
+        result.className = 'output error';
+        result.textContent = '正则表达式错误: ' + e.message;
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    document.getElementById('pattern').addEventListener('input', testRegex);
+    document.getElementById('flags').addEventListener('input', testRegex);
+    document.getElementById('testText').addEventListener('input', testRegex);
+  </script>
+</body>
+</html>
