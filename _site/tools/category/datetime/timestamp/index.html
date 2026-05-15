@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时间戳转�?- Developer Tools</title>
+  <link rel="stylesheet" href="/assets/css/tools.css">
+  <style>
+    .current-timestamp {
+      background: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .current-timestamp .value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      font-family: monospace;
+    }
+    .current-timestamp .label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+    .convert-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 768px) {
+      .convert-section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../../../utils/core.js"></script>
+
+  
+
+<script>
+    const toolId = 'timestamp';
+    let currentInterval = null;
+
+    async function init() {
+      await AppConfig.init();
+      render();
+      startCurrentTime();
+    }
+
+    function render() {
+      const tool = AppConfig.getToolById(toolId);
+      document.getElementById('app').innerHTML = `
+        ${UI.renderNavbar()}
+        <div class="container">
+          <div class="header">
+            <h1>${tool.name}</h1>
+            <p>${tool.description}</p>
+          </div>
+
+          <div class="current-timestamp">
+            <div id="currentTime" class="value"></div>
+            <div class="label">${AppConfig.t('tools.timestamp.currentTimestamp')}</div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('tools.timestamp.timestampToDate')}</div>
+            <div class="convert-section">
+              <input type="text" id="timestampInput" placeholder="输入时间�?(秒或毫秒)">
+              <button class="btn btn-primary" onclick="timestampToDate()">${AppConfig.t('tools.timestamp.timestampToDate')}</button>
+            </div>
+            <div id="dateOutput" class="output" style="margin-top: 1rem;"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('tools.timestamp.dateToTimestamp')}</div>
+            <div class="convert-section">
+              <input type="datetime-local" id="dateInput">
+              <button class="btn btn-primary" onclick="dateToTimestamp()">${AppConfig.t('tools.timestamp.dateToTimestamp')}</button>
+            </div>
+            <div id="timestampOutput" class="output" style="margin-top: 1rem;"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function startCurrentTime() {
+      const updateTime = () => {
+        const now = Math.floor(Date.now() / 1000);
+        document.getElementById('currentTime').textContent = now;
+      };
+      updateTime();
+      currentInterval = setInterval(updateTime, 1000);
+    }
+
+    function timestampToDate() {
+      const input = document.getElementById('timestampInput').value.trim();
+      if (!input) {
+        UI.setOutput('dateOutput', '请输入时间戳', 'error');
+        return;
+      }
+
+      let timestamp = parseInt(input);
+      if (input.length <= 10) {
+        timestamp *= 1000;
+      }
+
+      const date = new Date(timestamp);
+      if (isNaN(date.getTime())) {
+        UI.setOutput('dateOutput', '无效的时间戳', 'error');
+        return;
+      }
+
+      const result = date.toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        weekday: 'long'
+      });
+
+      UI.setOutput('dateOutput', result, 'success');
+    }
+
+    function dateToTimestamp() {
+      const input = document.getElementById('dateInput').value;
+      if (!input) {
+        UI.setOutput('timestampOutput', '请选择日期时间', 'error');
+        return;
+      }
+
+      const date = new Date(input);
+      const timestamp = Math.floor(date.getTime() / 1000);
+
+      UI.setOutput('timestampOutput', `�? ${timestamp}\n毫秒: ${timestamp * 1000}`, 'success');
+    }
+
+    init();
+  </script>
+
+
+</body>
+</html>

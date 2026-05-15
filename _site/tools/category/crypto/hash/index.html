@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多算法哈�?- Developer Tools</title>
+  <link rel="stylesheet" href="/assets/css/tools.css">
+  <style>
+    .hash-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      margin-bottom: 0.5rem;
+    }
+    .hash-label {
+      min-width: 100px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .hash-value {
+      flex: 1;
+      font-family: monospace;
+      word-break: break-all;
+      font-size: 0.9rem;
+    }
+    .hash-copy {
+      padding: 0.5rem 1rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .hash-copy:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../../../utils/core.js"></script>
+
+  
+
+<script>
+    const toolId = 'hash';
+
+    async function init() {
+      await AppConfig.init();
+      render();
+    }
+
+    function render() {
+      const tool = AppConfig.getToolById(toolId);
+      document.getElementById('app').innerHTML = `
+        ${UI.renderNavbar()}
+        <div class="container">
+          <div class="header">
+            <h1>${tool.name}</h1>
+            <p>${tool.description}</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.input')}</div>
+            <textarea id="input" placeholder="${AppConfig.t('tools.hash.inputPlaceholder')}"></textarea>
+            
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="generate()">${AppConfig.t('common.generate')}</button>
+              <button class="btn btn-secondary" onclick="clearAll()">${AppConfig.t('common.clear')}</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.result')}</div>
+            <div id="output"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    async function generate() {
+      const input = document.getElementById('input').value;
+      const output = document.getElementById('output');
+      
+      if (!input) {
+        output.innerHTML = '<div class="output error">请输入文本本�?/div>';
+        return;
+      }
+
+      const encoder = new TextEncoder();
+      const data = encoder.encode(input);
+
+      const sha1 = await crypto.subtle.digest('SHA-1', data);
+      const sha256 = await crypto.subtle.digest('SHA-256', data);
+      const sha512 = await crypto.subtle.digest('SHA-512', data);
+
+      const hashes = [
+        { label: 'SHA-1', value: arrayToHex(sha1) },
+        { label: 'SHA-256', value: arrayToHex(sha256) },
+        { label: 'SHA-512', value: arrayToHex(sha512) }
+      ];
+
+      output.innerHTML = hashes.map(h => `
+        <div class="hash-item">
+          <span class="hash-label">${h.label}</span>
+          <span class="hash-value">${h.value}</span>
+          <button class="hash-copy" onclick="UI.copy('${h.value}')">${AppConfig.t('common.copy')}</button>
+        </div>
+      `).join('');
+    }
+
+    function arrayToHex(buffer) {
+      return Array.from(new Uint8Array(buffer))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+    }
+
+    function clearAll() {
+      document.getElementById('input').value = '';
+      document.getElementById('output').innerHTML = '';
+    }
+
+    init();
+  </script>
+
+
+</body>
+</html>

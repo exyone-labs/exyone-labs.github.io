@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base64 编解码 - Developer Tools</title>
+  <link rel="stylesheet" href="/assets/css/tools.css">
+</head>
+<body>
+  <div id="app"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../../../utils/core.js"></script>
+  
+  
+<script>
+    const toolId = 'base64';
+
+    async function init() {
+      await AppConfig.init();
+      render();
+    }
+
+    function render() {
+      const tool = AppConfig.getToolById(toolId);
+      document.getElementById('app').innerHTML = `
+        ${UI.renderNavbar()}
+        <div class="container">
+          <div class="header">
+            <h1>${tool.name}</h1>
+            <p>${tool.description}</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.input')}</div>
+            <textarea id="input" placeholder="${AppConfig.t('tools.base64.inputPlaceholder')}"></textarea>
+            
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="encode()">${AppConfig.t('tools.base64.encodeBtn')}</button>
+              <button class="btn btn-primary" onclick="decode()">${AppConfig.t('tools.base64.decodeBtn')}</button>
+              <button class="btn btn-secondary" onclick="copyResult()">${AppConfig.t('common.copy')}</button>
+              <button class="btn btn-secondary" onclick="clearAll()">${AppConfig.t('common.clear')}</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.output')}</div>
+            <div id="output" class="output"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function encode() {
+      const input = document.getElementById('input').value;
+      if (!input) {
+        UI.setOutput('output', AppConfig.t('common.inputPlaceholder'), 'error');
+        return;
+      }
+      try {
+        const encoded = btoa(unescape(encodeURIComponent(input)));
+        UI.setOutput('output', encoded, 'success');
+      } catch (e) {
+        UI.setOutput('output', AppConfig.t('tools.base64.encodeError') + ': ' + e.message, 'error');
+      }
+    }
+
+    function decode() {
+      const input = document.getElementById('input').value.trim();
+      if (!input) {
+        UI.setOutput('output', AppConfig.t('common.inputPlaceholder'), 'error');
+        return;
+      }
+      try {
+        const decoded = decodeURIComponent(escape(atob(input)));
+        UI.setOutput('output', decoded, 'success');
+      } catch (e) {
+        UI.setOutput('output', AppConfig.t('tools.base64.decodeError'), 'error');
+      }
+    }
+
+    function copyResult() {
+      const output = document.getElementById('output').textContent;
+      if (output && !output.includes(':')) {
+        UI.copy(output);
+      }
+    }
+
+    function clearAll() {
+      document.getElementById('input').value = '';
+      UI.clear('output');
+    }
+
+    init();
+  </script>
+
+  
+</body>
+</html>

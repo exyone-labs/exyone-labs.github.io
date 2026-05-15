@@ -1,0 +1,133 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>正则测试 - Developer Tools</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+  <style>
+    .regex-input {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .regex-input input {
+      flex: 1;
+    }
+    .flags-input {
+      width: 100px;
+    }
+    .match-item {
+      background: var(--bg-secondary);
+      padding: 0.75rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 0.5rem;
+      border-left: 3px solid var(--primary-color);
+    }
+    .match-item code {
+      background: var(--bg-tertiary);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+    .highlight {
+      background: rgba(233, 69, 96, 0.3);
+      color: var(--primary-color);
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../../../utils/core.js"></script>
+
+  
+{% raw %}
+<script>
+    const toolId = 'regex';
+
+    async function init() {
+      await AppConfig.init();
+      render();
+    }
+
+    function render() {
+      const tool = AppConfig.getToolById(toolId);
+      document.getElementById('app').innerHTML = `
+        ${UI.renderNavbar()}
+        <div class="container">
+          <div class="header">
+            <h1>${tool.name}</h1>
+            <p>${tool.description}</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('tools.regex.pattern')}</div>
+            <div class="regex-input">
+              <input type="text" id="pattern" placeholder="输入正则表达�?.." oninput="test()">
+              <input type="text" id="flags" class="flags-input" value="g" placeholder="${AppConfig.t('tools.regex.flags')}" oninput="test()">
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.input')}</div>
+            <textarea id="input" placeholder="输入测试文本..." oninput="test()"></textarea>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('tools.regex.matches')}</div>
+            <div id="output"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function test() {
+      const pattern = document.getElementById('pattern').value;
+      const flags = document.getElementById('flags').value;
+      const input = document.getElementById('input').value;
+      const output = document.getElementById('output');
+
+      if (!pattern || !input) {
+        output.innerHTML = '<div class="output" style="color: var(--text-secondary);">输入正则表达式和测试文本</div>';
+        return;
+      }
+
+      try {
+        const regex = new RegExp(pattern, flags);
+        const matches = input.matchAll(regex);
+        const results = [...matches];
+
+        if (results.length === 0) {
+          output.innerHTML = `<div class="output" style="color: var(--text-secondary);">${AppConfig.t('tools.regex.noMatch')}</div>`;
+          return;
+        }
+
+        output.innerHTML = results.map((match, i) => `
+          <div class="match-item">
+            <strong>匹配 ${i + 1}:</strong> <code>${escapeHtml(match[0])}</code>
+            <br><small style="color: var(--text-secondary);">位置: ${match.index}</small>
+          </div>
+        `).join('');
+      } catch (e) {
+        output.innerHTML = `<div class="output error">正则表达式错�? ${e.message}</div>`;
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    init();
+  </script>
+{% endraw %}
+
+</body>
+</html>

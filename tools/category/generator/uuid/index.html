@@ -1,0 +1,118 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UUID 生成器 - Developer Tools</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+  <style>
+    .uuid-options {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .uuid-options label {
+      font-weight: 600;
+    }
+    .uuid-list {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .uuid-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.5rem;
+    }
+    .uuid-item code {
+      flex: 1;
+      font-family: monospace;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../../../utils/core.js"></script>
+
+{% raw %}
+<script>
+    const toolId = 'uuid';
+
+    async function init() {
+      await AppConfig.init();
+      render();
+    }
+
+    function render() {
+      const tool = AppConfig.getToolById(toolId);
+      document.getElementById('app').innerHTML = `
+        ${UI.renderNavbar()}
+        <div class="container">
+          <div class="header">
+            <h1>${tool.name}</h1>
+            <p>${tool.description}</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">选项</div>
+            <div class="uuid-options">
+              <label>${AppConfig.t('tools.uuid.count')}:</label>
+              <input type="number" id="count" value="1" min="1" max="100" style="width: 80px;">
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="generate()">${AppConfig.t('tools.uuid.generateBtn')}</button>
+              <button class="btn btn-secondary" onclick="copyAll()">复制全部</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.result')}</div>
+            <div id="output" class="uuid-list"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function generate() {
+      const count = parseInt(document.getElementById('count').value) || 1;
+      const output = document.getElementById('output');
+
+      const uuids = [];
+      for (let i = 0; i < Math.min(count, 100); i++) {
+        uuids.push(Utils.generateUUID());
+      }
+
+      output.innerHTML = uuids.map(uuid => `
+        <div class="uuid-item">
+          <code>${uuid}</code>
+          <button class="btn btn-secondary" onclick="UI.copy('${uuid}')">${AppConfig.t('common.copy')}</button>
+        </div>
+      `).join('');
+    }
+
+    function copyAll() {
+      const items = document.querySelectorAll('.uuid-item code');
+      if (items.length === 0) {
+        UI.toast('请先生成 UUID');
+        return;
+      }
+      const text = Array.from(items).map(el => el.textContent).join('\n');
+      UI.copy(text, '已复制全部 UUID');
+    }
+
+    init();
+  </script>
+{% endraw %}
+
+</body>
+</html>

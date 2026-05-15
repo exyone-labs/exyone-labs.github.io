@@ -1,0 +1,165 @@
+{
+  "common": {
+    "copy": "Copy",
+    "copySuccess": "Copied to clipboard",
+    "copyFail": "Copy failed",
+    "clear": "Clear",
+    "swap": "Swap",
+    "download": "Download",
+    "generate": "Generate",
+    "encode": "Encode",
+    "decode": "Decode",
+    "format": "Format",
+    "minify": "Minify",
+    "validate": "Validate",
+    "input": "Input",
+    "output": "Output",
+    "result": "Result",
+    "error": "Error",
+    "success": "Success",
+    "loading": "Loading...",
+    "noResult": "No result",
+    "inputPlaceholder": "Enter content...",
+    "backToHome": "Back to Tools",
+    "searchPlaceholder": "Search tools..."
+  },
+  "nav": {
+    "home": "Home",
+    "allTools": "All Tools",
+    "recentUsed": "Recent"
+  },
+  "categories": {
+    "encoding": "Encoding",
+    "format": "Format",
+    "crypto": "Crypto",
+    "datetime": "Date & Time",
+    "text": "Text",
+    "image": "Image & Color",
+    "generator": "Generator"
+  },
+  "tools": {
+    "base64": {
+      "title": "Base64 Encoder/Decoder",
+      "description": "Convert text to and from Base64 format",
+      "encodeBtn": "Encode",
+      "decodeBtn": "Decode",
+      "inputPlaceholder": "Enter text to encode or decode...",
+      "encodeError": "Encoding error",
+      "decodeError": "Decoding error: Invalid Base64 string"
+    },
+    "url-encode": {
+      "title": "URL Encoder/Decoder",
+      "description": "URL encoding and decoding tool",
+      "encodeBtn": "Encode",
+      "decodeBtn": "Decode",
+      "encodeComponentBtn": "Encode Component",
+      "decodeComponentBtn": "Decode Component"
+    },
+    "unicode": {
+      "title": "Unicode Converter",
+      "description": "Convert text to and from Unicode",
+      "textToUnicode": "Text to Unicode",
+      "unicodeToText": "Unicode to Text",
+      "showCodePoints": "Show Code Points"
+    },
+    "json-formatter": {
+      "title": "JSON Formatter",
+      "description": "Format, minify, and validate JSON",
+      "formatBtn": "Format",
+      "minifyBtn": "Minify",
+      "validateBtn": "Validate",
+      "validJson": "Valid JSON",
+      "invalidJson": "Invalid JSON"
+    },
+    "timestamp": {
+      "title": "Timestamp Converter",
+      "description": "Convert between timestamp and date format",
+      "timestampToDate": "Timestamp to Date",
+      "dateToTimestamp": "Date to Timestamp",
+      "setCurrent": "Set Current Time",
+      "currentTimestamp": "Current Timestamp"
+    },
+    "password": {
+      "title": "Password Generator",
+      "description": "Generate secure random passwords",
+      "length": "Password Length",
+      "includeLower": "Include lowercase",
+      "includeUpper": "Include uppercase",
+      "includeNumber": "Include numbers",
+      "includeSymbol": "Include symbols",
+      "generateBtn": "Generate Password",
+      "generateMultiple": "Generate Multiple"
+    },
+    "regex": {
+      "title": "Regex Tester",
+      "description": "Online regular expression testing tool",
+      "pattern": "Pattern",
+      "flags": "Flags",
+      "testBtn": "Test",
+      "matches": "Matches",
+      "noMatch": "No match",
+      "presets": "Common Patterns"
+    },
+    "hash": {
+      "title": "Multi-Algorithm Hash",
+      "description": "SHA-1/SHA-256/SHA-512 hash generator",
+      "inputPlaceholder": "Enter text to hash..."
+    },
+    "md5": {
+      "title": "MD5 Hash",
+      "description": "Generate MD5 hash of text"
+    },
+    "counter": {
+      "title": "Word Counter",
+      "description": "Count characters, words, and lines",
+      "characters": "Characters",
+      "charactersNoSpace": "Characters (no spaces)",
+      "words": "Words",
+      "lines": "Lines",
+      "chinese": "Chinese Characters"
+    },
+    "diff": {
+      "title": "Text Diff",
+      "description": "Compare two texts for differences",
+      "original": "Original Text",
+      "modified": "Modified Text",
+      "compareBtn": "Compare"
+    },
+    "qrcode": {
+      "title": "QR Code Generator",
+      "description": "Generate custom QR codes",
+      "content": "QR Code Content",
+      "size": "Size",
+      "downloadPng": "Download PNG",
+      "downloadSvg": "Download SVG"
+    },
+    "uuid": {
+      "title": "UUID Generator",
+      "description": "Generate UUID/GUID",
+      "generateBtn": "Generate UUID",
+      "generateMultiple": "Generate Multiple",
+      "count": "Count"
+    },
+    "color-converter": {
+      "title": "Color Converter",
+      "description": "HEX/RGB/HSL color conversion",
+      "hex": "HEX",
+      "rgb": "RGB",
+      "hsl": "HSL",
+      "pickColor": "Pick Color"
+    },
+    "image-base64": {
+      "title": "Image to Base64",
+      "description": "Convert image to and from Base64",
+      "selectImage": "Select Image",
+      "dragDrop": "Or drag and drop image here",
+      "copyBase64": "Copy Base64"
+    },
+    "markdown": {
+      "title": "Markdown Preview",
+      "description": "Real-time Markdown editor and preview",
+      "preview": "Preview",
+      "copyHtml": "Copy HTML"
+    }
+  }
+}

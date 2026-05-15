@@ -1,0 +1,117 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON 格式化 - Developer Tools</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+</head>
+<body>
+  <div id="app"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../../../utils/core.js"></script>
+
+{% raw %}
+<script>
+    const toolId = 'json-formatter';
+
+    async function init() {
+      await AppConfig.init();
+      render();
+    }
+
+    function render() {
+      const tool = AppConfig.getToolById(toolId);
+      document.getElementById('app').innerHTML = `
+        ${UI.renderNavbar()}
+        <div class="container">
+          <div class="header">
+            <h1>${tool.name}</h1>
+            <p>${tool.description}</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.input')}</div>
+            <textarea id="input" placeholder="输入 JSON 数据..."></textarea>
+            
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="format()">${AppConfig.t('tools.json-formatter.formatBtn')}</button>
+              <button class="btn btn-secondary" onclick="minify()">${AppConfig.t('tools.json-formatter.minifyBtn')}</button>
+              <button class="btn btn-secondary" onclick="validate()">${AppConfig.t('tools.json-formatter.validateBtn')}</button>
+              <button class="btn btn-secondary" onclick="copyResult()">${AppConfig.t('common.copy')}</button>
+              <button class="btn btn-secondary" onclick="clearAll()">${AppConfig.t('common.clear')}</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.output')}</div>
+            <div id="output" class="output" style="white-space: pre-wrap; word-break: break-all;"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function format() {
+      const input = document.getElementById('input').value.trim();
+      if (!input) {
+        UI.setOutput('output', '请输入 JSON 数据', 'error');
+        return;
+      }
+      try {
+        const parsed = JSON.parse(input);
+        UI.setOutput('output', JSON.stringify(parsed, null, 2), 'success');
+      } catch (e) {
+        UI.setOutput('output', 'JSON 解析错误: ' + e.message, 'error');
+      }
+    }
+
+    function minify() {
+      const input = document.getElementById('input').value.trim();
+      if (!input) {
+        UI.setOutput('output', '请输入 JSON 数据', 'error');
+        return;
+      }
+      try {
+        const parsed = JSON.parse(input);
+        UI.setOutput('output', JSON.stringify(parsed), 'success');
+      } catch (e) {
+        UI.setOutput('output', 'JSON 解析错误: ' + e.message, 'error');
+      }
+    }
+
+    function validate() {
+      const input = document.getElementById('input').value.trim();
+      if (!input) {
+        UI.setOutput('output', '请输入 JSON 数据', 'error');
+        return;
+      }
+      try {
+        JSON.parse(input);
+        UI.setOutput('output', AppConfig.t('tools.json-formatter.validJson'), 'success');
+      } catch (e) {
+        UI.setOutput('output', AppConfig.t('tools.json-formatter.invalidJson') + ': ' + e.message, 'error');
+      }
+    }
+
+    function copyResult() {
+      const output = document.getElementById('output').textContent;
+      if (output && !output.includes('错误') && !output.includes('请输入')) {
+        UI.copy(output);
+      }
+    }
+
+    function clearAll() {
+      document.getElementById('input').value = '';
+      UI.clear('output');
+    }
+
+    init();
+  </script>
+{% endraw %}
+
+</body>
+</html>

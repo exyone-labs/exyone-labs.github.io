@@ -1,0 +1,162 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文本对比 - Developer Tools</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+  <style>
+    .diff-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 768px) {
+      .diff-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    .diff-panel {
+      display: flex;
+      flex-direction: column;
+    }
+    .diff-panel textarea {
+      flex: 1;
+      min-height: 200px;
+    }
+    .diff-result {
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-break: break-all;
+      line-height: 1.6;
+    }
+    .diff-add {
+      background: rgba(76, 175, 80, 0.2);
+      color: #4caf50;
+    }
+    .diff-remove {
+      background: rgba(244, 67, 54, 0.2);
+      color: #f44336;
+      text-decoration: line-through;
+    }
+    .diff-line {
+      padding: 2px 4px;
+      margin: 1px 0;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../../../utils/core.js"></script>
+
+{% raw %}
+<script>
+    const toolId = 'diff';
+
+    async function init() {
+      await AppConfig.init();
+      render();
+    }
+
+    function render() {
+      const tool = AppConfig.getToolById(toolId);
+      document.getElementById('app').innerHTML = `
+        ${UI.renderNavbar()}
+        <div class="container">
+          <div class="header">
+            <h1>${tool.name}</h1>
+            <p>${tool.description}</p>
+          </div>
+
+          <div class="diff-container">
+            <div class="diff-panel">
+              <div class="card-title">${AppConfig.t('tools.diff.original')}</div>
+              <textarea id="original" placeholder="输入原始文本..."></textarea>
+            </div>
+            <div class="diff-panel">
+              <div class="card-title">${AppConfig.t('tools.diff.modified')}</div>
+              <textarea id="modified" placeholder="输入修改后文本..."></textarea>
+            </div>
+          </div>
+
+          <div class="btn-group" style="margin: 1rem 0;">
+            <button class="btn btn-primary" onclick="compare()">${AppConfig.t('tools.diff.compareBtn')}</button>
+            <button class="btn btn-secondary" onclick="swap()">${AppConfig.t('common.swap')}</button>
+            <button class="btn btn-secondary" onclick="clearAll()">${AppConfig.t('common.clear')}</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.result')}</div>
+            <div id="output" class="diff-result"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function compare() {
+      const original = document.getElementById('original').value;
+      const modified = document.getElementById('modified').value;
+      const output = document.getElementById('output');
+
+      if (!original && !modified) {
+        output.innerHTML = '<div class="output error">请输入文本</div>';
+        return;
+      }
+
+      const originalLines = original.split('\n');
+      const modifiedLines = modified.split('\n');
+
+      let result = '';
+      const maxLen = Math.max(originalLines.length, modifiedLines.length);
+
+      for (let i = 0; i < maxLen; i++) {
+        const orig = originalLines[i] || '';
+        const mod = modifiedLines[i] || '';
+
+        if (orig === mod) {
+          result += `<div class="diff-line">${escapeHtml(orig)}</div>`;
+        } else {
+          if (orig) {
+            result += `<div class="diff-line diff-remove">- ${escapeHtml(orig)}</div>`;
+          }
+          if (mod) {
+            result += `<div class="diff-line diff-add">+ ${escapeHtml(mod)}</div>`;
+          }
+        }
+      }
+
+      output.innerHTML = result;
+    }
+
+    function swap() {
+      const original = document.getElementById('original');
+      const modified = document.getElementById('modified');
+      const temp = original.value;
+      original.value = modified.value;
+      modified.value = temp;
+    }
+
+    function clearAll() {
+      document.getElementById('original').value = '';
+      document.getElementById('modified').value = '';
+      document.getElementById('output').innerHTML = '';
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    init();
+  </script>
+{% endraw %}
+
+</body>
+</html>

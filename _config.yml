@@ -61,7 +61,7 @@ webmaster_verifications:
 include:
   - .domains
   - tools
-  - fiction
+  - works
 
 # Web Analytics Settings
 analytics:

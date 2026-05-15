@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片 Base64 - Developer Tools</title>
+  <link rel="stylesheet" href="/assets/css/tools.css">
+  <style>
+    .drop-zone {
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .drop-zone:hover, .drop-zone.dragover {
+      border-color: var(--primary-color);
+      background: rgba(233, 69, 96, 0.05);
+    }
+    .drop-zone svg {
+      width: 48px;
+      height: 48px;
+      fill: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    .preview-image {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 1rem;
+    }
+    .base64-output {
+      font-family: monospace;
+      font-size: 0.85rem;
+      word-break: break-all;
+      max-height: 200px;
+      overflow-y: auto;
+      background: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../../../utils/core.js"></script>
+
+
+<script>
+    const toolId = 'image-base64';
+
+    async function init() {
+      await AppConfig.init();
+      render();
+    }
+
+    function render() {
+      const tool = AppConfig.getToolById(toolId);
+      document.getElementById('app').innerHTML = `
+        ${UI.renderNavbar()}
+        <div class="container">
+          <div class="header">
+            <h1>${tool.name}</h1>
+            <p>${tool.description}</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('tools.image-base64.selectImage')}</div>
+            <div id="dropZone" class="drop-zone" onclick="document.getElementById('fileInput').click()">
+              <svg viewBox="0 0 24 24"><path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/></svg>
+              <p>${AppConfig.t('tools.image-base64.dragDrop')}</p>
+              <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this.files[0])" hidden>
+            </div>
+          </div>
+
+          <div class="card" id="resultCard" style="display: none;">
+            <div class="card-title">预览</div>
+            <img id="preview" class="preview-image">
+            <div class="btn-group" style="margin-bottom: 1rem;">
+              <button class="btn btn-secondary" onclick="copyBase64()">${AppConfig.t('tools.image-base64.copyBase64')}</button>
+              <button class="btn btn-secondary" onclick="copyDataUrl()">复制 Data URL</button>
+            </div>
+            <div id="base64Output" class="base64-output"></div>
+          </div>
+        </div>
+      `;
+
+      setupDragDrop();
+    }
+
+    function setupDragDrop() {
+      const dropZone = document.getElementById('dropZone');
+      
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+      });
+
+      dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) {
+          handleFile(file);
+        }
+      });
+    }
+
+    function handleFile(file) {
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const dataUrl = e.target.result;
+        document.getElementById('preview').src = dataUrl;
+        document.getElementById('base64Output').textContent = dataUrl;
+        document.getElementById('resultCard').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function copyBase64() {
+      const dataUrl = document.getElementById('base64Output').textContent;
+      const base64 = dataUrl.split(',')[1];
+      UI.copy(base64, 'Base64 已复制制');
+    }
+
+    function copyDataUrl() {
+      const dataUrl = document.getElementById('base64Output').textContent;
+      UI.copy(dataUrl, 'Data URL 已复制制');
+    }
+
+    init();
+  </script>
+
+
+</body>
+</html>

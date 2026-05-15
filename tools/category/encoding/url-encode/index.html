@@ -1,0 +1,121 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL 编解�?- Developer Tools</title>
+  <link rel="stylesheet" href="{{ '/assets/css/tools.css' | relative_url }}">
+</head>
+<body>
+  <div id="app"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../../../utils/core.js"></script>
+
+  
+{% raw %}
+<script>
+    const toolId = 'url-encode';
+
+    async function init() {
+      await AppConfig.init();
+      render();
+    }
+
+    function render() {
+      const tool = AppConfig.getToolById(toolId);
+      document.getElementById('app').innerHTML = `
+        ${UI.renderNavbar()}
+        <div class="container">
+          <div class="header">
+            <h1>${tool.name}</h1>
+            <p>${tool.description}</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.input')}</div>
+            <textarea id="input" placeholder="输入需要编码或解码�?URL..."></textarea>
+            
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="encode()">${AppConfig.t('tools.url-encode.encodeBtn')}</button>
+              <button class="btn btn-primary" onclick="decode()">${AppConfig.t('tools.url-encode.decodeBtn')}</button>
+              <button class="btn btn-secondary" onclick="encodeComponent()">${AppConfig.t('tools.url-encode.encodeComponentBtn')}</button>
+              <button class="btn btn-secondary" onclick="decodeComponent()">${AppConfig.t('tools.url-encode.decodeComponentBtn')}</button>
+              <button class="btn btn-secondary" onclick="copyResult()">${AppConfig.t('common.copy')}</button>
+              <button class="btn btn-secondary" onclick="clearAll()">${AppConfig.t('common.clear')}</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">${AppConfig.t('common.output')}</div>
+            <div id="output" class="output"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function encode() {
+      const input = document.getElementById('input').value;
+      if (!input) {
+        UI.setOutput('output', '请输�?URL', 'error');
+        return;
+      }
+      UI.setOutput('output', encodeURI(input), 'success');
+    }
+
+    function decode() {
+      const input = document.getElementById('input').value.trim();
+      if (!input) {
+        UI.setOutput('output', '请输�?URL', 'error');
+        return;
+      }
+      try {
+        UI.setOutput('output', decodeURI(input), 'success');
+      } catch (e) {
+        UI.setOutput('output', '解码错误: 无效�?URL 编码', 'error');
+      }
+    }
+
+    function encodeComponent() {
+      const input = document.getElementById('input').value;
+      if (!input) {
+        UI.setOutput('output', '请输入内容容�?, 'error');
+        return;
+      }
+      UI.setOutput('output', encodeURIComponent(input), 'success');
+    }
+
+    function decodeComponent() {
+      const input = document.getElementById('input').value.trim();
+      if (!input) {
+        UI.setOutput('output', '请输入内容容�?, 'error');
+        return;
+      }
+      try {
+        UI.setOutput('output', decodeURIComponent(input), 'success');
+      } catch (e) {
+        UI.setOutput('output', '解码错误: 无效�?URL 编码', 'error');
+      }
+    }
+
+    function copyResult() {
+      const output = document.getElementById('output').textContent;
+      if (output && !output.includes('错误') && !output.includes('�?)) {
+        UI.copy(output);
+      }
+    }
+
+    function clearAll() {
+      document.getElementById('input').value = '';
+      UI.clear('output');
+    }
+
+    init();
+  </script>
+{% endraw %}
+
+</body>
+</html>
