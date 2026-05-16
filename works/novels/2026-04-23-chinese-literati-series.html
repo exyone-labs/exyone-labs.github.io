@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无标题 - 中国文人系列</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif CN', serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .meta {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .tags {
+            margin-top: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 2px;
+        }
+        
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        .content h2 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin: 30px 0 20px 0;
+            font-size: 1.5rem;
+        }
+        
+        .content h3 {
+            color: #764ba2;
+            margin: 25px 0 15px 0;
+            font-size: 1.2rem;
+        }
+        
+        .content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .content blockquote {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .content blockquote br {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .content ul, .content ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        .content li {
+            margin-bottom: 8px;
+        }
+        
+        .article-link {
+            color: #667eea;
+            text-decoration: none;
+            border-bottom: 1px dashed #667eea;
+            transition: all 0.3s;
+        }
+        
+        .article-link:hover {
+            color: #764ba2;
+            border-bottom-color: #764ba2;
+        }
+        
+        .article-image {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .inline-code {
+            background: #f1f3f5;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        pre code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .nav-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+        
+        .nav-panel h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .nav-panel ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-panel li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .nav-panel li:last-child {
+            border-bottom: none;
+        }
+        
+        .nav-panel a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-panel a:hover {
+            color: #667eea;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 30px 15px;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>无标题</h1>
+        <div class="meta">
+            <span class="date"></span>
+        </div>
+        <div class="tags">
+            
+        </div>
+    </header>
+    
+    <div class="container">
+        <main class="content">
+            <p>---<br>title: "中国文人系列：从先秦到清末的文学长河"<br>date: 2026-04-23<br>tags: [history, literature, series]<br>categories: [Literature]<br>lang: zh<br>hidden: true<br>---<br><br><h3>系列文章列表</h3><br><br><ul><li><a href="/posts/zh/chinese-pre-qin-dynasty-poets" class="article-link">先秦楚歌：汨罗江上的千古悲歌</a></li></ul><br><ul><li><a href="/posts/zh/chinese-literati-eastern-han-dynasty" class="article-link">建安风流：铜雀台下的文人悲歌</a></li></ul><br><ul><li><a href="/posts/zh/chinese-literati-wei-and-jin-dynasty-poets" class="article-link">结庐南山：归去来兮的田园牧歌</a></li></ul><br><ul><li><a href="/posts/zh/chinese-literati-the-jin-and-north-southern-dynasties" class="article-link">魏晋风流：乱世中的诗与远方</a></li></ul><br><ul><li><a href="/posts/zh/chinese-literati-early-tang-poets" class="article-link">初唐四杰：青春与命运的双重变奏</a></li></ul><br><ul><li><a href="/posts/zh/chinese-literati-wu-zhou-dynasty-poets" class="article-link">从初唐到盛唐的一位诗人：谄媚与诗才的双重困境</a></li></ul><br><ul><li><a href="/posts/zh/chinese-literati-tang-dynasty-poets" class="article-link">盛唐余晖与晚唐暮色：唐诗黄昏的最后光芒</a></li></ul><br><ul><li><a href="/posts/zh/chinese-literati-song-dynasty-poets" class="article-link">两宋风华：词国巅峰与家国悲歌</a></li></ul><br><ul><li><a href="/posts/zh/chinese-literati-jin-dynasty-poetry" class="article-link">生死相许：为故国修史，遗民泪尽野史亭</a></li></ul><br><ul><li><a href="/posts/zh/chinese-literati-yuan-dynasty-drama" class="article-link">元曲风华：乱世中的市井悲欢与文人风骨</a></li></ul><br><ul><li><a href="/posts/zh/chinese-literati-qing-dynasty-poetry" class="article-link">清诗新韵：考据学兴与边塞诗的田园转向</a></li></ul><br><br><h2>系列简介</h2><br><br>中国文学源远流长，从《诗经》《楚辞》开始，经过汉赋、魏晋玄学、唐诗、宋词、元曲、明清小说等不同阶段的发展，形成了独具特色的文学传统。本系列文章以历史朝代为线索，探讨各个时期的文人命运、文学成就及其时代背景，展现中国文学的演变历程和精神内核。<br><br>从东汉末年的建安七子，到魏晋时期的竹林七贤；从初唐四杰的青春意气，到盛唐诗人的浪漫豪情；从两宋词人的家国情怀，到宋金遗民的故国之思；从元代曲家的市井风情，到清代学者的考据精神，中国文人在不同的历史环境中，以各自的方式表达着对生命、对社会、对文化的理解和追求。</p>
+        </main>
+        
+        <nav class="nav-panel">
+            <h3>系列文章</h3>
+            <ul>
+                
+        <li><a href="2023-07-03-chinese-pre-qin-dynasty-poets.html">2023-07-03-chinese-pre-qin-dynasty-poets.md</a></li>
+    
+        <li><a href="2023-09-15-chinese-literati-eastern-han-dynasty.html">建安风流：铜雀台下的文人悲歌</a></li>
+    
+        <li><a href="2023-10-14-chinese-literati-wei-and-jin-dynasty-poets.html">2023-10-14-chinese-literati-wei-and-jin-dynasty-poets.md</a></li>
+    
+        <li><a href="2023-12-08-chinese-literati-the-jin-and-north-southern-dynasties.html">2023-12-08-chinese-literati-the-jin-and-north-southern-dynasties.md</a></li>
+    
+        <li><a href="2024-02-01-chinese-literati-early-tang-poets.html">2024-02-01-chinese-literati-early-tang-poets.md</a></li>
+    
+        <li><a href="2024-04-03-chinese-literati-wu-zhou-dynasty-poets.html">2024-04-03-chinese-literati-wu-zhou-dynasty-poets.md</a></li>
+    
+        <li><a href="2024-05-15-chinese-literati-tang-dynasty-poets.html">2024-05-15-chinese-literati-tang-dynasty-poets.md</a></li>
+    
+        <li><a href="2024-06-20-chinese-literati-song-dynasty-poets.html">2024-06-20-chinese-literati-song-dynasty-poets.md</a></li>
+    
+        <li><a href="2025-02-14-chinese-literati-jin-dynasty-poetry.html">2025-02-14-chinese-literati-jin-dynasty-poetry.md</a></li>
+    
+        <li><a href="2025-03-15-chinese-literati-yuan-dynasty-drama.html">2025-03-15-chinese-literati-yuan-dynasty-drama.md</a></li>
+    
+        <li><a href="2025-04-10-chinese-literati-qing-dynasty-poetry.html">2025-04-10-chinese-literati-qing-dynasty-poetry.md</a></li>
+    
+        <li><a href="2026-04-23-chinese-literati-series.html">2026-04-23-chinese-literati-series.md</a></li>
+    
+            </ul>
+        </nav>
+    </div>
+    
+    <footer>
+        <p>中国文人系列 - 从先秦到清末的文学长河</p>
+    </footer>
+</body>
+</html>

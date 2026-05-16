@@ -1,9 +1,0 @@
-{
-  "title": "Developer Tools",
-  "subtitle": "开发者工具箱",
-  "description": "纯前端开发者工具箱 - 无需后端，数据安全，离线可用",
-  "version": "2.0.0",
-  "author": "exyone",
-  "keywords": ["developer", "tools", "frontend", "utility"],
-  "baseUrl": "/tools/"
-}

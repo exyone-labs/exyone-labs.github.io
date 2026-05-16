@@ -1,0 +1,178 @@
+import type {ToolBaseInfo} from '@/types/tool'
+import {jsonFormatterInfo} from './json-formatter/info'
+import {base64ConverterInfo} from './base64-converter/info'
+import {colorPickerInfo} from './color-picker/info'
+import {qrCodeGeneratorInfo} from './qr-code-generator/info'
+import {passwordGeneratorInfo} from './password-generator/info'
+import {regexTesterInfo} from './regex-tester/info'
+import {hashGeneratorInfo} from './hash-generator/info'
+import {imageOptimizerInfo} from './image-optimizer/info'
+import {textCaseConverterInfo} from './text-case-converter/info'
+import {cronGeneratorInfo} from './cron-generator/info'
+import {iconGeneratorInfo} from './icon-generator/info'
+import {asciiArtGeneratorInfo} from './ascii-art-generator/info'
+import {imageWatermarkInfo} from './image-watermark/info'
+import {moneyConverterInfo} from './money-converter/info'
+import {navicatDecryptInfo} from './navicat-decrypt/info'
+import {s3UploadInfo} from './s3-upload/info'
+import {baseConverterInfo} from './base-converter/info'
+import {shortUrlGeneratorInfo} from './short-url-generator/info'
+import {timeConverterInfo} from "@/tools/time-converter/info.ts";
+import {jsonYamlConverterInfo} from './json-yaml-converter/info'
+import {textDiffInfo} from './text-diff/info'
+import {countdownTimerInfo} from './countdown-timer/info'
+
+export interface Tool extends ToolBaseInfo {
+  route: string
+  category: string
+  color: string
+}
+
+export const tools: Tool[] = [
+  {
+    ...jsonFormatterInfo,
+    route: '/json-formatter',
+    category: 'text',
+    color: 'from-blue-500 to-blue-600'
+  },
+  {
+    ...base64ConverterInfo,
+    route: '/base64-converter',
+    category: 'encode',
+    color: 'from-green-500 to-green-600'
+  },
+  {
+    ...colorPickerInfo,
+    route: '/color-picker',
+    category: 'design',
+    color: 'from-pink-500 to-pink-600'
+  },
+  {
+    ...qrCodeGeneratorInfo,
+    route: '/qr-code-generator',
+    category: 'generator',
+    color: 'from-indigo-500 to-indigo-600'
+  },
+  {
+    ...passwordGeneratorInfo,
+    route: '/password-generator',
+    category: 'generator',
+    color: 'from-red-500 to-red-600'
+  },
+  {
+    ...regexTesterInfo,
+    route: '/regex-tester',
+    category: 'text',
+    color: 'from-yellow-500 to-yellow-600'
+  },
+  {
+    ...hashGeneratorInfo,
+    route: '/hash-generator',
+    category: 'encode',
+    color: 'from-orange-500 to-orange-600'
+  },
+  {
+    ...imageOptimizerInfo,
+    route: '/image-optimizer',
+    category: 'image',
+    color: 'from-cyan-500 to-cyan-600'
+  },
+  {
+    ...textCaseConverterInfo,
+    route: '/text-case-converter',
+    category: 'text',
+    color: 'from-violet-500 to-violet-600'
+  },
+  {
+    ...cronGeneratorInfo,
+    route: '/cron-generator',
+    category: 'generator',
+    color: 'from-green-500 to-green-600'
+  },
+  {
+    ...iconGeneratorInfo,
+    route: '/icon-generator',
+    category: 'image',
+    color: 'from-cyan-500 to-cyan-600'
+  },
+  {
+    ...asciiArtGeneratorInfo,
+    route: '/ascii-art-generator',
+    category: 'generator',
+    color: 'from-gray-500 to-gray-600'
+  },
+  {
+    ...imageWatermarkInfo,
+    route: '/image-watermark',
+    category: 'image',
+    color: 'from-pink-500 to-pink-600'
+  },
+  {
+    ...moneyConverterInfo,
+    route: '/money-converter',
+    category: 'converter',
+    color: 'from-green-500 to-emerald-600'
+  },
+  {
+    ...navicatDecryptInfo,
+    route: '/navicat-decrypt',
+    category: 'security',
+    color: 'from-amber-500 to-orange-600'
+  },
+  {
+    ...s3UploadInfo,
+    route: '/s3-upload',
+    category: 'upload',
+    color: 'from-blue-500 to-purple-600'
+  },
+  {
+    ...baseConverterInfo,
+    route: '/base-converter',
+    category: 'converter',
+    color: 'from-purple-500 to-pink-600'
+  },
+  {
+    ...shortUrlGeneratorInfo,
+    route: '/short-url-generator',
+    category: 'utility',
+    color: 'from-blue-500 to-cyan-600'
+  },
+  {
+    ...timeConverterInfo,
+    route: '/time-converter',
+    category: 'converter',
+    color: 'from-green-500 to-teal-600'
+  },
+  {
+    ...jsonYamlConverterInfo,
+    route: '/json-yaml-converter',
+    category: 'converter',
+    color: 'from-blue-500 to-purple-600'
+  },
+  {
+    ...textDiffInfo,
+    route: '/text-diff',
+    category: 'text',
+    color: 'from-red-500 to-red-600'
+  },
+  {
+    ...countdownTimerInfo,
+    route: '/countdown-timer',
+    category: 'utility',
+    color: 'from-purple-500 to-pink-600'
+  }
+]
+
+// 从GitHub URL提取用户名
+export const getGithubUsername = (githubUrl?: string): string | null => {
+  if (!githubUrl) return null
+
+  try {
+    const url = new URL(githubUrl)
+    const pathname = url.pathname
+    const username = pathname.split('/')[1]
+    return username || null
+  } catch {
+    return null
+  }
+}
