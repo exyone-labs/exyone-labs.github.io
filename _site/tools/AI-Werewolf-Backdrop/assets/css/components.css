@@ -1,0 +1,516 @@
+/* ========================================
+   组件样式 - 卡片、按钮等UI组件
+   ======================================== */
+
+/* 主题切换按钮组 */
+.theme-btn {
+    transition: all 0.3s;
+}
+
+.theme-btn:hover {
+    transform: scale(1.05);
+}
+
+/* 游戏信息文字样式 */
+.game-info-title {
+    text-shadow: 
+        0 0 1px rgba(0, 0, 0, 0.3),
+        0 0 8px rgba(0, 0, 0, 0.9),
+        0 2px 4px rgba(0, 0, 0, 0.5);
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    max-width: 100%;
+    font-size: 2.5rem;
+    line-height: 1.3;
+}
+
+.game-info-description {
+    text-shadow: 
+        0 0 1px rgba(0, 0, 0, 0.25),
+        0 0 6px rgba(0, 0, 0, 0.8),
+        0 1px 3px rgba(0, 0, 0, 0.4);
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+/* 配置面板样式 */
+.config-panel {
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.config-tab {
+    transition: all 0.2s;
+}
+
+.config-tab.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.config-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 粒子动画 */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+.night-particle {
+    pointer-events: none;
+}
+
+/* 玩家卡片入场动画 */
+.player-card-animate {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 玩家名称样式 */
+.player-name {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.5px;
+}
+
+/* 角色徽章样式 */
+.role-badge {
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.role-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px currentColor;
+}
+
+.role-icon {
+    font-size: 1.1em;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.role-text {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* 投票徽章样式 */
+.vote-badge {
+    animation: pulse 2s infinite;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.5);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* 已淘汰徽章 */
+.dead-badge {
+    text-shadow: 0 0 8px rgba(248, 113, 113, 0.6);
+}
+
+/* 头像容器样式 */
+.avatar-container {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.avatar-container:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+/* 投票按钮悬停效果 */
+.vote-btn:hover,
+.status-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 统计栏样式 */
+#statsBar {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* 输入框焦点效果 */
+input:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/* 按钮点击效果 */
+button:active {
+    transform: scale(0.98);
+}
+
+/* 模态框背景模糊 */
+#configModal,
+#statsModal {
+    backdrop-filter: blur(4px);
+}
+
+/* 玩家卡片悬停效果 */
+.role-card:hover .vote-btn,
+.role-card:hover .status-btn {
+    opacity: 1;
+}
+
+/* 角色标签样式 */
+.role-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+}
+
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* 淘汰玩家覆盖层 */
+.dead-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 阶段历史样式 */
+#phaseHistoryContainer {
+    min-width: 80px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .config-panel {
+        max-width: 95vw;
+    }
+    
+    #statsBar {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    #statsBar > div {
+        flex: 1;
+        min-width: 200px;
+    }
+}
+
+/* ========================================
+   视觉效果动画
+   ======================================== */
+
+/* 雪花飘落 */
+@keyframes snowfall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(25vh) translateX(30px) rotate(90deg);
+    }
+    50% {
+        transform: translateY(50vh) translateX(-20px) rotate(180deg);
+    }
+    75% {
+        transform: translateY(75vh) translateX(25px) rotate(270deg);
+    }
+    100% {
+        transform: translateY(100vh) translateX(40px) rotate(360deg);
+    }
+}
+
+/* 雨滴下落 */
+@keyframes rainfall {
+    0% {
+        transform: translateY(0) scaleY(1);
+    }
+    50% {
+        transform: translateY(50vh) scaleY(1.2);
+    }
+    100% {
+        transform: translateY(100vh) scaleY(1);
+    }
+}
+
+/* 星星闪烁 */
+@keyframes starTwinkle {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+/* 萤火虫漂浮 */
+@keyframes fireflyFloat {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.4;
+    }
+    20% {
+        transform: translate(40px, -30px) scale(1.2);
+        opacity: 1;
+    }
+    40% {
+        transform: translate(-30px, 40px) scale(0.9);
+        opacity: 0.6;
+    }
+    60% {
+        transform: translate(30px, 30px) scale(1.1);
+        opacity: 0.9;
+    }
+    80% {
+        transform: translate(-20px, -20px) scale(1);
+        opacity: 0.7;
+    }
+}
+
+/* 花瓣飘落 */
+@keyframes petalFall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(25vh) translateX(60px) rotate(180deg);
+    }
+    50% {
+        transform: translateY(50vh) translateX(-40px) rotate(360deg);
+    }
+    75% {
+        transform: translateY(75vh) translateX(50px) rotate(540deg);
+    }
+    100% {
+        transform: translateY(100vh) translateX(80px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* 气泡上升 */
+@keyframes bubbleRise {
+    0% {
+        transform: translateY(0) scale(1) translateX(0);
+        opacity: 0.9;
+    }
+    25% {
+        transform: translateY(-25vh) scale(1.1) translateX(15px);
+    }
+    50% {
+        transform: translateY(-50vh) scale(1) translateX(-10px);
+    }
+    75% {
+        transform: translateY(-75vh) scale(0.9) translateX(12px);
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.6) translateX(0);
+        opacity: 0;
+    }
+}
+
+/* 彩纸飘落 */
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(25vh) translateX(40px) rotate(180deg);
+    }
+    50% {
+        transform: translateY(50vh) translateX(-30px) rotate(360deg);
+    }
+    75% {
+        transform: translateY(75vh) translateX(35px) rotate(540deg);
+    }
+    100% {
+        transform: translateY(100vh) translateX(50px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* 矩阵下落 */
+@keyframes matrixFall {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(calc(100vh + 200px));
+    }
+}
+
+/* 爱心上升 */
+@keyframes heartFloat {
+    0% {
+        transform: translateY(0) scale(1) translateX(0);
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(-25vh) scale(1.1) translateX(20px);
+    }
+    50% {
+        transform: translateY(-50vh) scale(0.95) translateX(-15px);
+    }
+    75% {
+        transform: translateY(-75vh) scale(1.05) translateX(18px);
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.6) translateX(0);
+        opacity: 0;
+    }
+}
+
+/* 波浪容器 */
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    animation: waveMove linear infinite;
+}
+
+.wave svg {
+    width: 100%;
+    height: 100%;
+}
+
+.wave1 {
+    animation-duration: 7s;
+    opacity: 0.9;
+    z-index: 4;
+}
+
+.wave2 {
+    animation-duration: 9s;
+    animation-direction: reverse;
+    opacity: 0.7;
+    z-index: 3;
+    bottom: 10px;
+}
+
+.wave3 {
+    animation-duration: 11s;
+    opacity: 0.5;
+    z-index: 2;
+    bottom: 20px;
+}
+
+.wave4 {
+    animation-duration: 13s;
+    animation-direction: reverse;
+    opacity: 0.4;
+    z-index: 1;
+    bottom: 30px;
+}
+
+@keyframes waveMove {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* 效果开关按钮样式 */
+.effect-toggle {
+    transition: all 0.3s ease;
+}
+
+.effect-toggle.active {
+    background: rgba(59, 130, 246, 0.3);
+    border-color: rgba(59, 130, 246, 0.6);
+}
+
+.effect-toggle:hover {
+    transform: scale(1.02);
+}

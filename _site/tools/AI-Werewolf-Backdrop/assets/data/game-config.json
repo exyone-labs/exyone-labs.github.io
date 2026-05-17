@@ -1,0 +1,11 @@
+{
+  "background": "https://picsum.photos/id/1048/1920/1080",
+  "gameInfo": {
+    "title": "狼人杀背景板",
+    "description": "12人经典版型\n预言家 · 女巫 · 猎人 · 守卫 · 骑士 · 狼王 · 狼人×3 · 平民×4"
+  },
+  "font": {
+    "family": "Noto Sans SC",
+    "cdn": "https://hanzi.itedev.com/fonts/Noto+Sans+SC/result.css"
+  }
+}

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI狼人杀 - 背景板</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wolf: {
+                            night: '#0f172a',
+                            day: '#0ea5e9',
+                            accent: '#f97316',
+                            card: 'rgba(30, 41, 59, 0.85)',
+                            cardNight: 'rgba(15, 23, 42, 0.9)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="style-minimal" id="gameBoard">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000" id="bgLayer">
+        <div class="absolute inset-0 day-overlay transition-all duration-1000" id="overlayLayer"></div>
+    </div>
+
+    <div class="absolute top-0 left-0 right-0 z-20 p-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="player-card rounded-lg px-4 py-2 text-white flex items-center gap-2 card-glow">
+                <i class="fa fa-moon-o" id="modeIcon"></i>
+                <span id="modeText" class="font-bold">白昼阶段</span>
+            </div>
+            
+            <div class="player-card rounded-lg px-4 py-2 text-white text-xl font-bold card-glow" id="gameTitle">
+                AI 狼人杀 对局中
+            </div>
+
+            <div class="player-card rounded-lg px-4 py-2 text-white flex items-center gap-2 card-glow" id="phaseHistoryContainer">
+                <i class="fa fa-history"></i>
+                <span id="phaseHistory" class="font-bold">第 1 天</span>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-2">
+            <button id="toggleModeBtn" class="bg-wolf-accent hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-all duration-300 card-glow">
+                切换昼夜
+            </button>
+
+            <button id="statsBtn" class="player-card rounded-lg px-4 py-2 text-white hover:bg-white/20 transition-all card-glow" title="统计">
+                <i class="fa fa-bar-chart"></i>
+            </button>
+            
+            <button id="settingsBtn" class="player-card rounded-lg px-4 py-2 text-white hover:bg-white/20 transition-all card-glow" title="设置">
+                <i class="fa fa-cog"></i>
+            </button>
+            
+            <button class="player-card rounded-lg px-4 py-2 text-white hover:bg-white/20 transition-all card-glow" title="全屏">
+                <i class="fa fa-expand" id="fullscreenBtn"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 right-0 z-20 p-4 flex justify-center items-center gap-4" id="statsBar">
+        <div class="player-card rounded-lg px-4 py-2 text-white flex items-center gap-3 card-glow">
+            <div class="flex items-center gap-2">
+                <i class="fa fa-users text-green-400"></i>
+                <span>存活: <span id="aliveCount" class="font-bold">12</span></span>
+            </div>
+            <div class="w-px h-4 bg-white/30"></div>
+            <div class="flex items-center gap-2">
+                <i class="fa fa-skull text-red-400"></i>
+                <span>淘汰: <span id="deadCount" class="font-bold">0</span></span>
+            </div>
+        </div>
+        <div class="player-card rounded-lg px-4 py-2 text-white flex items-center gap-2 card-glow">
+            <span class="text-white/60">开发者:</span>
+            <a href="https://exyone.is-a.dev" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors font-medium">Exyone Developer</a>
+        </div>
+    </div>
+
+    <div id="configModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="modalOverlay"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="config-panel bg-slate-800/95 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden border border-white/10">
+                <div class="flex items-center justify-between p-4 border-b border-white/10">
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa fa-cog"></i>
+                        游戏配置面板
+                    </h2>
+                    <button id="closeModalBtn" class="text-white/60 hover:text-white text-2xl">&times;</button>
+                </div>
+                
+                <div class="flex h-[calc(90vh-60px)]">
+                    <div class="w-48 bg-slate-900/50 border-r border-white/10 p-2">
+                        <button class="config-tab active w-full text-left px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-all mb-1" data-tab="game">
+                            <i class="fa fa-gamepad mr-2"></i>游戏设置
+                        </button>
+                        <button class="config-tab w-full text-left px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-all mb-1" data-tab="appearance">
+                            <i class="fa fa-paint-brush mr-2"></i>外观样式
+                        </button>
+                        <button class="config-tab w-full text-left px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-all mb-1" data-tab="players">
+                            <i class="fa fa-users mr-2"></i>玩家管理
+                        </button>
+                        <button class="config-tab w-full text-left px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-all mb-1" data-tab="import">
+                            <i class="fa fa-download mr-2"></i>导入/导出
+                        </button>
+                        <button class="config-tab w-full text-left px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-all mb-1" data-tab="support">
+                            <i class="fa fa-heart mr-2"></i>赞赏支持
+                        </button>
+                    </div>
+                    
+                    <div class="flex-1 overflow-y-auto p-6">
+                        <div id="tab-game" class="config-tab-content">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-white/80 mb-2">游戏标题</label>
+                                    <input type="text" id="configTitle" class="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-white/10 focus:border-blue-500 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-white/80 mb-2">游戏描述</label>
+                                    <textarea id="configDescription" rows="3" class="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-white/10 focus:border-blue-500 focus:outline-none resize-none"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-white/80 mb-2">背景图片URL</label>
+                                    <input type="text" id="configBackground" class="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-white/10 focus:border-blue-500 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-white/80 mb-2">当前局号</label>
+                                    <input type="number" id="configRound" min="1" value="1" class="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-white/10 focus:border-blue-500 focus:outline-none">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="tab-appearance" class="config-tab-content hidden">
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-white/80 mb-3">界面风格</label>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <button class="style-option p-4 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-style="minimal">
+                                            <div class="text-white font-bold mb-1">简约现代</div>
+                                            <div class="text-white/60 text-sm">简洁清爽的现代风格</div>
+                                        </button>
+                                        <button class="style-option p-4 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-style="game">
+                                            <div class="text-white font-bold mb-1">游戏卡牌</div>
+                                            <div class="text-white/60 text-sm">经典游戏卡牌风格</div>
+                                        </button>
+                                        <button class="style-option p-4 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-style="tech">
+                                            <div class="text-white font-bold mb-1">科技未来</div>
+                                            <div class="text-white/60 text-sm">赛博朋克科技感</div>
+                                        </button>
+                                        <button class="style-option p-4 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-style="classic">
+                                            <div class="text-white font-bold mb-1">中国古典</div>
+                                            <div class="text-white/60 text-sm">传统中国风元素</div>
+                                        </button>
+                                        <button class="style-option p-4 rounded-xl border-2 border-white/20 hover:border-pink-500 transition-all text-left" data-style="neon">
+                                            <div class="text-white font-bold mb-1">霓虹赛博</div>
+                                            <div class="text-white/60 text-sm">粉紫蓝霓虹光效</div>
+                                        </button>
+                                        <button class="style-option p-4 rounded-xl border-2 border-white/20 hover:border-red-800 transition-all text-left" data-style="gothic">
+                                            <div class="text-white font-bold mb-1">暗黑哥特</div>
+                                            <div class="text-white/60 text-sm">血红与黑色的暗黑风</div>
+                                        </button>
+                                        <button class="style-option p-4 rounded-xl border-2 border-white/20 hover:border-green-500 transition-all text-left" data-style="forest">
+                                            <div class="text-white font-bold mb-1">森林自然</div>
+                                            <div class="text-white/60 text-sm">清新自然的森林风</div>
+                                        </button>
+                                        <button class="style-option p-4 rounded-xl border-2 border-white/20 hover:border-blue-600 transition-all text-left" data-style="ocean">
+                                            <div class="text-white font-bold mb-1">海洋深邃</div>
+                                            <div class="text-white/60 text-sm">深蓝海洋波浪效果</div>
+                                        </button>
+                                        <button class="style-option p-4 rounded-xl border-2 border-white/20 hover:border-purple-500 transition-all text-left" data-style="cosmic">
+                                            <div class="text-white font-bold mb-1">星空宇宙</div>
+                                            <div class="text-white/60 text-sm">神秘星空闪烁效果</div>
+                                        </button>
+                                        <button class="style-option p-4 rounded-xl border-2 border-white/20 hover:border-green-400 transition-all text-left" data-style="pixel">
+                                            <div class="text-white font-bold mb-1">复古像素</div>
+                                            <div class="text-white/60 text-sm">8-bit复古游戏风</div>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6">
+                                    <label class="block text-white/80 mb-3">视觉效果</label>
+                                    <p class="text-white/50 text-sm mb-3">开启后将在背景层显示动态效果</p>
+                                    <div class="grid grid-cols-2 gap-3" id="effectsGrid">
+                                        <button class="effect-toggle p-3 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-effect="snow">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-lg">❄️</span>
+                                                <span class="text-white font-medium">雪花飘落</span>
+                                            </div>
+                                        </button>
+                                        <button class="effect-toggle p-3 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-effect="rain">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-lg">🌧️</span>
+                                                <span class="text-white font-medium">雨滴效果</span>
+                                            </div>
+                                        </button>
+                                        <button class="effect-toggle p-3 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-effect="stars">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-lg">⭐</span>
+                                                <span class="text-white font-medium">星空闪烁</span>
+                                            </div>
+                                        </button>
+                                        <button class="effect-toggle p-3 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-effect="fireflies">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-lg">✨</span>
+                                                <span class="text-white font-medium">萤火虫</span>
+                                            </div>
+                                        </button>
+                                        <button class="effect-toggle p-3 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-effect="petals">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-lg">🌸</span>
+                                                <span class="text-white font-medium">花瓣飘落</span>
+                                            </div>
+                                        </button>
+                                        <button class="effect-toggle p-3 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-effect="bubbles">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-lg">🫧</span>
+                                                <span class="text-white font-medium">气泡上升</span>
+                                            </div>
+                                        </button>
+                                        <button class="effect-toggle p-3 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-effect="confetti">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-lg">🎊</span>
+                                                <span class="text-white font-medium">彩纸飘落</span>
+                                            </div>
+                                        </button>
+                                        <button class="effect-toggle p-3 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-effect="matrix">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-lg">💻</span>
+                                                <span class="text-white font-medium">矩阵代码</span>
+                                            </div>
+                                        </button>
+                                        <button class="effect-toggle p-3 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-effect="hearts">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-lg">💕</span>
+                                                <span class="text-white font-medium">爱心飘浮</span>
+                                            </div>
+                                        </button>
+                                        <button class="effect-toggle p-3 rounded-xl border-2 border-white/20 hover:border-blue-500 transition-all text-left" data-effect="wave">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-lg">🌊</span>
+                                                <span class="text-white font-medium">多彩波浪</span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 border-t border-white/10 pt-6">
+                                    <label class="block text-white/80 mb-3">字体设置</label>
+                                    <p class="text-white/50 text-sm mb-3">选择预设字体或自定义字体。如果不确定如何设置，建议直接使用预设字体。</p>
+                                    
+                                    <div class="mb-4">
+                                        <label class="block text-white/60 text-sm mb-2">预设字体</label>
+                                        <select id="fontPresetSelect" class="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-white/10 focus:border-blue-500 focus:outline-none">
+                                            <option value="">-- 选择预设字体 --</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="border-t border-white/10 pt-4 mt-4">
+                                        <p class="text-white/60 text-sm mb-3">或者自定义字体（需要提供字体名称和CDN链接）</p>
+                                        <div class="space-y-3">
+                                            <div>
+                                                <label class="block text-white/60 text-sm mb-1">字体名称</label>
+                                                <input type="text" id="customFontFamily" placeholder="例如: Noto Sans SC" class="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-white/10 focus:border-blue-500 focus:outline-none text-sm">
+                                            </div>
+                                            <div>
+                                                <label class="block text-white/60 text-sm mb-1">CDN链接</label>
+                                                <input type="text" id="customFontCdn" placeholder="例如: https://fonts.googleapis.com/css2?family=..." class="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-white/10 focus:border-blue-500 focus:outline-none text-sm">
+                                            </div>
+                                            <button id="applyCustomFontBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-all text-sm">
+                                                <i class="fa fa-check mr-1"></i>应用自定义字体
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 p-3 bg-slate-700/50 rounded-lg">
+                                        <p class="text-white/60 text-xs">
+                                            <i class="fa fa-info-circle mr-1"></i>
+                                            当前字体: <span id="currentFontName" class="text-white font-medium">加载中...</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="tab-players" class="config-tab-content hidden">
+                            <div class="mb-4 flex justify-between items-center">
+                                <span class="text-white/80">玩家列表</span>
+                                <button id="addPlayerBtn" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg text-sm transition-all">
+                                    <i class="fa fa-plus mr-1"></i>添加玩家
+                                </button>
+                            </div>
+                            <div id="playersList" class="space-y-2 max-h-[60vh] overflow-y-auto pr-2">
+                            </div>
+                        </div>
+                        
+                        <div id="tab-import" class="config-tab-content hidden">
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-white font-bold mb-3">导出配置</h3>
+                                    <p class="text-white/60 text-sm mb-3">导出当前配置为JSON文件，保存到本地</p>
+                                    <div class="flex gap-2">
+                                        <button id="exportConfigBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all">
+                                            <i class="fa fa-download mr-1"></i>导出配置
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="border-t border-white/10 pt-6">
+                                    <h3 class="text-white font-bold mb-3">导入配置</h3>
+                                    <p class="text-white/60 text-sm mb-3">从JSON文件导入配置，不会覆盖预设文件</p>
+                                    <div class="flex gap-2">
+                                        <input type="file" id="importFileInput" accept=".json" class="hidden">
+                                        <button id="importConfigBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-all">
+                                            <i class="fa fa-upload mr-1"></i>选择文件导入
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="border-t border-white/10 pt-6">
+                                    <h3 class="text-white font-bold mb-3">本地存储</h3>
+                                    <p class="text-white/60 text-sm mb-3">配置会自动保存到浏览器本地存储，下次打开自动加载</p>
+                                    <div class="flex gap-2">
+                                        <button id="clearStorageBtn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all">
+                                            <i class="fa fa-trash mr-1"></i>清除本地存储
+                                        </button>
+                                        <button id="resetToDefaultBtn" class="bg-slate-600 hover:bg-slate-700 text-white px-4 py-2 rounded-lg transition-all">
+                                            <i class="fa fa-undo mr-1"></i>恢复预设配置
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab-support" class="config-tab-content hidden">
+                            <div class="space-y-6">
+                                <div class="text-center py-8">
+                                    <div class="text-6xl mb-4">❤️</div>
+                                    <h3 class="text-white text-xl font-bold mb-2">感谢您的支持！</h3>
+                                    <p class="text-white/60 text-sm mb-6">如果您觉得这个项目对您有帮助，欢迎赞赏支持开发者继续维护和改进。</p>
+                                    <a href="https://exyone.us.kg/support" target="_blank" 
+                                       class="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg">
+                                        <i class="fa fa-heart"></i>
+                                        前往赞赏页面
+                                    </a>
+                                </div>
+                                
+                                <div class="border-t border-white/10 pt-6">
+                                    <h4 class="text-white font-bold mb-3">关于项目</h4>
+                                    <div class="bg-slate-700/50 rounded-lg p-4 space-y-2 text-white/70 text-sm">
+                                        <p><i class="fa fa-code mr-2"></i>开发者: <a href="https://exyone.is-a.dev" target="_blank" class="text-blue-400 hover:underline">Exyone Developer</a></p>
+                                        <p><i class="fa fa-github mr-2"></i>GitHub: <a href="https://github.com/exyone-labs/AI-Werewolf-Backdrop" target="_blank" class="text-blue-400 hover:underline">AI-Werewolf-Backdrop</a></p>
+                                        <p><i class="fa fa-code-fork mr-2"></i>Codeberg: <a href="https://codeberg.org/exyone/AI-Werewolf-Backdrop" target="_blank" class="text-blue-400 hover:underline">AI-Werewolf-Backdrop</a></p>
+                                        <p><i class="fa fa-star mr-2"></i>如果喜欢请给个 Star 支持一下！</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 border-t border-white/10 flex justify-end gap-2">
+                    <button id="cancelConfigBtn" class="bg-slate-600 hover:bg-slate-700 text-white px-6 py-2 rounded-lg transition-all">取消</button>
+                    <button id="saveConfigBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-all">
+                        <i class="fa fa-save mr-1"></i>保存配置
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="statsModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="statsModalOverlay"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="config-panel bg-slate-800/95 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] overflow-hidden border border-white/10">
+                <div class="flex items-center justify-between p-4 border-b border-white/10">
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa fa-bar-chart"></i>
+                        游戏统计
+                    </h2>
+                    <button id="closeStatsBtn" class="text-white/60 hover:text-white text-2xl">&times;</button>
+                </div>
+                
+                <div class="p-6 overflow-y-auto max-h-[60vh]">
+                    <div class="mb-4">
+                        <h3 class="text-white font-bold mb-3">玩家状态</h3>
+                        <div id="playerStatsList" class="space-y-2">
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button id="resetGameBtn" class="bg-slate-600 hover:bg-slate-700 text-white px-4 py-2 rounded-lg transition-all">
+                            <i class="fa fa-refresh mr-1"></i>重置本局
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="particleContainer" class="absolute inset-0 pointer-events-none z-5 overflow-hidden"></div>
+
+    <div class="absolute inset-0 z-10 flex justify-between items-center px-10 md:px-20 pt-20 pb-24">
+        <div class="flex flex-col gap-5 w-72" id="leftPlayersContainer">
+        </div>
+
+        <div class="text-center text-white hidden lg:block px-4" id="gameInfoContainer">
+            <h2 class="text-4xl font-bold game-info-title" id="gameInfoTitle"></h2>
+            <p class="mt-4 text-xl game-info-description" id="gameInfoDescription"></p>
+        </div>
+
+        <div class="flex flex-col gap-5 w-72" id="rightPlayersContainer">
+        </div>
+    </div>
+
+    <script src="assets/js/config-manager.js"></script>
+    <script src="assets/js/font-manager.js"></script>
+    <script src="assets/js/player-renderer.js"></script>
+    <script src="assets/js/theme-switcher.js"></script>
+    <script src="assets/js/effects-manager.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

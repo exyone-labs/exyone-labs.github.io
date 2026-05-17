@@ -1,0 +1,466 @@
+/* ========================================
+   主题样式 - 十种风格的定义
+   ======================================== */
+
+/* 简约现代风格 */
+.style-minimal .player-card {
+    background: rgba(30, 41, 59, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.style-minimal .card-glow {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.style-minimal .night-card-glow {
+    box-shadow: 0 4px 25px rgba(249, 115, 22, 0.2);
+}
+
+.style-minimal .night-overlay {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.88));
+}
+
+.style-minimal .day-overlay {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(20, 184, 166, 0.08));
+}
+
+.style-minimal .avatar-container {
+    border-radius: 8px;
+    background: white;
+}
+
+/* 游戏卡牌风格 */
+.style-game .player-card {
+    background: linear-gradient(145deg, rgba(51, 65, 85, 0.9), rgba(30, 41, 59, 0.85));
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    position: relative;
+    overflow: visible;
+}
+
+.style-game .player-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.3), rgba(14, 165, 233, 0.3));
+    border-radius: 18px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.style-game .player-card:hover::before {
+    opacity: 1;
+}
+
+.style-game .card-glow {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.style-game .night-card-glow {
+    box-shadow: 0 8px 35px rgba(249, 115, 22, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.style-game .night-overlay {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(51, 65, 85, 0.9));
+}
+
+.style-game .day-overlay {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(20, 184, 166, 0.1));
+}
+
+.style-game .avatar-container {
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fff, #e2e8f0);
+    padding: 3px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.style-game .avatar-container img {
+    border-radius: 50%;
+}
+
+/* 科技未来风格 */
+.style-tech .player-card {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.8));
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    border-radius: 8px;
+    position: relative;
+}
+
+.style-tech .player-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #0ea5e9, transparent);
+}
+
+.style-tech .card-glow {
+    box-shadow: 0 0 30px rgba(14, 165, 233, 0.3), 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.style-tech .night-card-glow {
+    box-shadow: 0 0 35px rgba(249, 115, 22, 0.4), 0 4px 25px rgba(0, 0, 0, 0.5);
+}
+
+.style-tech .night-overlay {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
+}
+
+.style-tech .day-overlay {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(6, 182, 212, 0.15));
+}
+
+.style-tech .avatar-container {
+    border-radius: 4px;
+    background: rgba(14, 165, 233, 0.2);
+    border: 1px solid rgba(14, 165, 233, 0.4);
+}
+
+/* 中国风古典风格 */
+.style-classic .player-card {
+    background: linear-gradient(145deg, rgba(127, 29, 29, 0.75), rgba(30, 41, 59, 0.7));
+    border: 2px solid rgba(251, 146, 60, 0.4);
+    border-radius: 8px;
+    position: relative;
+}
+
+.style-classic .player-card::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border: 1px solid rgba(251, 146, 60, 0.2);
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.style-classic .card-glow {
+    box-shadow: 0 6px 25px rgba(127, 29, 29, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.style-classic .night-card-glow {
+    box-shadow: 0 6px 30px rgba(251, 146, 60, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.style-classic .night-overlay {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.93), rgba(127, 29, 29, 0.4));
+}
+
+.style-classic .day-overlay {
+    background: linear-gradient(135deg, rgba(251, 146, 60, 0.15), rgba(20, 184, 166, 0.08));
+}
+
+.style-classic .avatar-container {
+    border-radius: 8px;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 2px solid rgba(251, 146, 60, 0.5);
+}
+
+/* 霓虹赛博风格 */
+.style-neon .player-card {
+    background: linear-gradient(135deg, rgba(15, 15, 35, 0.9), rgba(30, 20, 50, 0.85));
+    border: 2px solid transparent;
+    border-radius: 12px;
+    position: relative;
+    background-clip: padding-box;
+}
+
+.style-neon .player-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, #ff00ff, #00ffff, #ff00ff);
+    border-radius: 14px;
+    z-index: -1;
+    animation: neonGlow 3s ease-in-out infinite;
+}
+
+@keyframes neonGlow {
+    0%, 100% { opacity: 0.7; filter: blur(2px); }
+    50% { opacity: 1; filter: blur(4px); }
+}
+
+.style-neon .card-glow {
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.2);
+}
+
+.style-neon .night-card-glow {
+    box-shadow: 0 0 25px rgba(255, 0, 128, 0.5), 0 0 50px rgba(128, 0, 255, 0.3);
+}
+
+.style-neon .night-overlay {
+    background: linear-gradient(135deg, rgba(10, 5, 30, 0.95), rgba(30, 10, 60, 0.9));
+}
+
+.style-neon .day-overlay {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.1));
+}
+
+.style-neon .avatar-container {
+    border-radius: 8px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+/* 暗黑哥特风格 */
+.style-gothic .player-card {
+    background: linear-gradient(145deg, rgba(20, 5, 10, 0.9), rgba(40, 15, 25, 0.85));
+    border: 2px solid rgba(139, 0, 0, 0.5);
+    border-radius: 8px;
+    position: relative;
+}
+
+.style-gothic .player-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 0L20 10L10 20L0 10Z' fill='none' stroke='rgba(139,0,0,0.1)' stroke-width='0.5'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: 6px;
+}
+
+.style-gothic .card-glow {
+    box-shadow: 0 6px 30px rgba(139, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.style-gothic .night-card-glow {
+    box-shadow: 0 8px 40px rgba(100, 0, 0, 0.6), inset 0 0 30px rgba(139, 0, 0, 0.2);
+}
+
+.style-gothic .night-overlay {
+    background: linear-gradient(135deg, rgba(5, 0, 0, 0.95), rgba(40, 10, 15, 0.9));
+}
+
+.style-gothic .day-overlay {
+    background: linear-gradient(135deg, rgba(80, 20, 30, 0.2), rgba(40, 10, 20, 0.15));
+}
+
+.style-gothic .avatar-container {
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a0a0f, #2d1018);
+    border: 3px solid #8b0000;
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
+}
+
+/* 森林自然风格 */
+.style-forest .player-card {
+    background: linear-gradient(145deg, rgba(20, 50, 30, 0.85), rgba(30, 60, 40, 0.8));
+    border: 2px solid rgba(34, 197, 94, 0.3);
+    border-radius: 16px;
+    position: relative;
+}
+
+.style-forest .player-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 20H25Z' fill='rgba(34,197,94,0.1)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: 14px;
+}
+
+.style-forest .card-glow {
+    box-shadow: 0 6px 25px rgba(34, 197, 94, 0.3), 0 0 40px rgba(20, 83, 45, 0.2);
+}
+
+.style-forest .night-card-glow {
+    box-shadow: 0 8px 35px rgba(16, 185, 129, 0.4), 0 0 50px rgba(5, 150, 105, 0.2);
+}
+
+.style-forest .night-overlay {
+    background: linear-gradient(135deg, rgba(5, 25, 15, 0.95), rgba(20, 50, 30, 0.9));
+}
+
+.style-forest .day-overlay {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.15));
+}
+
+.style-forest .avatar-container {
+    border-radius: 12px;
+    background: linear-gradient(135deg, #166534, #14532d);
+    border: 2px solid rgba(34, 197, 94, 0.5);
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+/* 海洋深邃风格 */
+.style-ocean .player-card {
+    background: linear-gradient(145deg, rgba(10, 30, 60, 0.9), rgba(20, 50, 80, 0.85));
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.style-ocean .player-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    animation: oceanWave 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes oceanWave {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(5%, 5%) rotate(5deg); }
+}
+
+.style-ocean .card-glow {
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4), 0 0 50px rgba(37, 99, 235, 0.2);
+}
+
+.style-ocean .night-card-glow {
+    box-shadow: 0 10px 40px rgba(30, 64, 175, 0.5), 0 0 60px rgba(29, 78, 216, 0.3);
+}
+
+.style-ocean .night-overlay {
+    background: linear-gradient(135deg, rgba(5, 15, 35, 0.95), rgba(15, 35, 70, 0.9));
+}
+
+.style-ocean .day-overlay {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(14, 165, 233, 0.15));
+}
+
+.style-ocean .avatar-container {
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e3a5f, #1e40af);
+    border: 3px solid rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+/* 星空宇宙风格 */
+.style-cosmic .player-card {
+    background: linear-gradient(135deg, rgba(15, 10, 40, 0.9), rgba(30, 20, 60, 0.85));
+    border: 1px solid rgba(147, 51, 234, 0.3);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.style-cosmic .player-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, white, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, white, transparent),
+        radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 160px 20px, white, transparent);
+    background-size: 200px 100px;
+    animation: twinkle 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.style-cosmic .card-glow {
+    box-shadow: 0 0 30px rgba(147, 51, 234, 0.4), 0 0 60px rgba(79, 70, 229, 0.2);
+}
+
+.style-cosmic .night-card-glow {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.5), 0 0 80px rgba(124, 58, 237, 0.3);
+}
+
+.style-cosmic .night-overlay {
+    background: linear-gradient(135deg, rgba(5, 5, 20, 0.95), rgba(20, 10, 50, 0.9));
+}
+
+.style-cosmic .day-overlay {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(79, 70, 229, 0.1));
+}
+
+.style-cosmic .avatar-container {
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e1b4b, #312e81);
+    border: 2px solid rgba(147, 51, 234, 0.5);
+    box-shadow: 0 0 25px rgba(147, 51, 234, 0.5);
+}
+
+/* 复古像素风格 */
+.style-pixel .player-card {
+    background: linear-gradient(180deg, rgba(30, 40, 50, 0.9), rgba(20, 30, 40, 0.85));
+    border: 4px solid #4ade80;
+    border-radius: 0;
+    box-shadow: 
+        4px 4px 0 #22c55e,
+        8px 8px 0 rgba(0, 0, 0, 0.3);
+    position: relative;
+    image-rendering: pixelated;
+}
+
+.style-pixel .player-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        #4ade80 0px,
+        #4ade80 8px,
+        transparent 8px,
+        transparent 16px
+    );
+}
+
+.style-pixel .card-glow {
+    box-shadow: 
+        4px 4px 0 #22c55e,
+        8px 8px 0 rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+.style-pixel .night-card-glow {
+    box-shadow: 
+        4px 4px 0 #f97316,
+        8px 8px 0 rgba(0, 0, 0, 0.4),
+        0 0 25px rgba(249, 115, 22, 0.4);
+}
+
+.style-pixel .night-overlay {
+    background: linear-gradient(180deg, rgba(10, 15, 20, 0.95), rgba(20, 25, 35, 0.9));
+}
+
+.style-pixel .day-overlay {
+    background: linear-gradient(180deg, rgba(74, 222, 128, 0.15), rgba(34, 197, 94, 0.1));
+}
+
+.style-pixel .avatar-container {
+    border-radius: 0;
+    background: #1a1a2e;
+    border: 3px solid #4ade80;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.style-pixel .role-label {
+    border-radius: 0 !important;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
