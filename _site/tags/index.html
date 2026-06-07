@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     Base Layout (Template Layer)
+     Serves as the root template for all pages.
+     ============================================================ -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Eleventy v3">
+
+<title>标签 - EXYONE@BLOG:~$</title>
+<meta name="description" content="Technical blog about .NET, front-end development, and web technologies. Sharing coding tutorials, software architecture insights, and development best practices.">
+<meta name="author" content="Exyone.dev">
+
+<!-- ========================================================== -->
+<!--  Open Graph / Social Preview                                -->
+<!-- ========================================================== -->
+<meta property="og:title" content="标签 - EXYONE@BLOG:~$">
+<meta property="og:description" content="Technical blog about .NET, front-end development, and web technologies. Sharing coding tutorials, software architecture insights, and development best practices.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://exyone.is-a.dev/tags/">
+<meta property="og:site_name" content="EXYONE@BLOG:~$">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://exyone.is-a.dev/assets/images/avatar.png">
+
+<!-- ========================================================== -->
+<!--  Twitter Card                                               -->
+<!-- ========================================================== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@exyone_frosty">
+<meta name="twitter:title" content="标签 - EXYONE@BLOG:~$">
+<meta name="twitter:description" content="Technical blog about .NET, front-end development, and web technologies. Sharing coding tutorials, software architecture insights, and development best practices.">
+<meta name="twitter:image" content="https://exyone.is-a.dev/assets/images/avatar.png">
+
+<!-- ========================================================== -->
+<!--  Webmaster Verification                                     -->
+<!-- ========================================================== -->
+<meta name="google-site-verification" content="kBZNtZYwiUvmQLdeBYw3KVii7WNN8MEFG3yZlizKv08">
+
+
+
+<!-- ========================================================== -->
+<!--  Font Awesome 6 (Free)                                      -->
+<!-- ========================================================== -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- ========================================================== -->
+<!--  Stylesheets                                                -->
+<!-- ========================================================== -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- ========================================================== -->
+<!--  Google Fonts                                                -->
+<!-- ========================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<!-- RSS Feed -->
+<link rel="alternate" type="application/atom+xml" title="EXYONE@BLOG:~$" href="https://exyone.is-a.dev/feed.xml">
+
+<!-- ========================================================== -->
+<!--  Favicon (SVG inline — cloud-drizzle icon)                 -->
+<!-- ========================================================== -->
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon-precomposed" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cloud-drizzle' viewBox='0 0 16 16'%3E%3Cpath d='M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973M8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4 4 0 0 1 8.5 2'/%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-title" content="EXYONE@BLOG:~$">
+<meta name="application-name" content="EXYONE@BLOG:~$">
+<meta name="theme-color" content="#ffffff">
+
+  
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "EXYONE@BLOG:~$",
+  "description": "Technical blog about .NET, front-end development, and web technologies. Sharing coding tutorials, software architecture insights, and development best practices.",
+  "url": "https://exyone.is-a.dev",
+  "author": {
+    "@type": "Person",
+    "name": "Exyone.dev"
+  }
+}
+</script>
+
+
+
+  <!-- ========================================================== -->
+  <!--  PWA: Web App Manifest                                      -->
+  <!-- ========================================================== -->
+  <link rel="manifest" href="/assets/manifest.json">
+  <meta name="theme-color" content="#2dd4a8">
+
+  <!-- ========================================================== -->
+  <!--  Analytics: Umami                                           -->
+  <!-- ========================================================== -->
+  
+
+  <!-- ========================================================== -->
+  <!--  Analytics: Google (gtag.js)                                -->
+  <!-- ========================================================== -->
+  
+
+  <!-- ========================================================== -->
+  <!--  Analytics: Cloudflare Web Analytics                        -->
+  <!-- ========================================================== -->
+  
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__logo">
+      <span class="site-header__logo-text">EXYONE@BLOG:~$</span>
+    </a>
+
+    <!-- Main Navigation (text links) -->
+    <nav class="header-nav">
+      <a href="/" class="header-nav__link">导航</a>
+      <a href="/categories/" class="header-nav__link">整理</a>
+      <a href="/links/" class="header-nav__link">友链</a>
+      <a href="/guestbook/" class="header-nav__link">留言</a>
+      <a href="/share/" class="header-nav__link">分享</a>
+      <a href="/about/" class="header-nav__link">关于</a>
+    </nav>
+
+    <!-- Right-aligned tools -->
+    <div class="header-tools">
+      <!-- Search -->
+      <button class="header-tools__btn" id="searchBtn" aria-label="搜索" title="搜索">
+        <i class="fas fa-search"></i>
+      </button>
+
+      <!-- Theme Toggle -->
+      <div class="header-tools__btn header-theme-toggle" id="themeToggle">
+        <i class="fas fa-moon theme-icon-dark"></i>
+        <i class="fas fa-sun theme-icon-light"></i>
+      </div>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="切换导航" title="切换导航">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</header>
+
+
+  <div class="site-container">
+    
+
+<aside class="left-nav" id="leftNav">
+  <!-- Author + Site info (merged hero) -->
+  <div class="left-nav__author">
+    <div class="left-nav__avatar">
+      <img src="/assets/images/avatar.png" alt="Exyone.dev" loading="lazy">
+    </div>
+    <h2 class="left-nav__author-name">Exyone.dev</h2>
+    <p class="left-nav__site-title">EXYONE@BLOG:~$</p>
+    <p class="left-nav__site-tagline">Building software with C# and JS. Based in China.</p>
+    <p class="left-nav__author-desc">将好奇心转化为代码</p>
+    <div class="left-nav__social">
+      
+        <a href="https://github.com/exyone-labs" class="left-nav__social-link" aria-label="GitHub" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      
+      
+        <a href="https://twitter.com/exyone_frosty" class="left-nav__social-link" aria-label="Twitter" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      
+      
+        <a href="mailto:exyone.dev@icloud.com" class="left-nav__social-link" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+    </div>
+  </div>
+
+  <!-- Main navigation -->
+  <nav class="left-nav__menu" aria-label="Main navigation">
+    
+      <a href="/" class="left-nav__item">
+        
+          <i class="fas fa-house"></i>
+        
+        <span>首页</span>
+      </a>
+    
+      <a href="/categories/" class="left-nav__item">
+        
+          <i class="fas fa-layer-group"></i>
+        
+        <span>分类</span>
+      </a>
+    
+      <a href="/tags/" class="left-nav__item left-nav__item--active">
+        
+          <i class="fas fa-tags"></i>
+        
+        <span>标签</span>
+      </a>
+    
+      <a href="/archive/" class="left-nav__item">
+        
+          <i class="fas fa-box-archive"></i>
+        
+        <span>归档</span>
+      </a>
+    
+  </nav>
+
+  <!-- Overlay for mobile -->
+  <div class="left-nav__overlay" id="navOverlay"></div>
+</aside>
+
+
+<main class="main-content" id="main-content">
+  <section class="tags-page">
+    
+      <a href="/tags/tutorial/" class="tags-page__item" data-count="2">
+        #教程<span class="tags-page__count">2</span>
+      </a>
+    
+      <a href="/tags/css/" class="tags-page__item" data-count="2">
+        #CSS<span class="tags-page__count">2</span>
+      </a>
+    
+      <a href="/tags/frontend/" class="tags-page__item" data-count="2">
+        #前端<span class="tags-page__count">2</span>
+      </a>
+    
+      <a href="/tags/eleventy/" class="tags-page__item" data-count="1">
+        #Eleventy<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/static-site/" class="tags-page__item" data-count="1">
+        #静态站点<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/theme/" class="tags-page__item" data-count="1">
+        #主题<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/responsive/" class="tags-page__item" data-count="1">
+        #响应式<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/reading/" class="tags-page__item" data-count="1">
+        #读书<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/programming/" class="tags-page__item" data-count="1">
+        #编程<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/code-quality/" class="tags-page__item" data-count="1">
+        #代码质量<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/life/" class="tags-page__item" data-count="1">
+        #生活<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/hiking/" class="tags-page__item" data-count="1">
+        #徒步<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/nature/" class="tags-page__item" data-count="1">
+        #自然<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/docker/" class="tags-page__item" data-count="1">
+        #Docker<span class="tags-page__count">1</span>
+      </a>
+    
+      <a href="/tags/deployment/" class="tags-page__item" data-count="1">
+        #部署<span class="tags-page__count">1</span>
+      </a>
+    
+  </section>
+</main>
+
+
+<aside class="right-sidebar">
+  <!-- ============================================================ -->
+  <!--  Table of Contents                                            -->
+  <!-- ============================================================ -->
+  <div class="sidebar-card toc-card" id="tocCard" style="display:none;">
+    <h3 class="sidebar-card__title">
+      <i class="fas fa-list" style="margin-right:4px;font-size:0.85em;"></i>
+      目录
+    </h3>
+    <nav class="toc" id="toc"></nav>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  Site Stats                                                   -->
+  <!-- ============================================================ -->
+  <div class="sidebar-card site-info-card">
+    <h3 class="sidebar-card__title">
+      <i class="fas fa-chart-simple" style="margin-right:4px;font-size:0.85em;"></i>
+      站点统计
+    </h3>
+    <div class="site-info-card__stats">
+      <div class="site-info-card__stat">
+        <span class="site-info-card__stat-value">6</span>
+        <span class="site-info-card__stat-label">文章</span>
+      </div>
+      <div class="site-info-card__stat">
+        <span class="site-info-card__stat-value">4</span>
+        <span class="site-info-card__stat-label">分类</span>
+      </div>
+      <div class="site-info-card__stat">
+        <span class="site-info-card__stat-value">15</span>
+        <span class="site-info-card__stat-label">标签</span>
+      </div>
+      <div class="site-info-card__stat">
+        <span class="site-info-card__stat-value">2026</span>
+        <span class="site-info-card__stat-label">建站</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  Categories                                                   -->
+  <!-- ============================================================ -->
+  
+  <div class="sidebar-card categories-card">
+    <h3 class="sidebar-card__title">
+      <i class="fas fa-folder-open" style="margin-right:4px;font-size:0.85em;"></i>
+      分类
+    </h3>
+    <ul class="categories-list">
+      
+        <li class="categories-list__item">
+          <a href="/categories/tech-notes/">技术笔记<span class="categories-list__count">3</span></a>
+        </li>
+      
+        <li class="categories-list__item">
+          <a href="/categories/projects/">项目分享<span class="categories-list__count">1</span></a>
+        </li>
+      
+    </ul>
+  </div>
+  
+
+  <!-- ============================================================ -->
+  <!--  Tag Cloud                                                    -->
+  <!-- ============================================================ -->
+  
+  <div class="sidebar-card tags-card">
+    <h3 class="sidebar-card__title">
+      <i class="fas fa-tags" style="margin-right:4px;font-size:0.85em;"></i>
+      标签
+    </h3>
+    <div class="tag-cloud">
+      
+        <a href="/tags/tutorial/" class="tag-cloud__item" data-count="2">教程</a>
+      
+        <a href="/tags/css/" class="tag-cloud__item" data-count="2">CSS</a>
+      
+        <a href="/tags/frontend/" class="tag-cloud__item" data-count="2">前端</a>
+      
+        <a href="/tags/docker/" class="tag-cloud__item" data-count="1">Docker</a>
+      
+        <a href="/tags/deployment/" class="tag-cloud__item" data-count="1">部署</a>
+      
+        <a href="/tags/responsive/" class="tag-cloud__item" data-count="1">响应式</a>
+      
+        <a href="/tags/theme/" class="tag-cloud__item" data-count="1">主题</a>
+      
+        <a href="/tags/eleventy/" class="tag-cloud__item" data-count="1">Eleventy</a>
+      
+        <a href="/tags/static-site/" class="tag-cloud__item" data-count="1">静态站点</a>
+      
+    </div>
+  </div>
+  
+</aside>
+
+
+  </div>
+
+  
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__copyright">
+      &copy; 2026 <a href="https://github.com/exyone-labs">Exyone.dev</a>. 保留所有权利。
+    </p>
+    <div class="site-footer__links">
+      
+        <a href="https://twitter.com/exyone_frosty" class="site-footer__link" aria-label="Twitter" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      
+      
+        <a href="https://github.com/exyone-labs" class="site-footer__link" aria-label="GitHub" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      
+      
+        <a href="mailto:exyone.dev@icloud.com" class="site-footer__link" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+      <span class="site-footer__powered">
+        Powered by <a href="https://www.11ty.dev/" target="_blank" rel="noopener">Eleventy</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="回到顶部" title="回到顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="/assets/js/main.js"></script>
+
+  <!-- ========================================================== -->
+  <!--  Search Modal                                               -->
+  <!-- ========================================================== -->
+  <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-label="搜索">
+    <div class="search-modal__overlay" id="searchOverlay"></div>
+    <div class="search-modal__content">
+      <div class="search-modal__header">
+        <i class="fas fa-search search-modal__icon"></i>
+        <input type="text" class="search-modal__input" id="searchInput" placeholder="搜索文章..." autocomplete="off" spellcheck="false">
+        <button class="search-modal__close" id="searchClose" aria-label="关闭搜索">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="search-modal__results" id="searchResults">
+        <div class="search-modal__empty">输入关键词开始搜索</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================== -->
+  <!--  PWA: Service Worker Registration                          -->
+  <!-- ========================================================== -->
+  
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "provider": "giscus",
+  "giscus": {
+    "repo": "exyone-labs/exyone-labs.github.io",
+    "repo_id": "R_kgDOSARDDA",
+    "category": "Comments",
+    "category_id": "DIC_kwDOSARDDM4C6pqo",
+    "mapping": "pathname",
+    "strict": 0,
+    "input_position": "top",
+    "reactions_enabled": true
+  },
+  "twikoo": {
+    "env_id": "https://cmt.exyon.ee/",
+    "version": "1.6.44"
+  }
+}

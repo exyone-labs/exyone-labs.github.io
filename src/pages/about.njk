@@ -1,0 +1,27 @@
+---
+layout: base.njk
+title: 关于
+permalink: /about/
+---
+{% include "left-nav.njk" %}
+
+<main class="main-content" id="main-content">
+  <h1 class="page-title">关于</h1>
+  <p class="page-subtitle">关于本博客</p>
+
+  <article class="post-content">
+    <p>这是一个基于 <a href="https://www.11ty.dev/" target="_blank" rel="noopener">Eleventy</a> 构建的个人技术博客。</p>
+
+    <h2>关于作者</h2>
+    <p>{{ author.description }}</p>
+
+    <h2>联系我</h2>
+    <ul>
+      {% if author.social.github %}<li>GitHub: <a href="{{ author.social.github }}" target="_blank" rel="noopener">{{ author.social.github }}</a></li>{% endif %}
+      {% if author.social.twitter %}<li>Twitter: <a href="{{ author.social.twitter }}" target="_blank" rel="noopener">{{ author.social.twitter }}</a></li>{% endif %}
+      {% if author.email %}<li>Email: <a href="mailto:{{ author.email }}">{{ author.email }}</a></li>{% endif %}
+    </ul>
+  </article>
+</main>
+
+{% include "right-sidebar.njk" %}

@@ -1,0 +1,35 @@
+/**
+ * Main Stylesheet (Entry Point)
+ *
+ * Imports all CSS partials in order.
+ * Each partial is a self-contained layer of the design system.
+ *
+ * Order:
+ *   1. variables.css     — Design tokens (jelly green theme)
+ *   2. base.css          — Reset, typography, utilities
+ *   3. layout.css        — Grid, header, footer, navigation
+ *   4. components.css    — Cards, badges, pagination, TOC, sidebar
+ *   5. theme.css         — Glass effects, noise, glow, animations
+ *   6. responsive.css    — Media queries
+ */
+
+/* Bootstrap (vendored) */
+@import "bootstrap.min.css";
+
+/* Design tokens */
+@import "variables.css";
+
+/* Base layer */
+@import "base.css";
+
+/* Layout layer */
+@import "layout.css";
+
+/* Components layer */
+@import "components.css";
+
+/* Decorative & theme layer */
+@import "theme.css";
+
+/* Responsive overrides */
+@import "responsive.css";

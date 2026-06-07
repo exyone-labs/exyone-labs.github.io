@@ -1,0 +1,49 @@
+[{
+  "title": "用Eleventy搭建静态博客的完整指南",
+  "url": "/posts/eleventy-guide/",
+  "date": "2026-06-01T00:00:00Z",
+  "excerpt": "本文详细介绍了如何使用Eleventy静态站点生成器搭建一个现代化的博客系统，从项目初始化到主题开发，涵盖目录结构、模板引擎、数据文件等核心概念。",
+  "categories": ["技术笔记"],
+  "tags": ["Eleventy","静态站点","教程"]
+},
+{
+  "title": "CSS自定义属性实现主题切换",
+  "url": "/posts/css-custom-properties/",
+  "date": "2026-05-20T00:00:00Z",
+  "excerpt": "使用CSS自定义属性（CSS Variables）实现博客主题的灵活配置，包括颜色方案、字体样式和布局参数的动态调整。",
+  "categories": ["技术笔记"],
+  "tags": ["CSS","前端","主题"]
+},
+{
+  "title": "响应式设计的最佳实践",
+  "url": "/posts/responsive-design/",
+  "date": "2026-05-15T00:00:00Z",
+  "excerpt": "探讨现代响应式设计的核心策略，包括移动优先、弹性布局、断点选择等关键实践，确保网站在不同设备上都能提供优秀的阅读体验。",
+  "categories": ["技术笔记"],
+  "tags": ["CSS","响应式","前端"]
+},
+{
+  "title": "读书笔记：代码整洁之道",
+  "url": "/posts/clean-code-notes/",
+  "date": "2026-05-01T00:00:00Z",
+  "excerpt": "《代码整洁之道》读书笔记，总结关于命名、函数、注释等方面的核心原则，帮助写出更易读、更易维护的代码。",
+  "categories": ["笔耕问道"],
+  "tags": ["读书","编程","代码质量"]
+},
+{
+  "title": "记一次周末徒步",
+  "url": "/posts/weekend-hiking/",
+  "date": "2026-04-20T00:00:00Z",
+  "excerpt": "趁着春光正好，周末和朋友去郊外徒步。山间清风拂面，溪水潺潺，远离城市的喧嚣，在大自然中找到了久违的宁静。",
+  "categories": ["闲情杂记"],
+  "tags": ["生活","徒步","自然"]
+},
+{
+  "title": "Docker容器化部署实践",
+  "url": "/posts/docker-deployment/",
+  "date": "2026-04-10T00:00:00Z",
+  "excerpt": "分享使用Docker进行博客项目容器化部署的实践经验，包括Dockerfile编写、多阶段构建和Docker Compose编排。",
+  "categories": ["项目分享"],
+  "tags": ["Docker","部署","教程"]
+}
+]

@@ -1,0 +1,6 @@
+[
+  { "label": "首页", "url": "/", "icon": "home" },
+  { "label": "分类", "url": "/categories/", "icon": "categories" },
+  { "label": "标签", "url": "/tags/", "icon": "tags" },
+  { "label": "归档", "url": "/archive/", "icon": "archive" }
+]

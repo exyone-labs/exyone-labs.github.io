@@ -1,0 +1,44 @@
+{# ================================================================
+   JSON-LD Structured Data (SEO Layer)
+   Generates Schema.org markup for blog posts and pages.
+   ================================================================ #}
+{% if page.url != '/' and page.filePathStem.indexOf('/_posts/') === 0 %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ title }}",
+  "description": "{{ excerpt or description or site.description }}",
+  "datePublished": "{{ date | dateToRfc3339 }}",
+  "dateModified": "{{ (updated or date) | dateToRfc3339 }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ author.name }}",
+    "url": "{{ author.social.github }}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ site.url }}{{ page.url }}"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "{{ author.name }}"
+  },
+  "url": "{{ site.url }}{{ page.url }}"
+}
+</script>
+{% else %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ site.title }}",
+  "description": "{{ site.description }}",
+  "url": "{{ site.url }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ author.name }}"
+  }
+}
+</script>
+{% endif %}

@@ -1,0 +1,39 @@
+{# ================================================================
+   Site Header (Template Layer - Component)
+   Sticky top bar with logo, nav links, icon buttons, and theme toggle.
+   ================================================================ #}
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__logo">
+      <span class="site-header__logo-text">{{ site.title }}</span>
+    </a>
+
+    <!-- Main Navigation (text links) -->
+    <nav class="header-nav">
+      <a href="/" class="header-nav__link{% if page.url == '/' %} header-nav__link--active{% endif %}">导航</a>
+      <a href="/categories/" class="header-nav__link{% if page.url == '/categories/' or page.url.indexOf('/categories/') === 0 %} header-nav__link--active{% endif %}">整理</a>
+      <a href="/links/" class="header-nav__link{% if page.url == '/links/' %} header-nav__link--active{% endif %}">友链</a>
+      <a href="/guestbook/" class="header-nav__link{% if page.url == '/guestbook/' %} header-nav__link--active{% endif %}">留言</a>
+      <a href="/share/" class="header-nav__link{% if page.url == '/share/' %} header-nav__link--active{% endif %}">分享</a>
+      <a href="/about/" class="header-nav__link{% if page.url == '/about/' %} header-nav__link--active{% endif %}">关于</a>
+    </nav>
+
+    <!-- Right-aligned tools -->
+    <div class="header-tools">
+      <!-- Search -->
+      <button class="header-tools__btn" id="searchBtn" aria-label="搜索" title="搜索">
+        <i class="fas fa-search"></i>
+      </button>
+
+      <!-- Theme Toggle -->
+      <div class="header-tools__btn header-theme-toggle" id="themeToggle">
+        <i class="fas fa-moon theme-icon-dark"></i>
+        <i class="fas fa-sun theme-icon-light"></i>
+      </div>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="切换导航" title="切换导航">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</header>

@@ -1,0 +1,37 @@
+---
+layout: base.njk
+title: 留言
+permalink: /guestbook/
+---
+{% include "left-nav.njk" %}
+
+<main class="main-content" id="main-content">
+  <h1 class="page-title">留言</h1>
+  <p class="page-subtitle">欢迎留言交流</p>
+
+  <section class="post-content">
+    <p>在这里留下你的想法吧。</p>
+  </section>
+
+  {% if comments.provider == "giscus" and comments.giscus.repo %}
+  <section class="comments-section" id="comments">
+    <script src="https://giscus.app/client.js"
+      data-repo="{{ comments.giscus.repo }}"
+      data-repo-id="{{ comments.giscus.repo_id }}"
+      data-category="{{ comments.giscus.category }}"
+      data-category-id="{{ comments.giscus.category_id }}"
+      data-mapping="{{ comments.giscus.mapping }}"
+      data-strict="{{ comments.giscus.strict }}"
+      data-reactions-enabled="{{ comments.giscus.reactions_enabled }}"
+      data-emit-metadata="0"
+      data-input-position="{{ comments.giscus.input_position }}"
+      data-lang="{{ site.lang }}"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </section>
+  {% endif %}
+</main>
+
+{% include "right-sidebar.njk" %}

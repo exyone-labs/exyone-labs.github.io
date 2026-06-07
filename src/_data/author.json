@@ -1,0 +1,16 @@
+{
+  "name": "Exyone.dev",
+  "avatar": "/assets/images/avatar.png",
+  "email": "exyone.dev@icloud.com",
+  "description": "将好奇心转化为代码",
+  "fediverse_handle": "",
+  "links": [
+    "https://twitter.com/exyone_frosty",
+    "https://github.com/exyone-labs"
+  ],
+  "social": {
+    "github": "https://github.com/exyone-labs",
+    "twitter": "https://twitter.com/exyone_frosty",
+    "email": "mailto:exyone.dev@icloud.com"
+  }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     Base Layout (Template Layer)
+     Serves as the root template for all pages.
+     ============================================================ -->
+<html lang="{{ site.lang }}">
+<head>
+  {% include "head.njk" %}
+  {% include "jsonld.njk" %}
+
+  <!-- ========================================================== -->
+  <!--  PWA: Web App Manifest                                      -->
+  <!-- ========================================================== -->
+  <link rel="manifest" href="/assets/manifest.json">
+  <meta name="theme-color" content="#2dd4a8">
+
+  <!-- ========================================================== -->
+  <!--  Analytics: Umami                                           -->
+  <!-- ========================================================== -->
+  {% if analytics.umami.id and analytics.umami.domain %}
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ analytics.umami.id }}" data-domains="{{ analytics.umami.domain }}"></script>
+  {% endif %}
+
+  <!-- ========================================================== -->
+  <!--  Analytics: Google (gtag.js)                                -->
+  <!-- ========================================================== -->
+  {% if analytics.google.id %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ analytics.google.id }}"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','{{ analytics.google.id }}');</script>
+  {% endif %}
+
+  <!-- ========================================================== -->
+  <!--  Analytics: Cloudflare Web Analytics                        -->
+  <!-- ========================================================== -->
+  {% if analytics.cloudflare.id %}
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ analytics.cloudflare.id }}"}'></script>
+  {% endif %}
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  {% include "header.njk" %}
+
+  <div class="site-container">
+    {{ content | safe }}
+  </div>
+
+  {% include "footer.njk" %}
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="回到顶部" title="回到顶部">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="/assets/js/main.js"></script>
+
+  <!-- ========================================================== -->
+  <!--  Search Modal                                               -->
+  <!-- ========================================================== -->
+  <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-label="搜索">
+    <div class="search-modal__overlay" id="searchOverlay"></div>
+    <div class="search-modal__content">
+      <div class="search-modal__header">
+        <i class="fas fa-search search-modal__icon"></i>
+        <input type="text" class="search-modal__input" id="searchInput" placeholder="搜索文章..." autocomplete="off" spellcheck="false">
+        <button class="search-modal__close" id="searchClose" aria-label="关闭搜索">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="search-modal__results" id="searchResults">
+        <div class="search-modal__empty">输入关键词开始搜索</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================== -->
+  <!--  PWA: Service Worker Registration                          -->
+  <!-- ========================================================== -->
+  {% if pwa.enabled %}
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
+  {% endif %}
+</body>
+</html>

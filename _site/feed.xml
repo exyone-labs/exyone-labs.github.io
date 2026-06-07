@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
+  <title>Exyone Blog</title>
+  <subtitle>一个专注于技术与思考的博客空间，记录开发实践、学习笔记与生活感悟。</subtitle>
+  <link href="https://example.com/feed.xml" rel="self" />
+  <link href="https://example.com/" />
+  <updated>2026-06-01T00:00:00Z</updated>
+  <id>https://example.com/</id>
+  <author>
+    <name>Exyone</name>
+    <email>hello@example.com</email>
+  </author>
+  <entry>
+    <title>用Eleventy搭建静态博客的完整指南</title>
+    <link href="https://example.com/posts/eleventy-guide/" />
+    <updated>2026-06-02T00:00:00Z</updated>
+    <id>https://example.com/posts/eleventy-guide/</id>
+    <content type="html">&lt;h2&gt;为什么选择Eleventy&lt;/h2&gt;
+&lt;p&gt;Eleventy（简称11ty）是一个简单而强大的静态站点生成器。与Hexo、Hugo等框架不同，Eleventy不强制使用特定的模板引擎或项目结构，给予开发者最大的自由度。&lt;/p&gt;
+&lt;h3&gt;Eleventy的优势&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;零配置起步&lt;/strong&gt;：开箱即用，无需复杂配置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多模板引擎&lt;/strong&gt;：支持Nunjucks、Liquid、Handlebars等&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;构建速度快&lt;/strong&gt;：纯JavaScript实现，构建效率高&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;灵活的数据目录&lt;/strong&gt;：通过&lt;code&gt;_data&lt;/code&gt;目录管理全局数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;项目结构&lt;/h2&gt;
+&lt;p&gt;一个典型的Eleventy博客项目结构如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;src/
+├── _data/          # 全局数据
+├── _includes/      # 模板组件
+│   ├── layouts/    # 布局模板
+│   └── partials/   # 局部模板
+├── css/            # 样式文件
+├── posts/          # 博客文章
+├── categories/     # 分类页面
+├── tags/           # 标签页面
+└── index.njk       # 首页
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;开始搭建&lt;/h2&gt;
+&lt;p&gt;首先安装Eleventy：&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; @11ty/eleventy --save-dev&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后在项目根目录创建&lt;code&gt;.eleventy.js&lt;/code&gt;配置文件，定义输入输出目录和自定义过滤器。&lt;/p&gt;
+&lt;h2&gt;模板引擎选择&lt;/h2&gt;
+&lt;p&gt;Eleventy支持多种模板引擎，推荐使用&lt;strong&gt;Nunjucks&lt;/strong&gt;，因为它功能丰富且语法直观：&lt;/p&gt;
+&lt;pre class=&quot;language-njk&quot;&gt;&lt;code class=&quot;language-njk&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;
+&lt;span class=&quot;token variable&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;njk&lt;/span&gt;
+&lt;span class=&quot;token variable&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;World&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;用&lt;span class=&quot;token variable&quot;&gt;Eleventy&lt;/span&gt;搭建静态博客的完整指南&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;数据驱动&lt;/h2&gt;
+&lt;p&gt;Eleventy的数据文件可以放在&lt;code&gt;_data&lt;/code&gt;目录中，支持JSON、JS、YAML等多种格式：&lt;/p&gt;
+&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;site&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;My Blog&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;description&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;A simple blog&quot;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;结语&lt;/h2&gt;
+&lt;p&gt;Eleventy的灵活性和简洁性使其成为构建静态博客的理想选择。通过合理的项目结构设计，可以搭建出既美观又高效的博客系统。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>CSS自定义属性实现主题切换</title>
+    <link href="https://example.com/posts/css-custom-properties/" />
+    <updated>2026-05-20T00:00:00Z</updated>
+    <id>https://example.com/posts/css-custom-properties/</id>
+    <content type="html">&lt;h2&gt;CSS自定义属性基础&lt;/h2&gt;
+&lt;p&gt;CSS自定义属性（Custom Properties）允许我们在样式表中定义可复用的变量：&lt;/p&gt;
+&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;--primary-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; #4f46e5&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;--text-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; #1e293b&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;主题系统设计&lt;/h2&gt;
+&lt;p&gt;通过定义一组语义化的设计令牌（Design Tokens），可以实现统一的主题管理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;颜色系统&lt;/strong&gt;：主色、辅色、背景色、文字色&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;排版系统&lt;/strong&gt;：字体族、字号比例、行高&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;间距系统&lt;/strong&gt;：内外边距、栅格间距&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;阴影系统&lt;/strong&gt;：不同层级的阴影效果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;实际应用&lt;/h2&gt;
+&lt;p&gt;在设计博客主题时，将CSS自定义属性与媒体查询结合，可以实现暗色模式的自动切换：&lt;/p&gt;
+&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token atrule&quot;&gt;&lt;span class=&quot;token rule&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token property&quot;&gt;prefers-color-scheme&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; dark&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token selector&quot;&gt;:root&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;--background&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; #0f172a&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;--text-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; #e2e8f0&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;p&gt;CSS自定义属性为前端主题系统提供了强大的基础能力，使得样式维护和主题切换变得简单而优雅。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>响应式设计的最佳实践</title>
+    <link href="https://example.com/posts/responsive-design/" />
+    <updated>2026-05-15T00:00:00Z</updated>
+    <id>https://example.com/posts/responsive-design/</id>
+    <content type="html">&lt;h2&gt;移动优先策略&lt;/h2&gt;
+&lt;p&gt;移动优先（Mobile First）是现代响应式设计的核心思想。先为小屏幕设计基础样式，再通过媒体查询逐步增强大屏体验。&lt;/p&gt;
+&lt;h2&gt;弹性布局方案&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CSS Grid&lt;/strong&gt;：适合二维布局，如文章列表、分类网格&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Flexbox&lt;/strong&gt;：适合一维布局，如导航栏、卡片内容&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相对单位&lt;/strong&gt;：使用rem、em、%代替固定像素值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;断点选择&lt;/h2&gt;
+&lt;p&gt;合理的断点应该基于内容，而非设备：&lt;/p&gt;
+&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;/* Mobile: &amp;lt; 768px */&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;/* Tablet: 768px - 1199px */&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;/* Desktop: &gt;= 1200px */&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;响应式图片&lt;/h2&gt;
+&lt;p&gt;使用&lt;code&gt;srcset&lt;/code&gt;和&lt;code&gt;sizes&lt;/code&gt;属性，根据视口宽度加载合适尺寸的图片：&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;img&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;small.jpg&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
+     &lt;span class=&quot;token attr-name&quot;&gt;srcset&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;medium.jpg 768w, large.jpg 1200w&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
+     &lt;span class=&quot;token attr-name&quot;&gt;sizes&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;(max-width: 768px) 100vw, 50vw&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;p&gt;响应式设计不是一次性工作，而是一个持续优化的过程。关注内容、渐进增强，才能打造出真正优秀的跨设备体验。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>读书笔记：代码整洁之道</title>
+    <link href="https://example.com/posts/clean-code-notes/" />
+    <updated>2026-05-01T00:00:00Z</updated>
+    <id>https://example.com/posts/clean-code-notes/</id>
+    <content type="html">&lt;h2&gt;为什么要写整洁的代码&lt;/h2&gt;
+&lt;p&gt;代码的阅读次数远多于编写次数。整洁的代码不仅能减少维护成本，更能体现开发者的专业素养。&lt;/p&gt;
+&lt;h2&gt;有意义的命名&lt;/h2&gt;
+&lt;p&gt;好的命名应当揭示意图，避免误导性缩写：&lt;/p&gt;
+&lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Bad&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt; d&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// 经过的天数&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Good&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt; elapsedTimeInDays&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;函数原则&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;短小精悍&lt;/strong&gt;：函数应该只做一件事&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;单一职责&lt;/strong&gt;：每个函数不超过20行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;避免副作用&lt;/strong&gt;：函数要么做什么，要么返回值，不要两者兼得&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;注释的艺术&lt;/h2&gt;
+&lt;p&gt;注释不能美化糟糕的代码。与其花时间写注释解释混乱的代码，不如花时间清理代码本身。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;好的代码本身就是最好的文档。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;p&gt;代码整洁之道不仅是技术规范，更是一种职业态度。每次提交代码时，都应该让代码比你发现它时更整洁。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>记一次周末徒步</title>
+    <link href="https://example.com/posts/weekend-hiking/" />
+    <updated>2026-04-20T00:00:00Z</updated>
+    <id>https://example.com/posts/weekend-hiking/</id>
+    <content type="html">&lt;h2&gt;出发&lt;/h2&gt;
+&lt;p&gt;周末清晨，阳光正好。背上简单的行囊，和朋友驱车前往郊外的徒步路线。&lt;/p&gt;
+&lt;h2&gt;山间小径&lt;/h2&gt;
+&lt;p&gt;山路蜿蜒，两侧是郁郁葱葱的树林。空气清新，夹杂着泥土和草木的芬芳。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;徒步的意义不在于抵达终点，而在于沿途的风景和感受。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;溪水边&lt;/h2&gt;
+&lt;p&gt;途中经过一条清澈的小溪，溪水潺潺，在阳光下泛着粼粼波光。我们停下来休息，把脚浸入清凉的溪水中，疲惫一扫而空。&lt;/p&gt;
+&lt;h2&gt;登顶&lt;/h2&gt;
+&lt;p&gt;经过两个小时的攀登，终于到达山顶。眼前的景色令人震撼——连绵的群山在蓝天白云下延伸，城市在远方若隐若现。&lt;/p&gt;
+&lt;h2&gt;返程&lt;/h2&gt;
+&lt;p&gt;下山时已是傍晚，夕阳将天空染成金色。这次徒步不仅锻炼了身体，更让心灵得到了放松。在城市快节奏的生活中，偶尔放慢脚步，亲近自然，是一种难得的幸福。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Docker容器化部署实践</title>
+    <link href="https://example.com/posts/docker-deployment/" />
+    <updated>2026-04-10T00:00:00Z</updated>
+    <id>https://example.com/posts/docker-deployment/</id>
+    <content type="html">&lt;h2&gt;为什么选择Docker&lt;/h2&gt;
+&lt;p&gt;Docker容器化部署可以解决&amp;quot;在我机器上能跑&amp;quot;的经典问题，确保开发、测试、生产环境的一致性。&lt;/p&gt;
+&lt;h2&gt;Dockerfile编写&lt;/h2&gt;
+&lt;pre class=&quot;language-dockerfile&quot;&gt;&lt;code class=&quot;language-dockerfile&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# 构建阶段&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;FROM&lt;/span&gt; node:18-alpine &lt;span class=&quot;token keyword&quot;&gt;AS&lt;/span&gt; builder&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;WORKDIR&lt;/span&gt; /app&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;COPY&lt;/span&gt; package*.json ./&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; npm ci&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;COPY&lt;/span&gt; . .&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; npm run build&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;# 运行阶段&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;FROM&lt;/span&gt; nginx:alpine&lt;/span&gt;
+&lt;span class=&quot;token instruction&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;COPY&lt;/span&gt; &lt;span class=&quot;token options&quot;&gt;&lt;span class=&quot;token property&quot;&gt;--from&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;builder&lt;/span&gt;&lt;/span&gt; /app/_site /usr/share/nginx/html&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;多阶段构建&lt;/h2&gt;
+&lt;p&gt;多阶段构建可以有效减小最终镜像体积。构建阶段包含所有开发依赖，运行阶段只包含产物和运行时。&lt;/p&gt;
+&lt;h2&gt;Docker Compose编排&lt;/h2&gt;
+&lt;pre class=&quot;language-yaml&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;3.8&#39;&lt;/span&gt;
+&lt;span class=&quot;token key atrule&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; .
+    &lt;span class=&quot;token key atrule&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;8080:80&quot;&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; unless&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;stopped&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;p&gt;Docker容器化让部署变得可重复、可预测。结合CI/CD流水线，可以实现一键部署的自动化流程。&lt;/p&gt;
+</content>
+  </entry>
+</feed>
