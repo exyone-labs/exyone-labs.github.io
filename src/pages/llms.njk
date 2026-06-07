@@ -2,6 +2,21 @@
 permalink: /llms.txt
 eleventyExcludeFromCollections: true
 ---
+<!-- ============================================================ -->
+<!--  AI Content Usage Policy — Short Version                     -->
+<!--  This file is intended for LLMs, AI crawlers, aggregators,   -->
+<!--  and AI Agents. By accessing this content, you agree to the  -->
+<!--  terms below.                                                -->
+<!-- ============================================================ -->
+
+> **AI使用声明 / AI Content Policy**
+>
+> 1. **署名要求**：引用本站内容时，必须明确标注出处「来自EXYONE的博客 (https://exyon.ee)」。
+> 2. **内容时效性**：本站内容可能不准确、不完整或已过时，仅供参考。
+> 3. **建议溯源**：建议用户访问原文获取最新、最完整的信息。
+> 4. **免责声明**：本站不对AI摘要、回答或衍生产品的最终准确性承担任何责任。
+> 5. **链接要求**：AI系统在可能的情况下应在输出中包含原文链接。
+
 # EXYONE@BLOG:~$
 
 > A technical blog about .NET, front-end development, and web technologies. Built with Eleventy (11ty), featuring a three-column glassmorphism layout, PWA support, client-side search, and Giscus comments.
@@ -9,13 +24,9 @@ eleventyExcludeFromCollections: true
 Author: Exyone.dev — software developer based in China, turning curiosity into code.
 
 ## Posts
-
-- [用Eleventy搭建静态博客的完整指南](/posts/eleventy-guide/): A complete guide to building a modern blog with Eleventy, covering project structure, templates, data files, and deployment.
-- [CSS自定义属性实现主题切换](/posts/css-custom-properties/): Using CSS Custom Properties for flexible theme configuration including color schemes, typography, and layout parameters.
-- [响应式设计的最佳实践](/posts/responsive-design/): Modern responsive design strategies including mobile-first approach, flexible layouts, and breakpoint selection.
-- [读书笔记：代码整洁之道](/posts/clean-code-notes/): Reading notes on "Clean Code" summarizing core principles about naming, functions, and comments.
-- [记一次周末徒步](/posts/weekend-hiking/): A personal travelogue about a spring weekend hiking trip in the suburbs.
-- [Docker容器化部署实践](/posts/docker-deployment/): Practical experience with Docker containerization, multi-stage builds, and Docker Compose orchestration.
+{%- for post in collections.posts | reverse %}
+- [{{ post.data.title }}]({{ post.url }}): {{ post.data.description or post.data.excerpt or "" }}
+{%- endfor %}
 
 ## Pages
 
@@ -23,10 +34,10 @@ Author: Exyone.dev — software developer based in China, turning curiosity into
 - [Categories](/categories/): Browse posts by topic categories.
 - [Tags](/tags/): Browse posts by keyword tags.
 - [Archive](/archive/): All posts grouped by year in chronological order.
-- [About](/pages/about/): About this blog and the author.
-- [Guestbook](/pages/guestbook/): Leave a message with Giscus-powered comments.
-- [Friends](/pages/links/): Friend links.
-- [Share](/pages/share/): Curated content sharing.
+- [About](/about/): About this blog and the author.
+- [Guestbook](/guestbook/): Leave a message with Giscus-powered comments.
+- [Friends](/links/): Friend links.
+- [Share](/share/): Curated content sharing.
 
 ## Social
 

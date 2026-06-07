@@ -1,5 +1,5 @@
 {
-  "provider": "giscus",
+  "provider": "twikoo",
   "giscus": {
     "repo": "exyone-labs/exyone-labs.github.io",
     "repo_id": "R_kgDOSARDDA",
@@ -11,7 +11,7 @@
     "reactions_enabled": true
   },
   "twikoo": {
-    "env_id": "https://cmt.exyon.ee/",
+    "env_id": "https://comments.exyone.vip/",
     "version": "1.6.44"
   }
 }

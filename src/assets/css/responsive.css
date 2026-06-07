@@ -2,12 +2,11 @@
  * Responsive Styles (Presentation Layer)
  *
  * Breakpoint overrides for tablet and mobile layouts.
- * Breakpoints:
- *   - Desktop:  >= 1200px (three columns)
- *   - Tablet:   768px - 1199px (two columns)
- *   - Mobile:   < 768px (single column)
+ * Desktop:  >= 1200px (three columns)
+ * Tablet:   768px - 1199px (two columns)
+ * Mobile:   < 768px (single column)
  *
- * Uses the Bootstrap grid system (col-*) where applicable.
+ * Updated for wider content area and enhanced glass effects.
  */
 
 /* ================================================================ */
@@ -32,10 +31,10 @@
     z-index: 30;
     width: 280px;
     padding: 1.5rem;
-    background: var(--glass-bg);
+    background: var(--glass-bg-strong);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-right: 1px solid var(--border);
+    border-right: 1px solid var(--glass-border);
     box-shadow: 4px 0 32px -16px rgba(0, 0, 0, 0.15);
     overflow-y: auto;
   }
@@ -55,6 +54,14 @@
 
   .right-sidebar {
     padding: 1rem 0;
+  }
+
+  .site-header__inner {
+    padding: 0 24px;
+  }
+
+  .site-footer__inner {
+    padding: 0 24px;
   }
 }
 
@@ -190,7 +197,8 @@
     animation: none;
   }
 
-  #mouse-glow {
+  .bg-blob,
+  .falling-leaf {
     display: none !important;
   }
 }

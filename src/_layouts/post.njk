@@ -101,27 +101,47 @@ layout: base.njk
   </article>
 
   <!-- ============================================================ -->
-  <!--  Prev / Next Post Navigation                                  -->
+  <!--  Prev / Next Post Navigation — Same Line                     -->
   <!-- ============================================================ -->
   {% set allPosts = collections.posts %}
   {% set prevPost = allPosts | prevPost(page.url) %}
   {% set nextPost = allPosts | nextPost(page.url) %}
-  {% if prevPost or nextPost %}
   <nav class="post-nav">
     {% if prevPost %}
       <a href="{{ prevPost.url }}" class="post-nav-link post-nav-link--prev">
-        <span class="post-nav-link__direction">← 上一篇</span>
-        <span class="post-nav-link__title">{{ prevPost.data.title }}</span>
+        <span class="post-nav-direction">
+          <span class="post-nav-arrow">←</span>
+          上一篇
+        </span>
+        <span class="post-nav-title">{{ prevPost.data.title }}</span>
       </a>
+    {% else %}
+      <div class="post-nav-link post-nav-link--prev post-nav-link--disabled">
+        <span class="post-nav-direction">
+          <span class="post-nav-arrow">←</span>
+          上一篇
+        </span>
+        <span class="post-nav-title">暂无更多文章</span>
+      </div>
     {% endif %}
     {% if nextPost %}
       <a href="{{ nextPost.url }}" class="post-nav-link post-nav-link--next">
-        <span class="post-nav-link__direction">下一篇 →</span>
-        <span class="post-nav-link__title">{{ nextPost.data.title }}</span>
+        <span class="post-nav-direction">
+          下一篇
+          <span class="post-nav-arrow">→</span>
+        </span>
+        <span class="post-nav-title">{{ nextPost.data.title }}</span>
       </a>
+    {% else %}
+      <div class="post-nav-link post-nav-link--next post-nav-link--disabled">
+        <span class="post-nav-direction">
+          下一篇
+          <span class="post-nav-arrow">→</span>
+        </span>
+        <span class="post-nav-title">暂无更多文章</span>
+      </div>
     {% endif %}
   </nav>
-  {% endif %}
 
   <!-- ============================================================ -->
   <!--  Related Posts                                                -->

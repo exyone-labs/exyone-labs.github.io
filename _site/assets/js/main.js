@@ -6,10 +6,10 @@
  *   - Back-to-top button
  *   - Reading progress bar
  *   - Table of contents generation + scroll spy
- *   - Mouse follower glow effect
- *   - Card mouse-tracking parallax shine
  *   - Smooth anchor scrolling
  *   - Theme toggle (dark/light) with localStorage persistence
+ *   - Liquid morphing background blobs
+ *   - Liquid ripple effect on interactive elements
  */
 
 (function () {
@@ -153,76 +153,6 @@
   }
 
   /* ================================================================ */
-  /*  Mouse Follower Glow Effect                                       */
-  /* ================================================================ */
-  (function () {
-    // Create glow element if it doesn't exist
-    let glow = document.getElementById("mouse-glow");
-    if (!glow) {
-      glow = document.createElement("div");
-      glow.id = "mouse-glow";
-      document.body.appendChild(glow);
-    }
-
-    let mouseX = -999;
-    let mouseY = -999;
-    let currentX = -999;
-    let currentY = -999;
-    let rafId = null;
-
-    function updateGlow() {
-      currentX += (mouseX - currentX) * 0.1;
-      currentY += (mouseY - currentY) * 0.1;
-      glow.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0) translate(-50%, -50%)";
-      rafId = null;
-    }
-
-    function animateGlow() {
-      if (!rafId) {
-        rafId = requestAnimationFrame(updateGlow);
-      }
-    }
-
-    document.addEventListener("mousemove", function (e) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      glow.classList.add("visible");
-      animateGlow();
-    });
-
-    document.addEventListener("mouseleave", function () {
-      glow.classList.remove("visible");
-    });
-
-    // Hide glow on touch devices
-    document.addEventListener("touchstart", function () {
-      glow.classList.remove("visible");
-    }, { passive: true });
-  })();
-
-  /* ================================================================ */
-  /*  Card Mouse Tracking (Parallax Shine)                             */
-  /* ================================================================ */
-  (function () {
-    const cards = document.querySelectorAll(".post-card, .related-post-card");
-
-    cards.forEach(function (card) {
-      card.addEventListener("mousemove", function (e) {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        card.style.setProperty("--mouse-x", x + "%");
-        card.style.setProperty("--mouse-y", y + "%");
-      });
-
-      card.addEventListener("mouseleave", function () {
-        card.style.setProperty("--mouse-x", "50%");
-        card.style.setProperty("--mouse-y", "50%");
-      });
-    });
-  })();
-
-  /* ================================================================ */
   /*  Smooth Anchor Scrolling (for in-page links)                     */
   /* ================================================================ */
   document.addEventListener("click", function (e) {
@@ -242,7 +172,9 @@
   /* ================================================================ */
   /*  Client-Side Search                                               */
   /* ================================================================ */
-  (function () {
+})();
+
+(function () {
     const searchBtn = document.getElementById("searchBtn");
     const searchModal = document.getElementById("searchModal");
     const searchOverlay = document.getElementById("searchOverlay");
@@ -393,4 +325,14 @@
     });
   })();
 
-})();
+  (function () {
+    // Create blob elements if they don't exist
+    var blobCount = 3;
+    for (var i = 1; i <= blobCount; i++) {
+      if (!document.querySelector(".bg-blob--" + i)) {
+        var blob = document.createElement("div");
+        blob.className = "bg-blob bg-blob--" + i;
+        document.body.appendChild(blob);
+      }
+    }
+  })();

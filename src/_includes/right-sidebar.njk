@@ -1,6 +1,6 @@
 {# ================================================================
    Right Sidebar (Template Layer - Component)
-   Sticky sidebar with TOC, site stats, categories, and tag cloud.
+   TOC, site stats, categories, and tag cloud.
    ================================================================ #}
 <aside class="right-sidebar">
   <!-- ============================================================ -->
@@ -39,6 +39,17 @@
         <span class="site-info-card__stat-value">{{ "now" | year }}</span>
         <span class="site-info-card__stat-label">建站</span>
       </div>
+    </div>
+    <div style="display:flex;gap:0.375rem;flex-wrap:wrap;margin-top:0.625rem;justify-content:center;">
+      <span class="stat-pill">
+        <span class="stat-pill__value">{{ collections.posts.length }}</span> 文章
+      </span>
+      <span class="stat-pill">
+        <span class="stat-pill__value">{{ collections.categories.length }}</span> 分类
+      </span>
+      <span class="stat-pill">
+        <span class="stat-pill__value">{{ "now" | year }}</span> 建站
+      </span>
     </div>
   </div>
 

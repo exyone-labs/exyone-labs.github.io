@@ -1,0 +1,61 @@
+name: Deploy Site
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .gitignore
+      - README.md
+      - LICENSE
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+
+      - name: Push to GitLab
+        run: |
+          git remote add gitlab ${{ secrets.GITLAB_REPO_URL }}
+          git push gitlab main --force
+        continue-on-error: true
+
+      - name: Deploy to Codeberg Pages
+        run: |
+          git clone ${{ secrets.CODEBERG_PAGES_REPO_URL }} codeberg-deploy --depth 1
+          rm -rf codeberg-deploy/*
+          cp -r _site/* codeberg-deploy/
+          cd codeberg-deploy
+          echo "exyone.js.cool" > .domains
+          git add .
+          git commit -m "Deploy: Update site"
+          git push -f origin main
+        continue-on-error: true

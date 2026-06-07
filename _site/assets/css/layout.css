@@ -5,6 +5,8 @@
  * Desktop: left-nav | main-content | right-sidebar
  * Tablet:  main-content | right-sidebar (left-nav hidden via overlay)
  * Mobile:  single column stack
+ *
+ * Enhanced with glassmorphism header and wider content area.
  */
 
 /* ================================================================ */
@@ -16,22 +18,23 @@
   gap: var(--content-gap);
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 24px 32px;
+  padding: 24px 40px;
   min-height: calc(100vh - 60px);
 }
 
 /* ================================================================ */
-/*  Site Header (Sticky Top Bar)                                     */
+/*  Site Header (Sticky Top Bar) — Enhanced Glass                    */
 /* ================================================================ */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
   height: 60px;
-  background: rgba(255, 255, 255, 0.60);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.30);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(var(--glass-saturate));
+  border-bottom: 1px solid var(--glass-border-strong);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.03);
 }
 
 .site-header__inner {
@@ -40,7 +43,7 @@
   gap: 1rem;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 40px;
   height: 100%;
 }
 
@@ -80,8 +83,8 @@
 .header-nav__link {
   display: inline-flex;
   align-items: center;
-  padding: 0.375rem 0.625rem;
-  border-radius: var(--radius-md);
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-pill);
   color: var(--text-secondary);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -92,12 +95,13 @@
 
 .header-nav__link:hover {
   color: var(--accent);
-  background: var(--tag-bg);
+  background: rgba(var(--accent-rgb), 0.06);
 }
 
 .header-nav__link--active {
   color: var(--accent);
   font-weight: 600;
+  background: rgba(var(--accent-rgb), 0.08);
 }
 
 /* Header Tools (icons on the right) */
@@ -126,6 +130,7 @@
 .header-tools__btn:hover {
   color: var(--accent);
   background: var(--tag-bg);
+  box-shadow: 0 0 12px var(--accent-glow);
 }
 
 /* Theme Toggle in Header */
@@ -174,7 +179,7 @@
 }
 
 /* ================================================================ */
-/*  Left Navigation (Author Profile + Menu)                          */
+/*  Left Navigation (Author Profile + Menu) — Enhanced Glass        */
 /* ================================================================ */
 .left-nav {
   position: sticky;
@@ -188,18 +193,20 @@
 
 /* Author Card */
 .left-nav__author {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   border-radius: var(--radius-card);
   padding: 1.5rem 1.25rem 1.25rem;
   text-align: left;
   box-shadow: var(--glass-shadow);
-  transition: box-shadow var(--transition-base), background var(--transition-base);
+  transition: box-shadow var(--transition-base), background var(--transition-base), border-color var(--transition-base);
+  border: 1px solid var(--glass-border);
 }
 
 .left-nav__author:hover {
-  background: var(--bg-elevated);
+  background: var(--glass-bg-strong);
+  border-color: var(--glass-border-strong);
 }
 
 .left-nav__avatar {
@@ -209,12 +216,13 @@
   overflow: hidden;
   margin: 0 0 0.75rem;
   border: 2px solid rgba(var(--accent-rgb), 0.25);
-  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.10);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.10), 0 0 20px rgba(var(--accent-rgb), 0.06);
   transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .left-nav__author:hover .left-nav__avatar {
-  border-color: var(--accent-glow);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15), 0 0 24px var(--accent-glow);
 }
 
 .left-nav__avatar img {
@@ -278,7 +286,7 @@
   color: var(--text-inverse);
   background: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--accent-glow);
+  box-shadow: 0 4px 12px var(--accent-glow), 0 0 20px rgba(var(--accent-rgb), 0.15);
 }
 
 /* Navigation Menu */
@@ -286,20 +294,21 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   border-radius: var(--radius-card);
   padding: 0.5rem;
   box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
 }
 
 .left-nav__item {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.625rem 0.875rem;
-  border-radius: var(--radius-xl);
+  padding: 0.625rem 1rem;
+  border-radius: var(--radius-pill);
   color: var(--text-secondary);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -309,12 +318,12 @@
 
 .left-nav__item:hover {
   color: var(--accent);
-  background: var(--tag-bg);
+  background: rgba(var(--accent-rgb), 0.06);
 }
 
 .left-nav__item--active {
   color: var(--accent);
-  background: var(--tag-bg);
+  background: rgba(var(--accent-rgb), 0.08);
   font-weight: 600;
 }
 
@@ -325,7 +334,7 @@
 }
 
 /* ================================================================ */
-/*  Main Content                                                     */
+/*  Main Content — Wider Area                                        */
 /* ================================================================ */
 .main-content {
   min-width: 0;
@@ -347,8 +356,8 @@
   line-height: var(--leading-relaxed);
 }
 
-/* ================================================================
-/*  Right Sidebar (Sticky)                                           */
+/* ================================================================ */
+/*  Right Sidebar (Sticky) — Enhanced Glass                         */
 /* ================================================================ */
 .right-sidebar {
   position: sticky;
@@ -387,7 +396,7 @@
   align-items: center;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 40px;
 }
 
 .site-footer__copyright,
@@ -404,6 +413,28 @@
 
 .site-footer__powered a:hover {
   color: var(--accent-light);
+}
+
+.site-footer__links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-footer__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.site-footer__link:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
 }
 
 /* ================================================================ */

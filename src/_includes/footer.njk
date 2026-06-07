@@ -1,31 +1,15 @@
 {# ================================================================
    Site Footer (Template Layer - Component)
-   Copyright and attribution footer with social links.
+   Minimal footer. Background slightly darker than page.
+   Centered text, light gray color, no fancy links.
    ================================================================ #}
-<footer class="site-footer">
-  <div class="site-footer__inner">
-    <p class="site-footer__copyright">
-      &copy; {{ "now" | year }} <a href="{{ author.social.github }}">{{ author.name }}</a>. 保留所有权利。
+<footer class="site-footer minimal-footer">
+  <div class="container">
+    <p class="small" style="color: #999;">
+      &copy; {{ "now" | year }} {{ author.name }}.
     </p>
-    <div class="site-footer__links">
-      {% if author.social.twitter %}
-        <a href="{{ author.social.twitter }}" class="site-footer__link" aria-label="Twitter" target="_blank" rel="noopener">
-          <i class="fab fa-twitter"></i>
-        </a>
-      {% endif %}
-      {% if author.social.github %}
-        <a href="{{ author.social.github }}" class="site-footer__link" aria-label="GitHub" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i>
-        </a>
-      {% endif %}
-      {% if author.social.email %}
-        <a href="{{ author.social.email }}" class="site-footer__link" aria-label="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-      {% endif %}
-      <span class="site-footer__powered">
-        Powered by <a href="https://www.11ty.dev/" target="_blank" rel="noopener">Eleventy</a>
-      </span>
-    </div>
+    <p style="color: #bbb; font-size: 0.75rem;">
+      Powered by <a href="https://www.11ty.dev/" target="_blank" rel="noopener" style="color: #bbb; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(0,0,0,0.15);">Eleventy</a>
+    </p>
   </div>
 </footer>
